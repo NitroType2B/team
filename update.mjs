@@ -51,6 +51,7 @@ const racers = members.map(m => ({
   role: m.role || "member",
   title: m.title || "",
   carId: m.carID ?? null,
+  carHue: m.carHueAngle ?? 0,
   carImage: carFiles[m.carID] ? `https://www.nitrotype.com/cars/${carFiles[m.carID]}` : null,
   avgSpeed: m.avgSpeed ?? null,
   highSpeed: m.highestSpeed ?? null,
