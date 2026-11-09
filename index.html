@@ -194,7 +194,7 @@ onAuthStateChanged(auth, user => {
 });
 
 /* ---------- racers (read from data.json, refreshed by GitHub) ---------- */
-let racers = [];
+let racers = [], carPics = {};
 
 function agoTs(sec) {
   if (!sec) return "-";
@@ -214,7 +214,7 @@ async function loadRacers() {
     const res = await fetch("data.json?t=" + Date.now());
     if (!res.ok) throw new Error("missing");
     const data = await res.json();
-    racers = data.racers.map(r => ({ ...r, gain: gainFrom(data.history?.[r.username]) }));
+    carPics = data.cars || {}; racers = data.racers.map(r => ({ ...r, gain: gainFrom(data.history?.[r.username]) }));
     $("updated").textContent = "updated " + agoTs(data.updated);
   } catch { racers = []; $("updated").textContent = ""; }
   drawRacers();
@@ -226,7 +226,33 @@ function listenRacers() {
   unsubs.push(() => clearInterval(t));
 }
 
-function cell(text, cls) { const td = document.createElement("td"); if (cls) td.className = cls; td.textContent = text; return td; }
+// recolor a car picture the way Nitro Type does (true hue shift)
+function tintCar(img, dataUrl, url, hue) {
+  if (!dataUrl) { img.referrerPolicy = "no-referrer"; img.src = url; return; }
+  const src = new Image();
+  src.onload = () => {
+    const c = document.createElement("canvas"); c.width = src.naturalWidth; c.height = src.naturalHeight;
+    const x = c.getContext("2d"); x.drawImage(src, 0, 0);
+    const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
+    for (let i = 0; i < p.length; i += 4) {
+      const r = p[i] / 255, g = p[i + 1] / 255, b = p[i + 2] / 255;
+      const mx = Math.max(r, g, b), mn = Math.min(r, g, b), dl = mx - mn;
+      if (dl === 0) continue;
+      let h = mx === r ? ((g - b) / dl) % 6 : mx === g ? (b - r) / dl + 2 : (r - g) / dl + 4;
+      h = (((h * 60 + hue) % 360) + 360) % 360;
+      const k = mx * (dl / mx), xx = k * (1 - Math.abs((h / 60) % 2 - 1)), m = mx - k;
+      let R, G, B;
+      if (h < 60) { R = k; G = xx; B = 0; } else if (h < 120) { R = xx; G = k; B = 0; }
+      else if (h < 180) { R = 0; G = k; B = xx; } else if (h < 240) { R = 0; G = xx; B = k; }
+      else if (h < 300) { R = xx; G = 0; B = k; } else { R = k; G = 0; B = xx; }
+      p[i] = Math.round((R + m) * 255); p[i + 1] = Math.round((G + m) * 255); p[i + 2] = Math.round((B + m) * 255);
+    }
+    x.putImageData(d, 0, 0);
+    img.src = c.toDataURL();
+  };
+  src.src = dataUrl;
+}
+  function cell(text, cls) { const td = document.createElement("td"); if (cls) td.className = cls; td.textContent = text; return td; }
 const num = v => (v == null || v === "" ? "-" : Number(v).toLocaleString());
 
 function drawRacers() {
@@ -242,7 +268,7 @@ function drawRacers() {
     const tr = document.createElement("tr"); if (i === 0) tr.className = "first";
     const who = document.createElement("td"), wrap = document.createElement("div"); wrap.className = "who-cell";
     let car;
-    if (r.carImage) { car = document.createElement("img"); car.referrerPolicy = "no-referrer"; car.style.filter = "hue-rotate(" + (r.carHue || 0) + "deg)"; car.src = r.carImage; car.alt = r.car || "Car"; car.className = "car"; car.onerror = () => { car.className = "car none"; car.removeAttribute("src"); }; }
+    if (r.carImage) { car = document.createElement("img"); tintCar(car, carPics[r.carFile], r.carImage, r.carHue || 0); car.alt = r.car || "Car"; car.className = "car"; car.onerror = () => { car.className = "car none"; car.removeAttribute("src"); }; }
     else { car = document.createElement("div"); car.className = "car none"; car.textContent = "no car"; }
     const names = document.createElement("div");
     const u = document.createElement("div"); u.className = "uname";
