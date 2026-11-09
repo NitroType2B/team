@@ -52,6 +52,7 @@ const racers = members.map(m => ({
   title: m.title || "",
   carId: m.carID ?? null,
   carHue: m.carHueAngle ?? 0,
+  carFile: carFiles[m.carID] || null,
   carImage: carFiles[m.carID] ? `https://www.nitrotype.com/cars/${carFiles[m.carID]}` : null,
   avgSpeed: m.avgSpeed ?? null,
   highSpeed: m.highestSpeed ?? null,
@@ -61,6 +62,19 @@ const racers = members.map(m => ({
   lastRace: m.lastActivity ?? null
 }));
 
+// download each car picture once so the site can recolor it exactly
+const cars = {};
+for (const r of racers) {
+  if (!r.carFile || cars[r.carFile]) continue;
+  if (old.cars?.[r.carFile]) { cars[r.carFile] = old.cars[r.carFile]; continue; }
+  try {
+    const rr = await fetch(r.carImage, { headers: { "User-Agent": H["User-Agent"] } });
+    if (!rr.ok) throw new Error("HTTP " + rr.status);
+    const type = rr.headers.get("content-type") || "image/png";
+    cars[r.carFile] = `data:${type};base64,` + Buffer.from(await rr.arrayBuffer()).toString("base64");
+  } catch (e) { carDebug.push("car download failed " + r.carFile + ": " + e.message); }
+}
+
 // remember team race totals per day so the site can show gains
 const history = old.history || {};
 for (const r of racers) {
@@ -69,6 +83,6 @@ for (const r of racers) {
   for (const d of days.slice(0, -60)) delete history[r.username][d];
 }
 
-await writeFile("data.json", JSON.stringify({ team: TEAM, updated: Math.floor(Date.now() / 1000), racers, history }, null, 1));
+await writeFile("data.json", JSON.stringify({ team: TEAM, updated: Math.floor(Date.now() / 1000), racers, cars, history }, null, 1));
 await writeFile("debug.json", JSON.stringify({ carLookup: carDebug, carsFound: Object.keys(carFiles).length, firstMember: members[0] }, null, 1));
 console.log(`Saved ${racers.length} racers`);
