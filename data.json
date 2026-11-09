@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794198985,
+ "updated": 1794228156,
  "racers": [
   {
    "username": "409607",
@@ -347,12 +347,12 @@
    "carHue": 0,
    "carFile": "panoz_small.png",
    "carImage": "https://www.nitrotype.com/cars/panoz_small.png",
-   "avgSpeed": 143,
-   "highSpeed": 158,
-   "lifetimeRaces": 204,
-   "teamRaces": 63,
+   "avgSpeed": 151,
+   "highSpeed": 172,
+   "lifetimeRaces": 211,
+   "teamRaces": 70,
    "memberSince": 1794063320,
-   "lastRace": 1794198141
+   "lastRace": 1794201613
   }
  ],
  "cars": {
@@ -440,7 +440,7 @@
    "2026-11-09": 24
   },
   "exterverjae7": {
-   "2026-11-09": 63
+   "2026-11-09": 70
   }
  }
 }
