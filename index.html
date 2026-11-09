@@ -242,7 +242,7 @@ function drawRacers() {
     const tr = document.createElement("tr"); if (i === 0) tr.className = "first";
     const who = document.createElement("td"), wrap = document.createElement("div"); wrap.className = "who-cell";
     let car;
-    if (r.carImage) { car = document.createElement("img"); car.src = r.carImage; car.alt = r.car || "Car"; car.className = "car"; car.onerror = () => { car.className = "car none"; car.removeAttribute("src"); }; }
+    if (r.carImage) { car = document.createElement("img"); car.referrerPolicy = "no-referrer"; car.src = r.carImage; car.alt = r.car || "Car"; car.className = "car"; car.onerror = () => { car.className = "car none"; car.removeAttribute("src"); }; }
     else { car = document.createElement("div"); car.className = "car none"; car.textContent = "no car"; }
     const names = document.createElement("div");
     const u = document.createElement("div"); u.className = "uname";
