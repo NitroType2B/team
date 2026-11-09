@@ -247,7 +247,7 @@ function drawRacers() {
     const names = document.createElement("div");
     const u = document.createElement("div"); u.className = "uname";
     const link = document.createElement("a"); link.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(r.username); link.target = "_blank"; link.rel = "noopener"; link.textContent = r.displayName || r.username; u.append(link);
-    const c = document.createElement("div"); c.className = "sub"; c.textContent = r.car || (r.role && r.role !== "member" ? r.role : "");
+    const c = document.createElement("div"); c.className = "sub"; c.textContent = (r.role && r.role !== "member" ? r.role + (r.title ? " · " : "") : "") + (r.title ? "\u201C" + r.title + "\u201D" : "");
     names.append(u, c); wrap.append(car, names); who.append(wrap);
     const team = cell(num(r.teamRaces));
     if (r.gain) { const g = document.createElement("div"); g.className = "gain"; g.textContent = "+" + r.gain.toLocaleString() + " since yesterday"; team.append(g); }
