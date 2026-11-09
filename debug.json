@@ -1,0 +1,28 @@
+{
+ "firstMember": {
+  "userID": 5590000,
+  "teamID": 4513953,
+  "racesPlayed": 621,
+  "avgSpeed": 25,
+  "lastLogin": 1793911226,
+  "played": 14,
+  "secs": 453,
+  "typed": 1012,
+  "errs": 66,
+  "joinStamp": 1793911889,
+  "lastActivity": 1793912818,
+  "role": "member",
+  "username": "409607",
+  "displayName": "Anime_409",
+  "membership": "gold",
+  "title": "Keeper of the Keys",
+  "carID": 479,
+  "carHueAngle": 0,
+  "status": "active",
+  "highestSpeed": 80
+ },
+ "racerSample": {
+  "status": "INVALID_REQUEST",
+  "results": "Uh oh, an error has occurred! If this persists, please contact support."
+ }
+}
