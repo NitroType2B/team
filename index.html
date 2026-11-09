@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team Pit Stop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#101828;--mute:#667085;--paper:#F5F6FA;--card:#fff;--line:#E3E6EE;--blue:#2F5BFF;--gold:#F5B301;--green:#12805C;--red:#C0362C}
+@media (prefers-color-scheme:dark){:root{--ink:#EEF1F8;--mute:#98A2B3;--paper:#0E1320;--card:#161C2C;--line:#262E44;--blue:#6C8BFF;--gold:#F5B301;--green:#4CC9A0;--red:#FF8077}}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.hidden{display:none!important}
+.banner{background:var(--gold);color:#101828;padding:10px 16px;font-weight:600;text-align:center}
+/* auth */
+.auth{min-height:100%;display:grid;place-items:center;padding:24px}
+.auth-box{width:100%;max-width:380px}
+.auth h1{font-size:44px;line-height:1.05;margin:0 0 8px;font-weight:800;letter-spacing:-.03em}
+.auth p{color:var(--mute);margin:0 0 24px}
+form.stack{display:grid;gap:12px}
+input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.btn{border:0;background:var(--blue);color:#fff;padding:12px 16px;border-radius:10px;font-weight:600;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.link{background:none;border:0;color:var(--blue);cursor:pointer;padding:0;font-weight:600}
+.err{color:var(--red);min-height:1.4em;margin:0;font-size:14px}
+/* app */
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);background:var(--card)}
+header h2{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em}
+header .who{display:flex;gap:12px;align-items:center;color:var(--mute);font-size:14px}
+main{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:24px;padding:24px;max-width:1200px;margin:0 auto;height:calc(100vh - 66px)}
+section{background:var(--card);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;min-height:0}
+section>h3{margin:0;padding:18px 20px;font-size:16px;border-bottom:1px solid var(--line)}
+.scroll{overflow:auto;flex:1;min-height:0}
+/* racers */
+.add{display:grid;grid-template-columns:1fr auto;gap:8px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:32px 1fr auto auto;gap:12px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--line)}
+.rank{font-weight:800;color:var(--mute)}
+.row:first-child .rank{color:var(--gold)}
+.name{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.name a{color:inherit;text-decoration:none}.name a:hover{text-decoration:underline}
+.total{font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+.gain{font-size:13px;color:var(--green);font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.log{display:flex;gap:6px}
+.log input{width:90px;padding:6px 8px}
+.log .btn{padding:6px 10px}
+.empty{padding:28px 20px;color:var(--mute)}
+/* chat */
+.msg{padding:8px 20px}
+.msg b{font-size:13px}
+.msg time{color:var(--mute);font-size:12px;margin-left:6px}
+.msg p{margin:2px 0 0;overflow-wrap:anywhere}
+.msg.me b{color:var(--blue)}
+.send{display:grid;grid-template-columns:1fr auto;gap:8px;padding:14px 20px;border-top:1px solid var(--line)}
+@media (max-width:820px){main{grid-template-columns:1fr;height:auto}.scroll{max-height:60vh}}
+</style>
+</head>
+<body>
+<div id="setup" class="banner hidden">Paste your Firebase apiKey into the firebaseConfig near the bottom of this file.</div>
+
+<div id="auth" class="auth hidden">
+  <div class="auth-box">
+    <h1>Team Pit Stop</h1>
+    <p>Chat with your team and see who is racing the most.</p>
+    <form id="authForm" class="stack">
+      <input id="username" placeholder="Nitro Type username" autocomplete="nickname" class="hidden">
+      <input id="email" type="email" placeholder="Email" autocomplete="email" required>
+      <input id="password" type="password" placeholder="Password (6+ characters)" autocomplete="current-password" minlength="6" required>
+      <p class="err" id="authErr" role="alert"></p>
+      <button class="btn" id="authBtn" type="submit">Sign in</button>
+    </form>
+    <p style="margin-top:16px"><span id="swapText">New here?</span> <button class="link" id="swap" type="button">Create an account</button></p>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <header>
+    <h2>Team Pit Stop</h2>
+    <div class="who"><span id="me"></span><button class="btn ghost" id="out">Sign out</button></div>
+  </header>
+  <main>
+    <section>
+      <h3>Racers</h3>
+      <form class="add" id="addForm">
+        <input id="newRacer" placeholder="Add a racer's name" required>
+        <button class="btn" type="submit">Add racer</button>
+      </form>
+      <div class="scroll" id="racers"></div>
+    </section>
+    <section>
+      <h3>Team chat</h3>
+      <div class="scroll" id="msgs"></div>
+      <form class="send" id="sendForm">
+        <input id="text" placeholder="Write a message" maxlength="500" autocomplete="off" required>
+        <button class="btn" type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getFirestore, collection, doc, addDoc, setDoc, onSnapshot, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDj-UlpMjTVccy4RfWqP8-Lyt_2HOFs4lc",
+  authDomain: "nitrotype2b.firebaseapp.com",
+  projectId: "nitrotype2b",
+  storageBucket: "nitrotype2b.firebasestorage.app",
+  messagingSenderId: "114212126454",
+  appId: "1:114212126454:web:d01f7f2fd6cefce797f6d7"
+};
+
+const $ = id => document.getElementById(id);
+if (firebaseConfig.apiKey.startsWith("PASTE")) $("setup").classList.remove("hidden");
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let signUp = false, unsubs = [];
+
+$("swap").onclick = () => {
+  signUp = !signUp;
+  $("username").classList.toggle("hidden", !signUp);
+  $("username").required = signUp;
+  $("authBtn").textContent = signUp ? "Create account" : "Sign in";
+  $("swapText").textContent = signUp ? "Already have an account?" : "New here?";
+  $("swap").textContent = signUp ? "Sign in" : "Create an account";
+  $("password").autocomplete = signUp ? "new-password" : "current-password";
+  $("authErr").textContent = "";
+};
+
+$("authForm").onsubmit = async e => {
+  e.preventDefault();
+  $("authErr").textContent = "";
+  try {
+    const email = $("email").value.trim(), pw = $("password").value;
+    if (signUp) {
+      const cred = await createUserWithEmailAndPassword(auth, email, pw);
+      await updateProfile(cred.user, { displayName: $("username").value.trim() });
+      $("me").textContent = cred.user.displayName;
+    } else {
+      await signInWithEmailAndPassword(auth, email, pw);
+    }
+  } catch (err) {
+    const map = {
+      "auth/invalid-credential": "Wrong email or password.",
+      "auth/email-already-in-use": "That email already has an account. Sign in instead.",
+      "auth/weak-password": "Use a password with at least 6 characters.",
+      "auth/invalid-email": "Enter a valid email address.",
+      "auth/operation-not-allowed": "Turn on Email/Password in Firebase Authentication.",
+      "auth/api-key-not-valid.-please-pass-a-valid-api-key.": "The apiKey in the config is wrong."
+    };
+    $("authErr").textContent = map[err.code] || err.message;
+  }
+};
+
+$("out").onclick = () => signOut(auth);
+
+onAuthStateChanged(auth, user => {
+  unsubs.forEach(u => u()); unsubs = [];
+  $("auth").classList.toggle("hidden", !!user);
+  $("app").classList.toggle("hidden", !user);
+  if (!user) return;
+  $("me").textContent = user.displayName || user.email;
+  listenRacers();
+  listenChat(user);
+});
+
+/* ---------- racers ---------- */
+const today = () => new Date().toISOString().slice(0, 10);
+
+function stats(r) {
+  const days = Object.keys(r.counts || {}).sort();
+  const last = days.length ? r.counts[days[days.length - 1]] : 0;
+  const prev = days.length > 1 ? r.counts[days[days.length - 2]] : null;
+  return { total: last, gain: prev === null ? 0 : last - prev };
+}
+
+function listenRacers() {
+  unsubs.push(onSnapshot(collection(db, "racers"), snap => {
+    const rows = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    rows.forEach(r => Object.assign(r, stats(r)));
+    rows.sort((a, b) => b.gain - a.gain || b.total - a.total);
+    const box = $("racers"); box.textContent = "";
+    if (!rows.length) { const p = document.createElement("p"); p.className = "empty"; p.textContent = "No racers yet. Add the first one above."; box.append(p); return; }
+    rows.forEach((r, i) => {
+      const row = document.createElement("div"); row.className = "row";
+      const rank = document.createElement("span"); rank.className = "rank"; rank.textContent = i + 1;
+      const name = document.createElement("span"); name.className = "name"; name.textContent = r.name;
+      const nums = document.createElement("div");
+      const t = document.createElement("div"); t.className = "total"; t.textContent = r.total.toLocaleString() + " races";
+      const g = document.createElement("div"); g.className = "gain"; g.textContent = r.gain ? "+" + r.gain.toLocaleString() + " since last log" : "no change";
+      nums.append(t, g);
+      const log = document.createElement("form"); log.className = "log";
+      const inp = document.createElement("input"); inp.type = "number"; inp.min = 0; inp.placeholder = "Total"; inp.required = true; inp.setAttribute("aria-label", "Total races for " + r.name);
+      const b = document.createElement("button"); b.className = "btn"; b.textContent = "Log";
+      log.append(inp, b);
+      log.onsubmit = async e => {
+        e.preventDefault();
+        await setDoc(doc(db, "racers", r.id), { counts: { [today()]: Number(inp.value) } }, { merge: true });
+        inp.value = "";
+      };
+      row.append(rank, name, nums, log);
+      box.append(row);
+    });
+  }));
+}
+
+$("addForm").onsubmit = async e => {
+  e.preventDefault();
+  const name = $("newRacer").value.trim();
+  if (!name) return;
+  await addDoc(collection(db, "racers"), { name, counts: {}, createdAt: serverTimestamp() });
+  $("newRacer").value = "";
+};
+
+/* ---------- chat ---------- */
+function listenChat(user) {
+  const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100));
+  unsubs.push(onSnapshot(q, snap => {
+    const box = $("msgs");
+    const stick = box.scrollTop + box.clientHeight >= box.scrollHeight - 40;
+    box.textContent = "";
+    snap.docs.slice().reverse().forEach(d => {
+      const m = d.data();
+      const el = document.createElement("div"); el.className = "msg" + (m.uid === user.uid ? " me" : "");
+      const b = document.createElement("b"); b.textContent = m.name || "Racer";
+      const t = document.createElement("time");
+      if (m.createdAt) t.textContent = m.createdAt.toDate().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      const p = document.createElement("p"); p.textContent = m.text;
+      el.append(b, t, p); box.append(el);
+    });
+    if (stick) box.scrollTop = box.scrollHeight;
+  }));
+}
+
+$("sendForm").onsubmit = async e => {
+  e.preventDefault();
+  const text = $("text").value.trim();
+  if (!text) return;
+  $("text").value = "";
+  const u = auth.currentUser;
+  await addDoc(collection(db, "messages"), { text, uid: u.uid, name: u.displayName || u.email, createdAt: serverTimestamp() });
+};
+</script>
+</body>
+</html>
