@@ -1,4 +1,12 @@
 {
+ "carLookup": [
+  "https://www.nitrotype.com/api/v2/cars: 0",
+  "https://www.nitrotype.com/api/cars: 0",
+  "home: 0",
+  "https://www.googletagmanager.com/gtag/js?id=G-CQ2ZK9PC9Y: 0",
+  "https://www.nitrotype.com/index/9833554ff3bd62bd7145f9e5fdfd91f7094a3aab-1861/bootstrap.js: 468"
+ ],
+ "carsFound": 468,
  "firstMember": {
   "userID": 5590000,
   "teamID": 4513953,
