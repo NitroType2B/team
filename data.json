@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794197002,
+ "updated": 1794197194,
  "racers": [
   {
    "username": "409607",
@@ -303,9 +303,9 @@
    "title": "Raw Racing Recruit",
    "carId": 304,
    "carImage": "https://www.nitrotype.com/cars/304_small_1.png",
-   "avgSpeed": 119,
+   "avgSpeed": 126,
    "highSpeed": 144,
-   "lifetimeRaces": 194,
+   "lifetimeRaces": 197,
    "teamRaces": 50,
    "memberSince": 1794063320,
    "lastRace": 1794066666
