@@ -20,9 +20,5 @@
   "carHueAngle": 0,
   "status": "active",
   "highestSpeed": 80
- },
- "racerSample": {
-  "status": "INVALID_REQUEST",
-  "results": "Uh oh, an error has occurred! If this persists, please contact support."
  }
 }
