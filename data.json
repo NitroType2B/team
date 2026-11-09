@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794197361,
+ "updated": 1794198125,
  "racers": [
   {
    "username": "409607",
@@ -8,6 +8,7 @@
    "role": "member",
    "title": "Keeper of the Keys",
    "carId": 479,
+   "carHue": 0,
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_final_seal_small.png",
    "avgSpeed": 25,
    "highSpeed": 80,
@@ -22,13 +23,14 @@
    "role": "member",
    "title": "Three Commas Club",
    "carId": 209,
+   "carHue": 0,
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
    "avgSpeed": 129,
    "highSpeed": 161,
-   "lifetimeRaces": 2772,
-   "teamRaces": 71,
+   "lifetimeRaces": 2773,
+   "teamRaces": 75,
    "memberSince": 1794193196,
-   "lastRace": 1794196700
+   "lastRace": 1794197770
   },
   {
    "username": "visco_asher_yt",
@@ -36,6 +38,7 @@
    "role": "officer",
    "title": "Drift King",
    "carId": 77,
+   "carHue": 160,
    "carImage": "https://www.nitrotype.com/cars/77_small_1.png",
    "avgSpeed": 139,
    "highSpeed": 172,
@@ -50,6 +53,7 @@
    "role": "officer",
    "title": "Rosso Rivale",
    "carId": 371,
+   "carHue": 120,
    "carImage": "https://www.nitrotype.com/cars/ultima_small.png",
    "avgSpeed": 115,
    "highSpeed": 149,
@@ -64,6 +68,7 @@
    "role": "officer",
    "title": "wow. such gifting",
    "carId": 115,
+   "carHue": 240,
    "carImage": "https://www.nitrotype.com/cars/115_small_1.png",
    "avgSpeed": 124,
    "highSpeed": 158,
@@ -78,6 +83,7 @@
    "role": "member",
    "title": "Pro Pacer",
    "carId": 43,
+   "carHue": 0,
    "carImage": "https://www.nitrotype.com/cars/suprillia_small.png",
    "avgSpeed": 37,
    "highSpeed": 45,
@@ -92,6 +98,7 @@
    "role": "member",
    "title": "wow. such gifting",
    "carId": 432,
+   "carHue": 80,
    "carImage": "https://www.nitrotype.com/cars/stingquant_small.png",
    "avgSpeed": 103,
    "highSpeed": 131,
@@ -106,6 +113,7 @@
    "role": "member",
    "title": "Original Gangster",
    "carId": 331,
+   "carHue": 60,
    "carImage": "https://www.nitrotype.com/cars/f1bug_small.png",
    "avgSpeed": 38,
    "highSpeed": 47,
@@ -120,6 +128,7 @@
    "role": "member",
    "title": "[SKIPWRD]",
    "carId": 338,
+   "carHue": 340,
    "carImage": "https://www.nitrotype.com/cars/blizferr_small.png",
    "avgSpeed": 34,
    "highSpeed": 118,
@@ -134,6 +143,7 @@
    "role": "member",
    "title": "Millionaire",
    "carId": 329,
+   "carHue": 200,
    "carImage": "https://www.nitrotype.com/cars/413243csdaf_small.png",
    "avgSpeed": 37,
    "highSpeed": 43,
@@ -148,6 +158,7 @@
    "role": "member",
    "title": "Mystery Man",
    "carId": 331,
+   "carHue": 100,
    "carImage": "https://www.nitrotype.com/cars/f1bug_small.png",
    "avgSpeed": 125,
    "highSpeed": 149,
@@ -162,6 +173,7 @@
    "role": "member",
    "title": "Filthy Rich",
    "carId": 54,
+   "carHue": 0,
    "carImage": "https://www.nitrotype.com/cars/atv2_small.png",
    "avgSpeed": 35,
    "highSpeed": 42,
@@ -176,6 +188,7 @@
    "role": "member",
    "title": "Booksmart",
    "carId": 43,
+   "carHue": 0,
    "carImage": "https://www.nitrotype.com/cars/suprillia_small.png",
    "avgSpeed": 39,
    "highSpeed": 50,
@@ -190,6 +203,7 @@
    "role": "officer",
    "title": "Sweaty Typer",
    "carId": 47,
+   "carHue": 60,
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
    "avgSpeed": 69,
    "highSpeed": 121,
@@ -204,6 +218,7 @@
    "role": "member",
    "title": "Original Gangster",
    "carId": 277,
+   "carHue": 0,
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
    "avgSpeed": 101,
    "highSpeed": 120,
@@ -218,6 +233,7 @@
    "role": "member",
    "title": "I Love Nitros",
    "carId": 438,
+   "carHue": 260,
    "carImage": "https://www.nitrotype.com/cars/hurricania_small.png",
    "avgSpeed": 30,
    "highSpeed": 38,
@@ -232,6 +248,7 @@
    "role": "member",
    "title": "Original Gangster",
    "carId": 277,
+   "carHue": 140,
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
    "avgSpeed": 46,
    "highSpeed": 53,
@@ -246,6 +263,7 @@
    "role": "officer",
    "title": "Sp00ked",
    "carId": 52,
+   "carHue": 160,
    "carImage": "https://www.nitrotype.com/cars/pizza_small.png",
    "avgSpeed": 37,
    "highSpeed": 75,
@@ -260,6 +278,7 @@
    "role": "member",
    "title": "Mystery Man",
    "carId": 91,
+   "carHue": 0,
    "carImage": "https://www.nitrotype.com/cars/91_small_1.png",
    "avgSpeed": 69,
    "highSpeed": 89,
@@ -274,6 +293,7 @@
    "role": "member",
    "title": "[SKIPWRD]",
    "carId": 17,
+   "carHue": 0,
    "carImage": "https://www.nitrotype.com/cars/17_small_1.png",
    "avgSpeed": 71,
    "highSpeed": 88,
@@ -288,6 +308,7 @@
    "role": "member",
    "title": "Word Skipper",
    "carId": 277,
+   "carHue": 300,
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
    "avgSpeed": 21,
    "highSpeed": 27,
@@ -302,13 +323,14 @@
    "role": "member",
    "title": "Raw Racing Recruit",
    "carId": 304,
+   "carHue": 0,
    "carImage": "https://www.nitrotype.com/cars/panoz_small.png",
-   "avgSpeed": 142,
+   "avgSpeed": 143,
    "highSpeed": 158,
-   "lifetimeRaces": 201,
-   "teamRaces": 50,
+   "lifetimeRaces": 203,
+   "teamRaces": 60,
    "memberSince": 1794063320,
-   "lastRace": 1794066666
+   "lastRace": 1794197342
   }
  ],
  "history": {
@@ -316,7 +338,7 @@
    "2026-11-09": 14
   },
   "quadruplex": {
-   "2026-11-09": 71
+   "2026-11-09": 75
   },
   "visco_asher_yt": {
    "2026-11-09": 141
@@ -376,7 +398,7 @@
    "2026-11-09": 24
   },
   "exterverjae7": {
-   "2026-11-09": 50
+   "2026-11-09": 60
   }
  }
 }
