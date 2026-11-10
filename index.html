@@ -38,7 +38,8 @@ input::placeholder{color:#8277B5}
 /* header */
 header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 24px;background:rgba(15,10,36,.78);backdrop-filter:blur(12px);flex-wrap:wrap}
 header::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:8px;background:repeating-conic-gradient(#fff 0 25%,#16102E 0 50%) 0 0/16px 16px;opacity:.9}
-.brand{font-size:28px;margin:0;line-height:1;background:linear-gradient(90deg,var(--gold),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand{display:inline-block;text-decoration:none;font-size:28px;margin:0;line-height:1;transition:transform .15s;background:linear-gradient(90deg,var(--gold),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand:hover{transform:scale(1.08)}
 nav{display:flex;gap:6px}
 nav a{padding:9px 16px;border-radius:999px;color:var(--mute);text-decoration:none;font-weight:700;transition:background .15s,color .15s}
 nav a:hover{color:var(--ink);background:rgba(255,255,255,.07)}
@@ -54,6 +55,8 @@ main{padding:36px 24px 48px;max-width:1200px;margin:0 auto}
 .hero h1{margin:0;font-size:clamp(44px,8vw,88px);line-height:.95;text-shadow:0 4px 24px rgba(0,0,0,.35)}
 .hero h1 .tagtxt{color:rgba(255,255,255,.62)}
 .hero .cap{margin:18px 0 0;font-size:18px;font-weight:600}
+.hero .cap a{color:inherit;text-decoration:underline;text-decoration-color:rgba(255,255,255,.45);text-underline-offset:4px;transition:text-decoration-color .15s}
+.hero .cap a:hover{text-decoration-color:#fff}
 .hero .cap .b{color:rgba(255,255,255,.62);font-weight:800}
 .hero .cap em{margin-left:10px;font-size:12px;font-weight:800;letter-spacing:.12em;background:var(--gold);color:#101828;padding:3px 9px;border-radius:999px;font-style:normal}
 .hero-stats{margin:0;display:grid;gap:10px;min-width:260px;background:rgba(15,10,36,.35);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:18px 22px;backdrop-filter:blur(6px)}
@@ -69,6 +72,7 @@ main{padding:36px 24px 48px;max-width:1200px;margin:0 auto}
 .big.a2{background:linear-gradient(135deg,#22D3EE,#4DA3FF);box-shadow:0 14px 40px rgba(34,211,238,.25)}
 .big.a2:hover{box-shadow:0 22px 50px rgba(34,211,238,.5)}
 .big svg{width:64px;height:64px;flex:none}
+.big .emoji{font-size:58px;line-height:1;width:64px;text-align:center;flex:none}
 .big strong{display:block;font-size:38px;line-height:1}
 .big span{display:block;margin-top:6px;font-weight:700;opacity:.78}
 /* panels */
@@ -145,7 +149,7 @@ td.c-dim{color:var(--mute)}
 
 <div id="app" class="hidden">
   <header>
-    <h2 class="brand display">[2B]</h2>
+    <a class="brand display" href="#home" aria-label="Go to the home page">[2B]</a>
     <nav aria-label="Pages">
       <a href="#home" id="navHome">Home</a>
       <a href="#stats" id="navStats">Team stats</a>
@@ -158,7 +162,7 @@ td.c-dim{color:var(--mute)}
       <div class="hero">
         <div>
           <h1 class="display"><span class="tagtxt" id="heroTag">[2B]</span><span id="heroName">2B Determined</span></h1>
-          <p class="cap"><span class="b" id="capTag">[2B]</span><span id="heroCaptain">-</span><em>TEAM CAPTAIN</em></p>
+          <p class="cap"><span class="b" id="capTag">[2B]</span><a id="heroCaptain" target="_blank" rel="noopener">-</a><em>TEAM CAPTAIN</em></p>
         </div>
         <dl class="hero-stats">
           <div><dt>Members</dt><dd id="statMembers">-</dd></div>
@@ -168,7 +172,7 @@ td.c-dim{color:var(--mute)}
       </div>
       <div class="cta">
         <a class="big a1" href="#stats">
-          <svg viewBox="0 0 64 64" fill="none" stroke="#101828" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 52V30M26 52V16M42 52V24M58 52H6"/><path d="M10 22l16-10 16 8 14-12"/></svg>
+          <span class="emoji" aria-hidden="true">🧪</span>
           <div><strong class="display">Team Stats</strong><span>See who is racing the most</span></div>
         </a>
         <a class="big a2" href="#chat">
@@ -311,6 +315,7 @@ function drawHero(meta) {
   $("heroName").textContent = meta.name || "2B Determined";
   const cap = racers.find(r => (r.role || "").toLowerCase() === "captain");
   $("heroCaptain").textContent = cap ? (cap.displayName || cap.username) : "-";
+  if (cap) $("heroCaptain").href = "https://www.nitrotype.com/racer/" + encodeURIComponent(cap.username); else $("heroCaptain").removeAttribute("href");
   $("statMembers").textContent = racers.length || "-";
   $("statFormed").textContent = meta.formedStamp ? new Date(meta.formedStamp * 1000).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "-";
   $("statViews").textContent = meta.views != null ? Number(meta.views).toLocaleString() : "-";
@@ -453,6 +458,20 @@ function drawRacers() {
 }
 
 /* ---------- chat ---------- */
+// today: time only. Older: Yesterday / 2-6 days ago / 1 week ago / MM/DD/YY, then the time
+function chatTime(when) {
+  const time = when.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  const midnight = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const days = Math.round((midnight(new Date()) - midnight(when)) / 864e5);
+  if (days <= 0) return time;
+  let label;
+  if (days === 1) label = "Yesterday";
+  else if (days <= 6) label = days + " days ago";
+  else if (days === 7) label = "1 week ago";
+  else label = String(when.getMonth() + 1).padStart(2, "0") + "/" + String(when.getDate()).padStart(2, "0") + "/" + String(when.getFullYear()).slice(-2);
+  return label + " " + time;
+}
+
 function listenChat(user) {
   const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100));
   unsubs.push(onSnapshot(q, snap => {
@@ -464,7 +483,7 @@ function listenChat(user) {
       const el = document.createElement("div"); el.className = "msg" + (m.uid === user.uid ? " me" : "");
       const b = document.createElement("b"); b.textContent = m.name || "Racer";
       const t = document.createElement("time");
-      if (m.createdAt) t.textContent = m.createdAt.toDate().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      if (m.createdAt) t.textContent = chatTime(m.createdAt.toDate());
       const p = document.createElement("p"); p.textContent = m.text;
       el.append(b, t, p); box.append(el);
     });
