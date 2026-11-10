@@ -41,6 +41,13 @@ try {
 } catch (e) { carDebug.push("car lookup failed: " + e.message); }
 console.log("Cars found:", Object.keys(carFiles).length);
 
+// who is the captain? Nitro Type may mark it in the team info; this name is the backup
+const CAPTAIN_NAME = "Sub 2 PickleNT on YT";
+const info = team.results.info || {};
+const captainIds = new Set(Object.entries(info)
+  .filter(([k, v]) => /captain|owner|leader|creator/i.test(k) && (typeof v === "number" || typeof v === "string"))
+  .map(([, v]) => String(v)));
+
 let old = {};
 try { old = JSON.parse(await readFile("data.json", "utf8")); } catch {}
 const today = new Date().toISOString().slice(0, 10);
@@ -48,7 +55,7 @@ const today = new Date().toISOString().slice(0, 10);
 const racers = members.map(m => ({
   username: m.username,
   displayName: m.displayName || m.username,
-  role: m.role || "member",
+  role: (m.role === "captain" || captainIds.has(String(m.userID)) || m.displayName === CAPTAIN_NAME) ? "captain" : (m.role || "member"),
   title: m.title || "",
   membership: m.membership || "",
   carId: m.carID ?? null,
@@ -85,5 +92,5 @@ for (const r of racers) {
 }
 
 await writeFile("data.json", JSON.stringify({ team: TEAM, updated: Math.floor(Date.now() / 1000), racers, cars, history }, null, 1));
-await writeFile("debug.json", JSON.stringify({ carLookup: carDebug, carsFound: Object.keys(carFiles).length, firstMember: members[0] }, null, 1));
+await writeFile("debug.json", JSON.stringify({ carLookup: carDebug, carsFound: Object.keys(carFiles).length, roles: members.map(m => `${m.displayName}: ${m.role}`), memberships: members.map(m => `${m.displayName}: ${m.membership}`), teamInfo: info, firstMember: members[0] }, null, 1));
 console.log(`Saved ${racers.length} racers`);
