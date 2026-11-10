@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#101828;--mute:#667085;--paper:#F5F6FA;--card:#fff;--line:#E3E6EE;--blue:#2F5BFF;--gold:#F5B301;--green:#12805C;--red:#C0362C}
-@media (prefers-color-scheme:dark){:root{--ink:#EEF1F8;--mute:#98A2B3;--paper:#0E1320;--card:#161C2C;--line:#262E44;--blue:#6C8BFF;--gold:#F5B301;--green:#4CC9A0;--red:#FF8077}}
+:root{--ink:#101828;--mute:#667085;--paper:#F5F6FA;--card:#fff;--line:#E3E6EE;--blue:#2F5BFF;--gold:#F5B301;--goldname:#C98A00;--green:#12805C;--red:#C0362C;--stripe:rgba(16,24,40,.04)}
+@media (prefers-color-scheme:dark){:root{--ink:#EEF1F8;--mute:#98A2B3;--paper:#0E1320;--card:#161C2C;--line:#262E44;--blue:#6C8BFF;--goldname:#F5B301;--green:#4CC9A0;--red:#FF8077;--stripe:rgba(255,255,255,.04)}}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
 body{font-family:Manrope,system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5}
@@ -27,41 +27,48 @@ input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .link{background:none;border:0;color:var(--blue);cursor:pointer;padding:0;font-weight:600}
 .err{color:var(--red);min-height:1.4em;margin:0;font-size:14px}
-/* app */
-header{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);background:var(--card)}
+/* header + pages */
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 24px;border-bottom:1px solid var(--line);background:var(--card);flex-wrap:wrap}
 header h2{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em}
+nav{display:flex;gap:4px}
+nav a{padding:8px 14px;border-radius:10px;color:var(--mute);text-decoration:none;font-weight:600}
+nav a[aria-current="page"]{background:var(--paper);color:var(--ink)}
 header .who{display:flex;gap:12px;align-items:center;color:var(--mute);font-size:14px}
-main{display:grid;gap:24px;padding:24px;max-width:1200px;margin:0 auto}
+main{padding:24px;max-width:1200px;margin:0 auto}
 section{background:var(--card);border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;min-height:0;overflow:hidden}
-.head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
 .head h3{margin:0;font-size:16px}
-.head .tools{display:flex;gap:8px;align-items:center}
-select{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
 .scroll{overflow:auto;flex:1;min-height:0}
 /* racers table */
-table{width:100%;border-collapse:collapse;min-width:860px}
-th{text-align:left;font-size:13px;color:var(--mute);font-weight:600;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+table{width:100%;border-collapse:collapse;min-width:900px}
+th{text-align:left;font-size:13px;color:var(--mute);font-weight:600;padding:0;border-bottom:1px solid var(--line);white-space:nowrap}
+th button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:4px;width:100%;padding:12px 14px;cursor:pointer}
+th button:hover{color:var(--ink)}
+th button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+th .arrow{font-size:10px;opacity:.9}
+th[aria-sort] button{color:var(--ink)}
+th:first-child button{padding-left:40px}
 td{padding:12px 14px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:nth-child(even) td{background:var(--stripe)}
 tr:last-child td{border-bottom:0}
+td.first{position:relative;padding-left:40px}
+.tag{position:absolute;left:0;top:0;bottom:0;width:24px;display:grid;place-items:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.tag.officer{background:#2A7BC8;color:#fff}
+.tag.captain{background:var(--gold);color:#101828}
 .who-cell{display:flex;align-items:center;gap:12px}
 .car{width:84px;height:36px;object-fit:contain;flex:none}
 .car.none{display:grid;place-items:center;color:var(--mute);font-size:12px;border:1px dashed var(--line);border-radius:8px}
-.uname{font-weight:800}
+.uname{font-weight:800;display:flex;align-items:center;gap:8px}
 .uname a{color:inherit;text-decoration:none}.uname a:hover{text-decoration:underline}
-.sub{color:var(--mute);font-size:12px}
+.uname.gold a{color:var(--goldname)}
+.sub{color:var(--mute);font-size:12px;font-style:italic}
 .gain{color:var(--green);font-size:12px;font-weight:600}
-.first .uname::before{content:"1st";background:var(--gold);color:#101828;border-radius:6px;padding:1px 6px;margin-right:8px;font-size:12px}
+.place{font-size:12px;font-weight:800;border-radius:6px;padding:1px 7px;color:#101828}
+.place.p1{background:#F5B301}.place.p2{background:#C3CAD6}.place.p3{background:#D9955A}
+.updated{color:var(--mute);font-size:12px;font-weight:400}
 .empty{padding:28px 20px;color:var(--mute)}
-/* dialog */
-dialog{border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);padding:24px;width:min(460px,92vw)}
-dialog::backdrop{background:rgba(0,0,0,.5)}
-dialog h3{margin:0 0 16px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-label{display:grid;gap:4px;font-size:13px;color:var(--mute);font-weight:600}
-.span2{grid-column:1/3}
-.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
 /* chat */
-#chat{height:420px}
+#chat{height:calc(100vh - 190px);min-height:420px}
 .msg{padding:8px 20px}
 .msg b{font-size:13px}
 .msg time{color:var(--mute);font-size:12px;margin-left:6px}
@@ -91,25 +98,21 @@ label{display:grid;gap:4px;font-size:13px;color:var(--mute);font-weight:600}
 <div id="app" class="hidden">
   <header>
     <h2>Team Pit Stop</h2>
+    <nav aria-label="Pages">
+      <a href="#stats" id="navStats">Team stats</a>
+      <a href="#chat" id="navChat">Chat</a>
+    </nav>
     <div class="who"><span id="me"></span><button class="btn ghost" id="out">Sign out</button></div>
   </header>
   <main>
-    <section>
+    <section id="statsView">
       <div class="head">
-        <h3>Team racers <span class="sub" id="updated"></span></h3>
-        <div class="tools">
-          <select id="sort" aria-label="Sort racers">
-            <option value="team">Most team races</option>
-            <option value="gain">Biggest gain</option>
-            <option value="life">Most lifetime races</option>
-            <option value="avg">Highest average speed</option>
-            <option value="high">Highest top speed</option>
-          </select>
-        </div>
+        <h3>Team racers</h3>
+        <span class="updated" id="updated"></span>
       </div>
       <div class="scroll" id="racers"></div>
     </section>
-    <section id="chat">
+    <section id="chat" class="hidden">
       <div class="head"><h3>Team chat</h3></div>
       <div class="scroll" id="msgs"></div>
       <form class="send" id="sendForm">
@@ -118,8 +121,6 @@ label{display:grid;gap:4px;font-size:13px;color:var(--mute);font-weight:600}
       </form>
     </section>
   </main>
-
-  
 </div>
 
 <script type="module">
@@ -191,10 +192,34 @@ onAuthStateChanged(auth, user => {
   $("me").textContent = user.displayName || user.email;
   listenRacers();
   listenChat(user);
+  route();
 });
 
-/* ---------- racers (read from data.json, refreshed by GitHub) ---------- */
+/* ---------- pages ---------- */
+function route() {
+  const chat = location.hash === "#chat";
+  $("statsView").classList.toggle("hidden", chat);
+  $("chat").classList.toggle("hidden", !chat);
+  $("navStats").setAttribute("aria-current", chat ? "false" : "page");
+  $("navChat").setAttribute("aria-current", chat ? "page" : "false");
+  if (chat) { const m = $("msgs"); m.scrollTop = m.scrollHeight; }
+}
+window.addEventListener("hashchange", route);
+route();
+
+/* ---------- racers (read from data.json, refreshed by GitHub every hour) ---------- */
 let racers = [], carPics = {};
+// key, title, how to sort, and which direction is "best first"
+const COLS = [
+  { k: "name", t: "Racer", get: r => (r.displayName || r.username || "").toLowerCase(), best: "asc", podium: false },
+  { k: "avgSpeed", t: "Avg speed", get: r => r.avgSpeed, best: "desc" },
+  { k: "highSpeed", t: "Highest speed", get: r => r.highSpeed, best: "desc" },
+  { k: "lifetimeRaces", t: "Lifetime races", get: r => r.lifetimeRaces, best: "desc" },
+  { k: "teamRaces", t: "Team races", get: r => r.teamRaces, best: "desc" },
+  { k: "memberSince", t: "Member since", get: r => r.memberSince, best: "asc" },
+  { k: "lastRace", t: "Last race", get: r => r.lastRace, best: "desc" }
+];
+let sortKey = "teamRaces", sortDir = "desc";
 
 function agoTs(sec) {
   if (!sec) return "-";
@@ -214,8 +239,9 @@ async function loadRacers() {
     const res = await fetch("data.json?t=" + Date.now());
     if (!res.ok) throw new Error("missing");
     const data = await res.json();
-    carPics = data.cars || {}; racers = data.racers.map(r => ({ ...r, gain: gainFrom(data.history?.[r.username]) }));
-    $("updated").textContent = "updated " + agoTs(data.updated);
+    carPics = data.cars || {};
+    racers = data.racers.map(r => ({ ...r, gain: gainFrom(data.history?.[r.username]) }));
+    $("updated").textContent = "updated " + agoTs(data.updated) + " \u22C5 updates every hour";
   } catch { racers = []; $("updated").textContent = ""; }
   drawRacers();
 }
@@ -252,39 +278,71 @@ function tintCar(img, dataUrl, url, hue) {
   };
   src.src = dataUrl;
 }
-  function cell(text, cls) { const td = document.createElement("td"); if (cls) td.className = cls; td.textContent = text; return td; }
+
+function cell(text, cls) { const td = document.createElement("td"); if (cls) td.className = cls; td.textContent = text; return td; }
 const num = v => (v == null || v === "" ? "-" : Number(v).toLocaleString());
 
+function sortBy(k) {
+  const col = COLS.find(c => c.k === k);
+  if (sortKey === k) sortDir = sortDir === "asc" ? "desc" : "asc";
+  else { sortKey = k; sortDir = col.best; }
+  drawRacers();
+}
+
 function drawRacers() {
-  const key = { team: "teamRaces", gain: "gain", life: "lifetimeRaces", avg: "avgSpeed", high: "highSpeed" }[$("sort").value];
-  const rows = racers.slice().sort((a, b) => (b[key] || 0) - (a[key] || 0));
+  const col = COLS.find(c => c.k === sortKey);
+  const rows = racers.slice().sort((a, b) => {
+    const x = col.get(a), y = col.get(b);
+    if (x == null && y == null) return 0;
+    if (x == null) return 1;
+    if (y == null) return -1;
+    const c = typeof x === "string" ? x.localeCompare(y) : x - y;
+    return sortDir === "asc" ? c : -c;
+  });
+  const showPodium = col.podium !== false && sortDir === col.best;
   const box = $("racers"); box.textContent = "";
   if (!rows.length) { const p = document.createElement("p"); p.className = "empty"; p.textContent = "Racer stats are not loaded yet. They appear after the first automatic update finishes."; box.append(p); return; }
+
   const table = document.createElement("table");
-  const head = document.createElement("tr");
-  ["Racer", "Avg speed", "Highest speed", "Lifetime races", "Team races", "Member since", "Last race"].forEach(h => { const th = document.createElement("th"); th.textContent = h; head.append(th); });
-  table.append(head);
+  const thead = document.createElement("thead"), head = document.createElement("tr");
+  COLS.forEach(c => {
+    const th = document.createElement("th"), b = document.createElement("button");
+    b.type = "button"; b.textContent = c.t;
+    if (c.k === sortKey) {
+      th.setAttribute("aria-sort", sortDir === "asc" ? "ascending" : "descending");
+      const a = document.createElement("span"); a.className = "arrow"; a.textContent = sortDir === "asc" ? "\u25B2" : "\u25BC"; a.setAttribute("aria-hidden", "true"); b.append(a);
+    }
+    b.onclick = () => sortBy(c.k);
+    th.append(b); head.append(th);
+  });
+  thead.append(head); table.append(thead);
+
+  const tbody = document.createElement("tbody");
   rows.forEach((r, i) => {
-    const tr = document.createElement("tr"); if (i === 0) tr.className = "first";
-    const who = document.createElement("td"), wrap = document.createElement("div"); wrap.className = "who-cell";
+    const tr = document.createElement("tr");
+    const who = document.createElement("td"); who.className = "first";
+    const role = (r.role || "").toLowerCase();
+    if (role === "officer" || role === "captain") {
+      const tag = document.createElement("div"); tag.className = "tag " + role; tag.textContent = role; who.append(tag);
+    }
+    const wrap = document.createElement("div"); wrap.className = "who-cell";
     let car;
-    if (r.carImage) { car = document.createElement("img"); tintCar(car, carPics[r.carFile], r.carImage, r.carHue || 0); car.alt = r.car || "Car"; car.className = "car"; car.onerror = () => { car.className = "car none"; car.removeAttribute("src"); }; }
+    if (r.carImage) { car = document.createElement("img"); car.alt = r.car || "Car"; car.className = "car"; tintCar(car, carPics[r.carFile], r.carImage, r.carHue || 0); car.onerror = () => { car.className = "car none"; car.removeAttribute("src"); }; }
     else { car = document.createElement("div"); car.className = "car none"; car.textContent = "no car"; }
     const names = document.createElement("div");
-    const u = document.createElement("div"); u.className = "uname";
+    const u = document.createElement("div"); u.className = "uname" + (r.membership === "gold" ? " gold" : "");
+    if (showPodium && i < 3) { const p = document.createElement("span"); p.className = "place p" + (i + 1); p.textContent = ["1st", "2nd", "3rd"][i]; u.append(p); }
     const link = document.createElement("a"); link.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(r.username); link.target = "_blank"; link.rel = "noopener"; link.textContent = r.displayName || r.username; u.append(link);
-    const c = document.createElement("div"); c.className = "sub"; c.textContent = (r.role && r.role !== "member" ? r.role + (r.title ? " · " : "") : "") + (r.title ? "\u201C" + r.title + "\u201D" : "");
+    const c = document.createElement("div"); c.className = "sub"; c.textContent = r.title ? "\u201C" + r.title + "\u201D" : "";
     names.append(u, c); wrap.append(car, names); who.append(wrap);
     const team = cell(num(r.teamRaces));
     if (r.gain) { const g = document.createElement("div"); g.className = "gain"; g.textContent = "+" + r.gain.toLocaleString() + " since yesterday"; team.append(g); }
-    const since = cell(agoTs(r.memberSince)), last = cell(agoTs(r.lastRace));
-    tr.append(who, cell(r.avgSpeed ?? "-"), cell(r.highSpeed ?? "-"), cell(num(r.lifetimeRaces)), team, since, last);
-    table.append(tr);
+    tr.append(who, cell(r.avgSpeed ?? "-"), cell(r.highSpeed ?? "-"), cell(num(r.lifetimeRaces)), team, cell(agoTs(r.memberSince)), cell(agoTs(r.lastRace)));
+    tbody.append(tr);
   });
+  table.append(tbody);
   box.append(table);
 }
-
-$("sort").onchange = drawRacers;
 
 /* ---------- chat ---------- */
 function listenChat(user) {
