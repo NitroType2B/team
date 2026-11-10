@@ -34,6 +34,15 @@ input::placeholder{color:#8277B5}
 .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
 .btn.ghost:hover{box-shadow:none;border-color:var(--cyan)}
 .link{background:none;border:0;color:var(--cyan);cursor:pointer;padding:0;font-weight:700}
+.field-label{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13px;font-weight:800;color:var(--mute)}
+.help-wrap{position:relative}
+.help{width:20px;height:20px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);font-size:12px;font-weight:800;cursor:help;padding:0;line-height:1}
+.help:hover,.help:focus-visible{border-color:var(--cyan);color:var(--cyan)}
+.tip{display:none;position:absolute;left:-8px;top:30px;width:min(300px,78vw);background:#241A55;border:1px solid var(--cyan);border-radius:12px;padding:12px 14px;font-size:13px;font-weight:400;line-height:1.5;color:var(--ink);z-index:10;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.tip b{color:var(--cyan)}
+.help-wrap:hover .tip,.help-wrap:focus-within .tip{display:block}
+.msg b a{color:inherit;text-decoration:none}
+.msg b a:hover{text-decoration:underline}
 .err{color:var(--red);min-height:1.4em;margin:0;font-size:14px}
 /* header */
 header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 24px;background:rgba(15,10,36,.78);backdrop-filter:blur(12px);flex-wrap:wrap}
@@ -137,9 +146,18 @@ td.c-dim{color:var(--mute)}
     <h1 class="display">[2B] Determined</h1>
     <p>Sign in to chat with the team and see who is racing the most.</p>
     <form id="authForm" class="stack">
-      <input id="username" placeholder="Nitro Type username" autocomplete="nickname" class="hidden">
-      <input id="email" type="email" placeholder="Email" autocomplete="email" required>
+      <input id="username" placeholder="Username" autocomplete="username" maxlength="20" required>
       <input id="password" type="password" placeholder="Password (6+ characters)" autocomplete="current-password" minlength="6" required>
+      <div id="racerWrap" class="hidden">
+        <div class="field-label">
+          <label for="racerLink">Racer Profile Link</label>
+          <span class="help-wrap">
+            <button type="button" class="help" aria-label="How to find your link" aria-describedby="helpTip">?</button>
+            <span class="tip" id="helpTip" role="tooltip"><b>How to find your link</b><br>1. Go to "My Public Profile" in the dropdown in the top right corner of Nitro Type.<br>2. Copy the URL (nitrotype.com/racer/YOUR_USERNAME).</span>
+          </span>
+        </div>
+        <input id="racerLink" placeholder="nitrotype.com/racer/YOUR_USERNAME" autocomplete="off">
+      </div>
       <p class="err" id="authErr" role="alert"></p>
       <button class="btn" id="authBtn" type="submit">Sign in</button>
     </form>
@@ -204,7 +222,7 @@ td.c-dim{color:var(--mute)}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { getFirestore, collection, doc, addDoc, setDoc, onSnapshot, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, doc, addDoc, getDoc, writeBatch, onSnapshot, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDj-UlpMjTVccy4RfWqP8-Lyt_2HOFs4lc",
@@ -222,15 +240,27 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-let signUp = false, unsubs = [];
+let signUp = false, unsubs = [], creating = false, me = null;
+
+// people pick a username, so we turn it into a hidden login address (nobody ever sees or uses it)
+const toEmail = name => name.toLowerCase() + "@2b-determined.users";
+const NAME_OK = /^[A-Za-z0-9_.-]{3,20}$/;
+const claimId = racer => encodeURIComponent(racer.toLowerCase());
+const fail = code => Object.assign(new Error(code), { code });
+function parseRacer(link) {
+  const m = link.trim().match(/^(?:https?:\/\/)?(?:www\.)?nitrotype\.com\/racer\/([^\/?#\s]+)\/?(?:[?#].*)?$/i);
+  if (!m) return null;
+  try { return decodeURIComponent(m[1]); } catch { return m[1]; }
+}
 
 $("swap").onclick = () => {
   signUp = !signUp;
-  $("username").classList.toggle("hidden", !signUp);
-  $("username").required = signUp;
+  $("racerWrap").classList.toggle("hidden", !signUp);
+  $("racerLink").required = signUp;
   $("authBtn").textContent = signUp ? "Create account" : "Sign in";
   $("swapText").textContent = signUp ? "Already have an account?" : "New here?";
   $("swap").textContent = signUp ? "Sign in" : "Create an account";
+  $("username").placeholder = signUp ? "Choose a username" : "Username";
   $("password").autocomplete = signUp ? "new-password" : "current-password";
   $("authErr").textContent = "";
 };
@@ -238,40 +268,72 @@ $("swap").onclick = () => {
 $("authForm").onsubmit = async e => {
   e.preventDefault();
   $("authErr").textContent = "";
+  $("authBtn").disabled = true;
   try {
-    const email = $("email").value.trim(), pw = $("password").value;
-    if (signUp) {
-      const cred = await createUserWithEmailAndPassword(auth, email, pw);
-      await updateProfile(cred.user, { displayName: $("username").value.trim() });
-      $("me").textContent = cred.user.displayName;
+    const name = $("username").value.trim(), pw = $("password").value;
+    if (!NAME_OK.test(name)) throw fail("app/bad-username");
+    if (!signUp) {
+      await signInWithEmailAndPassword(auth, toEmail(name), pw);
     } else {
-      await signInWithEmailAndPassword(auth, email, pw);
+      const racer = parseRacer($("racerLink").value);
+      if (!racer) throw fail("app/bad-link");
+      try { if ((await getDoc(doc(db, "racerClaims", claimId(racer)))).exists()) throw fail("app/racer-taken"); }
+      catch (err) { if (err.code === "app/racer-taken") throw err; }
+      creating = true;
+      const cred = await createUserWithEmailAndPassword(auth, toEmail(name), pw);
+      try {
+        const batch = writeBatch(db);
+        batch.set(doc(db, "racerClaims", claimId(racer)), { uid: cred.user.uid, racer });
+        batch.set(doc(db, "profiles", cred.user.uid), { username: name, usernameLower: name.toLowerCase(), racer, createdAt: serverTimestamp() });
+        await batch.commit();
+      } catch (err) {
+        await cred.user.delete().catch(() => {});
+        await signOut(auth).catch(() => {});
+        throw fail(err.code === "permission-denied" ? "app/racer-taken" : "app/setup-failed");
+      }
+      await updateProfile(cred.user, { displayName: name }).catch(() => {});
+      me = { username: name, racer };
+      creating = false;
+      await enter(cred.user);
     }
   } catch (err) {
+    creating = false;
     const map = {
-      "auth/invalid-credential": "Wrong email or password.",
-      "auth/email-already-in-use": "That email already has an account. Sign in instead.",
+      "auth/invalid-credential": "Wrong username or password.",
+      "auth/user-not-found": "Wrong username or password.",
+      "auth/wrong-password": "Wrong username or password.",
+      "auth/email-already-in-use": "That username is already taken. Try another one.",
       "auth/weak-password": "Use a password with at least 6 characters.",
-      "auth/invalid-email": "Enter a valid email address.",
       "auth/operation-not-allowed": "Turn on Email/Password in Firebase Authentication.",
-      "auth/api-key-not-valid.-please-pass-a-valid-api-key.": "The apiKey in the config is wrong."
+      "auth/too-many-requests": "Too many tries. Wait a minute and try again.",
+      "app/bad-username": "Usernames are 3 to 20 characters: letters, numbers, dots, dashes or underscores.",
+      "app/bad-link": "Paste your full Nitro Type profile link (nitrotype.com/racer/YOUR_USERNAME).",
+      "app/racer-taken": "That Nitro Type profile is already linked to another account.",
+      "app/setup-failed": "Something went wrong creating your account. Please try again."
     };
     $("authErr").textContent = map[err.code] || err.message;
-  }
+  } finally { $("authBtn").disabled = false; }
 };
 
 $("out").onclick = () => signOut(auth);
 
-onAuthStateChanged(auth, user => {
+async function enter(user) {
   unsubs.forEach(u => u()); unsubs = [];
   $("auth").classList.toggle("hidden", !!user);
   $("app").classList.toggle("hidden", !user);
-  if (!user) return;
-  $("me").textContent = user.displayName || user.email;
-  listenRacers();
-  listenChat(user);
-  route();
-});
+  if (!user) { me = null; return; }
+  if (!me) { try { const s = await getDoc(doc(db, "profiles", user.uid)); if (s.exists()) me = s.data(); } catch {} }
+  $("me").textContent = me?.username || user.displayName || "";
+  listenRacers(); listenChat(user); route();
+}
+
+// one-time log out of every older session (from before usernames and profile links)
+try {
+  await auth.authStateReady();
+  if (localStorage.getItem("authV") !== "2") { await signOut(auth); localStorage.setItem("authV", "2"); }
+} catch {}
+
+onAuthStateChanged(auth, user => { if (creating) return; if (!user) me = null; enter(user); });
 
 /* ---------- pages ---------- */
 function route() {
@@ -481,7 +543,9 @@ function listenChat(user) {
     snap.docs.slice().reverse().forEach(d => {
       const m = d.data();
       const el = document.createElement("div"); el.className = "msg" + (m.uid === user.uid ? " me" : "");
-      const b = document.createElement("b"); b.textContent = m.name || "Racer";
+      const b = document.createElement("b");
+      if (m.racer) { const a = document.createElement("a"); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(m.racer); a.target = "_blank"; a.rel = "noopener"; a.textContent = m.name || "Racer"; b.append(a); }
+      else b.textContent = m.name || "Racer";
       const t = document.createElement("time");
       if (m.createdAt) t.textContent = chatTime(m.createdAt.toDate());
       const p = document.createElement("p"); p.textContent = m.text;
@@ -497,7 +561,7 @@ $("sendForm").onsubmit = async e => {
   if (!text) return;
   $("text").value = "";
   const u = auth.currentUser;
-  await addDoc(collection(db, "messages"), { text, uid: u.uid, name: u.displayName || u.email, createdAt: serverTimestamp() });
+  await addDoc(collection(db, "messages"), { text, uid: u.uid, name: me?.username || u.displayName || "Racer", racer: me?.racer || null, createdAt: serverTimestamp() });
 };
 </script>
 </body>
