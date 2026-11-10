@@ -1,12 +1,13 @@
 {
  "team": "2B",
- "updated": 1794264968,
+ "updated": 1794283599,
  "racers": [
   {
    "username": "409607",
    "displayName": "Anime_409",
    "role": "member",
    "title": "Keeper of the Keys",
+   "membership": "gold",
    "carId": 479,
    "carHue": 0,
    "carFile": "spirit_racers_final_seal_small.png",
@@ -21,24 +22,26 @@
   {
    "username": "quadruplex",
    "displayName": "Quadruplex",
-   "role": "member",
+   "role": "officer",
    "title": "Three Commas Club",
+   "membership": "gold",
    "carId": 209,
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 139,
+   "avgSpeed": 130,
    "highSpeed": 161,
-   "lifetimeRaces": 2829,
-   "teamRaces": 123,
+   "lifetimeRaces": 3037,
+   "teamRaces": 337,
    "memberSince": 1794193196,
-   "lastRace": 1794264589
+   "lastRace": 1794283172
   },
   {
    "username": "randalllack27",
    "displayName": "Asher8k",
    "role": "member",
    "title": "Filthy Rich",
+   "membership": "basic",
    "carId": 122,
    "carHue": 180,
    "carFile": "122_small_1.png",
@@ -55,54 +58,58 @@
    "displayName": "sonder",
    "role": "officer",
    "title": "Loco Motive",
+   "membership": "gold",
    "carId": 132,
    "carHue": 200,
    "carFile": "132_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/132_small_1.png",
-   "avgSpeed": 138,
+   "avgSpeed": 143,
    "highSpeed": 172,
-   "lifetimeRaces": 27475,
-   "teamRaces": 264,
+   "lifetimeRaces": 27479,
+   "teamRaces": 265,
    "memberSince": 1794100813,
-   "lastRace": 1794259350
+   "lastRace": 1794283155
   },
   {
    "username": "lifetime100",
    "displayName": "Gr8　　Minds　　",
    "role": "officer",
    "title": "Rosso Rivale",
+   "membership": "gold",
    "carId": 470,
    "carHue": 0,
    "carFile": "nt470_small.png",
    "carImage": "https://www.nitrotype.com/cars/nt470_small.png",
-   "avgSpeed": 113,
+   "avgSpeed": 114,
    "highSpeed": 149,
-   "lifetimeRaces": 23684,
-   "teamRaces": 89,
+   "lifetimeRaces": 23690,
+   "teamRaces": 95,
    "memberSince": 1793228769,
-   "lastRace": 1794243778
+   "lastRace": 1794276700
   },
   {
    "username": "piquel",
    "displayName": "Sub 2 PickleNT on YT",
    "role": "officer",
    "title": "wow. such gifting",
+   "membership": "gold",
    "carId": 115,
    "carHue": 240,
    "carFile": "115_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/115_small_1.png",
-   "avgSpeed": 124,
+   "avgSpeed": 118,
    "highSpeed": 158,
-   "lifetimeRaces": 33663,
-   "teamRaces": 930,
+   "lifetimeRaces": 33676,
+   "teamRaces": 943,
    "memberSince": 1792979300,
-   "lastRace": 1794184723
+   "lastRace": 1794281347
   },
   {
    "username": "25db4dd822756ad6d1df065db97ebcab",
    "displayName": "SW34TYK1D",
    "role": "member",
    "title": "Pro Pacer",
+   "membership": "basic",
    "carId": 43,
    "carHue": 0,
    "carFile": "suprillia_small.png",
@@ -119,22 +126,24 @@
    "displayName": "petrify",
    "role": "member",
    "title": "wow. such gifting",
+   "membership": "basic",
    "carId": 432,
    "carHue": 80,
    "carFile": "stingquant_small.png",
    "carImage": "https://www.nitrotype.com/cars/stingquant_small.png",
-   "avgSpeed": 91,
+   "avgSpeed": 87,
    "highSpeed": 131,
-   "lifetimeRaces": 12821,
-   "teamRaces": 158,
+   "lifetimeRaces": 12831,
+   "teamRaces": 168,
    "memberSince": 1794240864,
-   "lastRace": 1794261253
+   "lastRace": 1794280127
   },
   {
    "username": "24cf4df60146763fc790068e421c9389",
    "displayName": "mmmmmmmmmmm",
    "role": "member",
    "title": "Original Gangster",
+   "membership": "basic",
    "carId": 331,
    "carHue": 60,
    "carFile": "f1bug_small.png",
@@ -151,6 +160,7 @@
    "displayName": "StellarCoralMongoose",
    "role": "member",
    "title": "[SKIPWRD]",
+   "membership": "basic",
    "carId": 338,
    "carHue": 340,
    "carFile": "blizferr_small.png",
@@ -167,6 +177,7 @@
    "displayName": "U DONT CARE",
    "role": "member",
    "title": "Millionaire",
+   "membership": "basic",
    "carId": 329,
    "carHue": 200,
    "carFile": "413243csdaf_small.png",
@@ -183,6 +194,7 @@
    "displayName": "Speed of light",
    "role": "member",
    "title": "Mystery Man",
+   "membership": "basic",
    "carId": 331,
    "carHue": 100,
    "carFile": "f1bug_small.png",
@@ -199,22 +211,24 @@
    "displayName": "AmazingBlueTyrannosaurus",
    "role": "member",
    "title": "Filthy Rich",
+   "membership": "basic",
    "carId": 277,
    "carHue": 0,
    "carFile": "fully_leaded_small.png",
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
-   "avgSpeed": 39,
+   "avgSpeed": 36,
    "highSpeed": 45,
-   "lifetimeRaces": 208,
-   "teamRaces": 79,
+   "lifetimeRaces": 225,
+   "teamRaces": 96,
    "memberSince": 1794027205,
-   "lastRace": 1794264595
+   "lastRace": 1794269012
   },
   {
    "username": "197778e3651f7f3d54c111e024ae2cfc",
    "displayName": "monkey mav",
    "role": "member",
    "title": "Booksmart",
+   "membership": "basic",
    "carId": 43,
    "carHue": 0,
    "carFile": "suprillia_small.png",
@@ -231,6 +245,7 @@
    "displayName": "AwesomeOrangePanther",
    "role": "officer",
    "title": "Sweaty Typer",
+   "membership": "basic",
    "carId": 47,
    "carHue": 60,
    "carFile": "fastback_small.png",
@@ -247,6 +262,7 @@
    "displayName": "MelodicEmeraldBedbug",
    "role": "member",
    "title": "Original Gangster",
+   "membership": "basic",
    "carId": 277,
    "carHue": 0,
    "carFile": "fully_leaded_small.png",
@@ -263,6 +279,7 @@
    "displayName": "hunty 2 fine",
    "role": "member",
    "title": "I Love Nitros",
+   "membership": "basic",
    "carId": 438,
    "carHue": 260,
    "carFile": "hurricania_small.png",
@@ -279,6 +296,7 @@
    "displayName": "HonestCoffeeDonkey",
    "role": "member",
    "title": "Original Gangster",
+   "membership": "basic",
    "carId": 277,
    "carHue": 140,
    "carFile": "fully_leaded_small.png",
@@ -295,6 +313,7 @@
    "displayName": "Imissmydogtobuddy",
    "role": "officer",
    "title": "Sp00ked",
+   "membership": "basic",
    "carId": 484,
    "carHue": 140,
    "carFile": "shadow_dragon_small.png",
@@ -311,6 +330,7 @@
    "displayName": "Rainbow Dragon",
    "role": "member",
    "title": "Ghost Lap",
+   "membership": "basic",
    "carId": 484,
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
@@ -327,6 +347,7 @@
    "displayName": "KirbyIsTuff",
    "role": "member",
    "title": "Mystery Man",
+   "membership": "basic",
    "carId": 91,
    "carHue": 0,
    "carFile": "91_small_1.png",
@@ -343,6 +364,7 @@
    "displayName": "I want to be officer",
    "role": "member",
    "title": "[SKIPWRD]",
+   "membership": "basic",
    "carId": 17,
    "carHue": 0,
    "carFile": "17_small_1.png",
@@ -359,6 +381,7 @@
    "displayName": "tacolover999777",
    "role": "member",
    "title": "Word Skipper",
+   "membership": "basic",
    "carId": 277,
    "carHue": 300,
    "carFile": "fully_leaded_small.png",
@@ -375,22 +398,24 @@
    "displayName": "exterverjae7",
    "role": "member",
    "title": "Raw Racing Recruit",
+   "membership": "basic",
    "carId": 304,
    "carHue": 0,
    "carFile": "panoz_small.png",
    "carImage": "https://www.nitrotype.com/cars/panoz_small.png",
-   "avgSpeed": 151,
+   "avgSpeed": 152,
    "highSpeed": 172,
-   "lifetimeRaces": 211,
-   "teamRaces": 70,
+   "lifetimeRaces": 223,
+   "teamRaces": 80,
    "memberSince": 1794063320,
-   "lastRace": 1794201613
+   "lastRace": 1794281909
   },
   {
    "username": "f80d75120418f0ec5867162d84d42707",
    "displayName": "CeruleanOrangeOcelot",
    "role": "member",
    "title": "Raw Racing Recruit",
+   "membership": "basic",
    "carId": 264,
    "carHue": 200,
    "carFile": "3214rfdwasc_small.png",
@@ -426,79 +451,104 @@
  },
  "history": {
   "409607": {
-   "2026-11-09": 14
+   "2026-11-09": 14,
+   "2026-11-10": 14
   },
   "quadruplex": {
-   "2026-11-09": 123
+   "2026-11-09": 123,
+   "2026-11-10": 337
   },
   "visco_asher_yt": {
-   "2026-11-09": 264
+   "2026-11-09": 264,
+   "2026-11-10": 265
   },
   "lifetime100": {
-   "2026-11-09": 89
+   "2026-11-09": 89,
+   "2026-11-10": 95
   },
   "piquel": {
-   "2026-11-09": 930
+   "2026-11-09": 930,
+   "2026-11-10": 943
   },
   "25db4dd822756ad6d1df065db97ebcab": {
-   "2026-11-09": 0
+   "2026-11-09": 0,
+   "2026-11-10": 0
   },
   "shadowlegend402": {
-   "2026-11-09": 158
+   "2026-11-09": 158,
+   "2026-11-10": 168
   },
   "24cf4df60146763fc790068e421c9389": {
-   "2026-11-09": 28
+   "2026-11-09": 28,
+   "2026-11-10": 28
   },
   "f163a203de4636cabd1a6e5bd5c3a6ef": {
-   "2026-11-09": 5
+   "2026-11-09": 5,
+   "2026-11-10": 5
   },
   "3082aed66286fe8fe6d8f58ad00e2713": {
-   "2026-11-09": 23
+   "2026-11-09": 23,
+   "2026-11-10": 23
   },
   "ab9e10f06ae77ced2d67f287f8d94501": {
-   "2026-11-09": 87
+   "2026-11-09": 87,
+   "2026-11-10": 87
   },
   "10926d592c97ad37a9c79614491cc0c9": {
-   "2026-11-09": 79
+   "2026-11-09": 79,
+   "2026-11-10": 96
   },
   "197778e3651f7f3d54c111e024ae2cfc": {
-   "2026-11-09": 2
+   "2026-11-09": 2,
+   "2026-11-10": 2
   },
   "travishaha12345": {
-   "2026-11-09": 307
+   "2026-11-09": 307,
+   "2026-11-10": 307
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
-   "2026-11-09": 30
+   "2026-11-09": 30,
+   "2026-11-10": 30
   },
   "hunterrr12376": {
-   "2026-11-09": 26
+   "2026-11-09": 26,
+   "2026-11-10": 26
   },
   "1a5e12e602bb813005d1fe89aeab6459": {
-   "2026-11-09": 12
+   "2026-11-09": 12,
+   "2026-11-10": 12
   },
   "e89137c6d948fbd06cfde6ca3f2737d2": {
-   "2026-11-09": 858
+   "2026-11-09": 858,
+   "2026-11-10": 858
   },
   "nikooo124": {
-   "2026-11-09": 10
+   "2026-11-09": 10,
+   "2026-11-10": 10
   },
   "xwordreaperx": {
-   "2026-11-09": 35
+   "2026-11-09": 35,
+   "2026-11-10": 35
   },
   "1f00628c7818edb45331470d6fd128bb": {
-   "2026-11-09": 24
+   "2026-11-09": 24,
+   "2026-11-10": 24
   },
   "exterverjae7": {
-   "2026-11-09": 70
+   "2026-11-09": 70,
+   "2026-11-10": 80
   },
   "randalllack27": {
-   "2026-11-09": 0
+   "2026-11-09": 0,
+   "2026-11-10": 0
   },
   "ilike100acc": {
-   "2026-11-09": 105
+   "2026-11-09": 105,
+   "2026-11-10": 105
   },
   "f80d75120418f0ec5867162d84d42707": {
-   "2026-11-09": 1
+   "2026-11-09": 1,
+   "2026-11-10": 1
   }
  }
 }
