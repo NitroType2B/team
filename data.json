@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794283599,
+ "updated": 1794284022,
  "racers": [
   {
    "username": "409607",
@@ -29,12 +29,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 130,
+   "avgSpeed": 131,
    "highSpeed": 161,
-   "lifetimeRaces": 3037,
-   "teamRaces": 337,
+   "lifetimeRaces": 3038,
+   "teamRaces": 339,
    "memberSince": 1794193196,
-   "lastRace": 1794283172
+   "lastRace": 1794283278
   },
   {
    "username": "randalllack27",
@@ -66,9 +66,9 @@
    "avgSpeed": 143,
    "highSpeed": 172,
    "lifetimeRaces": 27479,
-   "teamRaces": 265,
+   "teamRaces": 268,
    "memberSince": 1794100813,
-   "lastRace": 1794283155
+   "lastRace": 1794283287
   },
   {
    "username": "lifetime100",
@@ -90,7 +90,7 @@
   {
    "username": "piquel",
    "displayName": "Sub 2 PickleNT on YT",
-   "role": "officer",
+   "role": "captain",
    "title": "wow. such gifting",
    "membership": "gold",
    "carId": 115,
@@ -403,12 +403,12 @@
    "carHue": 0,
    "carFile": "panoz_small.png",
    "carImage": "https://www.nitrotype.com/cars/panoz_small.png",
-   "avgSpeed": 152,
+   "avgSpeed": 150,
    "highSpeed": 172,
-   "lifetimeRaces": 223,
-   "teamRaces": 80,
+   "lifetimeRaces": 231,
+   "teamRaces": 87,
    "memberSince": 1794063320,
-   "lastRace": 1794281909
+   "lastRace": 1794283774
   },
   {
    "username": "f80d75120418f0ec5867162d84d42707",
@@ -456,11 +456,11 @@
   },
   "quadruplex": {
    "2026-11-09": 123,
-   "2026-11-10": 337
+   "2026-11-10": 339
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
-   "2026-11-10": 265
+   "2026-11-10": 268
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -536,7 +536,7 @@
   },
   "exterverjae7": {
    "2026-11-09": 70,
-   "2026-11-10": 80
+   "2026-11-10": 87
   },
   "randalllack27": {
    "2026-11-09": 0,
