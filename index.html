@@ -176,7 +176,7 @@ td.c-dim{color:var(--mute)}
           <div><strong class="display">Team Stats</strong><span>See who is racing the most</span></div>
         </a>
         <a class="big a2" href="#chat">
-          <svg viewBox="0 0 64 64" fill="none" stroke="#101828" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12h48v32H30L16 56V44H8z"/><path d="M20 24h24M20 32h14"/></svg>
+          <svg viewBox="0 0 64 64" fill="none" stroke="#101828" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12h48v32H30L16 56V44H8z" fill="#fff"/><path d="M20 24h24M20 32h14"/></svg>
           <div><strong class="display">Chat</strong><span>Talk with the whole team</span></div>
         </a>
       </div>
@@ -469,7 +469,7 @@ function chatTime(when) {
   else if (days <= 6) label = days + " days ago";
   else if (days === 7) label = "1 week ago";
   else label = String(when.getMonth() + 1).padStart(2, "0") + "/" + String(when.getDate()).padStart(2, "0") + "/" + String(when.getFullYear()).slice(-2);
-  return label + " " + time;
+  return label + ", " + time;
 }
 
 function listenChat(user) {
