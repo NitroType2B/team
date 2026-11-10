@@ -50,6 +50,7 @@ const racers = members.map(m => ({
   displayName: m.displayName || m.username,
   role: m.role || "member",
   title: m.title || "",
+  membership: m.membership || "",
   carId: m.carID ?? null,
   carHue: m.carHueAngle ?? 0,
   carFile: carFiles[m.carID] || null,
