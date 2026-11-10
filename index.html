@@ -393,7 +393,7 @@ async function loadRacers() {
     meta = data.teamMeta;
     racers = data.racers.slice();
     await Promise.all(racers.map(carSrc));
-    $("updated").textContent = "updated " + agoTs(data.updated) + " \u22C5 updates every hour";
+    $("updated").textContent = "updated " + agoTs(data.updated) + " \u22C5 updates every ~20 minutes";
   } catch { racers = []; $("updated").textContent = ""; }
   drawHero(meta);
   drawRacers();
