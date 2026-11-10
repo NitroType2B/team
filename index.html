@@ -63,6 +63,7 @@ td.first{position:relative;padding-left:40px}
 .uname.gold a{color:var(--goldname)}
 .sub{color:var(--mute);font-size:12px;font-style:italic}
 .gain{color:var(--green);font-size:12px;font-weight:600}
+.nt{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:4px;background:var(--gold);color:#101828;font-size:11px;font-weight:800;flex:none}
 .place{font-size:12px;font-weight:800;border-radius:6px;padding:1px 7px;color:#101828}
 .place.p1{background:#F5B301}.place.p2{background:#C3CAD6}.place.p3{background:#D9955A}
 .updated{color:var(--mute);font-size:12px;font-weight:400}
@@ -241,6 +242,7 @@ async function loadRacers() {
     const data = await res.json();
     carPics = data.cars || {};
     racers = data.racers.map(r => ({ ...r, gain: gainFrom(data.history?.[r.username]) }));
+    await Promise.all(racers.map(carSrc));
     $("updated").textContent = "updated " + agoTs(data.updated) + " \u22C5 updates every hour";
   } catch { racers = []; $("updated").textContent = ""; }
   drawRacers();
@@ -252,31 +254,57 @@ function listenRacers() {
   unsubs.push(() => clearInterval(t));
 }
 
-// recolor a car picture the way Nitro Type does (true hue shift)
-function tintCar(img, dataUrl, url, hue) {
-  if (!dataUrl) { img.referrerPolicy = "no-referrer"; img.src = url; return; }
-  const src = new Image();
-  src.onload = () => {
-    const c = document.createElement("canvas"); c.width = src.naturalWidth; c.height = src.naturalHeight;
-    const x = c.getContext("2d"); x.drawImage(src, 0, 0);
-    const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
-    for (let i = 0; i < p.length; i += 4) {
-      const r = p[i] / 255, g = p[i + 1] / 255, b = p[i + 2] / 255;
-      const mx = Math.max(r, g, b), mn = Math.min(r, g, b), dl = mx - mn;
-      if (dl === 0) continue;
-      let h = mx === r ? ((g - b) / dl) % 6 : mx === g ? (b - r) / dl + 2 : (r - g) / dl + 4;
-      h = (((h * 60 + hue) % 360) + 360) % 360;
-      const k = mx * (dl / mx), xx = k * (1 - Math.abs((h / 60) % 2 - 1)), m = mx - k;
-      let R, G, B;
-      if (h < 60) { R = k; G = xx; B = 0; } else if (h < 120) { R = xx; G = k; B = 0; }
-      else if (h < 180) { R = 0; G = k; B = xx; } else if (h < 240) { R = 0; G = xx; B = k; }
-      else if (h < 300) { R = xx; G = 0; B = k; } else { R = k; G = 0; B = xx; }
-      p[i] = Math.round((R + m) * 255); p[i + 1] = Math.round((G + m) * 255); p[i + 2] = Math.round((B + m) * 255);
-    }
-    x.putImageData(d, 0, 0);
-    img.src = c.toDataURL();
-  };
-  src.src = dataUrl;
+// recolor a car picture the way Nitro Type does (true hue shift), saved so it only happens once
+const tintCache = {}, imgCache = {};
+const carKey = r => (r.carFile || "") + "|" + (r.carHue || 0);
+function carSrc(r) {
+  const key = carKey(r);
+  if (tintCache[key]) return Promise.resolve(tintCache[key]);
+  const dataUrl = carPics[r.carFile], hue = r.carHue || 0;
+  if (!dataUrl) return Promise.resolve(null);
+  return new Promise(done => {
+    const src = new Image();
+    src.onerror = () => done(null);
+    src.onload = () => {
+      const c = document.createElement("canvas"); c.width = src.naturalWidth; c.height = src.naturalHeight;
+      const x = c.getContext("2d"); x.drawImage(src, 0, 0);
+      const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
+      for (let i = 0; i < p.length; i += 4) {
+        const r = p[i] / 255, g = p[i + 1] / 255, b = p[i + 2] / 255;
+        const mx = Math.max(r, g, b), mn = Math.min(r, g, b), dl = mx - mn;
+        if (dl === 0) continue;
+        let h = mx === r ? ((g - b) / dl) % 6 : mx === g ? (b - r) / dl + 2 : (r - g) / dl + 4;
+        h = (((h * 60 + hue) % 360) + 360) % 360;
+        const k = mx * (dl / mx), xx = k * (1 - Math.abs((h / 60) % 2 - 1)), m = mx - k;
+        let R, G, B;
+        if (h < 60) { R = k; G = xx; B = 0; } else if (h < 120) { R = xx; G = k; B = 0; }
+        else if (h < 180) { R = 0; G = k; B = xx; } else if (h < 240) { R = 0; G = xx; B = k; }
+        else if (h < 300) { R = xx; G = 0; B = k; } else { R = k; G = 0; B = xx; }
+        p[i] = Math.round((R + m) * 255); p[i + 1] = Math.round((G + m) * 255); p[i + 2] = Math.round((B + m) * 255);
+      }
+      x.putImageData(d, 0, 0);
+      tintCache[key] = c.toDataURL();
+      done(tintCache[key]);
+    };
+    src.src = dataUrl;
+  });
+}
+
+// one picture element per racer, reused every time the table is redrawn (no flicker)
+function carEl(r) {
+  const key = carKey(r) + "|" + (r.carImage || "");
+  const old = imgCache[r.username];
+  if (old && old.dataset.key === key) return old;
+  let el;
+  const s = tintCache[carKey(r)] || r.carImage;
+  if (s) {
+    el = document.createElement("img"); el.alt = ""; el.className = "car";
+    if (!tintCache[carKey(r)]) el.referrerPolicy = "no-referrer";
+    el.onerror = () => { el.replaceWith(Object.assign(document.createElement("div"), { className: "car none", textContent: "no car" })); };
+    el.src = s;
+  } else { el = document.createElement("div"); el.className = "car none"; el.textContent = "no car"; }
+  el.dataset.key = key; imgCache[r.username] = el;
+  return el;
 }
 
 function cell(text, cls) { const td = document.createElement("td"); if (cls) td.className = cls; td.textContent = text; return td; }
@@ -326,12 +354,11 @@ function drawRacers() {
       const tag = document.createElement("div"); tag.className = "tag " + role; tag.textContent = role; who.append(tag);
     }
     const wrap = document.createElement("div"); wrap.className = "who-cell";
-    let car;
-    if (r.carImage) { car = document.createElement("img"); car.alt = r.car || "Car"; car.className = "car"; tintCar(car, carPics[r.carFile], r.carImage, r.carHue || 0); car.onerror = () => { car.className = "car none"; car.removeAttribute("src"); }; }
-    else { car = document.createElement("div"); car.className = "car none"; car.textContent = "no car"; }
+    const car = carEl(r);
     const names = document.createElement("div");
     const u = document.createElement("div"); u.className = "uname" + (r.membership === "gold" ? " gold" : "");
     if (showPodium && i < 3) { const p = document.createElement("span"); p.className = "place p" + (i + 1); p.textContent = ["1st", "2nd", "3rd"][i]; u.append(p); }
+    if (r.membership === "gold") { const n = document.createElement("span"); n.className = "nt"; n.textContent = "N"; n.title = "Nitro Gold"; u.append(n); }
     const link = document.createElement("a"); link.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(r.username); link.target = "_blank"; link.rel = "noopener"; link.textContent = r.displayName || r.username; u.append(link);
     const c = document.createElement("div"); c.className = "sub"; c.textContent = r.title ? "\u201C" + r.title + "\u201D" : "";
     names.append(u, c); wrap.append(car, names); who.append(wrap);
