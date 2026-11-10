@@ -48,6 +48,20 @@ const captainIds = new Set(Object.entries(info)
   .filter(([k, v]) => /captain|owner|leader|creator/i.test(k) && (typeof v === "number" || typeof v === "string"))
   .map(([, v]) => String(v)));
 
+// team details for the home page (formed date and page views come from Nitro Type's team info)
+function numFrom(re, min) {
+  for (const src of [info, team.results]) for (const [k, v] of Object.entries(src || {})) {
+    if (re.test(k) && typeof v !== "object" && Number(v) > (min || 0)) return Number(v);
+  }
+  return null;
+}
+const teamMeta = {
+  tag: info.tag || TEAM,
+  name: info.name || "2B Determined",
+  formedStamp: numFrom(/creat|form|found|start/i, 1e9) || Date.parse("2026-10-25") / 1000,
+  views: numFrom(/view/i, 0)
+};
+
 let old = {};
 try { old = JSON.parse(await readFile("data.json", "utf8")); } catch {}
 const today = new Date().toISOString().slice(0, 10);
@@ -91,6 +105,6 @@ for (const r of racers) {
   for (const d of days.slice(0, -60)) delete history[r.username][d];
 }
 
-await writeFile("data.json", JSON.stringify({ team: TEAM, updated: Math.floor(Date.now() / 1000), racers, cars, history }, null, 1));
+await writeFile("data.json", JSON.stringify({ team: TEAM, updated: Math.floor(Date.now() / 1000), teamMeta, racers, cars, history }, null, 1));
 await writeFile("debug.json", JSON.stringify({ carLookup: carDebug, carsFound: Object.keys(carFiles).length, roles: members.map(m => `${m.displayName}: ${m.role}`), memberships: members.map(m => `${m.displayName}: ${m.membership}`), teamInfo: info, firstMember: members[0] }, null, 1));
 console.log(`Saved ${racers.length} racers`);
