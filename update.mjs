@@ -105,6 +105,26 @@ for (const r of racers) {
   for (const d of days.slice(0, -60)) delete history[r.username][d];
 }
 
+// save a snapshot of every racer's totals so giveaways can count races between two moments
+// each racer = [team races, lifetime races, letters typed, seconds typing]
+const nowS = Math.floor(Date.now() / 1000);
+let snaps = [];
+try { snaps = JSON.parse(await readFile("snapshots.json", "utf8")).snaps || []; } catch {}
+const snapRacers = {};
+for (const m of members) snapRacers[m.username] = [m.played ?? 0, m.racesPlayed ?? 0, m.typed ?? 0, m.secs ?? 0];
+snaps.push({ t: nowS, r: snapRacers });
+// keep every run for 3 days, then one per hour for a month, then one per 6 hours (up to 120 days)
+const kept = [], seenBuckets = new Set();
+for (const sn of snaps.sort((a, b) => b.t - a.t)) {
+  const age = nowS - sn.t;
+  if (age > 120 * 86400) continue;
+  const bucket = age <= 3 * 86400 ? "r" + sn.t : age <= 30 * 86400 ? "h" + Math.floor(sn.t / 3600) : "q" + Math.floor(sn.t / 21600);
+  if (seenBuckets.has(bucket)) continue;
+  seenBuckets.add(bucket); kept.push(sn);
+}
+kept.sort((a, b) => a.t - b.t);
+await writeFile("snapshots.json", JSON.stringify({ snaps: kept }));
+
 await writeFile("data.json", JSON.stringify({ team: TEAM, updated: Math.floor(Date.now() / 1000), teamMeta, racers, cars, history }, null, 1));
 await writeFile("debug.json", JSON.stringify({ carLookup: carDebug, carsFound: Object.keys(carFiles).length, roles: members.map(m => `${m.displayName}: ${m.role}`), memberships: members.map(m => `${m.displayName}: ${m.membership}`), teamInfo: info, firstMember: members[0] }, null, 1));
 console.log(`Saved ${racers.length} racers`);
