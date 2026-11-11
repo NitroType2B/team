@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794417616,
+ "updated": 1794418815,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -137,12 +137,12 @@
    "carHue": 300,
    "carFile": "tbutler56a_small.png",
    "carImage": "https://www.nitrotype.com/cars/tbutler56a_small.png",
-   "avgSpeed": 92,
+   "avgSpeed": 94,
    "highSpeed": 131,
-   "lifetimeRaces": 13017,
-   "teamRaces": 354,
+   "lifetimeRaces": 13020,
+   "teamRaces": 357,
    "memberSince": 1794240864,
-   "lastRace": 1794414786
+   "lastRace": 1794418363
   },
   {
    "username": "24cf4df60146763fc790068e421c9389",
@@ -358,12 +358,12 @@
    "carHue": 200,
    "carFile": "demon_small.png",
    "carImage": "https://www.nitrotype.com/cars/demon_small.png",
-   "avgSpeed": 190,
+   "avgSpeed": 191,
    "highSpeed": 215,
-   "lifetimeRaces": 4061,
-   "teamRaces": 17,
+   "lifetimeRaces": 4062,
+   "teamRaces": 18,
    "memberSince": 1794354442,
-   "lastRace": 1794357155
+   "lastRace": 1794418414
   },
   {
    "username": "ilike100acc",
@@ -375,12 +375,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 88,
+   "avgSpeed": 89,
    "highSpeed": 116,
-   "lifetimeRaces": 2199,
-   "teamRaces": 312,
+   "lifetimeRaces": 2216,
+   "teamRaces": 340,
    "memberSince": 1794241854,
-   "lastRace": 1794417598
+   "lastRace": 1794418780
   },
   {
    "username": "nikooo124",
@@ -409,12 +409,12 @@
    "carHue": 0,
    "carFile": "17_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/17_small_1.png",
-   "avgSpeed": 119,
+   "avgSpeed": 120,
    "highSpeed": 125,
-   "lifetimeRaces": 59,
-   "teamRaces": 44,
+   "lifetimeRaces": 61,
+   "teamRaces": 47,
    "memberSince": 1793906872,
-   "lastRace": 1794341978
+   "lastRace": 1794418759
   },
   {
    "username": "1f00628c7818edb45331470d6fd128bb",
@@ -542,7 +542,7 @@
   "shadowlegend402": {
    "2026-11-09": 158,
    "2026-11-10": 305,
-   "2026-11-11": 354
+   "2026-11-11": 357
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -607,7 +607,7 @@
   "xwordreaperx": {
    "2026-11-09": 35,
    "2026-11-10": 44,
-   "2026-11-11": 44
+   "2026-11-11": 47
   },
   "1f00628c7818edb45331470d6fd128bb": {
    "2026-11-09": 24,
@@ -627,7 +627,7 @@
   "ilike100acc": {
    "2026-11-09": 105,
    "2026-11-10": 247,
-   "2026-11-11": 312
+   "2026-11-11": 340
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
@@ -642,7 +642,7 @@
    "2026-11-11": 0
   },
   "ykitsmizu": {
-   "2026-11-11": 17
+   "2026-11-11": 18
   }
  }
 }
