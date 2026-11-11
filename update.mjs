@@ -84,77 +84,9 @@ const racers = members.map(m => ({
   lastRace: m.lastActivity ?? null
 }));
 
-// ---- everyone with a website account who is NOT on the team: look up their car and stats ----
-// The website saves a public list of racer names in Firestore (collection "publicRacers"); we read it here.
-const extrasDebug = [];
-const teamNames = new Set(racers.map(r => r.username.toLowerCase()));
-let wanted = [];
-try {
-  const cfg = await readFile("firebase-config.js", "utf8");
-  const pid = cfg.match(/projectId:\s*"([^"]+)"/)?.[1], key = cfg.match(/apiKey:\s*"([^"]+)"/)?.[1];
-  if (!pid || !key) throw new Error("projectId/apiKey not found in firebase-config.js");
-  let token = "";
-  do {
-    const u = `https://firestore.googleapis.com/v1/projects/${pid}/databases/(default)/documents/publicRacers?pageSize=300&key=${key}${token ? "&pageToken=" + token : ""}`;
-    const r = await fetch(u);
-    const j = await r.json();
-    if (!r.ok) throw new Error(`Firestore HTTP ${r.status}: ${JSON.stringify(j).slice(0, 160)}`);
-    for (const d of j.documents || []) { const n = d.fields?.racer?.stringValue; if (n) wanted.push(n); }
-    token = j.nextPageToken || "";
-  } while (token);
-  extrasDebug.push(`public racer list: ${wanted.length}`);
-} catch (e) { extrasDebug.push("public racer list failed: " + e.message); }
-wanted = [...new Set(wanted)].filter(n => !teamNames.has(n.toLowerCase())).slice(0, 150);
-
-// pull a racer's numbers out of whatever Nitro Type sends back (JSON or a web page)
-function pickRacer(text, name) {
-  const lower = name.toLowerCase();
-  let obj = null;
-  try {
-    const walk = v => {
-      if (obj || !v || typeof v !== "object") return;
-      if (typeof v.username === "string" && v.username.toLowerCase() === lower && (v.carID != null || v.avgSpeed != null || v.racesPlayed != null)) { obj = v; return; }
-      for (const k of Object.keys(v)) walk(v[k]);
-    };
-    walk(JSON.parse(text));
-  } catch {}
-  if (!obj) {
-    const i = text.toLowerCase().indexOf(`"username":"${lower}"`);
-    if (i < 0) return null;
-    const w = text.slice(Math.max(0, i - 1500), i + 2500), num = k => { const m = w.match(new RegExp(`"${k}":\\s*"?(-?[\\d.]+)`)); return m ? Number(m[1]) : null; };
-    obj = { username: name, carID: num("carID"), carHueAngle: num("carHueAngle"), avgSpeed: num("avgSpeed"), highestSpeed: num("highestSpeed"), racesPlayed: num("racesPlayed"), displayName: w.match(/"displayName":"([^"]*)"/)?.[1], title: w.match(/"title":"([^"]*)"/)?.[1], membership: w.match(/"membership":"([^"]*)"/)?.[1] };
-  }
-  return obj;
-}
-const extras = [];
-for (const name of wanted) {
-  let found = null;
-  const tries = [`https://www.nitrotype.com/api/v2/racers/${encodeURIComponent(name)}`, `https://www.nitrotype.com/racer/${encodeURIComponent(name)}`];
-  for (const u of tries) {
-    try {
-      const rr = await fetch(u, { headers: { ...H, Accept: "application/json,text/html,*/*" } });
-      const t = await rr.text();
-      found = pickRacer(t, name);
-      extrasDebug.push(`${name} ${u.includes("/api/") ? "api" : "page"}: HTTP ${rr.status} ${found ? "ok" : "no data (" + t.slice(0, 90).replace(/\s+/g, " ") + ")"}`);
-      if (found) break;
-    } catch (e) { extrasDebug.push(`${name}: ${e.message}`); }
-    await new Promise(r => setTimeout(r, 300));
-  }
-  const prev = (old.extras || []).find(x => x.username.toLowerCase() === name.toLowerCase());
-  if (found) {
-    extras.push({
-      username: found.username || name, displayName: found.displayName || found.username || name, title: found.title || "", membership: found.membership || "",
-      carId: found.carID ?? null, carHue: found.carHueAngle ?? 0, carFile: carFiles[found.carID] || null,
-      carImage: carFiles[found.carID] ? `https://www.nitrotype.com/cars/${carFiles[found.carID]}` : null,
-      avgSpeed: found.avgSpeed ?? null, highSpeed: found.highestSpeed ?? null, lifetimeRaces: found.racesPlayed ?? null
-    });
-  } else if (prev) extras.push(prev);
-  await new Promise(r => setTimeout(r, 300));
-}
-
 // download each car picture once so the site can recolor it exactly
 const cars = {};
-for (const r of racers.concat(extras)) {
+for (const r of racers) {
   if (!r.carFile || cars[r.carFile]) continue;
   if (old.cars?.[r.carFile]) { cars[r.carFile] = old.cars[r.carFile]; continue; }
   try {
@@ -193,6 +125,6 @@ for (const sn of snaps.sort((a, b) => b.t - a.t)) {
 kept.sort((a, b) => a.t - b.t);
 await writeFile("snapshots.json", JSON.stringify({ snaps: kept }));
 
-await writeFile("data.json", JSON.stringify({ team: TEAM, updated: Math.floor(Date.now() / 1000), teamMeta, racers, extras, cars, history }, null, 1));
-await writeFile("debug.json", JSON.stringify({ carLookup: carDebug, extras: extrasDebug, carsFound: Object.keys(carFiles).length, roles: members.map(m => `${m.displayName}: ${m.role}`), memberships: members.map(m => `${m.displayName}: ${m.membership}`), teamInfo: info, firstMember: members[0] }, null, 1));
+await writeFile("data.json", JSON.stringify({ team: TEAM, updated: Math.floor(Date.now() / 1000), teamMeta, racers, cars, history }, null, 1));
+await writeFile("debug.json", JSON.stringify({ carLookup: carDebug, carsFound: Object.keys(carFiles).length, roles: members.map(m => `${m.displayName}: ${m.role}`), memberships: members.map(m => `${m.displayName}: ${m.membership}`), teamInfo: info, firstMember: members[0] }, null, 1));
 console.log(`Saved ${racers.length} racers`);
