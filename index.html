@@ -763,6 +763,20 @@ const G_COLS = [
 ];
 let gSortKey = "team", gSortDir = "desc";
 
+// the Nitro Type racer linked to whoever created a giveaway (looked up from their profile if the giveaway doesn't carry it)
+const uidRacer = {};
+function creatorRacer(g) {
+  if (g.createdByRacer) return g.createdByRacer;
+  if (!g.createdBy) return "";
+  if (g.createdBy in uidRacer) return uidRacer[g.createdBy];
+  uidRacer[g.createdBy] = "";
+  getDoc(doc(db, "profiles", g.createdBy)).then(s => {
+    if (s.exists() && s.data().racer) { uidRacer[g.createdBy] = s.data().racer; renderGiveaways(); }
+    else delete uidRacer[g.createdBy];
+  }).catch(() => { delete uidRacer[g.createdBy]; });
+  return "";
+}
+
 function drawGiveawayDetail(id) {
   const hero = $("gHero"), box = $("gTable");
   hero.textContent = ""; box.textContent = "";
@@ -777,8 +791,9 @@ function drawGiveawayDetail(id) {
   [["Starts ", fmtDT(g.start)], ["Ends ", fmtDT(g.end)], ["", timeNote(g)]].forEach(([l, v]) => { const d = el("div"); if (l) d.append(el("span", "", l)); d.append(document.createTextNode(v)); dates.append(d); });
   hero.append(dates);
   if (g.createdByName) {
-    const by = el("p", "gh-dates"); by.append(el("span", "", "Created by "));
-    if (g.createdByRacer) { const a = el("a", "", g.createdByName); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(g.createdByRacer); a.target = "_blank"; a.rel = "noopener"; by.append(a); }
+    const by = el("p", "gh-dates"); by.append(el("span", "", "Created by: "));
+    const racerName = creatorRacer(g);
+    if (racerName) { const a = el("a", "", g.createdByName); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(racerName); a.target = "_blank"; a.rel = "noopener"; by.append(a); }
     else by.append(document.createTextNode(g.createdByName));
     hero.append(by);
   }
