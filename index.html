@@ -95,6 +95,14 @@ header .who{display:flex;gap:12px;align-items:center;color:var(--mute);font-size
 .ub-sep{height:1px;background:var(--line);margin:2px 6px}
 .msg .car{width:52px;height:22px;vertical-align:middle;margin-right:6px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 .ntlogo{height:22px;width:auto;display:block}
+.wave{margin-right:5px;font-size:14px}
+.trk{margin-right:8px;font-size:14px}
+.pr-lock{position:relative;width:190px;height:84px;border-radius:14px;overflow:hidden;display:grid;place-items:center;background:var(--fill)}
+.pr-lock .bg{position:absolute;inset:-10px;background:linear-gradient(135deg,var(--pink),var(--purple) 55%,var(--cyan));filter:blur(14px);opacity:.75}
+.pr-lock b{position:relative;color:#fff;font-size:52px;line-height:1;font-weight:800;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.pr-warn{position:relative;margin-left:auto;font-size:64px;line-height:1;cursor:help}
+.pr-warn::after{content:attr(data-tip);display:none;position:absolute;right:0;top:100%;margin-top:8px;width:min(260px,70vw);padding:10px 14px;border-radius:12px;background:var(--tip);color:var(--ink);border:1px solid var(--cyan);font-size:13px;font-weight:600;line-height:1.45;z-index:10;box-shadow:0 12px 30px var(--shadow)}
+.pr-warn:hover::after,.pr-warn:focus::after{display:block}
 .pr-top{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .pr-car .car{width:190px;height:84px}
 .pr-name{font-size:30px;line-height:1.1;margin:0}
@@ -603,25 +611,11 @@ const BANNED_MSG = "This account has been banned from the website.";
 const myName = () => me?.username || auth.currentUser?.displayName || "";
 
 function stopOwnerFeeds() { ownerUnsubs.forEach(u => u()); ownerUnsubs = []; postHist = []; drawPostHist(); }
-// owner only: make sure every account's racer name is in the public list the hourly update reads
-let pubSeen = null;
-function syncPublicRacers() {
-  if (!isOwner() || !pubSeen || !profilesLoaded) return;
-  profilesList.forEach(p => {
-    if (!p.racer) return;
-    const k = claimId(p.racer);
-    if (pubSeen.has(k)) return;
-    pubSeen.add(k);
-    setDoc(doc(db, "publicRacers", k), { racer: p.racer }).catch(() => { pubSeen.delete(k); });
-  });
-}
 function startOwnerFeeds() {
   if (ownerUnsubs.length) return;
-  pubSeen = null;
-  ownerUnsubs.push(onSnapshot(collection(db, "publicRacers"), snap => { pubSeen = new Set(snap.docs.map(d => d.id)); syncPublicRacers(); }, () => {}));
   ownerUnsubs.push(onSnapshot(query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(100)), snap => { postHist = snap.docs.map(d => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) })); drawPostHist(); }, () => {}));
   ownerUnsubs.push(onSnapshot(collection(db, "bans"), snap => { bans = {}; snap.docs.forEach(d => bans[d.id] = d.data()); drawOwner(); }, () => {}));
-  ownerUnsubs.push(onSnapshot(collection(db, "profiles"), snap => { profilesList = snap.docs.map(d => ({ uid: d.id, ...d.data() })); profilesLoaded = true; drawOwner(); syncPublicRacers(); }, () => { profilesLoaded = true; drawOwner(); }));
+  ownerUnsubs.push(onSnapshot(collection(db, "profiles"), snap => { profilesList = snap.docs.map(d => ({ uid: d.id, ...d.data() })); profilesLoaded = true; drawOwner(); }, () => { profilesLoaded = true; drawOwner(); }));
 }
 
 function listenRoles(user) {
@@ -667,8 +661,6 @@ async function enter(user) {
   if (!me) { try { const s = await getDoc(doc(db, "profiles", user.uid)); if (s.exists()) me = s.data(); } catch {} }
   $("me").textContent = myName();
   drawUserBar();
-  // a public list of racer names (nothing else) so the hourly update can look up everyone's car
-  if (me && me.racer) setDoc(doc(db, "publicRacers", claimId(me.racer)), { racer: me.racer }).catch(() => {});
   listenRacers(); listenChat(user); listenGiveaways(); listenRoles(user); listenPosts(user); route();
 }
 
@@ -705,13 +697,15 @@ function route() {
 window.addEventListener("hashchange", route);
 
 /* ---------- racers (read from data.json, refreshed by GitHub every hour) ---------- */
-let racers = [], extras = [], carPics = {};
-// anyone with an account: team members come from the team list, everyone else from the extra lookup
+let racers = [], carPics = {}, racersReady = false;
+// only people on the 2B team are tracked, so only they are in this list
 function racerByName(n) {
   if (!n) return null;
-  const k = String(n).toLowerCase(), f = r => (r.username || "").toLowerCase() === k;
-  return racers.find(f) || extras.find(f) || null;
+  const k = String(n).toLowerCase();
+  return racers.find(r => (r.username || "").toLowerCase() === k) || null;
 }
+// true / false once the team list has loaded, null while we don't know yet
+const trackedState = n => racersReady ? !!racerByName(n) : null;
 // key, title, how to sort, and which direction is "best first"
 const COLS = [
   { k: "name", t: "Racer", get: r => (r.displayName || r.username || "").toLowerCase(), best: "asc", podium: false },
@@ -754,16 +748,17 @@ async function loadRacers() {
     carPics = data.cars || {};
     meta = data.teamMeta;
     racers = data.racers.slice();
-    extras = Array.isArray(data.extras) ? data.extras.slice() : [];
-    await Promise.all(racers.concat(extras).map(carSrc));
+    await Promise.all(racers.map(carSrc));
+    racersReady = racers.length > 0;
     $("updated").textContent = "updated " + agoTs(data.updated);
-  } catch { racers = []; extras = []; $("updated").textContent = ""; }
+  } catch { racers = []; racersReady = false; $("updated").textContent = ""; }
   drawHero(meta);
   drawRacers();
   renderGiveaways();
   drawPost();
   drawChat();
   drawUserBar();
+  drawOwner();
   if (profName()) showProfile();
 }
 
@@ -1195,7 +1190,9 @@ function drawChat() {
     const row = document.createElement("div"); row.className = "msg" + (m.uid === chatUid ? " me" : "");
     const b = document.createElement("b");
     const role = roles[m.uid]?.role;
-    const mc = carFor(m.racer); if (mc) b.append(mc);
+    const mc = carFor(m.racer);
+    if (mc) b.append(mc);
+    else if (trackedState(m.racer) === false) { const w = el("span", "wave", "\u{1F44B}"); w.title = "Not on the team, so not tracked"; b.append(w); }
     if (ICON[role]) { const i = el("span", "ri", ICON[role]); i.title = ROLE_NAME[role]; b.append(i); }
     if (m.racer) { const a = document.createElement("a"); a.href = profileHref(m.racer); a.textContent = m.name || "Racer"; b.append(a); }
     else b.append(document.createTextNode(m.name || "Racer"));
@@ -1232,7 +1229,10 @@ function drawOwner() {
   const tbody = document.createElement("tbody");
   list.forEach(p => {
     const role = roles[p.uid]?.role, banned = !!bans[p.uid], tr = document.createElement("tr");
-    const nameTd = el("td"); nameTd.append(el("b", "", p.username || "?"));
+    const nameTd = el("td");
+    const ts = p.racer ? trackedState(p.racer) : false;
+    if (ts !== null) { const m = el("span", "trk " + (ts ? "yes" : "no"), ts ? "\u2705" : "\u274C"); m.title = ts ? "Tracked (on 2B)" : "Not tracked (not on 2B)"; m.setAttribute("aria-label", m.title); nameTd.append(m); }
+    nameTd.append(el("b", "", p.username || "?"));
     const racerTd = el("td");
     if (p.racer) { const a = el("a", "", p.racer); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(p.racer); a.target = "_blank"; a.rel = "noopener"; a.style.color = "var(--cyan)"; racerTd.append(a); } else racerTd.textContent = "-";
     const roleTd = el("td", "", ICON[role] ? ICON[role] + " " + ROLE_NAME[role] : "Member");
@@ -1301,9 +1301,15 @@ const profName = () => location.hash.startsWith("#profile/") ? decodeURIComponen
 function drawProfile(racer, acc) {
   const box = $("prBody"); box.textContent = "";
   const r = racerByName(racer), role = acc ? roles[acc.uid]?.role : null;
+  const untracked = trackedState(racer) === false;
   const top = el("div", "pr-top"), car = el("div", "pr-car"), who = el("div");
-  const c = carFor(racer);
-  car.append(c || el("div", "car none", "no car"));
+  if (untracked) {
+    const lock = el("div", "pr-lock"); lock.append(el("span", "bg"), el("b", "", "!"));
+    lock.title = "Car hidden: not tracked"; car.append(lock);
+  } else {
+    const c = carFor(racer);
+    car.append(c || el("div", "car none", "no car"));
+  }
   const h = el("h4", "display pr-name");
   if (ICON[role]) { const i = el("span", "ri", ICON[role]); i.title = ROLE_NAME[role]; h.append(i); }
   h.append(document.createTextNode((acc && acc.username) || (r && (r.displayName || r.username)) || racer));
@@ -1312,13 +1318,20 @@ function drawProfile(racer, acc) {
   const nt = el("a", "btn"); const ico = document.createElement("img"); ico.src = NT_LOGO; ico.alt = ""; ico.className = "ntlogo"; nt.append(ico, document.createTextNode("View on Nitro Type")); nt.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(racer); nt.target = "_blank"; nt.rel = "noopener";
   nt.style.cssText = "display:inline-flex;align-items:center;gap:8px;margin-top:12px;text-decoration:none";
   who.append(el("br"), nt);
-  top.append(car, who); box.append(top);
+  top.append(car, who);
+  if (untracked) {
+    const warn = el("span", "pr-warn", "\u26A0\uFE0F");
+    warn.tabIndex = 0; warn.setAttribute("role", "img");
+    warn.dataset.tip = "Profile is not tracked. Tracking is exclusive to 2B members.";
+    warn.setAttribute("aria-label", warn.dataset.tip);
+    top.append(warn);
+  }
+  box.append(top);
   const stats = el("dl", "pr-stats");
   const stat = (t, v) => { const d = el("div", "pr-stat"); d.append(el("dt", "", t), el("dd", "", v)); stats.append(d); };
-  stat("Avg WPM", r && r.avgSpeed != null ? String(Math.round(r.avgSpeed)) : "-");
-  stat("Lifetime races", r && r.lifetimeRaces != null ? Number(r.lifetimeRaces).toLocaleString() : "-");
+  stat("Avg WPM", !untracked && r && r.avgSpeed != null ? String(Math.round(r.avgSpeed)) : "-");
+  stat("Lifetime races", !untracked && r && r.lifetimeRaces != null ? Number(r.lifetimeRaces).toLocaleString() : "-");
   box.append(stats);
-  if (!r) box.append(el("p", "sub", "We could not find Nitro Type stats for this racer yet. They load when the team data updates."));
   box.append(el("p", "pr-h", "Badges"), el("div", "pr-badges", "No badges yet. Badges are coming soon!"));
 }
 async function showProfile() {
