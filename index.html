@@ -7,9 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Racing+Sans+One&display=swap" rel="stylesheet">
-<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"||t==="sunset")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
-:root{--bg:#0F0A24;--ink:#F4F1FF;--mute:#A9A0CF;--card:rgba(27,20,64,.78);--line:rgba(255,255,255,.1);--pink:#FF3D9A;--purple:#7C3AED;--cyan:#22D3EE;--gold:#FFC83D;--green:#3DDC97;--blue:#4DA3FF;--red:#FF8077;
+:root{--bg:#06182B;--ink:#EAF6FF;--mute:#8FB3CC;--card:rgba(10,38,64,.78);--line:rgba(255,255,255,.1);--pink:#1FB5C9;--purple:#1D6FD1;--cyan:#7DE3E8;--gold:#FFC83D;--green:#3DDC97;--blue:#4DA3FF;--red:#FF8A7A;
+  --goldtxt:#FFC83D;--greentxt:#3DDC97;--g1:rgba(31,181,201,.28);--g2:rgba(255,122,107,.14);--g3:rgba(29,111,209,.30);
+  --hdr:rgba(6,24,43,.82);--dlg:#0C2540;--tip:#11304F;--fill:rgba(255,255,255,.06);--fill2:rgba(255,255,255,.04);--fill3:rgba(255,255,255,.08);--hover:rgba(255,255,255,.07);
+  --check1:#fff;--check2:#0A2A4A;--ph:#6E93AE;--gdesc:#CBE4F5;--dash:rgba(255,255,255,.28);--shadow:rgba(0,0,0,.35);--scheme:dark;
+  --hero:linear-gradient(120deg,#0EA5B7 0%,#1D6FD1 50%,#0A2A5E 100%)}
+/* Ocean is the default look (deep navy, teal and coral) */
+/* Sunset */
+:root[data-theme="sunset"]{--bg:#0F0A24;--ink:#F4F1FF;--mute:#A9A0CF;--card:rgba(27,20,64,.78);--line:rgba(255,255,255,.1);--pink:#FF3D9A;--purple:#7C3AED;--cyan:#22D3EE;--gold:#FFC83D;--green:#3DDC97;--blue:#4DA3FF;--red:#FF8077;
   --goldtxt:#FFC83D;--greentxt:#3DDC97;--g1:color-mix(in srgb,var(--pink) 30%,transparent);--g2:color-mix(in srgb,var(--cyan) 20%,transparent);--g3:color-mix(in srgb,var(--purple) 30%,transparent);
   --hdr:rgba(15,10,36,.78);--dlg:#1B1440;--tip:#241A55;--fill:rgba(255,255,255,.06);--fill2:rgba(255,255,255,.04);--fill3:rgba(255,255,255,.08);--hover:rgba(255,255,255,.07);
   --check1:#fff;--check2:#16102E;--ph:#8277B5;--gdesc:#D7D0F5;--dash:rgba(255,255,255,.28);--shadow:rgba(0,0,0,.25);--scheme:dark;
@@ -87,6 +94,7 @@ header .who{display:flex;gap:12px;align-items:center;color:var(--mute);font-size
 .ub-item.out{color:var(--red)}
 .ub-sep{height:1px;background:var(--line);margin:2px 6px}
 .msg .car{width:52px;height:22px;vertical-align:middle;margin-right:6px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.ntlogo{height:22px;width:auto;display:block}
 .pr-top{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .pr-car .car{width:190px;height:84px}
 .pr-name{font-size:30px;line-height:1.1;margin:0}
@@ -1259,6 +1267,7 @@ document.addEventListener("click", e => { if (!bar.contains(e.target)) closeBar(
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeBar(); });
 
 // the racer profile page: #profile/<Nitro Type username>
+const NT_LOGO = "data:image/png;base64,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";
 const profCache = {};
 async function loadAccount(racer) {
   const k = racer.toLowerCase();
@@ -1286,8 +1295,8 @@ function drawProfile(racer, acc) {
   h.append(document.createTextNode((acc && acc.username) || (r && (r.displayName || r.username)) || racer));
   who.append(h);
   if (ROLE_NAME[role]) who.append(el("span", "sub", ROLE_NAME[role]));
-  const nt = el("a", "btn", "View on Nitro Type"); nt.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(racer); nt.target = "_blank"; nt.rel = "noopener";
-  nt.style.cssText = "display:inline-block;margin-top:12px;text-decoration:none";
+  const nt = el("a", "btn"); const ico = document.createElement("img"); ico.src = NT_LOGO; ico.alt = ""; ico.className = "ntlogo"; nt.append(ico, document.createTextNode("View on Nitro Type")); nt.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(racer); nt.target = "_blank"; nt.rel = "noopener";
+  nt.style.cssText = "display:inline-flex;align-items:center;gap:8px;margin-top:12px;text-decoration:none";
   who.append(el("br"), nt);
   top.append(car, who); box.append(top);
   const stats = el("dl", "pr-stats");
@@ -1310,11 +1319,12 @@ async function showProfile() {
 $("mProfile").onclick = () => { closeBar(); if (me && me.racer) location.hash = profileHref(me.racer); };
 
 const THEMES = [
-  ["sunset", "Sunset", "The default look", "linear-gradient(135deg,#FF3D9A,#8B3CF0 55%,#2563EB)"],
+  ["ocean", "Ocean", "The default look", "linear-gradient(135deg,#0EA5B7,#1D6FD1 55%,#0A2A5E)"],
+  ["sunset", "Sunset", "Pink, purple and blue", "linear-gradient(135deg,#FF3D9A,#8B3CF0 55%,#2563EB)"],
   ["light", "Light mode", "White and light colors", "linear-gradient(135deg,#FFFFFF,#E9E4FF)"],
   ["dark", "Dark mode", "Black and dark colors", "linear-gradient(135deg,#09090B,#27272A)"]
 ];
-const currentTheme = () => document.documentElement.getAttribute("data-theme") || "sunset";
+const currentTheme = () => document.documentElement.getAttribute("data-theme") || "ocean";
 function drawThemes() {
   const box = $("themes"); box.textContent = "";
   THEMES.forEach(([id, name, note, sw]) => {
@@ -1327,8 +1337,8 @@ function drawThemes() {
   });
 }
 function setTheme(id) {
-  if (id === "sunset") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", id);
-  try { if (id === "sunset") localStorage.removeItem("theme"); else localStorage.setItem("theme", id); } catch {}
+  if (id === "ocean") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", id);
+  try { if (id === "ocean") localStorage.removeItem("theme"); else localStorage.setItem("theme", id); } catch {}
   drawThemes();
 }
 $("mSettings").onclick = () => { closeBar(); drawThemes(); $("sdlg").showModal(); };
