@@ -6,6 +6,9 @@
   "https://www.googletagmanager.com/gtag/js?id=G-CQ2ZK9PC9Y: 0",
   "https://www.nitrotype.com/index/5dd270ad851c6532712452b4e581c381e7f5c8d3-1861/bootstrap.js: 468"
  ],
+ "extras": [
+  "public racer list: 1"
+ ],
  "carsFound": 468,
  "roles": [
   "Anime_409: member",
@@ -79,7 +82,7 @@
   "autoRemove": 0,
   "otherRequirements": "NG/1500r 1M/300r || 2mo of NG + 20M comp!  || Hundreds of millions given, over 15 years of gold given. https://padlet.com/zpicklewastaken/team2B",
   "members": 28,
-  "activePercent": 92,
+  "activePercent": 85,
   "searchable": 1,
   "enrollment": "auto",
   "leagueID": 2082606,
