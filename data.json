@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794402019,
+ "updated": 1794403214,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -137,12 +137,12 @@
    "carHue": 300,
    "carFile": "tbutler56a_small.png",
    "carImage": "https://www.nitrotype.com/cars/tbutler56a_small.png",
-   "avgSpeed": 86,
+   "avgSpeed": 87,
    "highSpeed": 131,
-   "lifetimeRaces": 13002,
-   "teamRaces": 339,
+   "lifetimeRaces": 13004,
+   "teamRaces": 341,
    "memberSince": 1794240864,
-   "lastRace": 1794348074
+   "lastRace": 1794402688
   },
   {
    "username": "24cf4df60146763fc790068e421c9389",
@@ -542,7 +542,7 @@
   "shadowlegend402": {
    "2026-11-09": 158,
    "2026-11-10": 305,
-   "2026-11-11": 339
+   "2026-11-11": 341
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
