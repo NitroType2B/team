@@ -1244,7 +1244,7 @@ function drawChat() {
     const role = roles[m.uid]?.role;
     const mc = carFor(m.racer);
     if (mc) b.append(mc);
-    else if (trackedState(m.racer) === false) { const w = el("span", "wave", "\u{1F44B}"); w.title = "Not on the team, so not tracked"; b.append(w); }
+    else if (trackedState(m.racer) === false) { const w = el("span", "wave", "\u26A0\uFE0F"); w.title = "Profile is not tracked. Tracking is exclusive to 2B members."; b.append(w); }
     if (ICON[role]) { const i = el("span", "ri", ICON[role]); i.title = ROLE_NAME[role]; b.append(i); }
     if (m.racer) { const a = document.createElement("a"); a.href = profileHref(m.racer); a.textContent = m.name || "Racer"; b.append(a); }
     else b.append(document.createTextNode(m.name || "Racer"));
