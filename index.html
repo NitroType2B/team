@@ -406,7 +406,8 @@ td.c-dim{color:var(--mute)}
       <div class="scroll" id="msgs"></div>
       <form class="send" id="sendForm">
         <input id="text" placeholder="Write a message" maxlength="500" autocomplete="off" required>
-        <button class="btn" type="submit">Send</button>
+        <button class="btn" type="submit" id="sendBtn">Send</button>
+        <p class="err" id="chatErr" role="alert" style="grid-column:1/-1;margin:0"></p>
       </form>
     </section>
 
@@ -513,7 +514,7 @@ td.c-dim{color:var(--mute)}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { getFirestore, collection, doc, addDoc, getDoc, setDoc, deleteDoc, writeBatch, onSnapshot, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, doc, addDoc, getDoc, getDocs, setDoc, deleteDoc, writeBatch, onSnapshot, query, where, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const $ = id => document.getElementById(id);
 if (firebaseConfig.apiKey.startsWith("PASTE")) $("setup").classList.remove("hidden");
@@ -608,6 +609,7 @@ const isStaff = () => myRole === "owner" || myRole === "admin";
 const ICON = { owner: "\u{1F451}", admin: "\u{1F528}" };
 const ROLE_NAME = { owner: "Owner", admin: "Admin" };
 const BANNED_MSG = "This account has been banned from the website.";
+const DELETED_MSG = "This account was deleted.";
 const myName = () => me?.username || auth.currentUser?.displayName || "";
 
 function stopOwnerFeeds() { ownerUnsubs.forEach(u => u()); ownerUnsubs = []; postHist = []; drawPostHist(); }
@@ -620,7 +622,7 @@ function startOwnerFeeds() {
 
 function listenRoles(user) {
   // if this account gets banned while using the site, sign it out right away
-  unsubs.push(onSnapshot(doc(db, "bans", user.uid), s => { if (s.exists()) { $("authErr").textContent = BANNED_MSG; signOut(auth).catch(() => {}); } }, () => {}));
+  unsubs.push(onSnapshot(doc(db, "bans", user.uid), s => { if (s.exists()) { $("authErr").textContent = s.data().deleted ? DELETED_MSG : BANNED_MSG; signOut(auth).catch(() => {}); } }, () => {}));
   unsubs.push(onSnapshot(collection(db, "roles"), snap => {
     roles = {}; snap.docs.forEach(d => roles[d.id] = d.data());
     rolesLoaded = true;
@@ -642,17 +644,19 @@ function applyRole() {
   drawOwner();
   drawPostBtn();
   drawPost();
+  drawChatBtn();
   if (profName()) showProfile();
 }
 
 let meUid = null;
 async function enter(user) {
+  lastChatAt = 0;
   unsubs.forEach(u => u()); unsubs = []; stopOwnerFeeds();
   roles = {}; myRole = "user"; rolesLoaded = false; bans = {}; profilesList = []; profilesLoaded = false;
   if (user) {
-    let banned = false;
-    try { banned = (await getDoc(doc(db, "bans", user.uid))).exists(); } catch {}
-    if (banned) { $("authErr").textContent = BANNED_MSG; await signOut(auth).catch(() => {}); return; }
+    let banned = false, gone = false;
+    try { const bs = await getDoc(doc(db, "bans", user.uid)); banned = bs.exists(); gone = banned && !!bs.data().deleted; } catch {}
+    if (banned) { $("authErr").textContent = gone ? DELETED_MSG : BANNED_MSG; await signOut(auth).catch(() => {}); return; }
   }
   $("auth").classList.toggle("hidden", !!user);
   $("app").classList.toggle("hidden", !user);
@@ -837,7 +841,7 @@ let statsRange = "all";
 function statRows() {
   if (statsRange === "all") return { rows: racers.map(r => ({ ...r, team: r.teamRaces, life: r.lifetimeRaces, avg: r.avgSpeed })), note: "" };
   const hours = { "7d": 168, "24h": 24, "1h": 1 }[statsRange], end = Date.now();
-  const s = rangeStats(end - hours * 3600e3, end);
+  const s = rangeStats(end - hours * 3600e3, end, true);
   return { rows: s.rows, note: s.note };
 }
 $("ranges").onclick = e => {
@@ -985,26 +989,44 @@ function drawGiveawayList() {
 // each snapshot racer = [team races, lifetime races, letters typed, seconds typing]
 function pickSnap(sec) { let best = null; for (const s of snaps) { if (s.t <= sec) best = s; else break; } return best; }
 
+// how close a saved snapshot must be to the START of a range before we trust it as the starting point
+const snapTol = winS => winS <= 7200 ? 900 : winS <= 172800 ? 2700 : 7200;
+function nearSnap(sec) {
+  let best = null, bd = Infinity;
+  for (const s of snaps) { const d = Math.abs(s.t - sec); if (d < bd) { bd = d; best = s; } }
+  return best ? { snap: best, gap: bd } : null;
+}
+
 // races gained between two moments (used by the 7 day / 24 hour / 1 hour boxes and by giveaways)
-function rangeStats(startMs, endMs) {
+// strict = the stats boxes: only show numbers when we truly have a saved snapshot from the start of the range
+function rangeStats(startMs, endMs, strict) {
   const known = new Map(racers.map(r => [r.username, r]));
-  const blank = () => racers.map(r => ({ ...r, team: null, life: null, avg: null }));
-  if (!snaps.length) return { rows: blank(), note: "Race tracking data is not available yet.", cur: null };
-  const startS = startMs / 1000, endS = endMs / 1000;
+  const blank = note => ({ rows: racers.map(r => ({ ...r, team: null, life: null, avg: null })), note, cur: null });
+  if (!snaps.length) return blank("Race tracking data is not available yet.");
+  const startS = startMs / 1000, endS = endMs / 1000, tol = snapTol(endS - startS);
   const cur = pickSnap(endS) || snaps[0];
-  const base = pickSnap(startS);
-  const baseSnap = base || snaps[0];
+  const near = nearSnap(startS);
   let note = "";
-  if (!base && snaps[0].t > startS + 1800) note = "Race tracking began " + fmtDT(snaps[0].t * 1000) + ", so earlier races are not counted.";
+  if (strict && (!near || near.gap > tol || near.snap.t >= cur.t && endS - startS > tol)) {
+    return blank(snaps[0].t > startS + tol
+      ? "Tracking began " + fmtDT(snaps[0].t * 1000) + ", so this range will fill in once that much time has passed."
+      : "Not enough saved tracking data for this range yet. It fills in as updates come in.");
+  }
+  const baseSnap = near.snap;
+  if (!strict) {
+    if (snaps[0].t > startS + tol) note = "Race tracking began " + fmtDT(snaps[0].t * 1000) + ", so earlier races are not counted.";
+    else if (near.gap > tol) note = "Tracking data was sparse near the start, so counts may be slightly off.";
+  }
   const rows = Object.keys(cur.r).map(u => {
-    const c = cur.r[u], b = baseSnap.r[u];
+    const c = cur.r[u], b = baseSnap.r[u], r = known.get(u) || { username: u, displayName: u };
     let team, life, typed, secs;
     if (b) { team = c[0] - b[0]; life = c[1] - b[1]; typed = c[2] - b[2]; secs = c[3] - b[3]; }
-    else {
+    else if (strict && !(r.memberSince && r.memberSince >= baseSnap.t - 60)) {
+      return { ...r, team: null, life: null, avg: null };   // not in the starting snapshot and not a new member: don't guess
+    } else {
       const first = snaps.find(s => s.t >= baseSnap.t && s.r[u]);
       team = c[0]; life = first ? c[1] - first.r[u][1] : 0; typed = c[2]; secs = c[3];
     }
-    const r = known.get(u) || { username: u, displayName: u };
     return { ...r, team: Math.max(0, team), life: Math.max(0, life), avg: secs > 0 && typed >= 0 ? Math.round((typed / 5) / (secs / 60)) : null };
   });
   return { rows, note, cur };
@@ -1260,7 +1282,28 @@ function drawOwner() {
           }
         } catch { ownerFail("Could not update the ban. Please try again."); }
       };
-      act.append(roleBtn, banBtn);
+      const delBtn = el("button", "mini bad", "Delete"); delBtn.type = "button";
+      delBtn.onclick = async () => {
+        ownerFail("");
+        if (!(await confirmBox("Delete " + (p.username || "this account") + "?", "Their account, their chat messages and their Nitro Type link are removed, and they can no longer sign in. This can't be undone.", "Delete account"))) return;
+        try {
+          // 1) their chat messages
+          const msgs = await getDocs(query(collection(db, "messages"), where("uid", "==", p.uid)));
+          for (let i = 0; i < msgs.docs.length; i += 400) {
+            const mb = writeBatch(db);
+            msgs.docs.slice(i, i + 400).forEach(d => mb.delete(d.ref));
+            await mb.commit();
+          }
+          // 2) the account itself (the block stays so the login can't be used again)
+          const ab = writeBatch(db);
+          ab.set(doc(db, "bans", p.uid), { uid: p.uid, username: p.username || "", racer: p.racer || null, deleted: true, bannedAt: serverTimestamp() });
+          if (role === "admin") ab.delete(doc(db, "roles", p.uid));
+          if (p.racer) ab.delete(doc(db, "racerClaims", claimId(p.racer)));
+          ab.delete(doc(db, "profiles", p.uid));
+          await ab.commit();
+        } catch { ownerFail("Could not delete that account. Please try again."); }
+      };
+      act.append(roleBtn, banBtn, delBtn);
     }
     tr.append(nameTd, racerTd, roleTd, statusTd, act); tbody.append(tr);
   });
@@ -1518,14 +1561,102 @@ function drawPostHist() {
   });
 }
 
+/* ---------- chat moderation ---------- */
+// members and admins cannot post links, attachments or slurs. Cuss words are fine. The owner is never checked.
+// (the word list is stored scrambled with ROT13 so the page source is not a list of slurs)
+const BAD_WORDS = "avttre,avttref,avttn,avttnf,avttnm,avtthu,avttnu,fnaqavttre,fnaqavttref,xvxr,xvxrf,snttbg,snttbgf,sntbg,sntbgf,snttl,snt,sntf,genaal,genaavrf,ergneq,ergneqf,ergneqrq,fcvp,fcvpf,fcvpx,fcvpxf,puvax,puvaxf,tbbx,tbbxf,jrgonpx,jrgonpxf,ornare,ornaref,cnxv,cnxvf,gbjryurnq,gbjryurnqf,enturnq,enturnqf,wnc,wncf,mvccreurnq,mvccreurnqf".split(",").map(w => w.replace(/[a-z]/g, c => String.fromCharCode((c.charCodeAt(0) - 97 + 13) % 26 + 97)));
+const AEIOU = "aeiou";
+const BAD_RES = BAD_WORDS.map(w => {
+  let out = "", i = 0;
+  while (i < w.length) {
+    const ch = w[i]; let n = 1;
+    while (w[i + n] === ch) n++;
+    const one = AEIOU.includes(ch) ? "(?:" + ch + "|\\*)" : ch;   // a * can stand in for a vowel: n*gger
+    out += n > 1 ? one + "{" + n + ",}" : one + "+";
+    i += n;
+  }
+  return new RegExp("^" + out + "$");
+});
+const LEET = { "@": "a", "$": "s", "0": "o", "1": "i", "!": "i", "|": "i", "3": "e", "4": "a", "5": "s", "7": "t", "а": "a", "е": "e", "о": "o", "і": "i", "с": "c", "р": "p", "х": "x" };
+function cleanText(t) {
+  let x = t.normalize("NFKD").replace(/[̀-ͯ​-‏⁠﻿­]/g, "").toLowerCase();
+  return x.replace(/[@$0-9!|аеоісрх]/g, c => LEET[c] || c);
+}
+function hasSlur(text) {
+  const toks = cleanText(text).split(/[^a-z*]+/).filter(Boolean);
+  if (toks.some(t => BAD_RES.some(re => re.test(t)))) return true;
+  // letters spelled out one at a time: "f.a.g.g.o.t" or "f a g g o t"
+  for (let i = 0; i < toks.length; i++) {
+    if (toks[i].length !== 1) continue;
+    let j = i, joined = "";
+    while (j < toks.length && toks[j].length === 1 && joined.length < 12) { joined += toks[j]; j++; if (joined.length >= 4 && BAD_RES.some(re => re.test(joined))) return true; }
+  }
+  return false;
+}
+// endings that are almost always a web address, and endings that are also common words (those only count when a / follows)
+const SAFE_TLD = "com|net|org|gg|tv|xyz|info|biz|io|ly|cc|ws|gl|fm|sh|vc|ru|cn|uk|app|dev";
+const MAYBE_TLD = "to|be|so|in|us|me|co|ca|de|fr|im|ai|it|ch|nl|au|site|online|link|club|top|store|shop|live|page|pro";
+const LINK_RES = [
+  /(?:https?|ftp|file|data|javascript|mailto):/,
+  /\bwww\s*[.,]/,
+  new RegExp("[a-z0-9-]+(?:\\.|\\s*\\[\\.\\]\\s*|\\s*\\(\\.\\)\\s*|\\s*\\(dot\\)\\s*|\\s*\\{dot\\}\\s*)(?:" + SAFE_TLD + ")(?![a-z])"),
+  new RegExp("[a-z0-9-]+\\.(?:" + MAYBE_TLD + ")/"),
+  /youtu\.?be|discord\.?gg|\bt\.me\b|bit\.?ly|tinyurl/,
+  /\b(?:dot|d0t)\s*(?:com|net|org|gg|io|tv|xyz)\b/,
+  /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/,
+  /<\s*(?:img|a|script|iframe)\b|\[\s*(?:img|url)\b|!\[/
+];
+function hasLink(text) {
+  const t = text.normalize("NFKD").replace(/[̀-ͯ​-‏⁠﻿­]/g, "").toLowerCase();
+  return LINK_RES.some(re => re.test(t));
+}
+// returns "" when the message is fine, otherwise the reason (never repeats the blocked word)
+function moderate(text) {
+  if (isOwner()) return "";
+  if (hasLink(text)) return "Links and attachments are not allowed in chat.";
+  if (hasSlur(text)) return "That message has language that is not allowed in chat.";
+  return "";
+}
+const chatCooldownMs = () => isOwner() ? 0 : myRole === "admin" ? 2000 : 5000;
+let lastChatAt = 0, chatTimer = null;
+function chatWait() { return Math.max(0, lastChatAt + chatCooldownMs() - Date.now()); }
+function drawChatBtn() {
+  const w = chatWait(), b = $("sendBtn");
+  if (!b) return;
+  b.disabled = w > 0;
+  b.textContent = w > 0 ? Math.ceil(w / 1000) + "s" : "Send";
+  clearTimeout(chatTimer);
+  if (w > 0) chatTimer = setTimeout(drawChatBtn, Math.min(w, 250));
+}
+$("text").oninput = () => { $("chatErr").textContent = ""; };
 $("sendForm").onsubmit = async e => {
   e.preventDefault();
-  const text = $("text").value.trim();
+  const input = $("text"), text = input.value.trim(), err = $("chatErr");
+  err.textContent = "";
   if (!text) return;
-  $("text").value = "";
-  const u = auth.currentUser;
-  await addDoc(collection(db, "messages"), { text, uid: u.uid, name: me?.username || u.displayName || "Racer", racer: me?.racer || null, createdAt: serverTimestamp() });
+  const u = auth.currentUser; if (!u) return;
+  const wait = chatWait();
+  if (wait > 0) { err.textContent = "Please wait " + Math.ceil(wait / 1000) + " more second" + (Math.ceil(wait / 1000) === 1 ? "" : "s") + " before sending another message."; return; }
+  const bad = moderate(text);
+  if (bad) { err.textContent = bad; return; }
+  input.value = "";
+  lastChatAt = Date.now(); drawChatBtn();
+  const ref = doc(collection(db, "messages"));
+  const data = { text, uid: u.uid, name: me?.username || u.displayName || "Racer", racer: me?.racer || null, createdAt: serverTimestamp() };
+  try {
+    if (isOwner()) await setDoc(ref, data);
+    else {
+      const b = writeBatch(db);
+      b.set(ref, data);
+      b.set(doc(db, "chatCooldowns", u.uid), { last: serverTimestamp() });
+      await b.commit();
+    }
+  } catch {
+    input.value = text; lastChatAt = 0; drawChatBtn();
+    err.textContent = "That message could not be sent. Wait a few seconds and try again.";
+  }
 };
+
 </script>
 </body>
 </html>
