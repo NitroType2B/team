@@ -603,11 +603,25 @@ const BANNED_MSG = "This account has been banned from the website.";
 const myName = () => me?.username || auth.currentUser?.displayName || "";
 
 function stopOwnerFeeds() { ownerUnsubs.forEach(u => u()); ownerUnsubs = []; postHist = []; drawPostHist(); }
+// owner only: make sure every account's racer name is in the public list the hourly update reads
+let pubSeen = null;
+function syncPublicRacers() {
+  if (!isOwner() || !pubSeen || !profilesLoaded) return;
+  profilesList.forEach(p => {
+    if (!p.racer) return;
+    const k = claimId(p.racer);
+    if (pubSeen.has(k)) return;
+    pubSeen.add(k);
+    setDoc(doc(db, "publicRacers", k), { racer: p.racer }).catch(() => { pubSeen.delete(k); });
+  });
+}
 function startOwnerFeeds() {
   if (ownerUnsubs.length) return;
+  pubSeen = null;
+  ownerUnsubs.push(onSnapshot(collection(db, "publicRacers"), snap => { pubSeen = new Set(snap.docs.map(d => d.id)); syncPublicRacers(); }, () => {}));
   ownerUnsubs.push(onSnapshot(query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(100)), snap => { postHist = snap.docs.map(d => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) })); drawPostHist(); }, () => {}));
   ownerUnsubs.push(onSnapshot(collection(db, "bans"), snap => { bans = {}; snap.docs.forEach(d => bans[d.id] = d.data()); drawOwner(); }, () => {}));
-  ownerUnsubs.push(onSnapshot(collection(db, "profiles"), snap => { profilesList = snap.docs.map(d => ({ uid: d.id, ...d.data() })); profilesLoaded = true; drawOwner(); }, () => { profilesLoaded = true; drawOwner(); }));
+  ownerUnsubs.push(onSnapshot(collection(db, "profiles"), snap => { profilesList = snap.docs.map(d => ({ uid: d.id, ...d.data() })); profilesLoaded = true; drawOwner(); syncPublicRacers(); }, () => { profilesLoaded = true; drawOwner(); }));
 }
 
 function listenRoles(user) {
