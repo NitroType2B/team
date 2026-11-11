@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794384017,
+ "updated": 1794385215,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -103,12 +103,12 @@
    "carHue": 240,
    "carFile": "115_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/115_small_1.png",
-   "avgSpeed": 119,
+   "avgSpeed": 113,
    "highSpeed": 158,
-   "lifetimeRaces": 33726,
-   "teamRaces": 993,
+   "lifetimeRaces": 33733,
+   "teamRaces": 1000,
    "memberSince": 1792979300,
-   "lastRace": 1794382699
+   "lastRace": 1794384493
   },
   {
    "username": "25db4dd822756ad6d1df065db97ebcab",
@@ -532,7 +532,7 @@
   "piquel": {
    "2026-11-09": 930,
    "2026-11-10": 948,
-   "2026-11-11": 993
+   "2026-11-11": 1000
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
