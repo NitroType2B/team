@@ -89,6 +89,27 @@ main{padding:36px 24px 48px;max-width:1200px;margin:0 auto}
 /* giveaways */
 .page-head h2{margin:0;font-size:40px;line-height:1.05}
 .page-head p{margin:6px 0 22px;color:var(--mute)}
+.tpost{margin:24px 0;padding:34px 38px;border-radius:28px;background:linear-gradient(135deg,rgba(124,58,237,.38),rgba(255,61,154,.22)),var(--card);border:1px solid rgba(255,255,255,.18);box-shadow:0 18px 50px rgba(0,0,0,.28);backdrop-filter:blur(8px)}
+.ptag{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--gold)}
+.ptitle{margin:6px 0 12px;font-size:clamp(34px,5vw,58px);line-height:1.02;overflow-wrap:anywhere}
+.ptext{margin:0 0 24px;font-size:17px;opacity:.92;white-space:pre-wrap;overflow-wrap:anywhere}
+.pby{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.pcar .car{width:120px;height:52px}
+.pnames b{display:block;font-size:15px}
+.pnames b a{color:var(--cyan);text-decoration:underline;text-underline-offset:3px}
+.pago{display:block;font-size:11px;color:var(--mute);font-weight:600}
+.preacts{display:flex;flex-wrap:wrap;gap:8px}
+.react{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--ink);font-size:18px;line-height:1;cursor:pointer;transition:transform .12s,border-color .12s}
+.react:hover{transform:translateY(-2px);border-color:var(--cyan)}
+.react[aria-pressed="true"]{border-color:var(--pink);background:rgba(255,61,154,.2)}
+.react .n{font-size:13px;font-weight:800}
+.plus.wait{opacity:.55;cursor:not-allowed}
+.plus.wait:hover{transform:none;border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+.ownsub{padding:18px 22px 8px;border-top:1px solid var(--line);margin-top:8px;font-weight:800;font-size:18px}
+.pitem{padding:16px 22px;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.pitem h4{margin:0;font-size:18px;overflow-wrap:anywhere}
+.pitem p{margin:0;color:var(--mute);white-space:pre-wrap;overflow-wrap:anywhere}
+.pitem .meta{font-size:12px;color:var(--mute);font-weight:600;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .plus{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:22px;width:100%;padding:28px 30px;border-radius:24px;border:2px dashed rgba(255,255,255,.28);cursor:pointer;background:rgba(255,255,255,.04);transition:transform .2s,border-color .2s,background .2s}
 .plus:hover,.plus:focus-visible{transform:translateY(-4px);border-color:var(--cyan);background:rgba(34,211,238,.08)}
 .plus:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
@@ -261,6 +282,11 @@ td.c-dim{color:var(--mute)}
           <div><dt>Team Page Views</dt><dd id="statViews">-</dd></div>
         </dl>
       </div>
+      <div id="postBox" class="hidden"></div>
+      <button class="plus hidden" id="newPost" type="button" style="margin:0 0 24px">
+        <span class="plusicon" aria-hidden="true">+</span>
+        <span><strong class="display">Team post</strong><em id="newPostEm"></em></span>
+      </button>
       <div class="cta">
         <a class="big a1" href="#stats">
           <span class="emoji" aria-hidden="true">🧪</span>
@@ -333,6 +359,8 @@ td.c-dim{color:var(--mute)}
       <div class="ownbar"><input id="ownSearch" placeholder="Search by username or Nitro Type name" autocomplete="off"></div>
       <p class="err ownerr" id="ownErr" role="alert"></p>
       <div class="scroll" id="ownerTable"></div>
+      <div class="ownsub">Team post history</div>
+      <div id="postHist"></div>
     </section>
 
     <dialog id="cdlg">
@@ -364,6 +392,16 @@ td.c-dim{color:var(--mute)}
         <p class="sub" style="margin:0">Times are shown in each person's own time zone.</p>
         <p class="err" id="gErr" role="alert"></p>
         <div class="actions"><button class="btn ghost" type="button" id="gCancel">Cancel</button><button class="btn" id="gSave" type="submit">Create giveaway</button></div>
+      </form>
+    </dialog>
+    <dialog id="pdlg">
+      <form id="pform" class="stack">
+        <h3 class="display" style="margin:0;font-size:28px">New team post</h3>
+        <label class="flabel">Title<input id="p_title" maxlength="80" placeholder="Big headline for the team" required></label>
+        <label class="flabel">Message<textarea id="p_text" maxlength="1000" rows="5" placeholder="Write the details here" required></textarea></label>
+        <p class="sub" style="margin:0" id="pNote"></p>
+        <p class="err" id="pErr" role="alert"></p>
+        <div class="actions"><button class="btn ghost" type="button" id="pCancel">Cancel</button><button class="btn" id="pSave" type="submit">Post</button></div>
       </form>
     </dialog>
   </main>
@@ -460,6 +498,7 @@ $("authForm").onsubmit = async e => {
 $("out").onclick = () => signOut(auth);
 
 // ---- roles: "owner" and "admin" live in the roles collection, bans live in the bans collection ----
+let postHist = [];
 let roles = {}, myRole = "user", rolesLoaded = false, bans = {}, profilesList = [], profilesLoaded = false, ownerUnsubs = [];
 const isOwner = () => myRole === "owner";
 const isStaff = () => myRole === "owner" || myRole === "admin";
@@ -468,9 +507,10 @@ const ROLE_NAME = { owner: "Owner", admin: "Admin" };
 const BANNED_MSG = "This account has been banned from the website.";
 const myName = () => me?.username || auth.currentUser?.displayName || "";
 
-function stopOwnerFeeds() { ownerUnsubs.forEach(u => u()); ownerUnsubs = []; }
+function stopOwnerFeeds() { ownerUnsubs.forEach(u => u()); ownerUnsubs = []; postHist = []; drawPostHist(); }
 function startOwnerFeeds() {
   if (ownerUnsubs.length) return;
+  ownerUnsubs.push(onSnapshot(query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(100)), snap => { postHist = snap.docs.map(d => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) })); drawPostHist(); }, () => {}));
   ownerUnsubs.push(onSnapshot(collection(db, "bans"), snap => { bans = {}; snap.docs.forEach(d => bans[d.id] = d.data()); drawOwner(); }, () => {}));
   ownerUnsubs.push(onSnapshot(collection(db, "profiles"), snap => { profilesList = snap.docs.map(d => ({ uid: d.id, ...d.data() })); profilesLoaded = true; drawOwner(); }, () => { profilesLoaded = true; drawOwner(); }));
 }
@@ -496,6 +536,8 @@ function applyRole() {
   renderGiveaways();
   drawChat();
   drawOwner();
+  drawPostBtn();
+  drawPost();
 }
 
 let meUid = null;
@@ -513,7 +555,7 @@ async function enter(user) {
   if (meUid !== user.uid) { me = null; meUid = user.uid; }
   if (!me) { try { const s = await getDoc(doc(db, "profiles", user.uid)); if (s.exists()) me = s.data(); } catch {} }
   $("me").textContent = myName();
-  listenRacers(); listenChat(user); listenGiveaways(); listenRoles(user); route();
+  listenRacers(); listenChat(user); listenGiveaways(); listenRoles(user); listenPosts(user); route();
 }
 
 // one-time log out of every older session (from before usernames and profile links)
@@ -596,6 +638,7 @@ async function loadRacers() {
   drawHero(meta);
   drawRacers();
   renderGiveaways();
+  drawPost();
 }
 
 function listenRacers() {
@@ -1041,6 +1084,7 @@ function drawChat() {
 /* ---------- owner panel ---------- */
 function drawOwner() {
   if (!isOwner()) return;
+  drawPostHist();
   const box = $("ownerTable"); box.textContent = "";
   const q = $("ownSearch").value.trim().toLowerCase();
   const list = profilesList
@@ -1088,6 +1132,153 @@ function drawOwner() {
   table.append(tbody); box.append(table);
 }
 $("ownSearch").oninput = drawOwner;
+
+/* ---------- team posts ---------- */
+// admins and the owner write them; everyone sees only the newest one; the owner sees all of them
+const POST_EMOJI = ["\u{1F44D}", "❤️", "\u{1F602}", "\u{1F525}", "\u{1F389}", "\u{1F62E}", "\u{1F622}", "\u{1F44F}"];
+const COOLDOWN_MS = 2 * 3600e3;
+let latestPost = null, postReacts = [], reactUnsub = null, myCooldown = 0;
+const agoText = ms => {
+  const m = Math.floor((Date.now() - ms) / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return m + (m === 1 ? " minute" : " minutes") + " ago";
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + (h === 1 ? " hour" : " hours") + " ago";
+  const d = Math.floor(h / 24);
+  return d + (d === 1 ? " day" : " days") + " ago";
+};
+const tsMs = t => (t && t.toMillis ? t.toMillis() : Date.now());
+
+function watchReactions() {
+  if (reactUnsub) { reactUnsub(); reactUnsub = null; }
+  postReacts = [];
+  if (!latestPost) return;
+  reactUnsub = onSnapshot(collection(db, "posts", latestPost.id, "reactions"), snap => {
+    postReacts = snap.docs.map(d => ({ uid: d.id, emoji: d.data().emoji }));
+    drawPost();
+  }, () => {});
+}
+function listenPosts(user) {
+  latestPost = null; postReacts = []; myCooldown = 0;
+  if (reactUnsub) { reactUnsub(); reactUnsub = null; }
+  unsubs.push(() => { if (reactUnsub) { reactUnsub(); reactUnsub = null; } });
+  unsubs.push(onSnapshot(query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(1)), snap => {
+    const d = snap.docs[0], changed = (latestPost ? latestPost.id : null) !== (d ? d.id : null);
+    latestPost = d ? { id: d.id, ...d.data({ serverTimestamps: "estimate" }) } : null;
+    if (changed) watchReactions();
+    drawPost();
+  }, () => {}));
+  unsubs.push(onSnapshot(doc(db, "postCooldowns", user.uid), s => {
+    const v = s.exists() ? s.data({ serverTimestamps: "estimate" }).last : null;
+    myCooldown = v ? tsMs(v) : 0;
+    drawPostBtn();
+  }, () => {}));
+}
+
+// name with role icon and a link to the Nitro Type profile
+function posterName(uid, name, racer) {
+  const b = document.createElement("b");
+  const role = roles[uid]?.role;
+  if (ICON[role]) { const i = el("span", "ri", ICON[role]); i.title = ROLE_NAME[role]; b.append(i); }
+  if (racer) { const a = el("a", "", name || racer); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(racer); a.target = "_blank"; a.rel = "noopener"; b.append(a); }
+  else b.append(document.createTextNode(name || "Racer"));
+  return b;
+}
+
+function drawPost() {
+  const box = $("postBox");
+  box.textContent = "";
+  box.classList.toggle("hidden", !latestPost);
+  if (!latestPost) return;
+  const p = latestPost, card = el("article", "tpost");
+  card.append(el("div", "ptag", "TEAM POST"), el("h2", "display ptitle", p.title || ""), el("p", "ptext", p.text || ""));
+  const by = el("div", "pby");
+  const r = racers.find(x => (x.username || "").toLowerCase() === (p.racer || "").toLowerCase());
+  if (r) { const c = el("div", "pcar"); c.append(carEl(r).cloneNode(true)); by.append(c); }
+  const names = el("div", "pnames");
+  names.append(posterName(p.uid, p.name, p.racer), el("small", "pago", "Posted " + agoText(tsMs(p.createdAt))));
+  by.append(names); card.append(by);
+  const bar = el("div", "preacts"), counts = {}, uid = auth.currentUser ? auth.currentUser.uid : "";
+  postReacts.forEach(x => { counts[x.emoji] = (counts[x.emoji] || 0) + 1; });
+  const mine = (postReacts.find(x => x.uid === uid) || {}).emoji;
+  POST_EMOJI.forEach(em => {
+    const b = el("button", "react"); b.type = "button"; b.setAttribute("aria-pressed", mine === em ? "true" : "false"); b.title = "React";
+    b.append(el("span", "", em));
+    if (counts[em]) b.append(el("span", "n", String(counts[em])));
+    b.onclick = async () => {
+      if (!uid) return;
+      const ref = doc(db, "posts", p.id, "reactions", uid);
+      try { if (mine === em) await deleteDoc(ref); else await setDoc(ref, { emoji: em, uid }); } catch {}
+    };
+    bar.append(b);
+  });
+  card.append(bar); box.append(card);
+}
+
+const cooldownLeft = () => isOwner() ? 0 : myCooldown + COOLDOWN_MS - Date.now();
+function drawPostBtn() {
+  const b = $("newPost");
+  b.classList.toggle("hidden", !isStaff());
+  if (!isStaff()) return;
+  const left = cooldownLeft();
+  b.classList.toggle("wait", left > 0);
+  b.setAttribute("aria-disabled", left > 0 ? "true" : "false");
+  $("newPostEm").textContent = left > 0 ? "Next team post available in " + span(left) : isOwner() ? "Write a post for the whole team" : "Write a post for the whole team (once every 2 hours)";
+}
+setInterval(() => { if (!$("app").classList.contains("hidden")) { drawPost(); drawPostBtn(); } }, 30000);
+
+$("newPost").onclick = () => {
+  if (!isStaff() || cooldownLeft() > 0) return;
+  $("p_title").value = ""; $("p_text").value = ""; $("pErr").textContent = "";
+  $("pNote").textContent = isOwner() ? "Only the newest team post is shown to everyone." : "You can make one team post every 2 hours. Only the newest post is shown to everyone.";
+  $("pdlg").showModal();
+};
+$("pCancel").onclick = () => $("pdlg").close();
+$("pform").onsubmit = async e => {
+  e.preventDefault();
+  const title = $("p_title").value.trim(), text = $("p_text").value.trim();
+  const err = m => { $("pErr").textContent = m; };
+  err("");
+  if (!isStaff()) return err("Only admins and the owner can make team posts.");
+  if (!title) return err("Give your post a title.");
+  if (!text) return err("Write the message for your post.");
+  if (cooldownLeft() > 0) return err("You can post again in " + span(cooldownLeft()) + ".");
+  const u = auth.currentUser; if (!u) return err("Please sign in again.");
+  $("pSave").disabled = true;
+  try {
+    const ref = doc(collection(db, "posts"));
+    const data = { title, text, uid: u.uid, name: me?.username || u.displayName || "Racer", racer: me?.racer || null, createdAt: serverTimestamp() };
+    if (isOwner()) await setDoc(ref, data);
+    else {
+      const b = writeBatch(db);
+      b.set(ref, data);
+      b.set(doc(db, "postCooldowns", u.uid), { last: serverTimestamp() });
+      await b.commit();
+    }
+    $("pdlg").close();
+  } catch { err("Could not post. If you posted recently, wait for the cooldown to end and try again."); }
+  finally { $("pSave").disabled = false; }
+};
+
+// owner only: every post ever made, with a delete button
+function drawPostHist() {
+  const box = $("postHist");
+  if (!box) return;
+  box.textContent = "";
+  if (!isOwner()) return;
+  if (!postHist.length) { box.append(el("p", "empty", "No team posts yet.")); return; }
+  postHist.forEach(p => {
+    const row = el("div", "pitem"), meta = el("div", "meta");
+    meta.append(posterName(p.uid, p.name, p.racer), el("span", "", p.createdAt && p.createdAt.toDate ? chatTime(p.createdAt.toDate()) : ""));
+    const x = el("button", "mini bad", "Delete"); x.type = "button";
+    x.onclick = async () => {
+      if (!(await confirmBox("Delete team post?", "“" + (p.title || "") + "” will be removed for everyone.", "Delete"))) return;
+      try { await deleteDoc(doc(db, "posts", p.id)); } catch { $("ownErr").textContent = "Could not delete the post."; }
+    };
+    meta.append(x);
+    row.append(el("h4", "", p.title || ""), el("p", "", p.text || ""), meta); box.append(row);
+  });
+}
 
 $("sendForm").onsubmit = async e => {
   e.preventDefault();
