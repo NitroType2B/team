@@ -525,8 +525,12 @@ const db = getFirestore(app);
 
 let signUp = false, unsubs = [], creating = false, me = null;
 
-// people pick a username, so we turn it into a hidden login address (nobody ever sees or uses it)
+// people pick a username, but Firebase wants an email, so every account gets a hidden login address (nobody ever sees or uses it).
+// The "usernames" list says which hidden address belongs to which username. Deleting that entry frees the username completely.
+// (older accounts used name@2b-determined.users, which is still the fallback)
 const toEmail = name => name.toLowerCase() + "@2b-determined.users";
+const nameId = name => "u_" + name.toLowerCase();
+const newEmail = () => "u" + Array.from(crypto.getRandomValues(new Uint8Array(10)), b => b.toString(16).padStart(2, "0")).join("") + "@2b-determined.users";
 const NAME_OK = /^[A-Za-z0-9_.-]{3,20}$/;
 const profileHref = racer => "#profile/" + encodeURIComponent(racer);
 const claimId = racer => encodeURIComponent(racer.toLowerCase());
@@ -557,25 +561,31 @@ $("authForm").onsubmit = async e => {
     const name = $("username").value.trim(), pw = $("password").value;
     if (!NAME_OK.test(name)) throw fail("app/bad-username");
     if (!signUp) {
-      await signInWithEmailAndPassword(auth, toEmail(name), pw);
+      let email = toEmail(name);
+      try { const us = await getDoc(doc(db, "usernames", nameId(name))); if (us.exists() && us.data().email) email = us.data().email; } catch {}
+      await signInWithEmailAndPassword(auth, email, pw);
     } else {
       const racer = parseRacer($("racerLink").value);
       if (!racer) throw fail("app/bad-link");
-      try { if ((await getDoc(doc(db, "racerClaims", claimId(racer)))).exists()) throw fail("app/racer-taken"); }
-      catch (err) { if (err.code === "app/racer-taken") throw err; }
+      // (a link that is already taken is refused by the database rules below; a leftover link from a deleted account is allowed)
+      try { if ((await getDoc(doc(db, "usernames", nameId(name)))).exists()) throw fail("app/username-taken"); }
+      catch (err) { if (err.code === "app/username-taken") throw err; }
       creating = true;
-      const cred = await createUserWithEmailAndPassword(auth, toEmail(name), pw);
+      const email = newEmail();
+      const cred = await createUserWithEmailAndPassword(auth, email, pw);
       try {
         const batch = writeBatch(db);
+        batch.set(doc(db, "usernames", nameId(name)), { uid: cred.user.uid, email });
         batch.set(doc(db, "racerClaims", claimId(racer)), { uid: cred.user.uid, racer });
         batch.set(doc(db, "profiles", cred.user.uid), { username: name, usernameLower: name.toLowerCase(), racer, createdAt: serverTimestamp() });
         await batch.commit();
       } catch (err) {
         await cred.user.delete().catch(() => {});
         await signOut(auth).catch(() => {});
-        throw fail(err.code === "permission-denied" ? "app/racer-taken" : "app/setup-failed");
+        let nameTaken = false;
+        try { nameTaken = (await getDoc(doc(db, "usernames", nameId(name)))).exists(); } catch {}
+        throw fail(nameTaken ? "app/username-taken" : err.code === "permission-denied" ? "app/racer-taken" : "app/setup-failed");
       }
-      await updateProfile(cred.user, { displayName: name }).catch(() => {});
       me = { username: name, racer };
       creating = false;
       await enter(cred.user);
@@ -593,6 +603,7 @@ $("authForm").onsubmit = async e => {
       "app/bad-username": "Usernames are 3 to 20 characters: letters, numbers, dots, dashes or underscores.",
       "app/bad-link": "Paste your full Nitro Type profile link (nitrotype.com/racer/YOUR_USERNAME).",
       "app/racer-taken": "That Nitro Type profile is already linked to another account.",
+      "app/username-taken": "That username is already taken. Try another one.",
       "app/setup-failed": "Something went wrong creating your account. Please try again."
     };
     $("authErr").textContent = map[err.code] || err.message;
@@ -613,11 +624,26 @@ const DELETED_MSG = "This account was deleted.";
 const myName = () => me?.username || auth.currentUser?.displayName || "";
 
 function stopOwnerFeeds() { ownerUnsubs.forEach(u => u()); ownerUnsubs = []; postHist = []; drawPostHist(); }
+// owner only: older accounts get an entry in the username list so nobody else can take their name
+let unameSeen = null;
+const deletingUids = new Set();   // accounts being deleted right now: never re-add their username
+function syncUsernames() {
+  if (!isOwner() || !unameSeen || !profilesLoaded) return;
+  profilesList.forEach(p => {
+    if (!p.username || deletingUids.has(p.uid) || (bans[p.uid] && bans[p.uid].deleted)) return;
+    const k = nameId(p.username);
+    if (unameSeen.has(k)) return;
+    unameSeen.add(k);
+    setDoc(doc(db, "usernames", k), { uid: p.uid, email: toEmail(p.username) }).catch(() => { unameSeen.delete(k); });
+  });
+}
 function startOwnerFeeds() {
   if (ownerUnsubs.length) return;
+  unameSeen = null;
+  ownerUnsubs.push(onSnapshot(collection(db, "usernames"), snap => { unameSeen = new Set(snap.docs.map(d => d.id)); syncUsernames(); }, () => {}));
   ownerUnsubs.push(onSnapshot(query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(100)), snap => { postHist = snap.docs.map(d => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) })); drawPostHist(); }, () => {}));
   ownerUnsubs.push(onSnapshot(collection(db, "bans"), snap => { bans = {}; snap.docs.forEach(d => bans[d.id] = d.data()); drawOwner(); }, () => {}));
-  ownerUnsubs.push(onSnapshot(collection(db, "profiles"), snap => { profilesList = snap.docs.map(d => ({ uid: d.id, ...d.data() })); profilesLoaded = true; drawOwner(); }, () => { profilesLoaded = true; drawOwner(); }));
+  ownerUnsubs.push(onSnapshot(collection(db, "profiles"), snap => { profilesList = snap.docs.map(d => ({ uid: d.id, ...d.data() })); profilesLoaded = true; drawOwner(); syncUsernames(); }, () => { profilesLoaded = true; drawOwner(); }));
 }
 
 function listenRoles(user) {
@@ -665,6 +691,10 @@ async function enter(user) {
   if (!me) { try { const s = await getDoc(doc(db, "profiles", user.uid)); if (s.exists()) me = s.data(); } catch {} }
   $("me").textContent = myName();
   drawUserBar();
+  if (me && me.username && user.email) {
+    // older accounts: record their username and hidden login address once
+    getDoc(doc(db, "usernames", nameId(me.username))).then(us => { if (!us.exists()) return setDoc(doc(db, "usernames", nameId(me.username)), { uid: user.uid, email: user.email }); }).catch(() => {});
+  }
   listenRacers(); listenChat(user); listenGiveaways(); listenRoles(user); listenPosts(user); route();
 }
 
@@ -1285,23 +1315,30 @@ function drawOwner() {
       const delBtn = el("button", "mini bad", "Delete"); delBtn.type = "button";
       delBtn.onclick = async () => {
         ownerFail("");
-        if (!(await confirmBox("Delete " + (p.username || "this account") + "?", "Their account, their chat messages and their Nitro Type link are removed, and they can no longer sign in. This can't be undone.", "Delete account"))) return;
+        if (!(await confirmBox("Delete " + (p.username || "this account") + "?", "Their username, Nitro Type link, chat messages and team posts are erased and they can no longer sign in. The username and link can be used again. This can't be undone.", "Delete account"))) return;
+        deletingUids.add(p.uid);
         try {
-          // 1) their chat messages
-          const msgs = await getDocs(query(collection(db, "messages"), where("uid", "==", p.uid)));
-          for (let i = 0; i < msgs.docs.length; i += 400) {
-            const mb = writeBatch(db);
-            msgs.docs.slice(i, i + 400).forEach(d => mb.delete(d.ref));
-            await mb.commit();
+          // 1) everything they wrote: chat messages and team posts
+          for (const col of ["messages", "posts"]) {
+            const found = await getDocs(query(collection(db, col), where("uid", "==", p.uid)));
+            for (let i = 0; i < found.docs.length; i += 400) {
+              const mb = writeBatch(db);
+              found.docs.slice(i, i + 400).forEach(d => mb.delete(d.ref));
+              await mb.commit();
+            }
           }
-          // 2) the account itself (the block stays so the login can't be used again)
+          // 2) the account itself. Only a bare "deleted" marker is kept, so an old login can never be used again.
           const ab = writeBatch(db);
-          ab.set(doc(db, "bans", p.uid), { uid: p.uid, username: p.username || "", racer: p.racer || null, deleted: true, bannedAt: serverTimestamp() });
+          ab.set(doc(db, "bans", p.uid), { uid: p.uid, deleted: true, bannedAt: serverTimestamp() });
           if (role === "admin") ab.delete(doc(db, "roles", p.uid));
           if (p.racer) ab.delete(doc(db, "racerClaims", claimId(p.racer)));
+          if (p.username) ab.delete(doc(db, "usernames", nameId(p.username)));
+          if (latestPost) ab.delete(doc(db, "posts", latestPost.id, "reactions", p.uid));
+          ab.delete(doc(db, "chatCooldowns", p.uid));
+          ab.delete(doc(db, "postCooldowns", p.uid));
           ab.delete(doc(db, "profiles", p.uid));
           await ab.commit();
-        } catch { ownerFail("Could not delete that account. Please try again."); }
+        } catch (e) { deletingUids.delete(p.uid); ownerFail("Could not delete that account (" + ((e && (e.code || e.message)) || "error") + "). Make sure the newest rules are published."); }
       };
       act.append(roleBtn, banBtn, delBtn);
     }
