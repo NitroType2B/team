@@ -9,14 +9,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Racing+Sans+One&display=swap" rel="stylesheet">
-<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"||t==="ocean"||t==="neon")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"||t==="ocean"||t==="sunset")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
-:root{--bg:#0F0A24;--ink:#F4F1FF;--mute:#A9A0CF;--card:rgba(27,20,64,.78);--line:rgba(255,255,255,.1);--pink:#FF3D9A;--purple:#7C3AED;--cyan:#22D3EE;--gold:#FFC83D;--green:#3DDC97;--blue:#4DA3FF;--red:#FF8077;
-  --goldtxt:#FFC83D;--greentxt:#3DDC97;--g1:color-mix(in srgb,var(--pink) 30%,transparent);--g2:color-mix(in srgb,var(--cyan) 20%,transparent);--g3:color-mix(in srgb,var(--purple) 30%,transparent);
-  --hdr:rgba(15,10,36,.78);--dlg:#1B1440;--tip:#241A55;--fill:rgba(255,255,255,.06);--fill2:rgba(255,255,255,.04);--fill3:rgba(255,255,255,.08);--hover:rgba(255,255,255,.07);
-  --check1:#fff;--check2:#16102E;--ph:#8277B5;--gdesc:#D7D0F5;--dash:rgba(255,255,255,.28);--shadow:rgba(0,0,0,.25);--scheme:dark;
-  --hero:linear-gradient(120deg,#FF3D9A 0%,#8B3CF0 48%,#2563EB 100%)}
-/* Sunset is the default look (pink, purple and blue) */
+:root{--bg:#05010D;--ink:#F5F0FF;--mute:#B58CFF;--card:rgba(16,4,36,.82);--line:rgba(255,0,200,.32);--pink:#FF2BD6;--purple:#9D00FF;--cyan:#00F5FF;--gold:#FFF200;--green:#39FF14;--blue:#00B7FF;--red:#FF4D6D;
+  --goldtxt:#FFF200;--greentxt:#39FF14;--g1:rgba(255,43,214,.30);--g2:rgba(0,245,255,.20);--g3:rgba(157,0,255,.32);
+  --hdr:rgba(5,1,13,.88);--dlg:#12052B;--tip:#1B0840;--fill:rgba(255,255,255,.06);--fill2:rgba(255,255,255,.04);--fill3:rgba(255,255,255,.09);--hover:rgba(255,43,214,.14);
+  --check1:#05010D;--check2:#05010D;--ph:#8F6BD1;--gdesc:#E6D6FF;--dash:rgba(0,245,255,.5);--shadow:rgba(255,43,214,.28);--scheme:dark;
+  --hero:linear-gradient(120deg,#FF2BD6 0%,#9D00FF 50%,#00B7FF 100%)}
+/* Neon is the default look */
+/* Sunset: pink, purple and blue */
 /* Ocean */
 :root[data-theme="ocean"]{--bg:#06182B;--ink:#EAF6FF;--mute:#8FB3CC;--card:rgba(10,38,64,.78);--line:rgba(255,255,255,.1);--pink:#1FB5C9;--purple:#1D6FD1;--cyan:#7DE3E8;--gold:#FFC83D;--green:#3DDC97;--blue:#4DA3FF;--red:#FF8A7A;
   --goldtxt:#FFC83D;--greentxt:#3DDC97;--g1:rgba(31,181,201,.28);--g2:rgba(255,122,107,.14);--g3:rgba(29,111,209,.30);
@@ -24,14 +25,14 @@
   --check1:#fff;--check2:#0A2A4A;--ph:#6E93AE;--gdesc:#CBE4F5;--dash:rgba(255,255,255,.28);--shadow:rgba(0,0,0,.35);--scheme:dark;
   --hero:linear-gradient(120deg,#0EA5B7 0%,#1D6FD1 50%,#0A2A5E 100%)}
 /* Neon */
-:root[data-theme="neon"]{--bg:#05010D;--ink:#F5F0FF;--mute:#B58CFF;--card:rgba(16,4,36,.82);--line:rgba(255,0,200,.32);--pink:#FF2BD6;--purple:#9D00FF;--cyan:#00F5FF;--gold:#FFF200;--green:#39FF14;--blue:#00B7FF;--red:#FF4D6D;
-  --goldtxt:#FFF200;--greentxt:#39FF14;--g1:rgba(255,43,214,.30);--g2:rgba(0,245,255,.20);--g3:rgba(157,0,255,.32);
-  --hdr:rgba(5,1,13,.88);--dlg:#12052B;--tip:#1B0840;--fill:rgba(255,255,255,.06);--fill2:rgba(255,255,255,.04);--fill3:rgba(255,255,255,.09);--hover:rgba(255,43,214,.14);
-  --check1:#05010D;--check2:#05010D;--ph:#8F6BD1;--gdesc:#E6D6FF;--dash:rgba(0,245,255,.5);--shadow:rgba(255,43,214,.28);--scheme:dark;
-  --hero:linear-gradient(120deg,#FF2BD6 0%,#9D00FF 50%,#00B7FF 100%)}
-:root[data-theme="neon"] h1,:root[data-theme="neon"] h2,:root[data-theme="neon"] .brand{text-shadow:0 0 10px color-mix(in srgb,var(--pink) 70%,transparent),0 0 24px color-mix(in srgb,var(--cyan) 40%,transparent)}
-:root[data-theme="neon"] .ub-btn,:root[data-theme="neon"] .theme-opt[aria-pressed="true"]{box-shadow:0 0 14px var(--pink),0 0 28px color-mix(in srgb,var(--cyan) 45%,transparent)}
-:root[data-theme="neon"] header{border-bottom-color:var(--pink);box-shadow:0 0 18px color-mix(in srgb,var(--pink) 55%,transparent)}
+:root[data-theme="sunset"]{--bg:#0F0A24;--ink:#F4F1FF;--mute:#A9A0CF;--card:rgba(27,20,64,.78);--line:rgba(255,255,255,.1);--pink:#FF3D9A;--purple:#7C3AED;--cyan:#22D3EE;--gold:#FFC83D;--green:#3DDC97;--blue:#4DA3FF;--red:#FF8077;
+  --goldtxt:#FFC83D;--greentxt:#3DDC97;--g1:color-mix(in srgb,var(--pink) 30%,transparent);--g2:color-mix(in srgb,var(--cyan) 20%,transparent);--g3:color-mix(in srgb,var(--purple) 30%,transparent);
+  --hdr:rgba(15,10,36,.78);--dlg:#1B1440;--tip:#241A55;--fill:rgba(255,255,255,.06);--fill2:rgba(255,255,255,.04);--fill3:rgba(255,255,255,.08);--hover:rgba(255,255,255,.07);
+  --check1:#fff;--check2:#16102E;--ph:#8277B5;--gdesc:#D7D0F5;--dash:rgba(255,255,255,.28);--shadow:rgba(0,0,0,.25);--scheme:dark;
+  --hero:linear-gradient(120deg,#FF3D9A 0%,#8B3CF0 48%,#2563EB 100%)}
+:root:not([data-theme]) h1,:root:not([data-theme]) h2,:root:not([data-theme]) .brand{text-shadow:0 0 10px color-mix(in srgb,var(--pink) 70%,transparent),0 0 24px color-mix(in srgb,var(--cyan) 40%,transparent)}
+:root:not([data-theme]) .ub-btn,:root:not([data-theme]) .theme-opt[aria-pressed="true"]{box-shadow:0 0 14px var(--pink),0 0 28px color-mix(in srgb,var(--cyan) 45%,transparent)}
+:root:not([data-theme]) header{border-bottom-color:var(--pink);box-shadow:0 0 18px color-mix(in srgb,var(--pink) 55%,transparent)}
 /* Light mode: mainly white and light colors */
 :root[data-theme="light"]{--bg:#F5F3FF;--ink:#1B1440;--mute:#5E5890;--card:rgba(255,255,255,.9);--line:rgba(30,20,90,.14);--pink:#E11D74;--purple:#7C3AED;--cyan:#0E7490;--red:#D6453D;
   --goldtxt:#9A6700;--greentxt:#15803D;--g1:color-mix(in srgb,var(--pink) 14%,transparent);--g2:color-mix(in srgb,var(--cyan) 18%,transparent);--g3:color-mix(in srgb,var(--purple) 12%,transparent);
@@ -114,10 +115,21 @@ header .who{display:flex;gap:12px;align-items:center;color:var(--mute);font-size
 .info::after{content:attr(data-tip);position:absolute;top:135%;left:50%;transform:translateX(-50%);width:max-content;max-width:min(280px,80vw);padding:9px 13px;border-radius:10px;background:var(--tip);color:var(--ink);font:700 13px/1.4 Manrope,system-ui,sans-serif;font-style:normal;border:1px solid var(--line);box-shadow:0 10px 26px var(--shadow);opacity:0;pointer-events:none;transition:opacity .12s;z-index:40}
 .info:hover::after,.info:focus-visible::after{opacity:1}
 .info:focus-visible{outline:2px solid #fff;outline-offset:2px}
-#sdlg{max-height:90vh;overflow:auto}
+#gtip{position:fixed;display:none;z-index:1000;max-width:min(260px,80vw);padding:10px 14px;border-radius:12px;background:var(--tip);color:var(--ink);border:1px solid var(--cyan);font-size:13px;font-weight:600;line-height:1.45;box-shadow:0 12px 30px var(--shadow);pointer-events:none}
+*{scrollbar-width:thin;scrollbar-color:var(--pink) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--pink);border-radius:999px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:var(--cyan);background-clip:padding-box;border:2px solid transparent}
+#sdlg{padding:0;overflow:hidden;max-height:90vh}
+#sdlg[open]{display:flex;flex-direction:column}
+.sx{position:absolute;top:14px;right:14px;z-index:5;width:38px;height:38px;border-radius:50%;border:2px solid var(--pink);background:var(--dlg);color:var(--ink);font-size:18px;font-weight:900;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s,box-shadow .15s}
+.sx:hover,.sx:focus-visible{box-shadow:0 0 14px color-mix(in srgb,var(--pink) 60%,transparent);transform:scale(1.08);outline:none}
+.sbody{overflow:auto;padding:28px;max-height:90vh}
+.sbody h3{padding-right:48px}
 .ack{display:flex;gap:10px;align-items:flex-start;font-weight:700;font-size:14px;cursor:pointer}
 .ack input{width:20px;height:20px;margin-top:2px;flex:none;padding:0}
-.setrow{display:grid;gap:8px;padding-top:14px;border-top:1px solid var(--line)}
+.setrow{display:grid;gap:8px;padding:14px 0 18px;border-top:1px solid var(--line)}
 .ok{color:var(--greentxt);font-weight:800;font-size:13px;margin:0;min-height:0}
 .trk{margin-right:8px;font-size:14px}
 .pr-lock{position:relative;width:190px;height:84px;border-radius:14px;overflow:hidden;display:grid;place-items:center;background:var(--fill)}
@@ -544,7 +556,8 @@ td.c-dim{color:var(--mute)}
       </form>
     </dialog>
     <dialog id="sdlg">
-      <div class="stack">
+      <button class="sx" type="button" id="sClose" aria-label="Close settings">✕</button>
+      <div class="stack sbody">
         <h3 class="display" style="margin:0;font-size:28px">Settings</h3>
         <div>
           <p class="pr-h" style="margin:0">Mode</p>
@@ -565,7 +578,6 @@ td.c-dim{color:var(--mute)}
           <p class="err" id="rcErr" role="alert"></p><p class="ok" id="rcOk" role="status"></p>
           <div class="actions"><button class="btn" type="submit" id="rcBtn">Change profile link</button></div>
         </form>
-        <div class="actions"><button class="btn ghost" type="button" id="sClose">Close</button></div>
       </div>
     </dialog>
   </main>
@@ -1104,13 +1116,14 @@ function rangeStats(startMs, endMs, strict) {
   const startS = startMs / 1000, endS = endMs / 1000, tol = snapTol(endS - startS);
   const cur = pickSnap(endS) || snaps[0];
   const near = nearSnap(startS);
-  let note = "";
-  if (strict && (!near || near.gap > tol || near.snap.t >= cur.t && endS - startS > tol)) {
-    return blank(snaps[0].t > startS + tol
-      ? "Tracking began " + fmtDT(snaps[0].t * 1000) + ", so this range will fill in once that much time has passed."
-      : "Not enough saved tracking data for this range yet. It fills in as updates come in.");
-  }
-  const baseSnap = near.snap;
+  let note = "", baseSnap;
+  if (strict) {
+    // a rolling window ending now: start from the snapshot at the start of the window; if tracking is younger than the window, start from the oldest snapshot we have
+    const before = pickSnap(startS), after = snaps.find(x => x.t > startS && x.t < cur.t);
+    if (before && startS - before.t <= tol) baseSnap = before;
+    else if (after) { baseSnap = after; note = "Tracking data begins " + fmtDT(after.t * 1000) + ", so this shows everything tracked since then."; }
+    else return blank("Tracking just started. Numbers appear after the next update.");
+  } else baseSnap = near.snap;
   if (!strict) {
     if (snaps[0].t > startS + tol) note = "Race tracking began " + fmtDT(snaps[0].t * 1000) + ", so earlier races are not counted.";
     else if (near.gap > tol) note = "Tracking data was sparse near the start, so counts may be slightly off.";
@@ -1332,11 +1345,11 @@ function drawChat() {
     const nm = (pr && pr.username) || m.name || "Racer", rc = (pr && pr.racer) || m.racer;
     const mc = carFor(rc);
     if (mc) b.append(mc);
-    else if (trackedState(rc) === false) { const w = el("span", "wave", "\u26A0\uFE0F"); w.title = "Tracking is not available for non-2B members. If you are a member, double-check your information in settings."; b.append(w); }
-    if (ICON[role]) { const i = el("span", "ri", ICON[role]); i.title = ROLE_NAME[role]; b.append(i); }
+    else if (trackedState(rc) === false) { const w = el("span", "wave", "\u26A0\uFE0F"); w.dataset.tt = "Tracking is not available for non-2B members. If you are a member, double-check your information in settings."; w.tabIndex = 0; b.append(w); }
+    if (ICON[role]) { const i = el("span", "ri", ICON[role]); i.dataset.tt = ROLE_NAME[role]; b.append(i); }
     if (rc) { const a = document.createElement("a"); a.href = profileHref(rc); a.textContent = nm; b.append(a); }
     else b.append(document.createTextNode(nm));
-    if (pr && pr.createdMs && Date.now() - pr.createdMs < 12 * 3600e3) { const w = el("span", "wave hi", "\u{1F44B}"); w.title = "Say hi! I'm new here!"; b.append(w); }
+    if (pr && pr.createdMs && Date.now() - pr.createdMs < 12 * 3600e3) { const w = el("span", "wave hi", "\u{1F44B}"); w.dataset.tt = "Say hi! I'm new here!"; w.tabIndex = 0; b.append(w); }
     const t = document.createElement("time");
     if (m.createdAt) t.textContent = chatTime(m.createdAt.toDate());
     const p = document.createElement("p"); p.textContent = m.text;
@@ -1516,6 +1529,21 @@ async function showProfile() {
 }
 $("mProfile").onclick = () => { closeBar(); if (me && me.racer) location.hash = profileHref(me.racer); };
 
+// instant custom hover boxes: any element with data-tt
+const gtip = document.createElement("div"); gtip.id = "gtip"; gtip.setAttribute("role", "tooltip"); document.body.append(gtip);
+function showTip(t) {
+  gtip.textContent = t.dataset.tt; gtip.style.display = "block";
+  const r = t.getBoundingClientRect(), w = gtip.offsetWidth, h = gtip.offsetHeight;
+  let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+  let y = r.bottom + 8; if (y + h > innerHeight - 8) y = r.top - h - 8;
+  gtip.style.left = x + "px"; gtip.style.top = y + "px";
+}
+const hideTip = () => { gtip.style.display = "none"; };
+document.addEventListener("mouseover", e => { const t = e.target.closest && e.target.closest("[data-tt]"); if (t) showTip(t); else hideTip(); });
+document.addEventListener("focusin", e => { const t = e.target.closest && e.target.closest("[data-tt]"); if (t) showTip(t); });
+document.addEventListener("focusout", hideTip);
+document.addEventListener("scroll", hideTip, true);
+
 // banner for brand-new accounts: from sign-up until the next data update
 function drawWelcome() {
   const c = me && me.createdMs;
@@ -1525,7 +1553,7 @@ setInterval(drawWelcome, 30000);
 
 /* ---------- changing your username / profile link ---------- */
 const UN_COOL = 7 * 864e5, RC_COOL = 14 * 864e5;
-const RACER_OK = /^[A-Za-z0-9_]{1,30}$/;
+const RACER_OK = /^[A-Za-z0-9_]{1,64}$/;
 const fmtWhen = ms => new Date(ms).toLocaleString([], { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
 function drawAccountSettings() {
   ["unErr", "unOk", "rcErr", "rcOk"].forEach(i => { $(i).textContent = ""; });
@@ -1653,13 +1681,13 @@ $("eform").onsubmit = async e => {
 };
 
 const THEMES = [
-  ["sunset", "Sunset", "The default look", "linear-gradient(135deg,#FF3D9A,#8B3CF0 55%,#2563EB)"],
+  ["neon", "Neon", "The default look", "linear-gradient(135deg,#FF2BD6,#9D00FF 50%,#00F5FF)"],
+  ["sunset", "Sunset", "Pink, purple and blue", "linear-gradient(135deg,#FF3D9A,#8B3CF0 55%,#2563EB)"],
   ["ocean", "Ocean", "Navy, teal and coral", "linear-gradient(135deg,#0EA5B7,#1D6FD1 55%,#0A2A5E)"],
-  ["neon", "Neon", "Glowing magenta, cyan and green", "linear-gradient(135deg,#FF2BD6,#9D00FF 50%,#00F5FF)"],
   ["light", "Light mode", "White and light colors", "linear-gradient(135deg,#FFFFFF,#E9E4FF)"],
   ["dark", "Dark mode", "Black and dark colors", "linear-gradient(135deg,#09090B,#27272A)"]
 ];
-const currentTheme = () => document.documentElement.getAttribute("data-theme") || "sunset";
+const currentTheme = () => document.documentElement.getAttribute("data-theme") || "neon";
 function drawThemes() {
   const box = $("themes"); box.textContent = "";
   THEMES.forEach(([id, name, note, sw]) => {
@@ -1672,12 +1700,14 @@ function drawThemes() {
   });
 }
 function setTheme(id) {
-  if (id === "sunset") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", id);
-  try { if (id === "sunset") localStorage.removeItem("theme"); else localStorage.setItem("theme", id); } catch {}
+  if (id === "neon") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", id);
+  try { if (id === "neon") localStorage.removeItem("theme"); else localStorage.setItem("theme", id); } catch {}
   drawThemes();
 }
 $("mSettings").onclick = () => { closeBar(); drawThemes(); drawAccountSettings(); $("sdlg").showModal(); };
 $("sClose").onclick = () => $("sdlg").close();
+// click on the dark area outside the box closes settings
+$("sdlg").addEventListener("mousedown", e => { if (e.target === $("sdlg")) $("sdlg").close(); });
 
 /* ---------- team posts ---------- */
 // admins and the owner write them; everyone sees only the newest one; the owner sees all of them
