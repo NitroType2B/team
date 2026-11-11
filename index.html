@@ -586,6 +586,7 @@ function statRows() {
 $("ranges").onclick = e => {
   const b = e.target.closest("button"); if (!b) return;
   statsRange = b.dataset.r;
+  if (statsRange !== "all" && sortKey === "lifetimeRaces") { sortKey = "teamRaces"; sortDir = "desc"; }
   $("ranges").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
   if (statsRange !== "all") refreshSnaps();
   drawRacers();
@@ -636,7 +637,8 @@ function drawRacers() {
 
   const table = document.createElement("table");
   const thead = document.createElement("thead"), head = document.createElement("tr");
-  COLS.forEach(c => {
+  const visCols = COLS.filter(c => !(c.k === "lifetimeRaces" && statsRange !== "all"));
+  visCols.forEach(c => {
     const th = document.createElement("th"), b = document.createElement("button");
     b.type = "button"; b.textContent = c.t;
     if (c.k === sortKey) {
@@ -652,7 +654,9 @@ function drawRacers() {
   rows.forEach((r, i) => {
     const tr = document.createElement("tr");
     const who = racerCell(r, showPodium ? i : -1, false);
-    tr.append(who, cell(r.avg ?? "-", "c-avg"), cell(r.highSpeed ?? "-", "c-high"), cell(num(r.life)), cell(num(r.team), "c-team"), cell(agoTs(r.memberSince), "c-dim"), cell(agoTs(r.lastRace), "c-dim"));
+    tr.append(who, cell(r.avg ?? "-", "c-avg"), cell(r.highSpeed ?? "-", "c-high"));
+    if (statsRange === "all") tr.append(cell(num(r.life)));
+    tr.append(cell(num(r.team), "c-team"), cell(agoTs(r.memberSince), "c-dim"), cell(agoTs(r.lastRace), "c-dim"));
     tbody.append(tr);
   });
   table.append(tbody);
