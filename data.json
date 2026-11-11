@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794422415,
+ "updated": 1794423202,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -137,9 +137,9 @@
    "carHue": 300,
    "carFile": "tbutler56a_small.png",
    "carImage": "https://www.nitrotype.com/cars/tbutler56a_small.png",
-   "avgSpeed": 94,
+   "avgSpeed": 96,
    "highSpeed": 131,
-   "lifetimeRaces": 13020,
+   "lifetimeRaces": 13022,
    "teamRaces": 357,
    "memberSince": 1794240864,
    "lastRace": 1794418363
