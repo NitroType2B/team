@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794420020,
+ "updated": 1794421215,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -375,12 +375,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 83,
+   "avgSpeed": 93,
    "highSpeed": 116,
-   "lifetimeRaces": 2231,
-   "teamRaces": 368,
+   "lifetimeRaces": 2244,
+   "teamRaces": 390,
    "memberSince": 1794241854,
-   "lastRace": 1794419955
+   "lastRace": 1794421183
   },
   {
    "username": "nikooo124",
@@ -627,7 +627,7 @@
   "ilike100acc": {
    "2026-11-09": 105,
    "2026-11-10": 247,
-   "2026-11-11": 368
+   "2026-11-11": 390
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
