@@ -138,6 +138,22 @@ input[type=datetime-local]{color-scheme:dark}
 .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:6px}
 .sub.note{padding:28px 22px;font-style:normal}
 @media (max-width:620px){.two{grid-template-columns:1fr}.plus strong{font-size:26px}.gname{font-size:28px}}
+/* roles + owner panel */
+.ri{margin-right:5px;font-size:14px}
+.msg .del{all:unset;cursor:pointer;float:right;margin-left:12px;opacity:.5;font-size:13px;line-height:1;padding:3px 6px;border-radius:6px}
+.msg .del:hover,.msg .del:focus-visible{opacity:1;background:rgba(255,93,93,.28)}
+.msg .del:focus-visible{outline:2px solid var(--cyan)}
+.ownbar{padding:14px 22px;border-bottom:1px solid var(--line)}
+.ownerr{margin:0;padding:0 22px}
+.ownerr:not(:empty){padding:10px 22px}
+.mini{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--ink);padding:6px 14px;border-radius:999px;font-weight:700;font-size:13px;cursor:pointer;margin-right:6px;transition:border-color .15s,background .15s}
+.mini:hover{border-color:var(--cyan)}
+.mini.bad{border-color:rgba(255,93,93,.6);color:#FF8077}
+.mini.bad:hover{background:rgba(255,93,93,.15)}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:800;color:#101828}
+.pill.ok{background:var(--green)}
+.pill.ban{background:#FF5D5D}
+table.own{min-width:720px}
 /* panels */
 section.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;display:flex;flex-direction:column;min-height:0;overflow:hidden;backdrop-filter:blur(8px);box-shadow:0 18px 50px rgba(0,0,0,.25)}
 .head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding:18px 22px;border-bottom:1px solid var(--line)}
@@ -228,6 +244,7 @@ td.c-dim{color:var(--mute)}
       <a href="#stats" id="navStats">Team stats</a>
       <a href="#giveaways" id="navGiveaways">Giveaways</a>
       <a href="#chat" id="navChat">Chat</a>
+      <a href="#owner" id="navOwner" class="hidden">Owner</a>
     </nav>
     <div class="who"><span id="me"></span><button class="btn ghost" id="out">Sign out</button></div>
   </header>
@@ -289,7 +306,7 @@ td.c-dim{color:var(--mute)}
         <h2 class="display">Giveaways</h2>
         <p>Every giveaway counts races automatically between its start and end times.</p>
       </div>
-      <button class="plus" id="newGiveaway" type="button">
+      <button class="plus hidden" id="newGiveaway" type="button">
         <span class="plusicon" aria-hidden="true">+</span>
         <span><strong class="display">Create giveaway</strong><em>Name it, describe it, and pick the dates and times</em></span>
       </button>
@@ -307,6 +324,24 @@ td.c-dim{color:var(--mute)}
         <div class="scroll" id="gTable"></div>
       </section>
     </div>
+
+    <section id="ownerView" class="panel page hidden">
+      <div class="head">
+        <h3 class="display">👑 Owner panel</h3>
+        <span class="updated">Only the owner can see this page</span>
+      </div>
+      <div class="ownbar"><input id="ownSearch" placeholder="Search by username or Nitro Type name" autocomplete="off"></div>
+      <p class="err ownerr" id="ownErr" role="alert"></p>
+      <div class="scroll" id="ownerTable"></div>
+    </section>
+
+    <dialog id="cdlg">
+      <form id="cform" class="stack">
+        <h3 class="display" id="cTitle" style="margin:0;font-size:28px"></h3>
+        <p id="cText" style="margin:0;color:var(--mute)"></p>
+        <div class="actions"><button class="btn ghost" type="button" id="cCancel">Cancel</button><button class="btn danger" id="cOk" type="submit"></button></div>
+      </form>
+    </dialog>
 
     <dialog id="ddlg">
       <form id="dform" class="stack">
@@ -338,7 +373,7 @@ td.c-dim{color:var(--mute)}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { getFirestore, collection, doc, addDoc, getDoc, deleteDoc, writeBatch, onSnapshot, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, doc, addDoc, getDoc, setDoc, deleteDoc, writeBatch, onSnapshot, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const $ = id => document.getElementById(id);
 if (firebaseConfig.apiKey.startsWith("PASTE")) $("setup").classList.remove("hidden");
@@ -424,14 +459,61 @@ $("authForm").onsubmit = async e => {
 
 $("out").onclick = () => signOut(auth);
 
+// ---- roles: "owner" and "admin" live in the roles collection, bans live in the bans collection ----
+let roles = {}, myRole = "user", rolesLoaded = false, bans = {}, profilesList = [], profilesLoaded = false, ownerUnsubs = [];
+const isOwner = () => myRole === "owner";
+const isStaff = () => myRole === "owner" || myRole === "admin";
+const ICON = { owner: "\u{1F451}", admin: "\u{1F528}" };
+const ROLE_NAME = { owner: "Owner", admin: "Admin" };
+const BANNED_MSG = "This account has been banned from the website.";
+const myName = () => me?.username || auth.currentUser?.displayName || "";
+
+function stopOwnerFeeds() { ownerUnsubs.forEach(u => u()); ownerUnsubs = []; }
+function startOwnerFeeds() {
+  if (ownerUnsubs.length) return;
+  ownerUnsubs.push(onSnapshot(collection(db, "bans"), snap => { bans = {}; snap.docs.forEach(d => bans[d.id] = d.data()); drawOwner(); }, () => {}));
+  ownerUnsubs.push(onSnapshot(collection(db, "profiles"), snap => { profilesList = snap.docs.map(d => ({ uid: d.id, ...d.data() })); profilesLoaded = true; drawOwner(); }, () => { profilesLoaded = true; drawOwner(); }));
+}
+
+function listenRoles(user) {
+  // if this account gets banned while using the site, sign it out right away
+  unsubs.push(onSnapshot(doc(db, "bans", user.uid), s => { if (s.exists()) { $("authErr").textContent = BANNED_MSG; signOut(auth).catch(() => {}); } }, () => {}));
+  unsubs.push(onSnapshot(collection(db, "roles"), snap => {
+    roles = {}; snap.docs.forEach(d => roles[d.id] = d.data());
+    rolesLoaded = true;
+    myRole = roles[user.uid]?.role === "owner" ? "owner" : roles[user.uid]?.role === "admin" ? "admin" : "user";
+    if (myRole === "owner") startOwnerFeeds(); else stopOwnerFeeds();
+    applyRole();
+  }, () => { rolesLoaded = true; myRole = "user"; applyRole(); }));
+}
+
+// shows or hides everything that depends on the account's role
+function applyRole() {
+  $("newGiveaway").classList.toggle("hidden", !isStaff());
+  $("navOwner").classList.toggle("hidden", !isOwner());
+  $("me").textContent = (ICON[myRole] ? ICON[myRole] + " " : "") + myName();
+  route();
+  renderGiveaways();
+  drawChat();
+  drawOwner();
+}
+
+let meUid = null;
 async function enter(user) {
-  unsubs.forEach(u => u()); unsubs = [];
+  unsubs.forEach(u => u()); unsubs = []; stopOwnerFeeds();
+  roles = {}; myRole = "user"; rolesLoaded = false; bans = {}; profilesList = []; profilesLoaded = false;
+  if (user) {
+    let banned = false;
+    try { banned = (await getDoc(doc(db, "bans", user.uid))).exists(); } catch {}
+    if (banned) { $("authErr").textContent = BANNED_MSG; await signOut(auth).catch(() => {}); return; }
+  }
   $("auth").classList.toggle("hidden", !!user);
   $("app").classList.toggle("hidden", !user);
   if (!user) { me = null; return; }
+  if (meUid !== user.uid) { me = null; meUid = user.uid; }
   if (!me) { try { const s = await getDoc(doc(db, "profiles", user.uid)); if (s.exists()) me = s.data(); } catch {} }
-  $("me").textContent = me?.username || user.displayName || "";
-  listenRacers(); listenChat(user); listenGiveaways(); route();
+  $("me").textContent = myName();
+  listenRacers(); listenChat(user); listenGiveaways(); listenRoles(user); route();
 }
 
 // one-time log out of every older session (from before usernames and profile links)
@@ -446,17 +528,20 @@ onAuthStateChanged(auth, user => { if (creating) return; if (!user) me = null; e
 let giveaways = [], giveawaysLoaded = false, snaps = [], snapsLoadedAt = 0;
 function route() {
   const h = location.hash;
-  const page = h === "#chat" ? "chat" : h === "#stats" ? "stats" : h === "#giveaways" ? "giveaways" : h.startsWith("#giveaway/") ? "giveaway" : "home";
+  const page = h === "#chat" ? "chat" : h === "#stats" ? "stats" : h === "#owner" ? "owner" : h === "#giveaways" ? "giveaways" : h.startsWith("#giveaway/") ? "giveaway" : "home";
+  if (page === "owner" && rolesLoaded && !isOwner()) { location.hash = "#home"; return; }
   $("homeView").classList.toggle("hidden", page !== "home");
+  $("ownerView").classList.toggle("hidden", page !== "owner" || !isOwner());
   $("statsView").classList.toggle("hidden", page !== "stats");
   $("chat").classList.toggle("hidden", page !== "chat");
   $("giveawaysView").classList.toggle("hidden", page !== "giveaways");
   $("giveawayView").classList.toggle("hidden", page !== "giveaway");
   const navPage = page === "giveaway" ? "giveaways" : page;
-  [["navHome", "home"], ["navStats", "stats"], ["navGiveaways", "giveaways"], ["navChat", "chat"]].forEach(([id, p]) => $(id).setAttribute("aria-current", p === navPage ? "page" : "false"));
+  [["navHome", "home"], ["navStats", "stats"], ["navGiveaways", "giveaways"], ["navChat", "chat"], ["navOwner", "owner"]].forEach(([id, p]) => $(id).setAttribute("aria-current", p === navPage ? "page" : "false"));
   if (page === "chat") { const m = $("msgs"); m.scrollTop = m.scrollHeight; }
   if (page === "giveaways" || page === "giveaway") { refreshSnaps(); renderGiveaways(); }
   if (page === "stats" && statsRange !== "all") refreshSnaps();
+  if (page === "owner") drawOwner();
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
@@ -708,7 +793,7 @@ function renderGiveaways() {
 function drawGiveawayList() {
   const box = $("giveawayList"); box.textContent = "";
   if (!giveawaysLoaded) { box.append(el("p", "empty", "Loading giveaways...")); return; }
-  if (!giveaways.length) { box.append(el("p", "empty", "No giveaways yet. Press Create giveaway to start the first one.")); return; }
+  if (!giveaways.length) { box.append(el("p", "empty", isStaff() ? "No giveaways yet. Press Create giveaway to start the first one." : "No giveaways yet. Check back soon!")); return; }
   const order = { active: 0, soon: 1, done: 2 };
   const list = giveaways.slice().sort((a, b) => {
     const sa = statusOf(a), sb = statusOf(b);
@@ -801,7 +886,7 @@ function drawGiveawayDetail(id) {
     else by.append(document.createTextNode(g.createdByName));
     hero.append(by);
   }
-  const del = el("button", "btn danger gh-del", "Delete giveaway"); del.type = "button"; del.onclick = () => openDelete(g); hero.append(del);
+  if (isOwner()) { const del = el("button", "btn danger gh-del", "Delete giveaway"); del.type = "button"; del.onclick = () => openDelete(g); hero.append(del); }
 
   $("gNote").textContent = stats.cur ? "races counted until " + fmtDT(Math.min(Date.now(), g.end)) + " \u22C5 data from " + agoTs(stats.cur.t) : "";
   if (stats.note) box.append(el("p", "sub note", stats.note));
@@ -841,6 +926,7 @@ function drawGiveawayDetail(id) {
 }
 
 $("newGiveaway").onclick = () => {
+  if (!isStaff()) return;
   const now = Date.now();
   $("g_name").value = ""; $("g_desc").value = "";
   $("g_start").value = toLocalInput(now); $("g_end").value = toLocalInput(now + 7 * 864e5);
@@ -854,6 +940,7 @@ $("gform").onsubmit = async e => {
   const start = new Date($("g_start").value).getTime(), end = new Date($("g_end").value).getTime();
   const err = m => { $("gErr").textContent = m; };
   err("");
+  if (!isStaff()) return err("Only admins and the owner can create giveaways.");
   if (!name) return err("Give your giveaway a name.");
   if (!(start > 0) || !(end > 0)) return err("Pick a start and an end date and time.");
   if (end <= start) return err("The end has to be after the start.");
@@ -877,7 +964,7 @@ function openDelete(g) {
 $("dCancel").onclick = () => $("ddlg").close();
 $("dform").onsubmit = async e => {
   e.preventDefault();
-  if (!deleting) return;
+  if (!deleting || !isOwner()) return;
   $("dConfirm").disabled = true;
   try {
     await deleteDoc(doc(db, "giveaways", deleting.id));
@@ -902,26 +989,105 @@ function chatTime(when) {
   return label + ", " + time;
 }
 
-function listenChat(user) {
-  const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100));
-  unsubs.push(onSnapshot(q, snap => {
-    const box = $("msgs");
-    const stick = box.scrollTop + box.clientHeight >= box.scrollHeight - 40;
-    box.textContent = "";
-    snap.docs.slice().reverse().forEach(d => {
-      const m = d.data();
-      const el = document.createElement("div"); el.className = "msg" + (m.uid === user.uid ? " me" : "");
-      const b = document.createElement("b");
-      if (m.racer) { const a = document.createElement("a"); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(m.racer); a.target = "_blank"; a.rel = "noopener"; a.textContent = m.name || "Racer"; b.append(a); }
-      else b.textContent = m.name || "Racer";
-      const t = document.createElement("time");
-      if (m.createdAt) t.textContent = chatTime(m.createdAt.toDate());
-      const p = document.createElement("p"); p.textContent = m.text;
-      el.append(b, t, p); box.append(el);
-    });
-    if (stick) box.scrollTop = box.scrollHeight;
-  }));
+// a small "are you sure?" box; resolves true or false
+function confirmBox(title, text, label) {
+  return new Promise(res => {
+    const dlg = $("cdlg"); let done = false;
+    const finish = v => { if (done) return; done = true; res(v); if (dlg.hasAttribute("open")) dlg.close(); };
+    $("cTitle").textContent = title; $("cText").textContent = text; $("cOk").textContent = label;
+    $("cform").onsubmit = e => { e.preventDefault(); finish(true); };
+    $("cCancel").onclick = () => finish(false);
+    dlg.onclose = () => finish(false);
+    dlg.showModal();
+  });
 }
+
+let chatDocs = [], chatUid = null;
+function listenChat(user) {
+  chatUid = user.uid; chatDocs = [];
+  const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100));
+  unsubs.push(onSnapshot(q, snap => { chatDocs = snap.docs.slice().reverse(); drawChat(); }, () => {}));
+}
+
+function drawChat() {
+  const box = $("msgs");
+  const stick = box.scrollTop + box.clientHeight >= box.scrollHeight - 40;
+  box.textContent = "";
+  chatDocs.forEach(d => {
+    const m = d.data();
+    const row = document.createElement("div"); row.className = "msg" + (m.uid === chatUid ? " me" : "");
+    const b = document.createElement("b");
+    const role = roles[m.uid]?.role;
+    if (ICON[role]) { const i = el("span", "ri", ICON[role]); i.title = ROLE_NAME[role]; b.append(i); }
+    if (m.racer) { const a = document.createElement("a"); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(m.racer); a.target = "_blank"; a.rel = "noopener"; a.textContent = m.name || "Racer"; b.append(a); }
+    else b.append(document.createTextNode(m.name || "Racer"));
+    const t = document.createElement("time");
+    if (m.createdAt) t.textContent = chatTime(m.createdAt.toDate());
+    const p = document.createElement("p"); p.textContent = m.text;
+    row.append(b, t);
+    if (isOwner()) {
+      const x = el("button", "del", "\u2715"); x.type = "button"; x.title = "Delete message"; x.setAttribute("aria-label", "Delete message");
+      x.onclick = async () => {
+        if (!(await confirmBox("Delete message?", "This message will be removed for everyone.", "Delete"))) return;
+        try { await deleteDoc(doc(db, "messages", d.id)); } catch { $("ownErr").textContent = "Could not delete the message."; }
+      };
+      row.append(x);
+    }
+    row.append(p); box.append(row);
+  });
+  if (stick) box.scrollTop = box.scrollHeight;
+}
+
+/* ---------- owner panel ---------- */
+function drawOwner() {
+  if (!isOwner()) return;
+  const box = $("ownerTable"); box.textContent = "";
+  const q = $("ownSearch").value.trim().toLowerCase();
+  const list = profilesList
+    .filter(p => !q || (p.username || "").toLowerCase().includes(q) || (p.racer || "").toLowerCase().includes(q))
+    .sort((a, b) => (a.username || "").localeCompare(b.username || ""));
+  if (!list.length) { box.append(el("p", "empty", profilesLoaded ? "No accounts found." : "Loading accounts...")); return; }
+  const table = el("table", "own"), thead = document.createElement("thead"), head = document.createElement("tr");
+  ["Account", "Nitro Type profile", "Role", "Status", "Actions"].forEach(h => { const th = el("th"); const s = el("span", "", h); s.style.cssText = "display:block;padding:14px"; th.append(s); head.append(th); });
+  thead.append(head); table.append(thead);
+  const tbody = document.createElement("tbody");
+  list.forEach(p => {
+    const role = roles[p.uid]?.role, banned = !!bans[p.uid], tr = document.createElement("tr");
+    const nameTd = el("td"); nameTd.append(el("b", "", p.username || "?"));
+    const racerTd = el("td");
+    if (p.racer) { const a = el("a", "", p.racer); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(p.racer); a.target = "_blank"; a.rel = "noopener"; a.style.color = "var(--cyan)"; racerTd.append(a); } else racerTd.textContent = "-";
+    const roleTd = el("td", "", ICON[role] ? ICON[role] + " " + ROLE_NAME[role] : "Member");
+    const statusTd = el("td"); statusTd.append(el("span", "pill " + (banned ? "ban" : "ok"), banned ? "Banned" : "Active"));
+    const act = el("td");
+    if (role === "owner") act.textContent = "-";
+    else {
+      const ownerFail = m => { $("ownErr").textContent = m; };
+      const roleBtn = el("button", "mini", role === "admin" ? "Remove admin" : "Make admin"); roleBtn.type = "button";
+      roleBtn.onclick = async () => {
+        ownerFail("");
+        try {
+          if (role === "admin") await deleteDoc(doc(db, "roles", p.uid));
+          else await setDoc(doc(db, "roles", p.uid), { role: "admin", username: p.username || "", grantedAt: serverTimestamp() });
+        } catch { ownerFail("Could not change that role. Please try again."); }
+      };
+      const banBtn = el("button", "mini bad", banned ? "Unban" : "Ban"); banBtn.type = "button";
+      banBtn.onclick = async () => {
+        ownerFail("");
+        try {
+          if (banned) await deleteDoc(doc(db, "bans", p.uid));
+          else {
+            if (!(await confirmBox("Ban " + (p.username || "this account") + "?", "They will be signed out and can't use the website until you unban them.", "Ban"))) return;
+            await setDoc(doc(db, "bans", p.uid), { uid: p.uid, username: p.username || "", racer: p.racer || null, bannedAt: serverTimestamp() });
+          }
+        } catch { ownerFail("Could not update the ban. Please try again."); }
+      };
+      act.append(roleBtn, banBtn);
+    }
+    tr.append(nameTd, racerTd, roleTd, statusTd, act); tbody.append(tr);
+  });
+  table.append(tbody); box.append(table);
+}
+$("ownSearch").oninput = drawOwner;
 
 $("sendForm").onsubmit = async e => {
   e.preventDefault();
