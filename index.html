@@ -98,7 +98,6 @@ main{padding:36px 24px 48px;max-width:1200px;margin:0 auto}
 .glist{display:grid;gap:18px;margin-top:20px}
 .gcard{display:grid;gap:8px;padding:24px 28px;border-radius:24px;background:var(--card);border:1px solid var(--line);text-decoration:none;color:var(--ink);backdrop-filter:blur(8px);box-shadow:0 18px 50px rgba(0,0,0,.25);transition:transform .2s,border-color .2s,box-shadow .2s}
 .gcard:hover,.gcard:focus-visible{transform:translateY(-4px);border-color:var(--pink);box-shadow:0 22px 56px rgba(255,61,154,.22)}
-.gcard.done{opacity:.82}
 .gtop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:var(--mute);font-size:13px;font-weight:700}
 .gname{font-size:34px;line-height:1.1;margin:0}
 .gdesc{margin:0;color:#D7D0F5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -108,8 +107,19 @@ main{padding:36px 24px 48px;max-width:1200px;margin:0 auto}
 .status.active{background:var(--green)}
 .status.active::before{content:"";width:8px;height:8px;border-radius:50%;background:#0B5A3A;animation:pulse 1.4s infinite}
 .status.soon{background:var(--gold)}
-.status.done{background:#C3CAD6}
+.status.done{background:#FF5D5D}
+.gcard.done{border-color:rgba(255,93,93,.45)}
 @keyframes pulse{50%{opacity:.25}}
+.ranges{display:flex;gap:8px;flex-wrap:wrap;padding:14px 22px;border-bottom:1px solid var(--line)}
+.ranges button{border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--mute);padding:9px 18px;border-radius:999px;font-weight:800;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.ranges button:hover{color:var(--ink);border-color:var(--cyan)}
+.ranges button[aria-pressed="true"]{background:linear-gradient(135deg,var(--pink),var(--purple));border-color:transparent;color:#fff}
+.rangenote{margin:0;padding:10px 22px;color:var(--mute);font-size:13px;border-bottom:1px solid var(--line)}
+.btn.danger{background:#FF5D5D;color:#101828}
+.btn.danger:hover{box-shadow:0 8px 24px rgba(255,93,93,.4)}
+.gh-del{margin-top:22px}
+.hero.single .gh-dates a{color:inherit;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);text-underline-offset:4px}
+.hero.single .gh-dates a:hover{text-decoration-color:#fff}
 .back{display:inline-block;margin-bottom:16px;color:var(--cyan);font-weight:800;text-decoration:none}
 .back:hover{text-decoration:underline}
 .hero.single{grid-template-columns:1fr;align-items:start}
@@ -255,6 +265,13 @@ td.c-dim{color:var(--mute)}
         <h3 class="display">Team racers</h3>
         <span class="updated" id="updated"></span>
       </div>
+      <div class="ranges" id="ranges" role="group" aria-label="Time range">
+        <button type="button" data-r="all" aria-pressed="true">All time</button>
+        <button type="button" data-r="7d" aria-pressed="false">7 day</button>
+        <button type="button" data-r="24h" aria-pressed="false">24 hour</button>
+        <button type="button" data-r="1h" aria-pressed="false">1 hour</button>
+      </div>
+      <p class="rangenote hidden" id="rangeNote"></p>
       <div class="scroll" id="racers"></div>
     </section>
 
@@ -291,6 +308,15 @@ td.c-dim{color:var(--mute)}
       </section>
     </div>
 
+    <dialog id="ddlg">
+      <form id="dform" class="stack">
+        <h3 class="display" style="margin:0;font-size:28px">Delete giveaway?</h3>
+        <p id="dText" style="margin:0;color:var(--mute)"></p>
+        <p class="err" id="dErr" role="alert"></p>
+        <div class="actions"><button class="btn ghost" type="button" id="dCancel">Cancel</button><button class="btn danger" id="dConfirm" type="submit">Delete</button></div>
+      </form>
+    </dialog>
+
     <dialog id="gdlg">
       <form id="gform" class="stack">
         <h3 class="display" style="margin:0;font-size:28px">Create giveaway</h3>
@@ -312,7 +338,7 @@ td.c-dim{color:var(--mute)}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { getFirestore, collection, doc, addDoc, getDoc, writeBatch, onSnapshot, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, doc, addDoc, getDoc, deleteDoc, writeBatch, onSnapshot, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const $ = id => document.getElementById(id);
 if (firebaseConfig.apiKey.startsWith("PASTE")) $("setup").classList.remove("hidden");
@@ -430,6 +456,7 @@ function route() {
   [["navHome", "home"], ["navStats", "stats"], ["navGiveaways", "giveaways"], ["navChat", "chat"]].forEach(([id, p]) => $(id).setAttribute("aria-current", p === navPage ? "page" : "false"));
   if (page === "chat") { const m = $("msgs"); m.scrollTop = m.scrollHeight; }
   if (page === "giveaways" || page === "giveaway") { refreshSnaps(); renderGiveaways(); }
+  if (page === "stats" && statsRange !== "all") refreshSnaps();
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
@@ -439,10 +466,10 @@ let racers = [], carPics = {};
 // key, title, how to sort, and which direction is "best first"
 const COLS = [
   { k: "name", t: "Racer", get: r => (r.displayName || r.username || "").toLowerCase(), best: "asc", podium: false },
-  { k: "avgSpeed", t: "Avg speed", get: r => r.avgSpeed, best: "desc", cls: "c-avg" },
+  { k: "avgSpeed", t: "Avg speed", get: r => r.avg, best: "desc", cls: "c-avg" },
   { k: "highSpeed", t: "Highest speed", get: r => r.highSpeed, best: "desc", cls: "c-high" },
-  { k: "lifetimeRaces", t: "Lifetime races", get: r => r.lifetimeRaces, best: "desc" },
-  { k: "teamRaces", t: "Team races", get: r => r.teamRaces, best: "desc", cls: "c-team" },
+  { k: "lifetimeRaces", t: "Lifetime races", get: r => r.life, best: "desc" },
+  { k: "teamRaces", t: "Team races", get: r => r.team, best: "desc", cls: "c-team" },
   { k: "memberSince", t: "Member since", get: r => r.memberSince, best: "asc", cls: "c-dim" },
   { k: "lastRace", t: "Last race", get: r => r.lastRace, best: "desc", cls: "c-dim" }
 ];
@@ -479,7 +506,7 @@ async function loadRacers() {
     meta = data.teamMeta;
     racers = data.racers.slice();
     await Promise.all(racers.map(carSrc));
-    $("updated").textContent = "updated " + agoTs(data.updated) + " \u22C5 updates every hour";
+    $("updated").textContent = "updated " + agoTs(data.updated);
   } catch { racers = []; $("updated").textContent = ""; }
   drawHero(meta);
   drawRacers();
@@ -548,6 +575,22 @@ function carEl(r) {
 function cell(text, cls) { const td = document.createElement("td"); if (cls) td.className = cls; td.textContent = text; return td; }
 const num = v => (v == null || v === "" ? "-" : Number(v).toLocaleString());
 
+// which time range the team stats table shows
+let statsRange = "all";
+function statRows() {
+  if (statsRange === "all") return { rows: racers.map(r => ({ ...r, team: r.teamRaces, life: r.lifetimeRaces, avg: r.avgSpeed })), note: "" };
+  const hours = { "7d": 168, "24h": 24, "1h": 1 }[statsRange], end = Date.now();
+  const s = rangeStats(end - hours * 3600e3, end);
+  return { rows: s.rows, note: s.note };
+}
+$("ranges").onclick = e => {
+  const b = e.target.closest("button"); if (!b) return;
+  statsRange = b.dataset.r;
+  $("ranges").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+  if (statsRange !== "all") refreshSnaps();
+  drawRacers();
+};
+
 // the racer column (strip tag, car, name, title) used by both tables
 function racerCell(r, place, cloneCar) {
   const who = document.createElement("td"); who.className = "first";
@@ -575,7 +618,8 @@ function sortBy(k) {
 
 function drawRacers() {
   const col = COLS.find(c => c.k === sortKey);
-  const rows = racers.slice().sort((a, b) => {
+  const sr = statRows();
+  const rows = sr.rows.slice().sort((a, b) => {
     const x = col.get(a), y = col.get(b);
     if (x == null && y == null) return 0;
     if (x == null) return 1;
@@ -583,6 +627,9 @@ function drawRacers() {
     const c = typeof x === "string" ? x.localeCompare(y) : x - y;
     return sortDir === "asc" ? c : -c;
   });
+  const rn = $("rangeNote");
+  rn.textContent = statsRange === "all" ? "" : "Showing races from the last " + { "7d": "7 days", "24h": "24 hours", "1h": "hour" }[statsRange] + "." + (sr.note ? " " + sr.note : "");
+  rn.classList.toggle("hidden", statsRange === "all");
   const showPodium = col.podium !== false && sortDir === col.best;
   const box = $("racers"); box.textContent = "";
   if (!rows.length) { const p = document.createElement("p"); p.className = "empty"; p.textContent = "Racer stats are not loaded yet. They appear after the first automatic update finishes."; box.append(p); return; }
@@ -605,7 +652,7 @@ function drawRacers() {
   rows.forEach((r, i) => {
     const tr = document.createElement("tr");
     const who = racerCell(r, showPodium ? i : -1, false);
-    tr.append(who, cell(r.avgSpeed ?? "-", "c-avg"), cell(r.highSpeed ?? "-", "c-high"), cell(num(r.lifetimeRaces)), cell(num(r.teamRaces), "c-team"), cell(agoTs(r.memberSince), "c-dim"), cell(agoTs(r.lastRace), "c-dim"));
+    tr.append(who, cell(r.avg ?? "-", "c-avg"), cell(r.highSpeed ?? "-", "c-high"), cell(num(r.life)), cell(num(r.team), "c-team"), cell(agoTs(r.memberSince), "c-dim"), cell(agoTs(r.lastRace), "c-dim"));
     tbody.append(tr);
   });
   table.append(tbody);
@@ -615,7 +662,7 @@ function drawRacers() {
 /* ---------- giveaways ---------- */
 const STATUS = { soon: "Coming soon!", active: "Active", done: "Concluded" };
 const statusOf = (g, now = Date.now()) => now < g.start ? "soon" : now < g.end ? "active" : "done";
-const fmtDT = ms => new Date(ms).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short" });
+const fmtDT = ms => new Date(ms).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short", timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone });
 function span(ms) {
   const m = Math.max(1, Math.round(ms / 60000)), d = Math.floor(m / 1440), h = Math.floor((m % 1440) / 60), mi = m % 60;
   return d ? d + "d " + h + "h" : h ? h + "h " + mi + "m" : mi + "m";
@@ -645,6 +692,7 @@ async function refreshSnaps() {
     if (r.ok) snaps = ((await r.json()).snaps || []).sort((a, b) => a.t - b.t);
   } catch {}
   renderGiveaways();
+  if (statsRange !== "all") drawRacers();
 }
 
 function renderGiveaways() {
@@ -676,17 +724,17 @@ function drawGiveawayList() {
 // each snapshot racer = [team races, lifetime races, letters typed, seconds typing]
 function pickSnap(sec) { let best = null; for (const s of snaps) { if (s.t <= sec) best = s; else break; } return best; }
 
-function giveawayStats(g) {
-  const st = statusOf(g);
+// races gained between two moments (used by the 7 day / 24 hour / 1 hour boxes and by giveaways)
+function rangeStats(startMs, endMs) {
   const known = new Map(racers.map(r => [r.username, r]));
   const blank = () => racers.map(r => ({ ...r, team: null, life: null, avg: null }));
-  if (st === "soon" || !snaps.length) return { st, rows: blank(), note: snaps.length || st === "soon" ? "" : "Race tracking data is not available yet.", cur: null };
-  const startS = g.start / 1000, endS = Math.min(Date.now(), g.end) / 1000;
+  if (!snaps.length) return { rows: blank(), note: "Race tracking data is not available yet.", cur: null };
+  const startS = startMs / 1000, endS = endMs / 1000;
   const cur = pickSnap(endS) || snaps[0];
   const base = pickSnap(startS);
   const baseSnap = base || snaps[0];
   let note = "";
-  if (!base && snaps[0].t > startS + 1800) note = "Race tracking began " + fmtDT(snaps[0].t * 1000) + ", so races before that are not counted.";
+  if (!base && snaps[0].t > startS + 1800) note = "Race tracking began " + fmtDT(snaps[0].t * 1000) + ", so earlier races are not counted.";
   const rows = Object.keys(cur.r).map(u => {
     const c = cur.r[u], b = baseSnap.r[u];
     let team, life, typed, secs;
@@ -698,13 +746,19 @@ function giveawayStats(g) {
     const r = known.get(u) || { username: u, displayName: u };
     return { ...r, team: Math.max(0, team), life: Math.max(0, life), avg: secs > 0 && typed >= 0 ? Math.round((typed / 5) / (secs / 60)) : null };
   });
-  return { st, rows, note, cur };
+  return { rows, note, cur };
+}
+
+function giveawayStats(g) {
+  const st = statusOf(g);
+  if (st === "soon") return { st, rows: racers.map(r => ({ ...r, team: null, avg: null })), note: "", cur: null };
+  const s = rangeStats(g.start, Math.min(Date.now(), g.end));
+  return { st, ...s };
 }
 
 const G_COLS = [
   { k: "name", t: "Racer", get: r => (r.displayName || r.username || "").toLowerCase(), best: "asc", podium: false },
-  { k: "team", t: "Team races", get: r => r.team, best: "desc", cls: "c-team" },
-  { k: "life", t: "Lifetime races", get: r => r.life, best: "desc" },
+  { k: "team", t: "Giveaway races", get: r => r.team, best: "desc", cls: "c-team" },
   { k: "avg", t: "Avg speed", get: r => r.avg, best: "desc", cls: "c-avg" }
 ];
 let gSortKey = "team", gSortDir = "desc";
@@ -722,7 +776,13 @@ function drawGiveawayDetail(id) {
   const dates = el("div", "gh-dates");
   [["Starts ", fmtDT(g.start)], ["Ends ", fmtDT(g.end)], ["", timeNote(g)]].forEach(([l, v]) => { const d = el("div"); if (l) d.append(el("span", "", l)); d.append(document.createTextNode(v)); dates.append(d); });
   hero.append(dates);
-  if (g.createdByName) hero.append(el("p", "gh-dates", "Created by " + g.createdByName));
+  if (g.createdByName) {
+    const by = el("p", "gh-dates"); by.append(el("span", "", "Created by "));
+    if (g.createdByRacer) { const a = el("a", "", g.createdByName); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(g.createdByRacer); a.target = "_blank"; a.rel = "noopener"; by.append(a); }
+    else by.append(document.createTextNode(g.createdByName));
+    hero.append(by);
+  }
+  const del = el("button", "btn danger gh-del", "Delete giveaway"); del.type = "button"; del.onclick = () => openDelete(g); hero.append(del);
 
   $("gNote").textContent = stats.cur ? "races counted until " + fmtDT(Math.min(Date.now(), g.end)) + " \u22C5 data from " + agoTs(stats.cur.t) : "";
   if (stats.note) box.append(el("p", "sub note", stats.note));
@@ -739,7 +799,7 @@ function drawGiveawayDetail(id) {
   const showPodium = col.podium !== false && gSortDir === col.best && st !== "soon";
   if (!rows.length) { box.append(el("p", "empty", "Racers will appear here once team data loads.")); return; }
 
-  const table = document.createElement("table"); table.style.minWidth = "560px";
+  const table = document.createElement("table"); table.style.minWidth = "480px";
   const thead = document.createElement("thead"), head = document.createElement("tr");
   G_COLS.forEach(c => {
     const th = document.createElement("th"), b = document.createElement("button");
@@ -755,7 +815,7 @@ function drawGiveawayDetail(id) {
   const tbody = document.createElement("tbody");
   rows.forEach((r, i) => {
     const tr = document.createElement("tr");
-    tr.append(racerCell(r, showPodium ? i : -1, true), cell(num(r.team), "c-team"), cell(num(r.life)), cell(r.avg ?? "-", "c-avg"));
+    tr.append(racerCell(r, showPodium ? i : -1, true), cell(num(r.team), "c-team"), cell(r.avg ?? "-", "c-avg"));
     tbody.append(tr);
   });
   table.append(tbody); box.append(table);
@@ -781,11 +841,31 @@ $("gform").onsubmit = async e => {
   const u = auth.currentUser; if (!u) return err("Please sign in again.");
   $("gSave").disabled = true;
   try {
-    const ref = await addDoc(collection(db, "giveaways"), { name, description, start, end, createdBy: u.uid, createdByName: me?.username || u.displayName || "Racer", createdAt: serverTimestamp() });
+    const ref = await addDoc(collection(db, "giveaways"), { name, description, start, end, createdBy: u.uid, createdByName: me?.username || u.displayName || "Racer", createdByRacer: me?.racer || null, createdAt: serverTimestamp() });
     $("gdlg").close();
     location.hash = "#giveaway/" + ref.id;
   } catch { err("Could not create the giveaway. Please try again."); }
   finally { $("gSave").disabled = false; }
+};
+
+let deleting = null;
+function openDelete(g) {
+  deleting = g;
+  $("dText").textContent = "\u201C" + g.name + "\u201D will be deleted for everyone. This can\u2019t be undone.";
+  $("dErr").textContent = "";
+  $("ddlg").showModal();
+}
+$("dCancel").onclick = () => $("ddlg").close();
+$("dform").onsubmit = async e => {
+  e.preventDefault();
+  if (!deleting) return;
+  $("dConfirm").disabled = true;
+  try {
+    await deleteDoc(doc(db, "giveaways", deleting.id));
+    $("ddlg").close();
+    location.hash = "#giveaways";
+  } catch { $("dErr").textContent = "Could not delete the giveaway. Please try again."; }
+  finally { $("dConfirm").disabled = false; }
 };
 
 /* ---------- chat ---------- */
