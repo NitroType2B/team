@@ -79,11 +79,11 @@ input::placeholder{color:var(--ph)}
 .msg b a{color:inherit;text-decoration:none}
 .msg b a:hover{text-decoration:underline}
 .err{color:var(--red);min-height:1.4em;margin:0;font-size:14px}
-.err:not(:empty){padding:10px 14px;border-radius:12px;border:2px solid var(--red);background:color-mix(in srgb,var(--red) 16%,transparent);font-weight:700;box-shadow:0 0 14px color-mix(in srgb,var(--red) 35%,transparent)}
-.err.shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97)}
-.has-err input:not([type=checkbox]){border-color:var(--red)!important}
-@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
-@media (prefers-reduced-motion:reduce){.err.shake{animation:none}}
+.err:not(:empty){font-weight:700}
+.wrong{border-color:var(--red)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--red) 35%,transparent)}
+.wrong.shake{animation:shake .4s ease-in-out}
+@keyframes shake{20%,60%{transform:translateX(-3px)}40%,80%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.wrong.shake{animation:none}}
 .reddot{display:none;position:absolute;min-width:24px;height:24px;padding:0 6px;box-sizing:border-box;border-radius:999px;background:#FF2D2D;color:#fff;font:800 14px/24px Manrope,system-ui,sans-serif;text-align:center;box-shadow:0 0 12px #FF2D2D;animation:dotblink 1s ease-in-out infinite}
 .reddot.on{display:block}
 #ubDot,#mpDot{position:static;flex:none}
@@ -1410,7 +1410,8 @@ function drawOwner() {
     const nameTd = el("td");
     const ts = p.racer ? trackedState(p.racer) : false;
     if (ts !== null) { const m = el("span", "trk " + (ts ? "yes" : "no"), ts ? "\u2705" : "\u274C"); m.title = ts ? "Tracked (on 2B)" : "Not tracked (not on 2B)"; m.setAttribute("aria-label", m.title); nameTd.append(m); }
-    nameTd.append(el("b", "", p.username || "?"));
+    if (p.racer) { const ua = el("a", "", p.username || "?"); ua.href = profileHref(p.racer); ua.style.cssText = "font-weight:800;color:inherit"; nameTd.append(ua); }
+    else nameTd.append(el("b", "", p.username || "?"));
     const racerTd = el("td");
     if (p.racer) { const a = el("a", "", p.racer); a.href = "https://www.nitrotype.com/racer/" + encodeURIComponent(p.racer); a.target = "_blank"; a.rel = "noopener"; a.style.color = "var(--cyan)"; racerTd.append(a); } else racerTd.textContent = "-";
     const roleTd = el("td", "", ICON[role] ? ICON[role] + " " + ROLE_NAME[role] : "Member");
@@ -1622,12 +1623,28 @@ function maybeAwardChatter() {
   if (myChatCount >= 3 && !myBadges.chatter && auth.currentUser) saveBadgeDoc({ chatter: serverTimestamp() }).catch(() => {});
 }
 
-// error boxes turn red and shake whenever a message appears in them
+// when an error appears, the input that holds the wrong information shakes and gets a red outline (the message below turns red)
+const ERR_FIELDS = {
+  authErr: { username: "username", password: "password", link: "racerLink" },
+  unErr: { all: "s_user" }, rcErr: { all: "s_link" },
+  eErr: { username: "e_user", link: "e_link" },
+  chatErr: { all: "text" }
+};
 const errObs = new MutationObserver(ms => ms.forEach(m => {
   const e = m.target.nodeType === 1 ? m.target : m.target.parentElement; if (!e || !e.classList.contains("err")) return;
-  const has = e.textContent.trim() !== "";
-  e.classList.remove("shake"); if (has) { void e.offsetWidth; e.classList.add("shake"); }
-  const f = e.closest("form"); if (f) f.classList.toggle("has-err", has);
+  const map = ERR_FIELDS[e.id]; if (!map) return;
+  const msg = e.textContent.trim().toLowerCase();
+  const f = e.closest("form") || document;
+  f.querySelectorAll(".wrong").forEach(x => x.classList.remove("wrong", "shake"));
+  if (!msg) return;
+  const ids = [];
+  if (map.all) ids.push(map.all);
+  else {
+    if (/password/.test(msg)) ids.push(map.password);
+    if (/username|sign in|name/.test(msg) && !/^enter your password/.test(msg)) ids.push(map.username);
+    if (/profile|link/.test(msg)) ids.push(map.link);
+  }
+  ids.filter(Boolean).forEach(id => { const i = document.getElementById(id); if (i) { void i.offsetWidth; i.classList.add("wrong", "shake"); } });
 }));
 document.querySelectorAll(".err").forEach(e => errObs.observe(e, { childList: true, characterData: true, subtree: true }));
 
