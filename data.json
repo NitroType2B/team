@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794513625,
+ "updated": 1794514830,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 327
+  "views": 329
  },
  "racers": [
   {
@@ -307,12 +307,12 @@
    "carHue": 60,
    "carFile": "fastback_small.png",
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
-   "avgSpeed": 75,
+   "avgSpeed": 70,
    "highSpeed": 121,
-   "lifetimeRaces": 3536,
-   "teamRaces": 467,
+   "lifetimeRaces": 3545,
+   "teamRaces": 491,
    "memberSince": 1793292197,
-   "lastRace": 1794513005
+   "lastRace": 1794513966
   },
   {
    "username": "bf0f4ce150bfa53eafcdb990c9841a97",
@@ -327,9 +327,9 @@
    "avgSpeed": 112,
    "highSpeed": 130,
    "lifetimeRaces": 208,
-   "teamRaces": 138,
+   "teamRaces": 139,
    "memberSince": 1793905494,
-   "lastRace": 1794512951
+   "lastRace": 1794513019
   },
   {
    "username": "hunterrr12376",
@@ -375,12 +375,12 @@
    "carHue": 140,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 39,
+   "avgSpeed": 43,
    "highSpeed": 75,
-   "lifetimeRaces": 4357,
-   "teamRaces": 982,
+   "lifetimeRaces": 4371,
+   "teamRaces": 984,
    "memberSince": 1793725663,
-   "lastRace": 1794486760
+   "lastRace": 1794514203
   },
   {
    "username": "ykitsmizu",
@@ -426,12 +426,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 91,
+   "avgSpeed": 92,
    "highSpeed": 116,
-   "lifetimeRaces": 2599,
-   "teamRaces": 1015,
+   "lifetimeRaces": 2614,
+   "teamRaces": 1032,
    "memberSince": 1794241854,
-   "lastRace": 1794512850
+   "lastRace": 1794514188
   },
   {
    "username": "nikooo124",
@@ -678,13 +678,13 @@
    "2026-11-09": 307,
    "2026-11-10": 374,
    "2026-11-11": 419,
-   "2026-11-12": 467
+   "2026-11-12": 491
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
    "2026-11-10": 87,
    "2026-11-11": 101,
-   "2026-11-12": 138
+   "2026-11-12": 139
   },
   "hunterrr12376": {
    "2026-11-09": 26,
@@ -702,7 +702,7 @@
    "2026-11-09": 858,
    "2026-11-10": 871,
    "2026-11-11": 980,
-   "2026-11-12": 982
+   "2026-11-12": 984
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -738,7 +738,7 @@
    "2026-11-09": 105,
    "2026-11-10": 247,
    "2026-11-11": 742,
-   "2026-11-12": 1015
+   "2026-11-12": 1032
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
