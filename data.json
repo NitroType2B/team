@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794511215,
+ "updated": 1794512440,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 325
+  "views": 326
  },
  "racers": [
   {
@@ -324,12 +324,12 @@
    "carHue": 0,
    "carFile": "fully_leaded_small.png",
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
-   "avgSpeed": 111,
+   "avgSpeed": 114,
    "highSpeed": 130,
-   "lifetimeRaces": 178,
-   "teamRaces": 101,
+   "lifetimeRaces": 199,
+   "teamRaces": 119,
    "memberSince": 1793905494,
-   "lastRace": 1794428064
+   "lastRace": 1794511762
   },
   {
    "username": "hunterrr12376",
@@ -426,12 +426,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 93,
+   "avgSpeed": 92,
    "highSpeed": 116,
-   "lifetimeRaces": 2572,
-   "teamRaces": 959,
+   "lifetimeRaces": 2593,
+   "teamRaces": 988,
    "memberSince": 1794241854,
-   "lastRace": 1794510591
+   "lastRace": 1794511794
   },
   {
    "username": "nikooo124",
@@ -685,7 +685,7 @@
    "2026-11-09": 30,
    "2026-11-10": 87,
    "2026-11-11": 101,
-   "2026-11-12": 101
+   "2026-11-12": 119
   },
   "hunterrr12376": {
    "2026-11-09": 26,
@@ -739,7 +739,7 @@
    "2026-11-09": 105,
    "2026-11-10": 247,
    "2026-11-11": 742,
-   "2026-11-12": 959
+   "2026-11-12": 988
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
