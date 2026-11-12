@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794504015,
+ "updated": 1794504748,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -174,9 +174,9 @@
    "avgSpeed": 77,
    "highSpeed": 131,
    "lifetimeRaces": 13085,
-   "teamRaces": 421,
+   "teamRaces": 422,
    "memberSince": 1794240864,
-   "lastRace": 1794503325
+   "lastRace": 1794503414
   },
   {
    "username": "24cf4df60146763fc790068e421c9389",
@@ -310,9 +310,9 @@
    "avgSpeed": 71,
    "highSpeed": 121,
    "lifetimeRaces": 3489,
-   "teamRaces": 433,
+   "teamRaces": 435,
    "memberSince": 1793292197,
-   "lastRace": 1794501278
+   "lastRace": 1794503581
   },
   {
    "username": "bf0f4ce150bfa53eafcdb990c9841a97",
@@ -426,12 +426,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 93,
+   "avgSpeed": 92,
    "highSpeed": 116,
-   "lifetimeRaces": 2521,
-   "teamRaces": 881,
+   "lifetimeRaces": 2525,
+   "teamRaces": 887,
    "memberSince": 1794241854,
-   "lastRace": 1794497660
+   "lastRace": 1794504570
   },
   {
    "username": "nikooo124",
@@ -637,7 +637,7 @@
    "2026-11-09": 158,
    "2026-11-10": 305,
    "2026-11-11": 375,
-   "2026-11-12": 421
+   "2026-11-12": 422
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -679,7 +679,7 @@
    "2026-11-09": 307,
    "2026-11-10": 374,
    "2026-11-11": 419,
-   "2026-11-12": 433
+   "2026-11-12": 435
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
@@ -739,7 +739,7 @@
    "2026-11-09": 105,
    "2026-11-10": 247,
    "2026-11-11": 742,
-   "2026-11-12": 881
+   "2026-11-12": 887
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
