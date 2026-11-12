@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794519615,
+ "updated": 1794520823,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -358,12 +358,12 @@
    "carHue": 140,
    "carFile": "fully_leaded_small.png",
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
-   "avgSpeed": 44,
+   "avgSpeed": 43,
    "highSpeed": 53,
-   "lifetimeRaces": 96,
-   "teamRaces": 12,
+   "lifetimeRaces": 98,
+   "teamRaces": 14,
    "memberSince": 1793998918,
-   "lastRace": 1794249087
+   "lastRace": 1794520683
   },
   {
    "username": "e89137c6d948fbd06cfde6ca3f2737d2",
@@ -585,23 +585,6 @@
    "teamRaces": 0,
    "memberSince": 1794429537,
    "lastRace": 0
-  },
-  {
-   "username": "ykitsmiku",
-   "displayName": "ykitsmiku",
-   "role": "member",
-   "title": "Raking in Wins",
-   "membership": "basic",
-   "carId": 264,
-   "carHue": 180,
-   "carFile": "3214rfdwasc_small.png",
-   "carImage": "https://www.nitrotype.com/cars/3214rfdwasc_small.png",
-   "avgSpeed": 93,
-   "highSpeed": 107,
-   "lifetimeRaces": 35,
-   "teamRaces": 0,
-   "memberSince": 1794519602,
-   "lastRace": 0
   }
  ],
  "cars": {
@@ -731,7 +714,7 @@
    "2026-11-09": 12,
    "2026-11-10": 12,
    "2026-11-11": 12,
-   "2026-11-12": 12
+   "2026-11-12": 14
   },
   "e89137c6d948fbd06cfde6ca3f2737d2": {
    "2026-11-09": 858,
