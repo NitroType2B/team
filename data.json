@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794520823,
+ "updated": 1794522015,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -360,10 +360,10 @@
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
    "avgSpeed": 43,
    "highSpeed": 53,
-   "lifetimeRaces": 98,
-   "teamRaces": 14,
+   "lifetimeRaces": 99,
+   "teamRaces": 15,
    "memberSince": 1793998918,
-   "lastRace": 1794520683
+   "lastRace": 1794521137
   },
   {
    "username": "e89137c6d948fbd06cfde6ca3f2737d2",
@@ -714,7 +714,7 @@
    "2026-11-09": 12,
    "2026-11-10": 12,
    "2026-11-11": 12,
-   "2026-11-12": 14
+   "2026-11-12": 15
   },
   "e89137c6d948fbd06cfde6ca3f2737d2": {
    "2026-11-09": 858,
