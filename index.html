@@ -79,6 +79,21 @@ input::placeholder{color:var(--ph)}
 .msg b a{color:inherit;text-decoration:none}
 .msg b a:hover{text-decoration:underline}
 .err{color:var(--red);min-height:1.4em;margin:0;font-size:14px}
+.err:not(:empty){padding:10px 14px;border-radius:12px;border:2px solid var(--red);background:color-mix(in srgb,var(--red) 16%,transparent);font-weight:700;box-shadow:0 0 14px color-mix(in srgb,var(--red) 35%,transparent)}
+.err.shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97)}
+.has-err input:not([type=checkbox]){border-color:var(--red)!important}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
+@media (prefers-reduced-motion:reduce){.err.shake{animation:none}}
+.reddot{display:none;position:absolute;width:13px;height:13px;border-radius:50%;background:#FF2D2D;border:2px solid var(--bg);box-shadow:0 0 10px #FF2D2D;animation:dotblink 1s ease-in-out infinite}
+.reddot.on{display:block}
+#ubDot{top:-2px;right:-2px}
+#mpDot{position:static;display:none;margin-left:auto}
+#mpDot.on{display:block}
+@keyframes dotblink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.8)}}
+.pr-badges.has{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start;text-align:left;border-style:solid;border-color:var(--line)}
+.badge{position:relative;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:2px solid var(--cyan);background:var(--fill);color:var(--ink);font-weight:800;font-size:14px;cursor:help}
+.badge .ico{font-size:18px}
+.badge .reddot{top:-5px;right:-3px}
 /* header */
 header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 24px;background:var(--hdr);backdrop-filter:blur(12px);flex-wrap:wrap}
 header::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:8px;background:repeating-conic-gradient(var(--check1) 0 25%,var(--check2) 0 50%) 0 0/16px 16px;opacity:.9}
@@ -91,7 +106,7 @@ nav a[aria-current="page"]{background:linear-gradient(135deg,var(--pink),var(--p
 header .who{display:flex;gap:12px;align-items:center;color:var(--mute);font-size:14px}
 /* user bar (top right) */
 .userbar{position:relative}
-.ub-btn{display:flex;align-items:center;gap:10px;padding:8px 18px 8px 14px;min-height:52px;border-radius:999px;border:2px solid var(--pink);background:linear-gradient(135deg,color-mix(in srgb,var(--pink) 22%,transparent),color-mix(in srgb,var(--purple) 22%,transparent));color:var(--ink);font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 6px 20px color-mix(in srgb,var(--pink) 30%,transparent);transition:transform .15s,box-shadow .15s}
+.ub-btn{position:relative;display:flex;align-items:center;gap:10px;padding:8px 18px 8px 14px;min-height:52px;border-radius:999px;border:2px solid var(--pink);background:linear-gradient(135deg,color-mix(in srgb,var(--pink) 22%,transparent),color-mix(in srgb,var(--purple) 22%,transparent));color:var(--ink);font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 6px 20px color-mix(in srgb,var(--pink) 30%,transparent);transition:transform .15s,box-shadow .15s}
 .ub-btn:hover,.userbar.open .ub-btn,.userbar:hover .ub-btn{transform:translateY(-1px);box-shadow:0 10px 26px color-mix(in srgb,var(--pink) 45%,transparent)}
 .ub-car{display:flex;align-items:center}
 .ub-car .car{width:68px;height:29px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))}
@@ -341,7 +356,7 @@ td.c-dim{color:var(--mute)}
   <div class="auth-box">
     <h1 class="display">[2B] Determined</h1>
     <p>Sign in to chat with the team and see who is racing the most.</p>
-    <form id="authForm" class="stack">
+    <form id="authForm" class="stack" novalidate>
       <input id="username" placeholder="Username" autocomplete="username" maxlength="20" required>
       <input id="password" type="password" placeholder="Password (6+ characters)" autocomplete="current-password" minlength="6" required>
       <div id="racerWrap" class="hidden">
@@ -376,10 +391,11 @@ td.c-dim{color:var(--mute)}
         <span class="ub-car" id="ubCar"></span>
         <span id="me"></span>
         <span class="ub-caret" aria-hidden="true">▾</span>
+        <span class="reddot" id="ubDot" aria-hidden="true"></span>
       </button>
       <div class="ub-menu" id="ubMenu">
         <div class="ub-menu-in" role="menu" aria-label="Account">
-          <button type="button" class="ub-item" id="mProfile" role="menuitem"><span aria-hidden="true">🏎️</span>Racer Profile</button>
+          <button type="button" class="ub-item" id="mProfile" role="menuitem"><span aria-hidden="true">🏎️</span>Racer Profile<span class="reddot" id="mpDot" aria-label="New badge"></span></button>
           <button type="button" class="ub-item" id="mSettings" role="menuitem"><span aria-hidden="true">⚙️</span>Settings</button>
           <div class="ub-sep"></div>
           <button type="button" class="ub-item out" id="out" role="menuitem"><span aria-hidden="true">↪</span>Sign out</button>
@@ -597,6 +613,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 let signUp = false, unsubs = [], creating = false, me = null;
+let myBadges = { seen: [] }, myChatCount = 0;
 
 // people pick a username, but Firebase wants an email, so every account gets a hidden login address (nobody ever sees or uses it).
 // The "usernames" list says which hidden address belongs to which username. Deleting that entry frees the username completely.
@@ -633,6 +650,7 @@ $("authForm").onsubmit = async e => {
   try {
     const name = $("username").value.trim(), pw = $("password").value;
     if (!NAME_OK.test(name)) throw fail("app/bad-username");
+    if (!pw) throw fail("app/no-password");
     if (!signUp) {
       let email = toEmail(name);
       try { const us = await getDoc(doc(db, "usernames", nameId(name))); if (us.exists() && us.data().email) email = us.data().email; } catch {}
@@ -673,13 +691,16 @@ $("authForm").onsubmit = async e => {
       "auth/weak-password": "Use a password with at least 6 characters.",
       "auth/operation-not-allowed": "Turn on Email/Password in Firebase Authentication.",
       "auth/too-many-requests": "Too many tries. Wait a minute and try again.",
+      "auth/network-request-failed": "Can't reach the server. Check your internet and try again.",
+      "auth/missing-password": "Enter your password.",
+      "app/no-password": "Enter your password.",
       "app/bad-username": "Usernames are 3 to 20 characters: letters, numbers, dots, dashes or underscores.",
       "app/bad-link": "Paste your full Nitro Type profile link (nitrotype.com/racer/YOUR_USERNAME).",
       "app/racer-taken": "That Nitro Type profile is already linked to another account.",
       "app/username-taken": "That username is already taken. Try another one.",
       "app/setup-failed": "Something went wrong creating your account. Please try again."
     };
-    $("authErr").textContent = map[err.code] || err.message;
+    $("authErr").textContent = map[err.code] || "Something went wrong. Please try again.";
   } finally { $("authBtn").disabled = false; }
 };
 
@@ -722,6 +743,9 @@ function startOwnerFeeds() {
 
 function listenRoles(user) {
   // if this account gets banned while using the site, sign it out right away
+  myBadges = { seen: [] }; myChatCount = 0;
+  unsubs.push(onSnapshot(doc(db, "badges", user.uid), s => { myBadges = s.exists() ? { seen: [], ...s.data() } : { seen: [] }; drawBadgeDot(); }, () => {}));
+  getDoc(doc(db, "chatCooldowns", user.uid)).then(s => { myChatCount = s.exists() ? (s.data().count || 0) : 0; }).catch(() => {});
   unsubs.push(onSnapshot(doc(db, "bans", user.uid), s => { if (s.exists()) { $("authErr").textContent = s.data().deleted ? DELETED_MSG : BANNED_MSG; signOut(auth).catch(() => {}); } }, () => {}));
   unsubs.push(onSnapshot(collection(db, "roles"), snap => {
     roles = {}; snap.docs.forEach(d => roles[d.id] = d.data());
@@ -866,7 +890,7 @@ async function loadRacers() {
     $("updated").textContent = "updated " + agoTs(data.updated);
     dataUpdatedMs = (Number(data.updated) || 0) * 1000;
   } catch { racers = []; racersReady = false; $("updated").textContent = ""; }
-  drawHero(meta); drawWelcome();
+  drawHero(meta); drawWelcome(); drawBadgeDot();
   drawRacers();
   renderGiveaways();
   drawPost();
@@ -1437,6 +1461,7 @@ function drawOwner() {
           if (p.username) ab.delete(doc(db, "usernames", nameId(p.username)));
           if (latestPost) ab.delete(doc(db, "posts", latestPost.id, "reactions", p.uid));
           ab.delete(doc(db, "chatCooldowns", p.uid));
+          ab.delete(doc(db, "badges", p.uid));
           ab.delete(doc(db, "postCooldowns", p.uid));
           ab.delete(doc(db, "profiles", p.uid));
           await ab.commit();
@@ -1475,7 +1500,9 @@ async function loadAccount(racer) {
     const c = await getDoc(doc(db, "racerClaims", claimId(racer)));
     if (c.exists()) {
       const uid = c.data().uid, p = await getDoc(doc(db, "profiles", uid));
-      acc = { uid, username: p.exists() ? p.data().username : null };
+      let chatter = false;
+      try { const bd = await getDoc(doc(db, "badges", uid)); chatter = bd.exists() && !!bd.data().chatter; } catch {}
+      acc = { uid, username: p.exists() ? p.data().username : null, chatter };
     }
   } catch { return null; }
   profCache[k] = acc;
@@ -1516,7 +1543,13 @@ function drawProfile(racer, acc) {
   stat("Avg WPM", !untracked && r && r.avgSpeed != null ? String(Math.round(r.avgSpeed)) : "-");
   stat("Lifetime races", !untracked && r && r.lifetimeRaces != null ? Number(r.lifetimeRaces).toLocaleString() : "-");
   box.append(stats);
-  box.append(el("p", "pr-h", "Badges"), el("div", "pr-badges", "No badges yet. Badges are coming soon!"));
+  const own = !!(me && me.racer && me.racer.toLowerCase() === racer.toLowerCase());
+  const ids = own ? myEarned() : BADGE_ORDER.filter(x => (x === "certified" && !untracked && trackedState(racer) === true) || (x === "chatter" && acc && acc.chatter));
+  const fresh = own ? [...new Set([...myUnseen(), ...freshIds])] : [];
+  const bx = el("div", "pr-badges" + (ids.length ? " has" : ""), ids.length ? "" : "No badges yet.");
+  ids.forEach(id => bx.append(badgeEl(id, fresh.includes(id))));
+  box.append(el("p", "pr-h", "Badges"), bx);
+  if (own && myUnseen().length) markBadgesSeen();
 }
 async function showProfile() {
   const racer = profName();
@@ -1543,6 +1576,55 @@ document.addEventListener("mouseover", e => { const t = e.target.closest && e.ta
 document.addEventListener("focusin", e => { const t = e.target.closest && e.target.closest("[data-tt]"); if (t) showTip(t); });
 document.addEventListener("focusout", hideTip);
 document.addEventListener("scroll", hideTip, true);
+
+/* ---------- badges ---------- */
+const BADGES = {
+  chatter: { name: "Chatter", icon: "\u{1F4AC}", tip: "Awarded for sending 3 chats in the team chat." },
+  certified: { name: "2B Certified", icon: "\u2705", tip: "Awarded for being a member of the 2B team. If you leave the team, this badge goes away." }
+};
+const BADGE_ORDER = ["certified", "chatter"];
+let freshIds = [];   // badges that were new when you opened your profile (they keep their red dot while you stay on that page)
+window.addEventListener("hashchange", () => { if (!/^#profile\//i.test(location.hash)) freshIds = []; });
+const myEarned = () => {
+  const e = [];
+  if (me && me.racer && racersReady && trackedState(me.racer) === true) e.push("certified");
+  if (myBadges.chatter) e.push("chatter");
+  return BADGE_ORDER.filter(x => e.includes(x));
+};
+const myUnseen = () => myEarned().filter(x => !(myBadges.seen || []).includes(x));
+function drawBadgeDot() { const on = myUnseen().length > 0; $("ubDot").classList.toggle("on", on); $("mpDot").classList.toggle("on", on); }
+async function saveBadgeDoc(patch) {
+  const u = auth.currentUser; if (!u) return;
+  const next = { seen: myBadges.seen || [], ...patch };
+  if (myBadges.chatter && !patch.chatter) next.chatter = myBadges.chatter;
+  await setDoc(doc(db, "badges", u.uid), next);
+}
+// called when you open your own racer profile: the new badges have now been seen
+function markBadgesSeen() {
+  const un = myUnseen(); if (!un.length) return;
+  const seen = [...new Set([...(myBadges.seen || []), ...un])];
+  freshIds = un; myBadges.seen = seen; drawBadgeDot();
+  saveBadgeDoc({ seen }).catch(() => {});
+}
+function badgeEl(id, fresh) {
+  const b = el("span", "badge"); b.tabIndex = 0; b.dataset.tt = BADGES[id].tip;
+  b.append(el("span", "ico", BADGES[id].icon), document.createTextNode(BADGES[id].name));
+  if (fresh) { const d = el("span", "reddot on"); d.setAttribute("aria-label", "New"); b.append(d); }
+  return b;
+}
+// chat: after the 3rd message you earn Chatter
+function maybeAwardChatter() {
+  if (myChatCount >= 3 && !myBadges.chatter && auth.currentUser) saveBadgeDoc({ chatter: serverTimestamp() }).catch(() => {});
+}
+
+// error boxes turn red and shake whenever a message appears in them
+const errObs = new MutationObserver(ms => ms.forEach(m => {
+  const e = m.target.nodeType === 1 ? m.target : m.target.parentElement; if (!e || !e.classList.contains("err")) return;
+  const has = e.textContent.trim() !== "";
+  e.classList.remove("shake"); if (has) { void e.offsetWidth; e.classList.add("shake"); }
+  const f = e.closest("form"); if (f) f.classList.toggle("has-err", has);
+}));
+document.querySelectorAll(".err").forEach(e => errObs.observe(e, { childList: true, characterData: true, subtree: true }));
 
 // banner for brand-new accounts: from sign-up until the next data update
 function drawWelcome() {
@@ -1939,14 +2021,13 @@ $("sendForm").onsubmit = async e => {
   const ref = doc(collection(db, "messages"));
   const data = { text, uid: u.uid, name: me?.username || u.displayName || "Racer", racer: me?.racer || null, createdAt: serverTimestamp() };
   try {
-    if (isOwner()) await setDoc(ref, data);
-    else {
-      const b = writeBatch(db);
-      b.set(ref, data);
-      b.set(doc(db, "chatCooldowns", u.uid), { last: serverTimestamp() });
-      await b.commit();
-    }
+    const b = writeBatch(db);
+    b.set(ref, data);
+    b.set(doc(db, "chatCooldowns", u.uid), { last: serverTimestamp(), count: myChatCount + 1 });
+    await b.commit();
+    myChatCount++; maybeAwardChatter();
   } catch {
+    getDoc(doc(db, "chatCooldowns", u.uid)).then(s => { myChatCount = s.exists() ? (s.data().count || 0) : 0; }).catch(() => {});
     input.value = text; lastChatAt = 0; drawChatBtn();
     err.textContent = "That message could not be sent. Wait a few seconds and try again.";
   }
