@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794460813,
+ "updated": 1794462013,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -137,9 +137,9 @@
    "carHue": 0,
    "carFile": "pinkerton_small.png",
    "carImage": "https://www.nitrotype.com/cars/pinkerton_small.png",
-   "avgSpeed": 127,
+   "avgSpeed": 122,
    "highSpeed": 158,
-   "lifetimeRaces": 101059,
+   "lifetimeRaces": 101068,
    "teamRaces": 31,
    "memberSince": 1794440454,
    "lastRace": 1794459563
