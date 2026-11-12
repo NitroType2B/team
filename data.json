@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794457215,
+ "updated": 1794458414,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 314
+  "views": 315
  },
  "racers": [
   {
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 140,
+   "avgSpeed": 138,
    "highSpeed": 173,
-   "lifetimeRaces": 3675,
-   "teamRaces": 976,
+   "lifetimeRaces": 3701,
+   "teamRaces": 1003,
    "memberSince": 1794193196,
-   "lastRace": 1794457158
+   "lastRace": 1794458387
   },
   {
    "username": "randalllack27",
@@ -572,7 +572,7 @@
    "2026-11-09": 123,
    "2026-11-10": 462,
    "2026-11-11": 845,
-   "2026-11-12": 976
+   "2026-11-12": 1003
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
