@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794505217,
+ "updated": 1794506417,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -37,7 +37,7 @@
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
    "avgSpeed": 130,
    "highSpeed": 173,
-   "lifetimeRaces": 3721,
+   "lifetimeRaces": 3722,
    "teamRaces": 1023,
    "memberSince": 1794193196,
    "lastRace": 1794460206
@@ -171,9 +171,9 @@
    "carHue": 40,
    "carFile": "dolphin_small.png",
    "carImage": "https://www.nitrotype.com/cars/dolphin_small.png",
-   "avgSpeed": 77,
+   "avgSpeed": 80,
    "highSpeed": 131,
-   "lifetimeRaces": 13085,
+   "lifetimeRaces": 13087,
    "teamRaces": 422,
    "memberSince": 1794240864,
    "lastRace": 1794503414
@@ -307,12 +307,12 @@
    "carHue": 60,
    "carFile": "fastback_small.png",
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
-   "avgSpeed": 72,
+   "avgSpeed": 69,
    "highSpeed": 121,
-   "lifetimeRaces": 3492,
-   "teamRaces": 435,
+   "lifetimeRaces": 3495,
+   "teamRaces": 441,
    "memberSince": 1793292197,
-   "lastRace": 1794503581
+   "lastRace": 1794505579
   },
   {
    "username": "bf0f4ce150bfa53eafcdb990c9841a97",
@@ -426,12 +426,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 82,
+   "avgSpeed": 49,
    "highSpeed": 116,
-   "lifetimeRaces": 2527,
-   "teamRaces": 887,
+   "lifetimeRaces": 2539,
+   "teamRaces": 905,
    "memberSince": 1794241854,
-   "lastRace": 1794504570
+   "lastRace": 1794505775
   },
   {
    "username": "nikooo124",
@@ -679,7 +679,7 @@
    "2026-11-09": 307,
    "2026-11-10": 374,
    "2026-11-11": 419,
-   "2026-11-12": 435
+   "2026-11-12": 441
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
@@ -739,7 +739,7 @@
    "2026-11-09": 105,
    "2026-11-10": 247,
    "2026-11-11": 742,
-   "2026-11-12": 887
+   "2026-11-12": 905
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
