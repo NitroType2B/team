@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794510018,
+ "updated": 1794511215,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -324,9 +324,9 @@
    "carHue": 0,
    "carFile": "fully_leaded_small.png",
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
-   "avgSpeed": 108,
+   "avgSpeed": 111,
    "highSpeed": 130,
-   "lifetimeRaces": 170,
+   "lifetimeRaces": 178,
    "teamRaces": 101,
    "memberSince": 1793905494,
    "lastRace": 1794428064
@@ -426,12 +426,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 92,
+   "avgSpeed": 93,
    "highSpeed": 116,
-   "lifetimeRaces": 2556,
-   "teamRaces": 926,
+   "lifetimeRaces": 2572,
+   "teamRaces": 959,
    "memberSince": 1794241854,
-   "lastRace": 1794509384
+   "lastRace": 1794510591
   },
   {
    "username": "nikooo124",
@@ -739,7 +739,7 @@
    "2026-11-09": 105,
    "2026-11-10": 247,
    "2026-11-11": 742,
-   "2026-11-12": 926
+   "2026-11-12": 959
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
