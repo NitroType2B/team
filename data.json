@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794516014,
+ "updated": 1794517216,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 330
+  "views": 331
  },
  "racers": [
   {
@@ -171,12 +171,12 @@
    "carHue": 40,
    "carFile": "dolphin_small.png",
    "carImage": "https://www.nitrotype.com/cars/dolphin_small.png",
-   "avgSpeed": 86,
+   "avgSpeed": 85,
    "highSpeed": 131,
-   "lifetimeRaces": 13096,
-   "teamRaces": 426,
+   "lifetimeRaces": 13103,
+   "teamRaces": 437,
    "memberSince": 1794240864,
-   "lastRace": 1794506457
+   "lastRace": 1794516515
   },
   {
    "username": "24cf4df60146763fc790068e421c9389",
@@ -377,10 +377,10 @@
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
    "avgSpeed": 40,
    "highSpeed": 75,
-   "lifetimeRaces": 4388,
-   "teamRaces": 1001,
+   "lifetimeRaces": 4402,
+   "teamRaces": 1019,
    "memberSince": 1793725663,
-   "lastRace": 1794515248
+   "lastRace": 1794516597
   },
   {
    "username": "ykitsmizu",
@@ -426,12 +426,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 75,
+   "avgSpeed": 92,
    "highSpeed": 116,
-   "lifetimeRaces": 2627,
-   "teamRaces": 1049,
+   "lifetimeRaces": 2643,
+   "teamRaces": 1071,
    "memberSince": 1794241854,
-   "lastRace": 1794515403
+   "lastRace": 1794516580
   },
   {
    "username": "nikooo124",
@@ -654,7 +654,7 @@
    "2026-11-09": 158,
    "2026-11-10": 305,
    "2026-11-11": 375,
-   "2026-11-12": 426
+   "2026-11-12": 437
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -720,7 +720,7 @@
    "2026-11-09": 858,
    "2026-11-10": 871,
    "2026-11-11": 980,
-   "2026-11-12": 1001
+   "2026-11-12": 1019
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -756,7 +756,7 @@
    "2026-11-09": 105,
    "2026-11-10": 247,
    "2026-11-11": 742,
-   "2026-11-12": 1049
+   "2026-11-12": 1071
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
