@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794459617,
+ "updated": 1794460813,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,9 +35,9 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 126,
+   "avgSpeed": 130,
    "highSpeed": 173,
-   "lifetimeRaces": 3708,
+   "lifetimeRaces": 3721,
    "teamRaces": 1010,
    "memberSince": 1794193196,
    "lastRace": 1794459480
@@ -137,9 +137,9 @@
    "carHue": 0,
    "carFile": "pinkerton_small.png",
    "carImage": "https://www.nitrotype.com/cars/pinkerton_small.png",
-   "avgSpeed": 126,
+   "avgSpeed": 127,
    "highSpeed": 158,
-   "lifetimeRaces": 101049,
+   "lifetimeRaces": 101059,
    "teamRaces": 31,
    "memberSince": 1794440454,
    "lastRace": 1794459563
