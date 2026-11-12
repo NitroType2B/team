@@ -84,16 +84,15 @@ input::placeholder{color:var(--ph)}
 .has-err input:not([type=checkbox]){border-color:var(--red)!important}
 @keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
 @media (prefers-reduced-motion:reduce){.err.shake{animation:none}}
-.reddot{display:none;position:absolute;width:13px;height:13px;border-radius:50%;background:#FF2D2D;border:2px solid var(--bg);box-shadow:0 0 10px #FF2D2D;animation:dotblink 1s ease-in-out infinite}
+.reddot{display:none;position:absolute;min-width:24px;height:24px;padding:0 6px;box-sizing:border-box;border-radius:999px;background:#FF2D2D;color:#fff;font:800 14px/24px Manrope,system-ui,sans-serif;text-align:center;box-shadow:0 0 12px #FF2D2D;animation:dotblink 1s ease-in-out infinite}
 .reddot.on{display:block}
-#ubDot{top:-2px;right:-2px}
-#mpDot{position:static;display:none;margin-left:auto}
-#mpDot.on{display:block}
+#ubDot,#mpDot{position:static;flex:none}
+#mpDot{margin-left:auto}
 @keyframes dotblink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.8)}}
 .pr-badges.has{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start;text-align:left;border-style:solid;border-color:var(--line)}
 .badge{position:relative;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:2px solid var(--cyan);background:var(--fill);color:var(--ink);font-weight:800;font-size:14px;cursor:help}
 .badge .ico{font-size:18px}
-.badge .reddot{top:-5px;right:-3px}
+.badge .reddot{top:-6px;right:-4px;min-width:16px;height:16px;padding:0;font-size:0;line-height:0}
 /* header */
 header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 24px;background:var(--hdr);backdrop-filter:blur(12px);flex-wrap:wrap}
 header::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:8px;background:repeating-conic-gradient(var(--check1) 0 25%,var(--check2) 0 50%) 0 0/16px 16px;opacity:.9}
@@ -388,10 +387,10 @@ td.c-dim{color:var(--mute)}
     </nav>
     <div class="userbar" id="userbar">
       <button type="button" class="ub-btn" id="ubBtn" aria-haspopup="true" aria-expanded="false" aria-controls="ubMenu">
+        <span class="reddot" id="ubDot" aria-hidden="true"></span>
         <span class="ub-car" id="ubCar"></span>
         <span id="me"></span>
         <span class="ub-caret" aria-hidden="true">▾</span>
-        <span class="reddot" id="ubDot" aria-hidden="true"></span>
       </button>
       <div class="ub-menu" id="ubMenu">
         <div class="ub-menu-in" role="menu" aria-label="Account">
@@ -1592,7 +1591,11 @@ const myEarned = () => {
   return BADGE_ORDER.filter(x => e.includes(x));
 };
 const myUnseen = () => myEarned().filter(x => !(myBadges.seen || []).includes(x));
-function drawBadgeDot() { const on = myUnseen().length > 0; $("ubDot").classList.toggle("on", on); $("mpDot").classList.toggle("on", on); }
+function drawBadgeDot() {
+  const n = myUnseen().length;
+  [$("ubDot"), $("mpDot")].forEach(d => { d.classList.toggle("on", n > 0); d.textContent = n > 0 ? String(n) : ""; });
+  $("ubBtn").setAttribute("aria-label", n > 0 ? n + " new badge" + (n === 1 ? "" : "s") : "Account menu");
+}
 async function saveBadgeDoc(patch) {
   const u = auth.currentUser; if (!u) return;
   const next = { seen: myBadges.seen || [], ...patch };
