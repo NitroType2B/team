@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794500417,
+ "updated": 1794501618,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -69,12 +69,12 @@
    "carHue": 300,
    "carFile": "195_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/195_small_1.png",
-   "avgSpeed": 128,
+   "avgSpeed": 127,
    "highSpeed": 172,
-   "lifetimeRaces": 27744,
-   "teamRaces": 530,
+   "lifetimeRaces": 27749,
+   "teamRaces": 538,
    "memberSince": 1794100813,
-   "lastRace": 1794499104
+   "lastRace": 1794500846
   },
   {
    "username": "lifetime100",
@@ -171,12 +171,12 @@
    "carHue": 40,
    "carFile": "dolphin_small.png",
    "carImage": "https://www.nitrotype.com/cars/dolphin_small.png",
-   "avgSpeed": 90,
+   "avgSpeed": 92,
    "highSpeed": 131,
-   "lifetimeRaces": 13069,
-   "teamRaces": 403,
+   "lifetimeRaces": 13081,
+   "teamRaces": 413,
    "memberSince": 1794240864,
-   "lastRace": 1794489020
+   "lastRace": 1794500943
   },
   {
    "username": "24cf4df60146763fc790068e421c9389",
@@ -307,12 +307,12 @@
    "carHue": 60,
    "carFile": "fastback_small.png",
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
-   "avgSpeed": 53,
+   "avgSpeed": 72,
    "highSpeed": 121,
-   "lifetimeRaces": 3473,
-   "teamRaces": 419,
+   "lifetimeRaces": 3487,
+   "teamRaces": 427,
    "memberSince": 1793292197,
-   "lastRace": 1794347911
+   "lastRace": 1794501000
   },
   {
    "username": "bf0f4ce150bfa53eafcdb990c9841a97",
@@ -613,7 +613,7 @@
    "2026-11-09": 264,
    "2026-11-10": 362,
    "2026-11-11": 497,
-   "2026-11-12": 530
+   "2026-11-12": 538
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -637,7 +637,7 @@
    "2026-11-09": 158,
    "2026-11-10": 305,
    "2026-11-11": 375,
-   "2026-11-12": 403
+   "2026-11-12": 413
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -679,7 +679,7 @@
    "2026-11-09": 307,
    "2026-11-10": 374,
    "2026-11-11": 419,
-   "2026-11-12": 419
+   "2026-11-12": 427
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
