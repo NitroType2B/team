@@ -344,6 +344,10 @@ td.c-dim{color:var(--mute)}
 .msg time{color:var(--mute);font-size:12px;margin-left:8px}
 .msg.me time{color:rgba(255,255,255,.75)}
 .msg p{margin:2px 0 0;overflow-wrap:anywhere}
+.msg.cont{padding:5px 12px;margin-top:-6px;font-size:14px;border-radius:14px 14px 14px 4px}
+.msg.cont p{margin:0}
+.msg.me.cont{border-radius:14px 14px 4px 14px}
+.msg.later{margin-top:10px}
 .send{display:grid;grid-template-columns:1fr auto;gap:10px;padding:14px 22px;border-top:1px solid var(--line)}
 @media (max-width:1000px){.cta{grid-template-columns:1fr}}
 @media (max-width:820px){.hero{grid-template-columns:1fr;padding:28px}.cta{grid-template-columns:1fr}.big strong{font-size:30px}}
@@ -1360,9 +1364,28 @@ function drawChat() {
   const stick = box.scrollTop + box.clientHeight >= box.scrollHeight - 40;
   box.textContent = "";
   loadProfs(chatDocs.map(d => d.data().uid));
+  let prev = null;
   chatDocs.forEach(d => {
     const m = d.data();
-    const row = document.createElement("div"); row.className = "msg" + (m.uid === chatUid ? " me" : "");
+    const at = m.createdAt && m.createdAt.toMillis ? m.createdAt.toMillis() : Date.now();
+    const same = prev && prev.uid === m.uid, gap = prev ? at - prev.at : 0;
+    const cont = same && gap <= 5 * 60e3;          // same person, within 5 minutes: just a small bubble under the last one
+    const later = same && gap > 5 * 60e3;          // same person, over 5 minutes later: full bubble again, with a little extra space
+    prev = { uid: m.uid, at };
+    const row = document.createElement("div"); row.className = "msg" + (m.uid === chatUid ? " me" : "") + (cont ? " cont" : "") + (later ? " later" : "");
+    if (cont) {
+      const p = document.createElement("p"); p.textContent = m.text;
+      if (isOwner()) {
+        const x = el("button", "del", "\u2715"); x.type = "button"; x.title = "Delete message"; x.setAttribute("aria-label", "Delete message");
+        x.onclick = async () => {
+          if (!(await confirmBox("Delete message?", "This message will be removed for everyone.", "Delete"))) return;
+          try { await deleteDoc(doc(db, "messages", d.id)); } catch { $("ownErr").textContent = "Could not delete the message."; }
+        };
+        row.append(x);
+      }
+      if (m.createdAt) row.title = chatTime(m.createdAt.toDate());
+      row.append(p); box.append(row); return;
+    }
     const b = document.createElement("b");
     const role = roles[m.uid]?.role;
     const pr = m.uid === chatUid && me ? { username: me.username, racer: me.racer, createdMs: me.createdMs || 0 } : chatProf[m.uid];
