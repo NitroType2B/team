@@ -1424,8 +1424,8 @@ function drawChat() {
     const m = d.data();
     const at = m.createdAt && m.createdAt.toMillis ? m.createdAt.toMillis() : Date.now();
     const same = prev && prev.uid === m.uid, gap = prev ? at - prev.at : 0;
-    const cont = same && gap <= 5 * 60e3;          // same person, within 5 minutes: just a small bubble under the last one
-    const later = same && gap > 5 * 60e3;          // same person, over 5 minutes later: full bubble again, with a little extra space
+    const cont = false;                            // every message is a full bubble (car, name, time)
+    const later = same && gap > 5 * 60e3;          // same person, over 5 minutes after their last message: a little extra space above
     prev = { uid: m.uid, at };
     const row = document.createElement("div"); row.className = "msg" + (m.uid === chatUid ? " me" : "") + (cont ? " cont" : "") + (later ? " later" : "");
     if (cont) {
