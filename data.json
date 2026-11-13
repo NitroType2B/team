@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794588017,
+ "updated": 1794589219,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -174,9 +174,9 @@
    "avgSpeed": 94,
    "highSpeed": 131,
    "lifetimeRaces": 13145,
-   "teamRaces": 468,
+   "teamRaces": 482,
    "memberSince": 1794240864,
-   "lastRace": 1794587224
+   "lastRace": 1794587995
   },
   {
    "username": "24cf4df60146763fc790068e421c9389",
@@ -273,9 +273,9 @@
    "carHue": 0,
    "carFile": "fully_leaded_small.png",
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
-   "avgSpeed": 37,
+   "avgSpeed": 36,
    "highSpeed": 45,
-   "lifetimeRaces": 248,
+   "lifetimeRaces": 249,
    "teamRaces": 119,
    "memberSince": 1794027205,
    "lastRace": 1794370002
@@ -307,12 +307,12 @@
    "carHue": 60,
    "carFile": "fastback_small.png",
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
-   "avgSpeed": 58,
+   "avgSpeed": 80,
    "highSpeed": 121,
-   "lifetimeRaces": 3562,
-   "teamRaces": 508,
+   "lifetimeRaces": 3569,
+   "teamRaces": 513,
    "memberSince": 1793292197,
-   "lastRace": 1794586598
+   "lastRace": 1794588582
   },
   {
    "username": "bf0f4ce150bfa53eafcdb990c9841a97",
@@ -480,9 +480,9 @@
    "avgSpeed": 62,
    "highSpeed": 77,
    "lifetimeRaces": 300,
-   "teamRaces": 22,
+   "teamRaces": 23,
    "memberSince": 1794585958,
-   "lastRace": 1794587135
+   "lastRace": 1794587918
   },
   {
    "username": "1f00628c7818edb45331470d6fd128bb",
@@ -679,7 +679,7 @@
    "2026-11-10": 305,
    "2026-11-11": 375,
    "2026-11-12": 444,
-   "2026-11-13": 468
+   "2026-11-13": 482
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -728,7 +728,7 @@
    "2026-11-10": 374,
    "2026-11-11": 419,
    "2026-11-12": 491,
-   "2026-11-13": 508
+   "2026-11-13": 513
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
@@ -859,7 +859,7 @@
    "2026-11-13": 0
   },
   "zatart": {
-   "2026-11-13": 22
+   "2026-11-13": 23
   }
  }
 }
