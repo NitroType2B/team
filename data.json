@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794531616,
+ "updated": 1794532813,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 333
+  "views": 334
  },
  "racers": [
   {
@@ -120,12 +120,12 @@
    "carHue": 120,
    "carFile": "f35_small.png",
    "carImage": "https://www.nitrotype.com/cars/f35_small.png",
-   "avgSpeed": 90,
+   "avgSpeed": 89,
    "highSpeed": 113,
-   "lifetimeRaces": 18047,
-   "teamRaces": 35,
+   "lifetimeRaces": 18050,
+   "teamRaces": 38,
    "memberSince": 1794434328,
-   "lastRace": 1794436514
+   "lastRace": 1794531724
   },
   {
    "username": "juanito2223",
@@ -813,7 +813,7 @@
   "fireheartc": {
    "2026-11-11": 35,
    "2026-11-12": 35,
-   "2026-11-13": 35
+   "2026-11-13": 38
   },
   "juanito2223": {
    "2026-11-12": 82,
