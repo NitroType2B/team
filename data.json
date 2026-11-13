@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794540220,
+ "updated": 1794541214,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 341
+  "views": 343
  },
  "racers": [
   {
@@ -122,10 +122,10 @@
    "carImage": "https://www.nitrotype.com/cars/115_small_1.png",
    "avgSpeed": 121,
    "highSpeed": 158,
-   "lifetimeRaces": 33857,
-   "teamRaces": 1124,
+   "lifetimeRaces": 33860,
+   "teamRaces": 1127,
    "memberSince": 1792979300,
-   "lastRace": 1794539708
+   "lastRace": 1794540844
   },
   {
    "username": "fireheartc",
@@ -648,7 +648,7 @@
    "2026-11-10": 948,
    "2026-11-11": 1067,
    "2026-11-12": 1111,
-   "2026-11-13": 1124
+   "2026-11-13": 1127
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
