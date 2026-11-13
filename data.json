@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794535218,
+ "updated": 1794536414,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -445,10 +445,10 @@
    "carImage": "https://www.nitrotype.com/cars/91_small_1.png",
    "avgSpeed": 69,
    "highSpeed": 89,
-   "lifetimeRaces": 86,
-   "teamRaces": 10,
+   "lifetimeRaces": 87,
+   "teamRaces": 11,
    "memberSince": 1793278169,
-   "lastRace": 1793653083
+   "lastRace": 1794535577
   },
   {
    "username": "xwordreaperx",
@@ -745,7 +745,7 @@
    "2026-11-10": 10,
    "2026-11-11": 10,
    "2026-11-12": 10,
-   "2026-11-13": 10
+   "2026-11-13": 11
   },
   "xwordreaperx": {
    "2026-11-09": 35,
