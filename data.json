@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794589219,
+ "updated": 1794590419,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 362
+  "views": 363
  },
  "racers": [
   {
@@ -37,10 +37,10 @@
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
    "avgSpeed": 130,
    "highSpeed": 173,
-   "lifetimeRaces": 3785,
-   "teamRaces": 1087,
+   "lifetimeRaces": 3786,
+   "teamRaces": 1088,
    "memberSince": 1794193196,
-   "lastRace": 1794547577
+   "lastRace": 1794589682
   },
   {
    "username": "x_onion_x",
@@ -171,12 +171,12 @@
    "carHue": 40,
    "carFile": "dolphin_small.png",
    "carImage": "https://www.nitrotype.com/cars/dolphin_small.png",
-   "avgSpeed": 94,
+   "avgSpeed": 91,
    "highSpeed": 131,
-   "lifetimeRaces": 13145,
-   "teamRaces": 482,
+   "lifetimeRaces": 13149,
+   "teamRaces": 486,
    "memberSince": 1794240864,
-   "lastRace": 1794587995
+   "lastRace": 1794589763
   },
   {
    "username": "24cf4df60146763fc790068e421c9389",
@@ -275,10 +275,10 @@
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
    "avgSpeed": 36,
    "highSpeed": 45,
-   "lifetimeRaces": 249,
-   "teamRaces": 119,
+   "lifetimeRaces": 250,
+   "teamRaces": 121,
    "memberSince": 1794027205,
-   "lastRace": 1794370002
+   "lastRace": 1794589242
   },
   {
    "username": "197778e3651f7f3d54c111e024ae2cfc",
@@ -307,12 +307,12 @@
    "carHue": 60,
    "carFile": "fastback_small.png",
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
-   "avgSpeed": 80,
+   "avgSpeed": 66,
    "highSpeed": 121,
-   "lifetimeRaces": 3569,
-   "teamRaces": 513,
+   "lifetimeRaces": 3572,
+   "teamRaces": 516,
    "memberSince": 1793292197,
-   "lastRace": 1794588582
+   "lastRace": 1794589784
   },
   {
    "username": "bf0f4ce150bfa53eafcdb990c9841a97",
@@ -644,7 +644,7 @@
    "2026-11-10": 462,
    "2026-11-11": 845,
    "2026-11-12": 1024,
-   "2026-11-13": 1087
+   "2026-11-13": 1088
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -679,7 +679,7 @@
    "2026-11-10": 305,
    "2026-11-11": 375,
    "2026-11-12": 444,
-   "2026-11-13": 482
+   "2026-11-13": 486
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -714,7 +714,7 @@
    "2026-11-10": 99,
    "2026-11-11": 119,
    "2026-11-12": 119,
-   "2026-11-13": 119
+   "2026-11-13": 121
   },
   "197778e3651f7f3d54c111e024ae2cfc": {
    "2026-11-09": 2,
@@ -728,7 +728,7 @@
    "2026-11-10": 374,
    "2026-11-11": 419,
    "2026-11-12": 491,
-   "2026-11-13": 513
+   "2026-11-13": 516
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
