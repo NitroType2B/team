@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794583232,
+ "updated": 1794584420,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -531,9 +531,9 @@
    "avgSpeed": 160,
    "highSpeed": 172,
    "lifetimeRaces": 268,
-   "teamRaces": 119,
+   "teamRaces": 127,
    "memberSince": 1794063320,
-   "lastRace": 1794581902
+   "lastRace": 1794583180
   },
   {
    "username": "cookies_cooking",
@@ -545,12 +545,12 @@
    "carHue": 80,
    "carFile": "hurricania_small.png",
    "carImage": "https://www.nitrotype.com/cars/hurricania_small.png",
-   "avgSpeed": 75,
+   "avgSpeed": 76,
    "highSpeed": 96,
-   "lifetimeRaces": 181,
-   "teamRaces": 8,
+   "lifetimeRaces": 182,
+   "teamRaces": 18,
    "memberSince": 1794515924,
-   "lastRace": 1794582602
+   "lastRace": 1794583039
   },
   {
    "username": "f80d75120418f0ec5867162d84d42707",
@@ -767,7 +767,7 @@
    "2026-11-10": 95,
    "2026-11-11": 95,
    "2026-11-12": 95,
-   "2026-11-13": 119
+   "2026-11-13": 127
   },
   "randalllack27": {
    "2026-11-09": 0,
@@ -833,7 +833,7 @@
   },
   "cookies_cooking": {
    "2026-11-12": 0,
-   "2026-11-13": 8
+   "2026-11-13": 18
   },
   "ykitsmiku": {
    "2026-11-12": 0
