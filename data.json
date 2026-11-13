@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794586818,
+ "updated": 1794588017,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 360
+  "views": 362
  },
  "racers": [
   {
@@ -86,12 +86,12 @@
    "carHue": 320,
    "carFile": "142_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/142_small_1.png",
-   "avgSpeed": 132,
+   "avgSpeed": 130,
    "highSpeed": 172,
-   "lifetimeRaces": 27776,
-   "teamRaces": 563,
+   "lifetimeRaces": 27785,
+   "teamRaces": 574,
    "memberSince": 1794100813,
-   "lastRace": 1794586200
+   "lastRace": 1794587239
   },
   {
    "username": "lifetime100",
@@ -105,10 +105,10 @@
    "carImage": "https://www.nitrotype.com/cars/70_small_1.png",
    "avgSpeed": 117,
    "highSpeed": 149,
-   "lifetimeRaces": 23696,
-   "teamRaces": 95,
+   "lifetimeRaces": 23700,
+   "teamRaces": 105,
    "memberSince": 1793228769,
-   "lastRace": 1794276700
+   "lastRace": 1794587334
   },
   {
    "username": "piquel",
@@ -171,12 +171,12 @@
    "carHue": 40,
    "carFile": "dolphin_small.png",
    "carImage": "https://www.nitrotype.com/cars/dolphin_small.png",
-   "avgSpeed": 85,
+   "avgSpeed": 94,
    "highSpeed": 131,
-   "lifetimeRaces": 13124,
-   "teamRaces": 458,
+   "lifetimeRaces": 13145,
+   "teamRaces": 468,
    "memberSince": 1794240864,
-   "lastRace": 1794575498
+   "lastRace": 1794587224
   },
   {
    "username": "24cf4df60146763fc790068e421c9389",
@@ -310,9 +310,9 @@
    "avgSpeed": 58,
    "highSpeed": 121,
    "lifetimeRaces": 3562,
-   "teamRaces": 499,
+   "teamRaces": 508,
    "memberSince": 1793292197,
-   "lastRace": 1794586188
+   "lastRace": 1794586598
   },
   {
    "username": "bf0f4ce150bfa53eafcdb990c9841a97",
@@ -471,18 +471,18 @@
    "username": "zatart",
    "displayName": "zatart",
    "role": "member",
-   "title": "Raw Racing Recruit",
+   "title": "Crazy About Typing",
    "membership": "basic",
-   "carId": 342,
-   "carHue": 20,
-   "carFile": "millionare_special_small.png",
-   "carImage": "https://www.nitrotype.com/cars/millionare_special_small.png",
-   "avgSpeed": 67,
+   "carId": 349,
+   "carHue": 60,
+   "carFile": "cerberus_small.png",
+   "carImage": "https://www.nitrotype.com/cars/cerberus_small.png",
+   "avgSpeed": 62,
    "highSpeed": 77,
-   "lifetimeRaces": 294,
-   "teamRaces": 4,
+   "lifetimeRaces": 300,
+   "teamRaces": 22,
    "memberSince": 1794585958,
-   "lastRace": 1794586209
+   "lastRace": 1794587135
   },
   {
    "username": "1f00628c7818edb45331470d6fd128bb",
@@ -651,14 +651,14 @@
    "2026-11-10": 362,
    "2026-11-11": 497,
    "2026-11-12": 538,
-   "2026-11-13": 563
+   "2026-11-13": 574
   },
   "lifetime100": {
    "2026-11-09": 89,
    "2026-11-10": 95,
    "2026-11-11": 95,
    "2026-11-12": 95,
-   "2026-11-13": 95
+   "2026-11-13": 105
   },
   "piquel": {
    "2026-11-09": 930,
@@ -679,7 +679,7 @@
    "2026-11-10": 305,
    "2026-11-11": 375,
    "2026-11-12": 444,
-   "2026-11-13": 458
+   "2026-11-13": 468
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -728,7 +728,7 @@
    "2026-11-10": 374,
    "2026-11-11": 419,
    "2026-11-12": 491,
-   "2026-11-13": 499
+   "2026-11-13": 508
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
@@ -859,7 +859,7 @@
    "2026-11-13": 0
   },
   "zatart": {
-   "2026-11-13": 4
+   "2026-11-13": 22
   }
  }
 }
