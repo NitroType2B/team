@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794578420,
+ "updated": 1794579615,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 352
+  "views": 354
  },
  "racers": [
   {
@@ -428,7 +428,7 @@
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
    "avgSpeed": 92,
    "highSpeed": 116,
-   "lifetimeRaces": 2663,
+   "lifetimeRaces": 2670,
    "teamRaces": 1128,
    "memberSince": 1794241854,
    "lastRace": 1794518696
@@ -477,12 +477,12 @@
    "carHue": 200,
    "carFile": "fully_leaded_small.png",
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
-   "avgSpeed": 24,
+   "avgSpeed": 23,
    "highSpeed": 29,
-   "lifetimeRaces": 58,
-   "teamRaces": 39,
+   "lifetimeRaces": 64,
+   "teamRaces": 45,
    "memberSince": 1793980725,
-   "lastRace": 1794578327
+   "lastRace": 1794578746
   },
   {
    "username": "mrman5544",
@@ -760,7 +760,7 @@
    "2026-11-10": 29,
    "2026-11-11": 33,
    "2026-11-12": 38,
-   "2026-11-13": 39
+   "2026-11-13": 45
   },
   "exterverjae7": {
    "2026-11-09": 70,
