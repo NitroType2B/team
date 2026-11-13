@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794590419,
+ "updated": 1794591626,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,9 +35,9 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 130,
+   "avgSpeed": 128,
    "highSpeed": 173,
-   "lifetimeRaces": 3786,
+   "lifetimeRaces": 3788,
    "teamRaces": 1088,
    "memberSince": 1794193196,
    "lastRace": 1794589682
@@ -307,12 +307,12 @@
    "carHue": 60,
    "carFile": "fastback_small.png",
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
-   "avgSpeed": 66,
+   "avgSpeed": 67,
    "highSpeed": 121,
-   "lifetimeRaces": 3572,
-   "teamRaces": 516,
+   "lifetimeRaces": 3574,
+   "teamRaces": 519,
    "memberSince": 1793292197,
-   "lastRace": 1794589784
+   "lastRace": 1794590832
   },
   {
    "username": "bf0f4ce150bfa53eafcdb990c9841a97",
@@ -728,7 +728,7 @@
    "2026-11-10": 374,
    "2026-11-11": 419,
    "2026-11-12": 491,
-   "2026-11-13": 516
+   "2026-11-13": 519
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
