@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794585618,
+ "updated": 1794586818,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 357
+  "views": 360
  },
  "racers": [
   {
@@ -86,12 +86,12 @@
    "carHue": 320,
    "carFile": "142_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/142_small_1.png",
-   "avgSpeed": 136,
+   "avgSpeed": 132,
    "highSpeed": 172,
-   "lifetimeRaces": 27762,
-   "teamRaces": 544,
+   "lifetimeRaces": 27776,
+   "teamRaces": 563,
    "memberSince": 1794100813,
-   "lastRace": 1794584965
+   "lastRace": 1794586200
   },
   {
    "username": "lifetime100",
@@ -103,9 +103,9 @@
    "carHue": 0,
    "carFile": "70_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/70_small_1.png",
-   "avgSpeed": 114,
+   "avgSpeed": 117,
    "highSpeed": 149,
-   "lifetimeRaces": 23690,
+   "lifetimeRaces": 23696,
    "teamRaces": 95,
    "memberSince": 1793228769,
    "lastRace": 1794276700
@@ -173,7 +173,7 @@
    "carImage": "https://www.nitrotype.com/cars/dolphin_small.png",
    "avgSpeed": 85,
    "highSpeed": 131,
-   "lifetimeRaces": 13121,
+   "lifetimeRaces": 13124,
    "teamRaces": 458,
    "memberSince": 1794240864,
    "lastRace": 1794575498
@@ -307,12 +307,12 @@
    "carHue": 60,
    "carFile": "fastback_small.png",
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
-   "avgSpeed": 70,
+   "avgSpeed": 58,
    "highSpeed": 121,
-   "lifetimeRaces": 3545,
-   "teamRaces": 491,
+   "lifetimeRaces": 3562,
+   "teamRaces": 499,
    "memberSince": 1793292197,
-   "lastRace": 1794513966
+   "lastRace": 1794586188
   },
   {
    "username": "bf0f4ce150bfa53eafcdb990c9841a97",
@@ -466,6 +466,23 @@
    "teamRaces": 106,
    "memberSince": 1793906872,
    "lastRace": 1794429174
+  },
+  {
+   "username": "zatart",
+   "displayName": "zatart",
+   "role": "member",
+   "title": "Raw Racing Recruit",
+   "membership": "basic",
+   "carId": 342,
+   "carHue": 20,
+   "carFile": "millionare_special_small.png",
+   "carImage": "https://www.nitrotype.com/cars/millionare_special_small.png",
+   "avgSpeed": 67,
+   "highSpeed": 77,
+   "lifetimeRaces": 294,
+   "teamRaces": 4,
+   "memberSince": 1794585958,
+   "lastRace": 1794586209
   },
   {
    "username": "1f00628c7818edb45331470d6fd128bb",
@@ -634,7 +651,7 @@
    "2026-11-10": 362,
    "2026-11-11": 497,
    "2026-11-12": 538,
-   "2026-11-13": 544
+   "2026-11-13": 563
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -711,7 +728,7 @@
    "2026-11-10": 374,
    "2026-11-11": 419,
    "2026-11-12": 491,
-   "2026-11-13": 491
+   "2026-11-13": 499
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
@@ -840,6 +857,9 @@
   },
   "x_onion_x": {
    "2026-11-13": 0
+  },
+  "zatart": {
+   "2026-11-13": 4
   }
  }
 }
