@@ -335,13 +335,21 @@ td.c-dim{color:var(--mute)}
 .place.p3{background:linear-gradient(135deg,#F2B27A,#C26F2E)}
 .empty{padding:28px 22px;color:var(--mute)}
 /* chat */
-#chat{height:calc(100vh - 200px);min-height:440px;position:relative;flex-direction:row}
+#chat{height:calc(100vh - 120px);min-height:600px;position:relative;flex-direction:row}
+main:has(#chat:not(.hidden)){max-width:1500px;padding-top:24px}
+.chatpane .msg:not(.cont){font-size:16px;max-width:72%}
+.chatpane .msg b{font-size:14px}
+.chatpane .msg time{font-size:13px}
+.chatpane .head{padding:20px 26px}
+.chatpane .send{padding:16px 26px}
+.chatpane .send input{padding:14px 16px;font-size:16px}
+.chatpane .send .btn{padding:0 26px;font-size:16px}
 .chatcol{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column}
 .chatpane{flex:1;min-height:0;display:flex;flex-direction:column}
 .chatpane.hidden{display:none}
-.chatnav{display:flex;flex-direction:column;gap:8px;flex:none;width:158px;padding:14px 10px;border-right:1px solid var(--line)}
+.chatnav{display:flex;flex-direction:column;gap:8px;flex:none;width:190px;padding:18px 12px;border-right:1px solid var(--line)}
 .chatnav.hidden{display:none}
-.cn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 12px;border-radius:12px;font-weight:800;font-size:14px;color:var(--mute);border:1px solid transparent;transition:background .12s,color .12s}
+.cn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;padding:13px 14px;border-radius:12px;font-weight:800;font-size:15px;color:var(--mute);border:1px solid transparent;transition:background .12s,color .12s}
 .cn:hover,.cn:focus-visible{background:var(--hover);color:var(--ink)}
 .cn:focus-visible{outline:2px solid var(--cyan)}
 .cn.on{color:var(--ink);background:color-mix(in srgb,var(--pink) 22%,transparent);border-color:var(--pink)}
@@ -358,7 +366,7 @@ td.c-dim{color:var(--mute)}
 body.guest #guestSignIn{display:inline-flex}
 body.guest .userbar{display:none}
 .react.off{opacity:.55;cursor:not-allowed}
-#msgs{display:flex;flex-direction:column;gap:10px;padding:18px 22px}
+#msgs,#amsgs{display:flex;flex-direction:column;gap:10px;padding:20px 26px}
 .msg{max-width:78%;align-self:flex-start;background:var(--fill3);border:1px solid var(--line);border-radius:18px 18px 18px 4px;padding:8px 14px}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--pink),var(--purple));border-color:transparent;border-radius:18px 18px 4px 18px}
 .msg b{font-size:13px;color:var(--cyan)}
