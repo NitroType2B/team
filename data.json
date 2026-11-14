@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794674414,
+ "updated": 1794676813,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 421
+  "views": 423
  },
  "racers": [
   {
@@ -511,12 +511,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 92,
+   "avgSpeed": 77,
    "highSpeed": 116,
-   "lifetimeRaces": 2969,
-   "teamRaces": 1654,
+   "lifetimeRaces": 2990,
+   "teamRaces": 1694,
    "memberSince": 1794241854,
-   "lastRace": 1794674248
+   "lastRace": 1794676481
   },
   {
    "username": "cf9e3eb05238ec4899612d044d71ee76",
@@ -929,7 +929,7 @@
    "2026-11-11": 742,
    "2026-11-12": 1128,
    "2026-11-13": 1253,
-   "2026-11-14": 1654
+   "2026-11-14": 1694
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
