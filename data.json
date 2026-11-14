@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794682818,
+ "updated": 1794684015,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 427
+  "views": 429
  },
  "racers": [
   {
@@ -120,12 +120,12 @@
    "carHue": 320,
    "carFile": "spirit_racers_final_seal_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_final_seal_small.png",
-   "avgSpeed": 121,
+   "avgSpeed": 124,
    "highSpeed": 158,
-   "lifetimeRaces": 34186,
-   "teamRaces": 1452,
+   "lifetimeRaces": 34200,
+   "teamRaces": 1467,
    "memberSince": 1792979300,
-   "lastRace": 1794682762
+   "lastRace": 1794683312
   },
   {
    "username": "3db33f0fa5e1cefd2a93a1d3f4eba1de",
@@ -506,7 +506,7 @@
    "displayName": "Rainbow Dragon",
    "role": "officer",
    "title": "Ghost Lap",
-   "membership": "basic",
+   "membership": "gold",
    "carId": 484,
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
@@ -776,7 +776,7 @@
    "2026-11-11": 1067,
    "2026-11-12": 1111,
    "2026-11-13": 1132,
-   "2026-11-14": 1452
+   "2026-11-14": 1467
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
