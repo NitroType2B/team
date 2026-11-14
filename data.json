@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794684015,
+ "updated": 1794685212,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -511,29 +511,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 67,
+   "avgSpeed": 65,
    "highSpeed": 116,
-   "lifetimeRaces": 3027,
-   "teamRaces": 1757,
+   "lifetimeRaces": 3030,
+   "teamRaces": 1763,
    "memberSince": 1794241854,
-   "lastRace": 1794682646
-  },
-  {
-   "username": "cf9e3eb05238ec4899612d044d71ee76",
-   "displayName": "SmoothTanSilverfish",
-   "role": "member",
-   "title": "Raw Racing Recruit",
-   "membership": "basic",
-   "carId": 277,
-   "carHue": 0,
-   "carFile": "fully_leaded_small.png",
-   "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
-   "avgSpeed": 154,
-   "highSpeed": 198,
-   "lifetimeRaces": 21,
-   "teamRaces": 6,
-   "memberSince": 1794627835,
-   "lastRace": 1794628274
+   "lastRace": 1794685199
   },
   {
    "username": "nikooo124",
@@ -928,7 +911,7 @@
    "2026-11-11": 742,
    "2026-11-12": 1128,
    "2026-11-13": 1253,
-   "2026-11-14": 1757
+   "2026-11-14": 1763
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
