@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794668420,
+ "updated": 1794669615,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -154,12 +154,12 @@
    "carHue": 120,
    "carFile": "f35_small.png",
    "carImage": "https://www.nitrotype.com/cars/f35_small.png",
-   "avgSpeed": 85,
+   "avgSpeed": 81,
    "highSpeed": 113,
-   "lifetimeRaces": 18055,
-   "teamRaces": 43,
+   "lifetimeRaces": 18064,
+   "teamRaces": 52,
    "memberSince": 1794434328,
-   "lastRace": 1794600533
+   "lastRace": 1794669542
   },
   {
    "username": "25db4dd822756ad6d1df065db97ebcab",
@@ -511,12 +511,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 82,
+   "avgSpeed": 83,
    "highSpeed": 116,
-   "lifetimeRaces": 2882,
-   "teamRaces": 1503,
+   "lifetimeRaces": 2901,
+   "teamRaces": 1536,
    "memberSince": 1794241854,
-   "lastRace": 1794668331
+   "lastRace": 1794669572
   },
   {
    "username": "cf9e3eb05238ec4899612d044d71ee76",
@@ -929,7 +929,7 @@
    "2026-11-11": 742,
    "2026-11-12": 1128,
    "2026-11-13": 1253,
-   "2026-11-14": 1503
+   "2026-11-14": 1536
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
@@ -968,7 +968,7 @@
    "2026-11-11": 35,
    "2026-11-12": 35,
    "2026-11-13": 43,
-   "2026-11-14": 43
+   "2026-11-14": 52
   },
   "juanito2223": {
    "2026-11-12": 82,
