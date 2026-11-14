@@ -2241,9 +2241,9 @@ function syncUnread() {
     if (k === "admin" && !isStaff()) return;
     if (!(k === "admin" ? adminLoaded : chatLoaded)) return;
     const docs = k === "admin" ? adminDocs : chatDocs, latest = docs.reduce((m, d) => Math.max(m, msgMs(d)), 0);
-    if (!readInit[k]) {   // first time on this device: only messages from now on count as unread
+    if (!readInit[k]) {   // first time on this device: messages from the last 24 hours (from other people) count as unread
       readInit[k] = true; let v = 0; try { v = Number(localStorage.getItem(lrKey(k))) || 0; } catch {}
-      lastRead[k] = v || latest || Date.now();
+      lastRead[k] = v || Date.now() - 24 * 3600e3;
     }
     if (isViewing(k) && latest > lastRead[k]) lastRead[k] = latest;
     try { localStorage.setItem(lrKey(k), String(lastRead[k])); } catch {}
