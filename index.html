@@ -335,7 +335,29 @@ td.c-dim{color:var(--mute)}
 .place.p3{background:linear-gradient(135deg,#F2B27A,#C26F2E)}
 .empty{padding:28px 22px;color:var(--mute)}
 /* chat */
-#chat{height:calc(100vh - 200px);min-height:440px}
+#chat{height:calc(100vh - 200px);min-height:440px;position:relative;flex-direction:row}
+.chatcol{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column}
+.chatpane{flex:1;min-height:0;display:flex;flex-direction:column}
+.chatpane.hidden{display:none}
+.chatnav{display:flex;flex-direction:column;gap:8px;flex:none;width:158px;padding:14px 10px;border-right:1px solid var(--line)}
+.chatnav.hidden{display:none}
+.cn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 12px;border-radius:12px;font-weight:800;font-size:14px;color:var(--mute);border:1px solid transparent;transition:background .12s,color .12s}
+.cn:hover,.cn:focus-visible{background:var(--hover);color:var(--ink)}
+.cn:focus-visible{outline:2px solid var(--cyan)}
+.cn.on{color:var(--ink);background:color-mix(in srgb,var(--pink) 22%,transparent);border-color:var(--pink)}
+@media (max-width:640px){#chat{flex-direction:column}.chatnav{flex-direction:row;width:auto;border-right:0;border-bottom:1px solid var(--line)}.cn{flex:1;justify-content:center}}
+.chatlock{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:20px;background:color-mix(in srgb,var(--bg) 35%,transparent);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.chatlock.hidden{display:none}
+.lockbox{max-width:360px;text-align:center;padding:26px 24px;border-radius:20px;background:var(--dlg);border:1px solid var(--pink);box-shadow:0 18px 50px var(--shadow)}
+.lockbox h3{margin:6px 0 8px;font-size:26px}
+.lockbox p{margin:0 0 18px;color:var(--mute)}
+.lockico{font-size:40px;line-height:1}
+.sk{display:inline-block;height:11px;border-radius:6px;background:var(--line);vertical-align:middle}
+.guestrow{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 0;color:var(--mute);font-size:14px}
+#guestSignIn{display:none}
+body.guest #guestSignIn{display:inline-flex}
+body.guest .userbar{display:none}
+.react.off{opacity:.55;cursor:not-allowed}
 #msgs{display:flex;flex-direction:column;gap:10px;padding:18px 22px}
 .msg{max-width:78%;align-self:flex-start;background:var(--fill3);border:1px solid var(--line);border-radius:18px 18px 18px 4px;padding:8px 14px}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--pink),var(--purple));border-color:transparent;border-radius:18px 18px 4px 18px}
@@ -393,6 +415,7 @@ td.c-dim{color:var(--mute)}
       <button class="btn" id="authBtn" type="submit">Sign in</button>
     </form>
     <p style="margin:16px 0 0"><span id="swapText">New here?</span> <button class="link" id="swap" type="button">Create an account</button></p>
+    <div class="guestrow"><span>or</span><button class="btn ghost" id="guestBtn" type="button">Use without an account</button></div>
   </div>
 </div>
 
@@ -406,6 +429,7 @@ td.c-dim{color:var(--mute)}
       <a href="#chat" id="navChat">Chat</a>
       <a href="#owner" id="navOwner" class="hidden">Owner</a>
     </nav>
+    <button class="btn" id="guestSignIn" type="button">Sign in / Create account</button>
     <div class="userbar" id="userbar">
       <button type="button" class="ub-btn" id="ubBtn" aria-haspopup="true" aria-expanded="false" aria-controls="ubMenu">
         <span class="reddot" id="ubDot" aria-hidden="true"></span>
@@ -477,13 +501,38 @@ td.c-dim{color:var(--mute)}
     </section>
 
     <section id="chat" class="panel page hidden">
-      <div class="head"><h3 class="display">Team chat</h3></div>
-      <div class="scroll" id="msgs"></div>
-      <form class="send" id="sendForm">
-        <input id="text" placeholder="Write a message" maxlength="500" autocomplete="off" required>
-        <button class="btn" type="submit" id="sendBtn">Send</button>
-        <p class="err" id="chatErr" role="alert" style="grid-column:1/-1;margin:0"></p>
-      </form>
+      <nav class="chatnav hidden" id="chatNav" aria-label="Chats">
+        <button type="button" class="cn on" id="cnMain" aria-pressed="true"><span aria-hidden="true">💬</span><span>Main chat</span></button>
+        <button type="button" class="cn" id="cnAdmin" aria-pressed="false"><span aria-hidden="true">🛡️</span><span>Admin chat</span></button>
+      </nav>
+      <div class="chatcol" id="chatCol">
+        <div class="chatpane" id="mainChat">
+          <div class="head"><h3 class="display">Team chat</h3></div>
+          <div class="scroll" id="msgs"></div>
+          <form class="send" id="sendForm">
+            <input id="text" placeholder="Write a message" maxlength="500" autocomplete="off" required>
+            <button class="btn" type="submit" id="sendBtn">Send</button>
+            <p class="err" id="chatErr" role="alert" style="grid-column:1/-1;margin:0"></p>
+          </form>
+        </div>
+        <div class="chatpane hidden" id="adminChat">
+          <div class="head"><h3 class="display">Admin chat</h3><span class="sub" style="margin:0">Only admins and the owner can see this</span></div>
+          <div class="scroll" id="amsgs"></div>
+          <form class="send" id="aSendForm">
+            <input id="aText" placeholder="Message the admins" maxlength="500" autocomplete="off" required>
+            <button class="btn" type="submit" id="aSendBtn">Send</button>
+            <p class="err" id="aErr" role="alert" style="grid-column:1/-1;margin:0"></p>
+          </form>
+        </div>
+      </div>
+      <div class="chatlock hidden" id="chatLock">
+        <div class="lockbox">
+          <div class="lockico" aria-hidden="true">🔒</div>
+          <h3 class="display">Chat is for members</h3>
+          <p>Create a free account to read and join the team chat.</p>
+          <button class="btn" id="chatUnlock" type="button">Unlock chat with account</button>
+        </div>
+      </div>
     </section>
 
     <section id="giveawaysView" class="page hidden">
@@ -634,6 +683,8 @@ const db = getFirestore(app);
 
 let signUp = false, unsubs = [], creating = false, me = null;
 let myBadges = { seen: [] }, myChatCount = 0;
+let guest = false;   // using the site without an account
+let chatTab = "main", adminDocs = [], adminUnsub = null;
 
 // people pick a username, but Firebase wants an email, so every account gets a hidden login address (nobody ever sees or uses it).
 // The "usernames" list says which hidden address belongs to which username. Deleting that entry frees the username completely.
@@ -789,12 +840,15 @@ function applyRole() {
   drawPostBtn();
   drawPost();
   drawChatBtn();
+  listenAdmin(); drawChatTabs();
   if (profName()) showProfile();
 }
 
 let meUid = null;
 async function enter(user) {
+  if (user) { guest = false; document.body.classList.remove("guest"); try { sessionStorage.removeItem("guest"); } catch {} }
   lastChatAt = 0;
+  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = "";
   unsubs.forEach(u => u()); unsubs = []; stopOwnerFeeds();
   roles = {}; myRole = "user"; rolesLoaded = false; bans = {}; profilesList = []; profilesLoaded = false;
   if (user) {
@@ -823,7 +877,44 @@ try {
   if (localStorage.getItem("authV") !== "2") { await signOut(auth); localStorage.setItem("authV", "2"); }
 } catch {}
 
-onAuthStateChanged(auth, user => { if (creating) return; if (!user) me = null; enter(user); });
+onAuthStateChanged(auth, user => {
+  if (creating) return;
+  if (!user) {
+    me = null;
+    let g = false; try { g = sessionStorage.getItem("guest") === "1"; } catch {}
+    if (g) { enterGuest(); return; }
+  }
+  enter(user);
+});
+
+/* ---------- using the site without an account ---------- */
+function enterGuest() {
+  guest = true; try { sessionStorage.setItem("guest", "1"); } catch {}
+  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = "";
+  unsubs.forEach(u => u()); unsubs = []; stopOwnerFeeds();
+  roles = {}; myRole = "user"; rolesLoaded = true; bans = {}; profilesList = []; me = null; meUid = null;
+  document.body.classList.add("guest");
+  $("auth").classList.add("hidden"); $("app").classList.remove("hidden");
+  listenRacers(); listenGiveaways(); listenPosts(null);
+  applyGuest();
+}
+function applyGuest() {
+  $("newGiveaway").classList.add("hidden"); $("navOwner").classList.add("hidden");
+  drawUserBar(); drawBadgeDot(); drawPostBtn(); drawChatLock(); route(); renderGiveaways(); drawPost(); drawChat();
+}
+// leave guest mode and show the sign in / create account screen
+function guestToSignIn() {
+  guest = false; document.body.classList.remove("guest"); try { sessionStorage.removeItem("guest"); } catch {}
+  drawChatLock(); enter(null);
+}
+$("guestBtn").onclick = () => enterGuest();
+$("guestSignIn").onclick = guestToSignIn;
+$("chatUnlock").onclick = guestToSignIn;
+// the chat page is blurred with an unlock button for people without an account
+function drawChatLock() {
+  $("chatLock").classList.toggle("hidden", !guest);
+  $("chatCol").inert = guest; $("chatNav").inert = guest;
+}
 
 /* ---------- pages ---------- */
 let giveaways = [], giveawaysLoaded = false, snaps = [], snapsLoadedAt = 0;
@@ -840,7 +931,7 @@ function route() {
   $("profileView").classList.toggle("hidden", page !== "profile");
   const navPage = page === "giveaway" ? "giveaways" : page;
   [["navHome", "home"], ["navStats", "stats"], ["navGiveaways", "giveaways"], ["navChat", "chat"], ["navOwner", "owner"]].forEach(([id, p]) => $(id).setAttribute("aria-current", p === navPage ? "page" : "false"));
-  if (page === "chat") { const m = $("msgs"); m.scrollTop = m.scrollHeight; }
+  if (page === "chat") { const m = $(chatTab === "admin" && isStaff() ? "amsgs" : "msgs"); m.scrollTop = m.scrollHeight; }
   if (page === "giveaways" || page === "giveaway") { refreshSnaps(); renderGiveaways(); }
   if (page === "stats" && statsRange !== "all") refreshSnaps();
   if (page === "owner") drawOwner();
@@ -1408,13 +1499,37 @@ function loadProfs(uids) {
       chatProf[uid] = d ? { t: Date.now(), username: d.username, racer: d.racer, createdMs: msOf(d.createdAt) } : { t: Date.now() };
     }).catch(() => { chatProf[uid] = { t: Date.now() }; }).finally(() => {
       profAsked.delete(uid);
-      clearTimeout(profTimer); profTimer = setTimeout(drawChat, 80);
+      clearTimeout(profTimer); profTimer = setTimeout(() => { drawChat(); if (adminDocs.length) drawAdminChat(); }, 80);
     });
   });
 }
-setInterval(() => { if (!$("app").classList.contains("hidden") && chatDocs.length) drawChat(); }, 60000);
+setInterval(() => { if (!$("app").classList.contains("hidden") && !guest) { if (chatDocs.length) drawChat(); if (adminDocs.length) drawAdminChat(); } }, 60000);
 
+function chatHeader(m) {
+  const b = document.createElement("b");
+  const role = roles[m.uid]?.role;
+  const pr = m.uid === chatUid && me ? { username: me.username, racer: me.racer, createdMs: me.createdMs || 0 } : chatProf[m.uid];
+  const nm = (pr && pr.username) || m.name || "Racer", rc = (pr && pr.racer) || m.racer;
+  const mc = carFor(rc);
+  if (mc) b.append(mc);
+  else if (trackedState(rc) === false) { const w = el("span", "wave", "\u26A0\uFE0F"); w.dataset.tt = "Tracking is not available for non-2B members. If you are a member, double-check your information in settings."; w.tabIndex = 0; b.append(w); }
+  if (ICON[role]) { const i = el("span", "ri", ICON[role]); i.dataset.tt = ROLE_NAME[role]; b.append(i); }
+  if (rc) { const a = document.createElement("a"); a.href = profileHref(rc); a.textContent = nm; b.append(a); }
+  else b.append(document.createTextNode(nm));
+  if (pr && pr.createdMs && Date.now() - pr.createdMs < 12 * 3600e3) { const w = el("span", "wave hi", "\u{1F44B}"); w.dataset.tt = "Say hi! I'm new here!"; w.tabIndex = 0; b.append(w); }
+  return b;
+}
+function drawChatSkeleton() {
+  const box = $("msgs"); box.textContent = "";
+  [[1, 120, 260], [0, 90, 180], [1, 110, 300], [0, 100, 220], [0, 80, 140], [1, 120, 240], [0, 100, 280]].forEach(([me2, a, b]) => {
+    const row = el("div", "msg" + (me2 ? " me" : ""));
+    const h = el("b"); const s1 = el("span", "sk"); s1.style.width = a + "px"; h.append(s1);
+    const p = el("p"); const s2 = el("span", "sk"); s2.style.width = b + "px"; p.append(s2);
+    row.append(h, p); box.append(row);
+  });
+}
 function drawChat() {
+  if (guest) { drawChatSkeleton(); return; }
   const box = $("msgs");
   const stick = box.scrollTop + box.clientHeight >= box.scrollHeight - 40;
   box.textContent = "";
@@ -1442,17 +1557,7 @@ function drawChat() {
       row.append(p); const cr = reactChips(d.id); if (cr) row.append(cr);
       row.append(reactBar(d.id)); box.append(row); return;
     }
-    const b = document.createElement("b");
-    const role = roles[m.uid]?.role;
-    const pr = m.uid === chatUid && me ? { username: me.username, racer: me.racer, createdMs: me.createdMs || 0 } : chatProf[m.uid];
-    const nm = (pr && pr.username) || m.name || "Racer", rc = (pr && pr.racer) || m.racer;
-    const mc = carFor(rc);
-    if (mc) b.append(mc);
-    else if (trackedState(rc) === false) { const w = el("span", "wave", "\u26A0\uFE0F"); w.dataset.tt = "Tracking is not available for non-2B members. If you are a member, double-check your information in settings."; w.tabIndex = 0; b.append(w); }
-    if (ICON[role]) { const i = el("span", "ri", ICON[role]); i.dataset.tt = ROLE_NAME[role]; b.append(i); }
-    if (rc) { const a = document.createElement("a"); a.href = profileHref(rc); a.textContent = nm; b.append(a); }
-    else b.append(document.createTextNode(nm));
-    if (pr && pr.createdMs && Date.now() - pr.createdMs < 12 * 3600e3) { const w = el("span", "wave hi", "\u{1F44B}"); w.dataset.tt = "Say hi! I'm new here!"; w.tabIndex = 0; b.append(w); }
+    const b = chatHeader(m);
     const t = document.createElement("time");
     if (m.createdAt) t.textContent = chatTime(m.createdAt.toDate());
     const p = document.createElement("p"); p.textContent = m.text;
@@ -1928,6 +2033,7 @@ function listenPosts(user) {
     if (changed) watchReactions();
     drawPost();
   }, () => {}));
+  if (!user) return;
   unsubs.push(onSnapshot(doc(db, "postCooldowns", user.uid), s => {
     const v = s.exists() ? s.data({ serverTimestamps: "estimate" }).last : null;
     myCooldown = v ? tsMs(v) : 0;
@@ -1962,11 +2068,12 @@ function drawPost() {
   postReacts.forEach(x => { counts[x.emoji] = (counts[x.emoji] || 0) + 1; });
   const mine = (postReacts.find(x => x.uid === uid) || {}).emoji;
   POST_EMOJI.forEach(em => {
-    const b = el("button", "react"); b.type = "button"; b.setAttribute("aria-pressed", mine === em ? "true" : "false"); b.title = "React";
+    const b = el("button", "react" + (guest ? " off" : "")); b.type = "button"; b.setAttribute("aria-pressed", mine === em ? "true" : "false");
+    if (guest) { b.setAttribute("aria-disabled", "true"); b.dataset.tt = "Create an account to react"; } else b.title = "React";
     b.append(el("span", "", em));
     if (counts[em]) b.append(el("span", "n", String(counts[em])));
     b.onclick = async () => {
-      if (!uid) return;
+      if (!uid || guest) return;
       const ref = doc(db, "posts", p.id, "reactions", uid);
       try { if (mine === em) await deleteDoc(ref); else await setDoc(ref, { emoji: em, uid }); } catch {}
     };
@@ -2107,6 +2214,64 @@ function drawChatBtn() {
   clearTimeout(chatTimer);
   if (w > 0) chatTimer = setTimeout(drawChatBtn, Math.min(w, 250));
 }
+/* ---------- admin chat (only admins and the owner can see it) ---------- */
+function listenAdmin() {
+  if (isStaff() && !adminUnsub) {
+    adminUnsub = onSnapshot(query(collection(db, "adminMessages"), orderBy("createdAt", "desc"), limit(100)), snap => { adminDocs = snap.docs.slice().reverse(); drawAdminChat(); }, () => {});
+  } else if (!isStaff() && adminUnsub) { adminUnsub(); adminUnsub = null; adminDocs = []; drawAdminChat(); }
+}
+function drawChatTabs() {
+  const staff = isStaff() && !guest;
+  if (!staff) chatTab = "main";
+  $("chatNav").classList.toggle("hidden", !staff);
+  $("mainChat").classList.toggle("hidden", chatTab !== "main");
+  $("adminChat").classList.toggle("hidden", chatTab !== "admin");
+  $("cnMain").classList.toggle("on", chatTab === "main"); $("cnMain").setAttribute("aria-pressed", chatTab === "main" ? "true" : "false");
+  $("cnAdmin").classList.toggle("on", chatTab === "admin"); $("cnAdmin").setAttribute("aria-pressed", chatTab === "admin" ? "true" : "false");
+}
+function openChatTab(t) {
+  chatTab = t; drawChatTabs();
+  const m = $(t === "admin" ? "amsgs" : "msgs"); m.scrollTop = m.scrollHeight;
+}
+$("cnMain").onclick = () => openChatTab("main");
+$("cnAdmin").onclick = () => { if (isStaff()) openChatTab("admin"); };
+function drawAdminChat() {
+  const box = $("amsgs");
+  const stick = box.scrollTop + box.clientHeight >= box.scrollHeight - 40;
+  box.textContent = "";
+  if (!isStaff()) return;
+  loadProfs(adminDocs.map(d => d.data().uid));
+  adminDocs.forEach(d => {
+    const m = d.data();
+    const row = document.createElement("div"); row.className = "msg" + (m.uid === chatUid ? " me" : "");
+    const t = document.createElement("time");
+    if (m.createdAt) t.textContent = chatTime(m.createdAt.toDate());
+    const p = document.createElement("p"); p.textContent = m.text;
+    row.append(chatHeader(m), t);
+    if (isOwner()) {
+      const x = el("button", "del", "\u2715"); x.type = "button"; x.title = "Delete message"; x.setAttribute("aria-label", "Delete message");
+      x.onclick = async () => {
+        if (!(await confirmBox("Delete message?", "This message will be removed for the admins.", "Delete"))) return;
+        try { await deleteDoc(doc(db, "adminMessages", d.id)); } catch { $("aErr").textContent = "Could not delete the message."; }
+      };
+      row.append(x);
+    }
+    row.append(p); box.append(row);
+  });
+  if (stick) box.scrollTop = box.scrollHeight;
+}
+$("aText").oninput = () => { $("aErr").textContent = ""; };
+$("aSendForm").onsubmit = async e => {
+  e.preventDefault();
+  const input = $("aText"), text = input.value.trim(), err = $("aErr");
+  err.textContent = "";
+  const u = auth.currentUser; if (!u || !text || !isStaff()) return;
+  input.value = "";
+  const data = { text, uid: u.uid, name: me?.username || u.displayName || "Racer", racer: me?.racer || null, createdAt: serverTimestamp() };
+  try { await addDoc(collection(db, "adminMessages"), data); }
+  catch { input.value = text; err.textContent = "That message could not be sent. Try again."; }
+};
+
 $("text").oninput = () => { $("chatErr").textContent = ""; };
 $("sendForm").onsubmit = async e => {
   e.preventDefault();
