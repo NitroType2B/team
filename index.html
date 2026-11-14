@@ -864,6 +864,7 @@ async function enter(user) {
     try { const bs = await getDoc(doc(db, "bans", user.uid)); banned = bs.exists(); gone = banned && !!bs.data().deleted; } catch {}
     if (banned) { $("authErr").textContent = gone ? DELETED_MSG : BANNED_MSG; await signOut(auth).catch(() => {}); return; }
   }
+  drawChatTabs();
   $("auth").classList.toggle("hidden", !!user);
   $("app").classList.toggle("hidden", !user);
   if (!user) { me = null; return; }
@@ -908,12 +909,12 @@ function enterGuest() {
 }
 function applyGuest() {
   $("newGiveaway").classList.add("hidden"); $("navOwner").classList.add("hidden");
-  drawUserBar(); drawBadgeDot(); drawPostBtn(); drawChatLock(); route(); renderGiveaways(); drawPost(); drawChat();
+  drawUserBar(); drawBadgeDot(); drawPostBtn(); drawChatLock(); drawChatTabs(); route(); renderGiveaways(); drawPost(); drawChat();
 }
 // leave guest mode and show the sign in / create account screen
 function guestToSignIn() {
   guest = false; document.body.classList.remove("guest"); try { sessionStorage.removeItem("guest"); } catch {}
-  drawChatLock(); enter(null);
+  drawChatLock(); enter(null); drawChatTabs();
 }
 $("guestBtn").onclick = () => enterGuest();
 $("guestSignIn").onclick = guestToSignIn;
