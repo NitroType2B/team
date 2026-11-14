@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794622813,
+ "updated": 1794624014,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 398
+  "views": 399
  },
  "racers": [
   {
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 138,
+   "avgSpeed": 135,
    "highSpeed": 173,
-   "lifetimeRaces": 4041,
-   "teamRaces": 1343,
+   "lifetimeRaces": 4058,
+   "teamRaces": 1360,
    "memberSince": 1794193196,
-   "lastRace": 1794622771
+   "lastRace": 1794623967
   },
   {
    "username": "x_onion_x",
@@ -88,10 +88,10 @@
    "carImage": "https://www.nitrotype.com/cars/142_small_1.png",
    "avgSpeed": 134,
    "highSpeed": 172,
-   "lifetimeRaces": 27839,
-   "teamRaces": 628,
+   "lifetimeRaces": 27846,
+   "teamRaces": 635,
    "memberSince": 1794100813,
-   "lastRace": 1794622795
+   "lastRace": 1794623164
   },
   {
    "username": "lifetime100",
@@ -579,12 +579,12 @@
    "carHue": 340,
    "carFile": "r1dwqdafa_small.png",
    "carImage": "https://www.nitrotype.com/cars/r1dwqdafa_small.png",
-   "avgSpeed": 49,
+   "avgSpeed": 50,
    "highSpeed": 70,
-   "lifetimeRaces": 921,
-   "teamRaces": 96,
+   "lifetimeRaces": 937,
+   "teamRaces": 126,
    "memberSince": 1794493776,
-   "lastRace": 1794497628
+   "lastRace": 1794623991
   },
   {
    "username": "exterverjae7",
@@ -700,7 +700,7 @@
    "2026-11-11": 845,
    "2026-11-12": 1024,
    "2026-11-13": 1259,
-   "2026-11-14": 1343
+   "2026-11-14": 1360
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -708,7 +708,7 @@
    "2026-11-11": 497,
    "2026-11-12": 538,
    "2026-11-13": 602,
-   "2026-11-14": 628
+   "2026-11-14": 635
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -929,7 +929,7 @@
   "foxman432": {
    "2026-11-12": 96,
    "2026-11-13": 96,
-   "2026-11-14": 96
+   "2026-11-14": 126
   },
   "tran1learningkolemak": {
    "2026-11-12": 0
