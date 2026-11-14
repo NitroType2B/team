@@ -366,6 +366,9 @@ main:has(#chat:not(.hidden)){max-width:1500px;padding-top:24px}
 body.guest #guestSignIn{display:inline-flex}
 body.guest .userbar{display:none}
 .react.off{opacity:.55;cursor:not-allowed}
+.reddot.nd{position:static;display:none;min-width:20px;height:20px;padding:0 5px;font-size:12px;line-height:20px;margin-left:8px;vertical-align:middle}
+.reddot.nd.on{display:inline-block}
+.cn .reddot.nd.on{margin-left:auto}
 #msgs,#amsgs{display:flex;flex-direction:column;gap:10px;padding:20px 26px}
 .msg{max-width:78%;align-self:flex-start;background:var(--fill3);border:1px solid var(--line);border-radius:18px 18px 18px 4px;padding:8px 14px}
 .msg.me{align-self:flex-end;background:linear-gradient(135deg,var(--pink),var(--purple));border-color:transparent;border-radius:18px 18px 4px 18px}
@@ -434,7 +437,7 @@ body.guest .userbar{display:none}
       <a href="#home" id="navHome">Home</a>
       <a href="#stats" id="navStats">Team stats</a>
       <a href="#giveaways" id="navGiveaways">Giveaways</a>
-      <a href="#chat" id="navChat">Chat</a>
+      <a href="#chat" id="navChat">Chat<span class="reddot nd" id="navDot" aria-hidden="true"></span></a>
       <a href="#owner" id="navOwner" class="hidden">Owner</a>
     </nav>
     <button class="btn" id="guestSignIn" type="button">Sign in / Create account</button>
@@ -510,8 +513,8 @@ body.guest .userbar{display:none}
 
     <section id="chat" class="panel page hidden">
       <nav class="chatnav hidden" id="chatNav" aria-label="Chats">
-        <button type="button" class="cn on" id="cnMain" aria-pressed="true"><span aria-hidden="true">💬</span><span>Main chat</span></button>
-        <button type="button" class="cn" id="cnAdmin" aria-pressed="false"><span aria-hidden="true">🛡️</span><span>Admin chat</span></button>
+        <button type="button" class="cn on" id="cnMain" aria-pressed="true"><span aria-hidden="true">💬</span><span>Main chat</span><span class="reddot nd" id="cnMainDot" aria-hidden="true"></span></button>
+        <button type="button" class="cn" id="cnAdmin" aria-pressed="false"><span aria-hidden="true">🛡️</span><span>Admin chat</span><span class="reddot nd" id="cnAdminDot" aria-hidden="true"></span></button>
       </nav>
       <div class="chatcol" id="chatCol">
         <div class="chatpane" id="mainChat">
@@ -693,6 +696,7 @@ let signUp = false, unsubs = [], creating = false, me = null;
 let myBadges = { seen: [] }, myChatCount = 0;
 let guest = false;   // using the site without an account
 let chatTab = "main", adminDocs = [], adminUnsub = null;
+let chatLoaded = false, adminLoaded = false, lastRead = { main: 0, admin: 0 }, readInit = { main: false, admin: false };
 
 // people pick a username, but Firebase wants an email, so every account gets a hidden login address (nobody ever sees or uses it).
 // The "usernames" list says which hidden address belongs to which username. Deleting that entry frees the username completely.
@@ -848,7 +852,7 @@ function applyRole() {
   drawPostBtn();
   drawPost();
   drawChatBtn();
-  listenAdmin(); drawChatTabs();
+  listenAdmin(); drawChatTabs(); syncUnread();
   if (profName()) showProfile();
 }
 
@@ -856,7 +860,7 @@ let meUid = null;
 async function enter(user) {
   if (user) { guest = false; document.body.classList.remove("guest"); try { sessionStorage.removeItem("guest"); } catch {} }
   lastChatAt = 0;
-  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = "";
+  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = ""; chatLoaded = false; adminLoaded = false; readInit = { main: false, admin: false }; lastRead = { main: 0, admin: 0 };
   unsubs.forEach(u => u()); unsubs = []; stopOwnerFeeds();
   roles = {}; myRole = "user"; rolesLoaded = false; bans = {}; profilesList = []; profilesLoaded = false;
   if (user) {
@@ -899,7 +903,7 @@ onAuthStateChanged(auth, user => {
 /* ---------- using the site without an account ---------- */
 function enterGuest() {
   guest = true; try { sessionStorage.setItem("guest", "1"); } catch {}
-  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = "";
+  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = ""; chatLoaded = false; adminLoaded = false; readInit = { main: false, admin: false }; lastRead = { main: 0, admin: 0 };
   unsubs.forEach(u => u()); unsubs = []; stopOwnerFeeds();
   roles = {}; myRole = "user"; rolesLoaded = true; bans = {}; profilesList = []; me = null; meUid = null;
   document.body.classList.add("guest");
@@ -941,6 +945,7 @@ function route() {
   const navPage = page === "giveaway" ? "giveaways" : page;
   [["navHome", "home"], ["navStats", "stats"], ["navGiveaways", "giveaways"], ["navChat", "chat"], ["navOwner", "owner"]].forEach(([id, p]) => $(id).setAttribute("aria-current", p === navPage ? "page" : "false"));
   if (page === "chat") { const m = $(chatTab === "admin" && isStaff() ? "amsgs" : "msgs"); m.scrollTop = m.scrollHeight; }
+  syncUnread();
   if (page === "giveaways" || page === "giveaway") { refreshSnaps(); renderGiveaways(); }
   if (page === "stats" && statsRange !== "all") refreshSnaps();
   if (page === "owner") drawOwner();
@@ -1455,7 +1460,7 @@ let chatDocs = [], chatUid = null;
 function listenChat(user) {
   chatUid = user.uid; chatDocs = [];
   const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100));
-  unsubs.push(onSnapshot(q, snap => { chatDocs = snap.docs.slice().reverse(); drawChat(); }, () => {}));
+  unsubs.push(onSnapshot(q, snap => { chatDocs = snap.docs.slice().reverse(); chatLoaded = true; drawChat(); syncUnread(); }, () => {}));
   chatReacts = {};
   unsubs.push(onSnapshot(query(collection(db, "chatReactions"), orderBy("createdAt", "desc"), limit(1000)), snap => {
     chatReacts = {};
@@ -2223,11 +2228,37 @@ function drawChatBtn() {
   clearTimeout(chatTimer);
   if (w > 0) chatTimer = setTimeout(drawChatBtn, Math.min(w, 250));
 }
+/* ---------- unread chat messages (the red number on the Chat tab) ---------- */
+const msgMs = d => { const c = d.data().createdAt; return c && c.toMillis ? c.toMillis() : Date.now(); };
+const lrKey = k => "lastRead:" + chatUid + ":" + k;
+const unreadFor = k => (k === "admin" ? adminDocs : chatDocs).filter(d => d.data().uid !== chatUid && msgMs(d) > lastRead[k]).length;
+const isViewing = k => !guest && !document.hidden && location.hash === "#chat" && (k === "main" ? chatTab === "main" || !isStaff() : chatTab === "admin" && isStaff());
+const dotText = n => n > 9 ? "9+" : String(n);
+function setDot(id, n) { const d = $(id); d.classList.toggle("on", n > 0); d.textContent = n > 0 ? dotText(n) : ""; }
+function syncUnread() {
+  if (guest || !chatUid) { ["navDot", "cnMainDot", "cnAdminDot"].forEach(i => setDot(i, 0)); return; }
+  ["main", "admin"].forEach(k => {
+    if (k === "admin" && !isStaff()) return;
+    if (!(k === "admin" ? adminLoaded : chatLoaded)) return;
+    const docs = k === "admin" ? adminDocs : chatDocs, latest = docs.reduce((m, d) => Math.max(m, msgMs(d)), 0);
+    if (!readInit[k]) {   // first time on this device: only messages from now on count as unread
+      readInit[k] = true; let v = 0; try { v = Number(localStorage.getItem(lrKey(k))) || 0; } catch {}
+      lastRead[k] = v || latest || Date.now();
+    }
+    if (isViewing(k) && latest > lastRead[k]) lastRead[k] = latest;
+    try { localStorage.setItem(lrKey(k), String(lastRead[k])); } catch {}
+  });
+  const m = unreadFor("main"), a = isStaff() ? unreadFor("admin") : 0;
+  setDot("navDot", m + a);
+  setDot("cnMainDot", isStaff() ? m : 0); setDot("cnAdminDot", a);
+}
+document.addEventListener("visibilitychange", syncUnread);
+
 /* ---------- admin chat (only admins and the owner can see it) ---------- */
 function listenAdmin() {
   if (isStaff() && !adminUnsub) {
-    adminUnsub = onSnapshot(query(collection(db, "adminMessages"), orderBy("createdAt", "desc"), limit(100)), snap => { adminDocs = snap.docs.slice().reverse(); drawAdminChat(); }, () => {});
-  } else if (!isStaff() && adminUnsub) { adminUnsub(); adminUnsub = null; adminDocs = []; drawAdminChat(); }
+    adminUnsub = onSnapshot(query(collection(db, "adminMessages"), orderBy("createdAt", "desc"), limit(100)), snap => { adminDocs = snap.docs.slice().reverse(); adminLoaded = true; drawAdminChat(); syncUnread(); }, () => {});
+  } else if (!isStaff() && adminUnsub) { adminUnsub(); adminUnsub = null; adminDocs = []; adminLoaded = false; drawAdminChat(); syncUnread(); }
 }
 function drawChatTabs() {
   const staff = isStaff() && !guest;
@@ -2239,7 +2270,7 @@ function drawChatTabs() {
   $("cnAdmin").classList.toggle("on", chatTab === "admin"); $("cnAdmin").setAttribute("aria-pressed", chatTab === "admin" ? "true" : "false");
 }
 function openChatTab(t) {
-  chatTab = t; drawChatTabs();
+  chatTab = t; drawChatTabs(); syncUnread();
   const m = $(t === "admin" ? "amsgs" : "msgs"); m.scrollTop = m.scrollHeight;
 }
 $("cnMain").onclick = () => openChatTab("main");
