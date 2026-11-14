@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794698413,
+ "updated": 1794699614,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 445
+  "views": 448
  },
  "racers": [
   {
@@ -86,12 +86,12 @@
    "carHue": 240,
    "carFile": "76_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/76_small_1.png",
-   "avgSpeed": 122,
+   "avgSpeed": 118,
    "highSpeed": 138,
-   "lifetimeRaces": 1836,
-   "teamRaces": 2,
+   "lifetimeRaces": 1844,
+   "teamRaces": 10,
    "memberSince": 1794697788,
-   "lastRace": 1794697878
+   "lastRace": 1794699583
   },
   {
    "username": "visco_asher_yt",
@@ -137,12 +137,12 @@
    "carHue": 320,
    "carFile": "spirit_racers_final_seal_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_final_seal_small.png",
-   "avgSpeed": 119,
+   "avgSpeed": 122,
    "highSpeed": 158,
-   "lifetimeRaces": 34225,
-   "teamRaces": 1492,
+   "lifetimeRaces": 34249,
+   "teamRaces": 1516,
    "memberSince": 1792979300,
-   "lastRace": 1794698358
+   "lastRace": 1794699588
   },
   {
    "username": "3db33f0fa5e1cefd2a93a1d3f4eba1de",
@@ -154,12 +154,12 @@
    "carHue": 200,
    "carFile": "gt40_small.png",
    "carImage": "https://www.nitrotype.com/cars/gt40_small.png",
-   "avgSpeed": 139,
+   "avgSpeed": 141,
    "highSpeed": 177,
-   "lifetimeRaces": 1185,
-   "teamRaces": 0,
+   "lifetimeRaces": 1195,
+   "teamRaces": 10,
    "memberSince": 1794627547,
-   "lastRace": 0
+   "lastRace": 1794699221
   },
   {
    "username": "fireheartc",
@@ -795,7 +795,7 @@
    "2026-11-11": 1067,
    "2026-11-12": 1111,
    "2026-11-13": 1132,
-   "2026-11-14": 1492
+   "2026-11-14": 1516
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
@@ -1034,7 +1034,7 @@
    "2026-11-14": 14
   },
   "3db33f0fa5e1cefd2a93a1d3f4eba1de": {
-   "2026-11-14": 0
+   "2026-11-14": 10
   },
   "cf9e3eb05238ec4899612d044d71ee76": {
    "2026-11-14": 6
@@ -1049,7 +1049,7 @@
    "2026-11-14": 4
   },
   "anwanar": {
-   "2026-11-14": 2
+   "2026-11-14": 10
   }
  }
 }
