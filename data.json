@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794678012,
+ "updated": 1794679216,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 424
+  "views": 425
  },
  "racers": [
   {
@@ -122,10 +122,10 @@
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_final_seal_small.png",
    "avgSpeed": 125,
    "highSpeed": 158,
-   "lifetimeRaces": 34113,
-   "teamRaces": 1380,
+   "lifetimeRaces": 34135,
+   "teamRaces": 1402,
    "memberSince": 1792979300,
-   "lastRace": 1794677929
+   "lastRace": 1794679045
   },
   {
    "username": "3db33f0fa5e1cefd2a93a1d3f4eba1de",
@@ -511,12 +511,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 92,
+   "avgSpeed": 78,
    "highSpeed": 116,
-   "lifetimeRaces": 3005,
-   "teamRaces": 1719,
+   "lifetimeRaces": 3009,
+   "teamRaces": 1724,
    "memberSince": 1794241854,
-   "lastRace": 1794677971
+   "lastRace": 1794678652
   },
   {
    "username": "cf9e3eb05238ec4899612d044d71ee76",
@@ -776,7 +776,7 @@
    "2026-11-11": 1067,
    "2026-11-12": 1111,
    "2026-11-13": 1132,
-   "2026-11-14": 1380
+   "2026-11-14": 1402
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
@@ -928,7 +928,7 @@
    "2026-11-11": 742,
    "2026-11-12": 1128,
    "2026-11-13": 1253,
-   "2026-11-14": 1719
+   "2026-11-14": 1724
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
