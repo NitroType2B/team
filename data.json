@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794651618,
+ "updated": 1794652815,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -443,12 +443,12 @@
    "carHue": 340,
    "carFile": "msg01_small.png",
    "carImage": "https://www.nitrotype.com/cars/msg01_small.png",
-   "avgSpeed": 36,
+   "avgSpeed": 39,
    "highSpeed": 75,
-   "lifetimeRaces": 4542,
-   "teamRaces": 1159,
+   "lifetimeRaces": 4566,
+   "teamRaces": 1179,
    "memberSince": 1793725663,
-   "lastRace": 1794651564
+   "lastRace": 1794652730
   },
   {
    "username": "ykitsmizu",
@@ -863,7 +863,7 @@
    "2026-11-11": 980,
    "2026-11-12": 1025,
    "2026-11-13": 1135,
-   "2026-11-14": 1159
+   "2026-11-14": 1179
   },
   "nikooo124": {
    "2026-11-09": 10,
