@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794669615,
+ "updated": 1794670815,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 418
+  "views": 420
  },
  "racers": [
   {
@@ -154,12 +154,12 @@
    "carHue": 120,
    "carFile": "f35_small.png",
    "carImage": "https://www.nitrotype.com/cars/f35_small.png",
-   "avgSpeed": 81,
+   "avgSpeed": 84,
    "highSpeed": 113,
-   "lifetimeRaces": 18064,
-   "teamRaces": 52,
+   "lifetimeRaces": 18067,
+   "teamRaces": 55,
    "memberSince": 1794434328,
-   "lastRace": 1794669542
+   "lastRace": 1794670439
   },
   {
    "username": "25db4dd822756ad6d1df065db97ebcab",
@@ -511,12 +511,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 83,
+   "avgSpeed": 91,
    "highSpeed": 116,
-   "lifetimeRaces": 2901,
-   "teamRaces": 1536,
+   "lifetimeRaces": 2918,
+   "teamRaces": 1564,
    "memberSince": 1794241854,
-   "lastRace": 1794669572
+   "lastRace": 1794670766
   },
   {
    "username": "cf9e3eb05238ec4899612d044d71ee76",
@@ -929,7 +929,7 @@
    "2026-11-11": 742,
    "2026-11-12": 1128,
    "2026-11-13": 1253,
-   "2026-11-14": 1536
+   "2026-11-14": 1564
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
@@ -968,7 +968,7 @@
    "2026-11-11": 35,
    "2026-11-12": 35,
    "2026-11-13": 43,
-   "2026-11-14": 52
+   "2026-11-14": 55
   },
   "juanito2223": {
    "2026-11-12": 82,
