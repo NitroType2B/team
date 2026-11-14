@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794627614,
+ "updated": 1794628821,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 406
+  "views": 408
  },
  "racers": [
   {
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 125,
+   "avgSpeed": 133,
    "highSpeed": 173,
-   "lifetimeRaces": 4090,
-   "teamRaces": 1392,
+   "lifetimeRaces": 4104,
+   "teamRaces": 1406,
    "memberSince": 1794193196,
-   "lastRace": 1794627596
+   "lastRace": 1794628783
   },
   {
    "username": "x_onion_x",
@@ -120,12 +120,12 @@
    "carHue": 240,
    "carFile": "115_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/115_small_1.png",
-   "avgSpeed": 125,
+   "avgSpeed": 126,
    "highSpeed": 158,
-   "lifetimeRaces": 33921,
-   "teamRaces": 1188,
+   "lifetimeRaces": 33930,
+   "teamRaces": 1197,
    "memberSince": 1792979300,
-   "lastRace": 1794627575
+   "lastRace": 1794628161
   },
   {
    "username": "3db33f0fa5e1cefd2a93a1d3f4eba1de",
@@ -496,10 +496,27 @@
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
    "avgSpeed": 92,
    "highSpeed": 116,
-   "lifetimeRaces": 2779,
-   "teamRaces": 1324,
+   "lifetimeRaces": 2795,
+   "teamRaces": 1354,
    "memberSince": 1794241854,
-   "lastRace": 1794627501
+   "lastRace": 1794628707
+  },
+  {
+   "username": "cf9e3eb05238ec4899612d044d71ee76",
+   "displayName": "SmoothTanSilverfish",
+   "role": "member",
+   "title": "Raw Racing Recruit",
+   "membership": "basic",
+   "carId": 277,
+   "carHue": 0,
+   "carFile": "fully_leaded_small.png",
+   "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
+   "avgSpeed": 154,
+   "highSpeed": 198,
+   "lifetimeRaces": 21,
+   "teamRaces": 6,
+   "memberSince": 1794627835,
+   "lastRace": 1794628274
   },
   {
    "username": "nikooo124",
@@ -596,12 +613,12 @@
    "carHue": 340,
    "carFile": "r1dwqdafa_small.png",
    "carImage": "https://www.nitrotype.com/cars/r1dwqdafa_small.png",
-   "avgSpeed": 47,
+   "avgSpeed": 48,
    "highSpeed": 70,
-   "lifetimeRaces": 985,
-   "teamRaces": 215,
+   "lifetimeRaces": 1002,
+   "teamRaces": 246,
    "memberSince": 1794493776,
-   "lastRace": 1794627568
+   "lastRace": 1794628761
   },
   {
    "username": "exterverjae7",
@@ -718,7 +735,7 @@
    "2026-11-11": 845,
    "2026-11-12": 1024,
    "2026-11-13": 1259,
-   "2026-11-14": 1392
+   "2026-11-14": 1406
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -742,7 +759,7 @@
    "2026-11-11": 1067,
    "2026-11-12": 1111,
    "2026-11-13": 1132,
-   "2026-11-14": 1188
+   "2026-11-14": 1197
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
@@ -894,7 +911,7 @@
    "2026-11-11": 742,
    "2026-11-12": 1128,
    "2026-11-13": 1253,
-   "2026-11-14": 1324
+   "2026-11-14": 1354
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
@@ -947,7 +964,7 @@
   "foxman432": {
    "2026-11-12": 96,
    "2026-11-13": 96,
-   "2026-11-14": 215
+   "2026-11-14": 246
   },
   "tran1learningkolemak": {
    "2026-11-12": 0
@@ -982,6 +999,9 @@
   },
   "3db33f0fa5e1cefd2a93a1d3f4eba1de": {
    "2026-11-14": 0
+  },
+  "cf9e3eb05238ec4899612d044d71ee76": {
+   "2026-11-14": 6
   }
  }
 }
