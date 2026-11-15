@@ -868,7 +868,7 @@ let meUid = null;
 async function enter(user) {
   if (user) { guest = false; document.body.classList.remove("guest"); try { sessionStorage.removeItem("guest"); } catch {} }
   lastChatAt = 0;
-  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = ""; chatLoaded = false; adminLoaded = false; readInit = { main: false, admin: false }; lastRead = { main: 0, admin: 0 };
+  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = ""; chatLoaded = false; adminLoaded = false; adminReacts = {}; readInit = { main: false, admin: false }; lastRead = { main: 0, admin: 0 };
   unsubs.forEach(u => u()); unsubs = []; stopOwnerFeeds();
   roles = {}; myRole = "user"; rolesLoaded = false; bans = {}; profilesList = []; profilesLoaded = false;
   if (user) {
@@ -911,7 +911,7 @@ onAuthStateChanged(auth, user => {
 /* ---------- using the site without an account ---------- */
 function enterGuest() {
   guest = true; try { sessionStorage.setItem("guest", "1"); } catch {}
-  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = ""; chatLoaded = false; adminLoaded = false; readInit = { main: false, admin: false }; lastRead = { main: 0, admin: 0 };
+  if (adminUnsub) { adminUnsub(); adminUnsub = null; } adminDocs = []; chatTab = "main"; $("amsgs").textContent = ""; chatLoaded = false; adminLoaded = false; adminReacts = {}; readInit = { main: false, admin: false }; lastRead = { main: 0, admin: 0 };
   unsubs.forEach(u => u()); unsubs = []; stopOwnerFeeds();
   roles = {}; myRole = "user"; rolesLoaded = true; bans = {}; profilesList = []; me = null; meUid = null;
   document.body.classList.add("guest");
@@ -1470,41 +1470,45 @@ function listenChat(user) {
   const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100));
   unsubs.push(onSnapshot(q, snap => { chatDocs = snap.docs.slice().reverse(); chatLoaded = true; drawChat(); syncUnread(); }, () => {}));
   chatReacts = {};
-  unsubs.push(onSnapshot(query(collection(db, "chatReactions"), orderBy("createdAt", "desc"), limit(1000)), snap => {
-    chatReacts = {};
-    snap.docs.forEach(d => { const r = d.data(); if (!RX[r.kind]) return; const m = chatReacts[r.msg] || (chatReacts[r.msg] = {}); const k = m[r.kind] || (m[r.kind] = { n: 0, mine: false }); k.n++; if (r.uid === chatUid) k.mine = true; });
-    drawChat();
-  }, () => {}));
+  unsubs.push(onSnapshot(query(collection(db, "chatReactions"), orderBy("createdAt", "desc"), limit(1000)), snap => { chatReacts = tallyReacts(snap); drawChat(); }, () => {}));
+}
+function tallyReacts(snap) {
+  const out = {};
+  snap.docs.forEach(d => { const r = d.data(); if (!RX[r.kind]) return; const m = out[r.msg] || (out[r.msg] = {}); const k = m[r.kind] || (m[r.kind] = { n: 0, mine: false }); k.n++; if (r.uid === chatUid) k.mine = true; });
+  return out;
 }
 // reactions on chat messages: 🔥 👍 ❤️ (one of each per person per message)
 const RX = { fire: "\u{1F525}", up: "\u{1F44D}", heart: "\u2764\uFE0F" };
-let chatReacts = {};
-async function toggleReact(msgId, kind) {
+let chatReacts = {}, adminReacts = {};
+const reactsOf = sc => sc === "admin" ? adminReacts : chatReacts;
+async function toggleReact(msgId, kind, sc) {
   const u = auth.currentUser; if (!u) return;
-  const ref = doc(db, "chatReactions", msgId + "_" + u.uid + "_" + kind);
+  const R = reactsOf(sc);
+  const ref = doc(db, sc === "admin" ? "adminReactions" : "chatReactions", msgId + "_" + u.uid + "_" + kind);
   try {
-    if (chatReacts[msgId] && chatReacts[msgId][kind] && chatReacts[msgId][kind].mine) await deleteDoc(ref);
+    if (R[msgId] && R[msgId][kind] && R[msgId][kind].mine) await deleteDoc(ref);
     else await setDoc(ref, { msg: msgId, uid: u.uid, kind, createdAt: serverTimestamp() });
   } catch {}
 }
-function reactBar(msgId) {
+function reactBar(msgId, sc) {
+  const R = reactsOf(sc);
   const bar = el("div", "rbar"); bar.setAttribute("role", "group"); bar.setAttribute("aria-label", "React to this message");
   Object.keys(RX).forEach(k => {
-    const b = el("button", "rb" + (chatReacts[msgId] && chatReacts[msgId][k] && chatReacts[msgId][k].mine ? " on" : ""), RX[k]);
-    b.type = "button"; b.setAttribute("aria-label", "React " + k); b.onclick = e => { e.stopPropagation(); toggleReact(msgId, k); };
+    const b = el("button", "rb" + (R[msgId] && R[msgId][k] && R[msgId][k].mine ? " on" : ""), RX[k]);
+    b.type = "button"; b.setAttribute("aria-label", "React " + k); b.onclick = e => { e.stopPropagation(); toggleReact(msgId, k, sc); };
     bar.append(b);
   });
   return bar;
 }
-function reactChips(msgId) {
-  const r = chatReacts[msgId]; if (!r) return null;
+function reactChips(msgId, sc) {
+  const r = reactsOf(sc)[msgId]; if (!r) return null;
   const box = el("div", "rxs");
   Object.keys(RX).forEach(k => {
     if (!(r[k] && r[k].n)) return;
     const c = el("button", "rx" + (r[k].mine ? " mine" : ""), RX[k]); c.type = "button";
     c.append(el("span", "n", String(r[k].n)));
     c.setAttribute("aria-pressed", r[k].mine ? "true" : "false"); c.setAttribute("aria-label", k + " reaction, " + r[k].n);
-    c.onclick = e => { e.stopPropagation(); toggleReact(msgId, k); };
+    c.onclick = e => { e.stopPropagation(); toggleReact(msgId, k, sc); };
     box.append(c);
   });
   return box.children.length ? box : null;
@@ -2266,8 +2270,10 @@ document.addEventListener("visibilitychange", syncUnread);
 /* ---------- admin chat (only admins and the owner can see it) ---------- */
 function listenAdmin() {
   if (isStaff() && !adminUnsub) {
-    adminUnsub = onSnapshot(query(collection(db, "adminMessages"), orderBy("createdAt", "desc"), limit(100)), snap => { adminDocs = snap.docs.slice().reverse(); adminLoaded = true; drawAdminChat(); syncUnread(); }, () => {});
-  } else if (!isStaff() && adminUnsub) { adminUnsub(); adminUnsub = null; adminDocs = []; adminLoaded = false; drawAdminChat(); syncUnread(); }
+    const u1 = onSnapshot(query(collection(db, "adminMessages"), orderBy("createdAt", "desc"), limit(100)), snap => { adminDocs = snap.docs.slice().reverse(); adminLoaded = true; drawAdminChat(); syncUnread(); }, () => {});
+    const u2 = onSnapshot(query(collection(db, "adminReactions"), orderBy("createdAt", "desc"), limit(1000)), snap => { adminReacts = tallyReacts(snap); drawAdminChat(); }, () => {});
+    adminUnsub = () => { u1(); u2(); };
+  } else if (!isStaff() && adminUnsub) { adminUnsub(); adminUnsub = null; adminDocs = []; adminReacts = {}; adminLoaded = false; drawAdminChat(); syncUnread(); }
 }
 function drawChatTabs() {
   const staff = isStaff() && !guest;
@@ -2305,7 +2311,8 @@ function drawAdminChat() {
       };
       row.append(x);
     }
-    row.append(p); box.append(row);
+    row.append(p); const ac = reactChips(d.id, "admin"); if (ac) row.append(ac);
+    row.append(reactBar(d.id, "admin")); box.append(row);
   });
   if (stick) box.scrollTop = box.scrollHeight;
 }
