@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794772816,
+ "updated": 1794774012,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -134,15 +134,15 @@
    "title": "Keep Calm & Shamrock On",
    "membership": "gold",
    "carId": 479,
-   "carHue": 320,
+   "carHue": 180,
    "carFile": "spirit_racers_final_seal_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_final_seal_small.png",
-   "avgSpeed": 116,
+   "avgSpeed": 117,
    "highSpeed": 158,
-   "lifetimeRaces": 34375,
-   "teamRaces": 1642,
+   "lifetimeRaces": 34401,
+   "teamRaces": 1668,
    "memberSince": 1792979300,
-   "lastRace": 1794772640
+   "lastRace": 1794773952
   },
   {
    "username": "3db33f0fa5e1cefd2a93a1d3f4eba1de",
@@ -818,7 +818,7 @@
    "2026-11-12": 1111,
    "2026-11-13": 1132,
    "2026-11-14": 1516,
-   "2026-11-15": 1642
+   "2026-11-15": 1668
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
