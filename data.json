@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794718817,
+ "updated": 1794720014,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 454
+  "views": 455
  },
  "racers": [
   {
@@ -35,9 +35,9 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 131,
+   "avgSpeed": 138,
    "highSpeed": 173,
-   "lifetimeRaces": 4309,
+   "lifetimeRaces": 4334,
    "teamRaces": 1611,
    "memberSince": 1794193196,
    "lastRace": 1794718327
@@ -137,9 +137,9 @@
    "carHue": 320,
    "carFile": "spirit_racers_final_seal_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_final_seal_small.png",
-   "avgSpeed": 124,
+   "avgSpeed": 128,
    "highSpeed": 158,
-   "lifetimeRaces": 34315,
+   "lifetimeRaces": 34343,
    "teamRaces": 1582,
    "memberSince": 1792979300,
    "lastRace": 1794717228
