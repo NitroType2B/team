@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794776415,
+ "updated": 1794777613,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 462
+  "views": 464
  },
  "racers": [
   {
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 135,
+   "avgSpeed": 138,
    "highSpeed": 173,
-   "lifetimeRaces": 4345,
-   "teamRaces": 1647,
+   "lifetimeRaces": 4347,
+   "teamRaces": 1649,
    "memberSince": 1794193196,
-   "lastRace": 1794720534
+   "lastRace": 1794777144
   },
   {
    "username": "x_onion_x",
@@ -137,12 +137,12 @@
    "carHue": 340,
    "carFile": "spirit_racers_final_seal_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_final_seal_small.png",
-   "avgSpeed": 116,
+   "avgSpeed": 120,
    "highSpeed": 158,
-   "lifetimeRaces": 34452,
-   "teamRaces": 1719,
+   "lifetimeRaces": 34467,
+   "teamRaces": 1734,
    "memberSince": 1792979300,
-   "lastRace": 1794776393
+   "lastRace": 1794776931
   },
   {
    "username": "3db33f0fa5e1cefd2a93a1d3f4eba1de",
@@ -494,21 +494,21 @@
    "carHue": 340,
    "carFile": "msg01_small.png",
    "carImage": "https://www.nitrotype.com/cars/msg01_small.png",
-   "avgSpeed": 41,
+   "avgSpeed": 45,
    "highSpeed": 75,
-   "lifetimeRaces": 4918,
-   "teamRaces": 1483,
+   "lifetimeRaces": 4930,
+   "teamRaces": 1495,
    "memberSince": 1793725663,
-   "lastRace": 1794766662
+   "lastRace": 1794777579
   },
   {
    "username": "ykitsmizu",
    "displayName": "ykitsmizu",
    "role": "member",
-   "title": "Taco Lover",
+   "title": "Continue?",
    "membership": "basic",
    "carId": 316,
-   "carHue": 200,
+   "carHue": 240,
    "carFile": "demon_small.png",
    "carImage": "https://www.nitrotype.com/cars/demon_small.png",
    "avgSpeed": 181,
@@ -596,12 +596,12 @@
    "carHue": 60,
    "carFile": "191_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/191_small_1.png",
-   "avgSpeed": 122,
+   "avgSpeed": 113,
    "highSpeed": 127,
-   "lifetimeRaces": 95,
-   "teamRaces": 106,
+   "lifetimeRaces": 96,
+   "teamRaces": 107,
    "memberSince": 1793906872,
-   "lastRace": 1794429174
+   "lastRace": 1794776638
   },
   {
    "username": "zatart",
@@ -791,7 +791,7 @@
    "2026-11-12": 1024,
    "2026-11-13": 1259,
    "2026-11-14": 1484,
-   "2026-11-15": 1647
+   "2026-11-15": 1649
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -818,7 +818,7 @@
    "2026-11-12": 1111,
    "2026-11-13": 1132,
    "2026-11-14": 1516,
-   "2026-11-15": 1719
+   "2026-11-15": 1734
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
@@ -935,7 +935,7 @@
    "2026-11-12": 1025,
    "2026-11-13": 1135,
    "2026-11-14": 1359,
-   "2026-11-15": 1483
+   "2026-11-15": 1495
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -953,7 +953,7 @@
    "2026-11-12": 106,
    "2026-11-13": 106,
    "2026-11-14": 106,
-   "2026-11-15": 106
+   "2026-11-15": 107
   },
   "1f00628c7818edb45331470d6fd128bb": {
    "2026-11-09": 24,
