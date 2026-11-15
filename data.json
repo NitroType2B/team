@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794784814,
+ "updated": 1794786012,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 481
+  "views": 482
  },
  "racers": [
   {
@@ -290,12 +290,12 @@
    "carHue": 60,
    "carFile": "blossom_small.png",
    "carImage": "https://www.nitrotype.com/cars/blossom_small.png",
-   "avgSpeed": 76,
+   "avgSpeed": 79,
    "highSpeed": 95,
-   "lifetimeRaces": 5291,
-   "teamRaces": 34,
+   "lifetimeRaces": 5309,
+   "teamRaces": 52,
    "memberSince": 1794685404,
-   "lastRace": 1794779260
+   "lastRace": 1794785988
   },
   {
    "username": "3082aed66286fe8fe6d8f58ad00e2713",
@@ -1034,7 +1034,7 @@
   },
   "1cd2108152718ff5a3b40e3deb0a7158": {
    "2026-11-14": 9,
-   "2026-11-15": 34
+   "2026-11-15": 52
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
