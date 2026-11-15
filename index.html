@@ -783,6 +783,14 @@ $("authForm").onsubmit = async e => {
       "app/username-taken": "That username is already taken. Try another one.",
       "app/setup-failed": "Something went wrong creating your account. Please try again."
     };
+    // which box holds the wrong information: only that box (or both username and password for a failed sign in) is highlighted
+    const which = {
+      "auth/invalid-credential": "username,password", "auth/user-not-found": "username,password", "auth/wrong-password": "username,password",
+      "auth/email-already-in-use": "username", "app/username-taken": "username", "app/bad-username": "username",
+      "auth/weak-password": "password", "auth/missing-password": "password", "app/no-password": "password",
+      "app/bad-link": "link", "app/racer-taken": "link"
+    };
+    $("authErr").dataset.f = which[err.code] || "";
     $("authErr").textContent = map[err.code] || "Something went wrong. Please try again.";
   } finally { $("authBtn").disabled = false; }
 };
@@ -1837,7 +1845,8 @@ const errObs = new MutationObserver(ms => ms.forEach(m => {
   f.querySelectorAll(".wrong").forEach(x => x.classList.remove("wrong", "shake"));
   if (!msg) return;
   const ids = [];
-  if (map.all) ids.push(map.all);
+  if (e.id === "authErr") (e.dataset.f || "").split(",").filter(Boolean).forEach(k => ids.push(map[k]));
+  else if (map.all) ids.push(map.all);
   else {
     if (/password/.test(msg)) ids.push(map.password);
     if (/username|sign in|name/.test(msg) && !/^enter your password/.test(msg)) ids.push(map.username);
