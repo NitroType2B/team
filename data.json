@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794779026,
+ "updated": 1794780017,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 477
+  "views": 478
  },
  "racers": [
   {
@@ -157,9 +157,9 @@
    "avgSpeed": 128,
    "highSpeed": 158,
    "lifetimeRaces": 34473,
-   "teamRaces": 1739,
+   "teamRaces": 1740,
    "memberSince": 1792979300,
-   "lastRace": 1794778765
+   "lastRace": 1794778804
   },
   {
    "username": "3db33f0fa5e1cefd2a93a1d3f4eba1de",
@@ -290,12 +290,12 @@
    "carHue": 60,
    "carFile": "blossom_small.png",
    "carImage": "https://www.nitrotype.com/cars/blossom_small.png",
-   "avgSpeed": 73,
+   "avgSpeed": 76,
    "highSpeed": 95,
-   "lifetimeRaces": 5285,
-   "teamRaces": 22,
+   "lifetimeRaces": 5291,
+   "teamRaces": 34,
    "memberSince": 1794685404,
-   "lastRace": 1794778783
+   "lastRace": 1794779260
   },
   {
    "username": "3082aed66286fe8fe6d8f58ad00e2713",
@@ -488,18 +488,18 @@
    "username": "e89137c6d948fbd06cfde6ca3f2737d2",
    "displayName": "Imissmydogtobuddy",
    "role": "officer",
-   "title": "Quicker Than the Fox",
+   "title": "Keeper of the Keys",
    "membership": "gold",
    "carId": 480,
    "carHue": 0,
    "carFile": "spirit_koi_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_koi_small.png",
-   "avgSpeed": 41,
+   "avgSpeed": 40,
    "highSpeed": 75,
-   "lifetimeRaces": 4941,
-   "teamRaces": 1503,
+   "lifetimeRaces": 4946,
+   "teamRaces": 1511,
    "memberSince": 1793725663,
-   "lastRace": 1794778525
+   "lastRace": 1794779995
   },
   {
    "username": "ykitsmizu",
@@ -750,7 +750,7 @@
    "2026-11-12": 1111,
    "2026-11-13": 1132,
    "2026-11-14": 1516,
-   "2026-11-15": 1739
+   "2026-11-15": 1740
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
@@ -867,7 +867,7 @@
    "2026-11-12": 1025,
    "2026-11-13": 1135,
    "2026-11-14": 1359,
-   "2026-11-15": 1503
+   "2026-11-15": 1511
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -1034,7 +1034,7 @@
   },
   "1cd2108152718ff5a3b40e3deb0a7158": {
    "2026-11-14": 9,
-   "2026-11-15": 22
+   "2026-11-15": 34
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
