@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794764414,
+ "updated": 1794765617,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -86,12 +86,12 @@
    "carHue": 240,
    "carFile": "76_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/76_small_1.png",
-   "avgSpeed": 115,
+   "avgSpeed": 122,
    "highSpeed": 138,
-   "lifetimeRaces": 1891,
-   "teamRaces": 57,
+   "lifetimeRaces": 1907,
+   "teamRaces": 73,
    "memberSince": 1794697788,
-   "lastRace": 1794711113
+   "lastRace": 1794765518
   },
   {
    "username": "visco_asher_yt",
@@ -562,12 +562,12 @@
    "carHue": 320,
    "carFile": "scream_small.png",
    "carImage": "https://www.nitrotype.com/cars/scream_small.png",
-   "avgSpeed": 107,
+   "avgSpeed": 105,
    "highSpeed": 128,
-   "lifetimeRaces": 2147,
-   "teamRaces": 105,
+   "lifetimeRaces": 2166,
+   "teamRaces": 124,
    "memberSince": 1794703032,
-   "lastRace": 1794764370
+   "lastRace": 1794765573
   },
   {
    "username": "nikooo124",
@@ -1109,10 +1109,10 @@
   },
   "anwanar": {
    "2026-11-14": 10,
-   "2026-11-15": 57
+   "2026-11-15": 73
   },
   "numba9nine": {
-   "2026-11-15": 105
+   "2026-11-15": 124
   }
  }
 }
