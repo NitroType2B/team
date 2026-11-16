@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794844821,
+ "updated": 1794846029,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -103,12 +103,12 @@
    "carHue": 320,
    "carFile": "142_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/142_small_1.png",
-   "avgSpeed": 124,
+   "avgSpeed": 131,
    "highSpeed": 172,
-   "lifetimeRaces": 27909,
-   "teamRaces": 698,
+   "lifetimeRaces": 27922,
+   "teamRaces": 704,
    "memberSince": 1794100813,
-   "lastRace": 1794844683
+   "lastRace": 1794845390
   },
   {
    "username": "hellotyper2",
@@ -139,7 +139,7 @@
    "carImage": "https://www.nitrotype.com/cars/70_small_1.png",
    "avgSpeed": 117,
    "highSpeed": 149,
-   "lifetimeRaces": 23700,
+   "lifetimeRaces": 23702,
    "teamRaces": 105,
    "memberSince": 1793228769,
    "lastRace": 1794587334
@@ -205,12 +205,12 @@
    "carHue": 40,
    "carFile": "116_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/116_small_1.png",
-   "avgSpeed": 98,
+   "avgSpeed": 100,
    "highSpeed": 131,
-   "lifetimeRaces": 13187,
-   "teamRaces": 523,
+   "lifetimeRaces": 13204,
+   "teamRaces": 537,
    "memberSince": 1794240864,
-   "lastRace": 1794844772
+   "lastRace": 1794845403
   },
   {
    "username": "ashertypes1",
@@ -562,12 +562,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 58,
+   "avgSpeed": 74,
    "highSpeed": 116,
-   "lifetimeRaces": 3135,
-   "teamRaces": 1941,
+   "lifetimeRaces": 3138,
+   "teamRaces": 1948,
    "memberSince": 1794241854,
-   "lastRace": 1794844779
+   "lastRace": 1794845050
   },
   {
    "username": "numba9nine",
@@ -664,12 +664,12 @@
    "carHue": 340,
    "carFile": "r1dwqdafa_small.png",
    "carImage": "https://www.nitrotype.com/cars/r1dwqdafa_small.png",
-   "avgSpeed": 50,
+   "avgSpeed": 51,
    "highSpeed": 70,
-   "lifetimeRaces": 1156,
-   "teamRaces": 449,
+   "lifetimeRaces": 1173,
+   "teamRaces": 464,
    "memberSince": 1794493776,
-   "lastRace": 1794844798
+   "lastRace": 1794845312
   },
   {
    "username": "exterverjae7",
@@ -787,7 +787,7 @@
    "2026-11-13": 602,
    "2026-11-14": 659,
    "2026-11-15": 671,
-   "2026-11-16": 698
+   "2026-11-16": 704
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -826,7 +826,7 @@
    "2026-11-13": 486,
    "2026-11-14": 486,
    "2026-11-15": 486,
-   "2026-11-16": 523
+   "2026-11-16": 537
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -996,7 +996,7 @@
    "2026-11-13": 1253,
    "2026-11-14": 1836,
    "2026-11-15": 1836,
-   "2026-11-16": 1941
+   "2026-11-16": 1948
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
@@ -1061,7 +1061,7 @@
    "2026-11-13": 96,
    "2026-11-14": 323,
    "2026-11-15": 363,
-   "2026-11-16": 449
+   "2026-11-16": 464
   },
   "tran1learningkolemak": {
    "2026-11-12": 0
