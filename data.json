@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794805217,
+ "updated": 1794806413,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,9 +35,9 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 133,
+   "avgSpeed": 128,
    "highSpeed": 173,
-   "lifetimeRaces": 4447,
+   "lifetimeRaces": 4457,
    "teamRaces": 1749,
    "memberSince": 1794193196,
    "lastRace": 1794805189
@@ -309,7 +309,7 @@
    "carImage": "https://www.nitrotype.com/cars/blizferr_small.png",
    "avgSpeed": 47,
    "highSpeed": 92,
-   "lifetimeRaces": 605,
+   "lifetimeRaces": 607,
    "teamRaces": 8,
    "memberSince": 1794787271,
    "lastRace": 1794792175
