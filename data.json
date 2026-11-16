@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794818414,
+ "updated": 1794819624,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -511,12 +511,12 @@
    "carHue": 0,
    "carFile": "spirit_koi_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_koi_small.png",
-   "avgSpeed": 33,
+   "avgSpeed": 39,
    "highSpeed": 75,
-   "lifetimeRaces": 4962,
-   "teamRaces": 1527,
+   "lifetimeRaces": 4981,
+   "teamRaces": 1545,
    "memberSince": 1793725663,
-   "lastRace": 1794818390
+   "lastRace": 1794819569
   },
   {
    "username": "ykitsmizu",
@@ -901,7 +901,7 @@
    "2026-11-13": 1135,
    "2026-11-14": 1359,
    "2026-11-15": 1512,
-   "2026-11-16": 1527
+   "2026-11-16": 1545
   },
   "nikooo124": {
    "2026-11-09": 10,
