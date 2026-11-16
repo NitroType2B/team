@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794793214,
+ "updated": 1794794421,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 139,
+   "avgSpeed": 138,
    "highSpeed": 173,
-   "lifetimeRaces": 4406,
-   "teamRaces": 1708,
+   "lifetimeRaces": 4407,
+   "teamRaces": 1709,
    "memberSince": 1794193196,
-   "lastRace": 1794793156
+   "lastRace": 1794793441
   },
   {
    "username": "x_onion_x",
@@ -290,12 +290,12 @@
    "carHue": 220,
    "carFile": "ice_cream_clown_small.png",
    "carImage": "https://www.nitrotype.com/cars/ice_cream_clown_small.png",
-   "avgSpeed": 76,
+   "avgSpeed": 73,
    "highSpeed": 95,
-   "lifetimeRaces": 5356,
-   "teamRaces": 99,
+   "lifetimeRaces": 5368,
+   "teamRaces": 111,
    "memberSince": 1794685404,
-   "lastRace": 1794793164
+   "lastRace": 1794794384
   },
   {
    "username": "c9274829331fb7fe1d0c56801b916e06",
@@ -341,12 +341,12 @@
    "carHue": 100,
    "carFile": "f1bug_small.png",
    "carImage": "https://www.nitrotype.com/cars/f1bug_small.png",
-   "avgSpeed": 120,
+   "avgSpeed": 126,
    "highSpeed": 149,
-   "lifetimeRaces": 1439,
-   "teamRaces": 231,
+   "lifetimeRaces": 1457,
+   "teamRaces": 249,
    "memberSince": 1792980022,
-   "lastRace": 1794793181
+   "lastRace": 1794794374
   },
   {
    "username": "10926d592c97ad37a9c79614491cc0c9",
@@ -742,7 +742,7 @@
    "2026-11-13": 1259,
    "2026-11-14": 1484,
    "2026-11-15": 1650,
-   "2026-11-16": 1708
+   "2026-11-16": 1709
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -831,7 +831,7 @@
    "2026-11-13": 87,
    "2026-11-14": 87,
    "2026-11-15": 222,
-   "2026-11-16": 231
+   "2026-11-16": 249
   },
   "10926d592c97ad37a9c79614491cc0c9": {
    "2026-11-09": 79,
@@ -1087,7 +1087,7 @@
   "1cd2108152718ff5a3b40e3deb0a7158": {
    "2026-11-14": 9,
    "2026-11-15": 52,
-   "2026-11-16": 99
+   "2026-11-16": 111
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
