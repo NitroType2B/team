@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794792014,
+ "updated": 1794793214,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 485
+  "views": 487
  },
  "racers": [
   {
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 136,
+   "avgSpeed": 139,
    "highSpeed": 173,
-   "lifetimeRaces": 4405,
-   "teamRaces": 1707,
+   "lifetimeRaces": 4406,
+   "teamRaces": 1708,
    "memberSince": 1794193196,
-   "lastRace": 1794791856
+   "lastRace": 1794793156
   },
   {
    "username": "x_onion_x",
@@ -290,12 +290,12 @@
    "carHue": 220,
    "carFile": "ice_cream_clown_small.png",
    "carImage": "https://www.nitrotype.com/cars/ice_cream_clown_small.png",
-   "avgSpeed": 71,
+   "avgSpeed": 76,
    "highSpeed": 95,
-   "lifetimeRaces": 5337,
-   "teamRaces": 79,
+   "lifetimeRaces": 5356,
+   "teamRaces": 99,
    "memberSince": 1794685404,
-   "lastRace": 1794791926
+   "lastRace": 1794793164
   },
   {
    "username": "c9274829331fb7fe1d0c56801b916e06",
@@ -307,12 +307,12 @@
    "carHue": 220,
    "carFile": "blizferr_small.png",
    "carImage": "https://www.nitrotype.com/cars/blizferr_small.png",
-   "avgSpeed": 48,
+   "avgSpeed": 47,
    "highSpeed": 92,
-   "lifetimeRaces": 602,
-   "teamRaces": 5,
+   "lifetimeRaces": 605,
+   "teamRaces": 8,
    "memberSince": 1794787271,
-   "lastRace": 1794787619
+   "lastRace": 1794792175
   },
   {
    "username": "3082aed66286fe8fe6d8f58ad00e2713",
@@ -341,12 +341,12 @@
    "carHue": 100,
    "carFile": "f1bug_small.png",
    "carImage": "https://www.nitrotype.com/cars/f1bug_small.png",
-   "avgSpeed": 132,
+   "avgSpeed": 120,
    "highSpeed": 149,
-   "lifetimeRaces": 1430,
-   "teamRaces": 222,
+   "lifetimeRaces": 1439,
+   "teamRaces": 231,
    "memberSince": 1792980022,
-   "lastRace": 1794772030
+   "lastRace": 1794793181
   },
   {
    "username": "10926d592c97ad37a9c79614491cc0c9",
@@ -562,12 +562,12 @@
    "carHue": 0,
    "carFile": "cads34q23_small.png",
    "carImage": "https://www.nitrotype.com/cars/cads34q23_small.png",
-   "avgSpeed": 106,
+   "avgSpeed": 110,
    "highSpeed": 128,
-   "lifetimeRaces": 2191,
-   "teamRaces": 150,
+   "lifetimeRaces": 2208,
+   "teamRaces": 167,
    "memberSince": 1794703032,
-   "lastRace": 1794791968
+   "lastRace": 1794793031
   },
   {
    "username": "nikooo124",
@@ -742,7 +742,7 @@
    "2026-11-13": 1259,
    "2026-11-14": 1484,
    "2026-11-15": 1650,
-   "2026-11-16": 1707
+   "2026-11-16": 1708
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -831,7 +831,7 @@
    "2026-11-13": 87,
    "2026-11-14": 87,
    "2026-11-15": 222,
-   "2026-11-16": 222
+   "2026-11-16": 231
   },
   "10926d592c97ad37a9c79614491cc0c9": {
    "2026-11-09": 79,
@@ -1087,7 +1087,7 @@
   "1cd2108152718ff5a3b40e3deb0a7158": {
    "2026-11-14": 9,
    "2026-11-15": 52,
-   "2026-11-16": 79
+   "2026-11-16": 99
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
@@ -1099,14 +1099,14 @@
   },
   "numba9nine": {
    "2026-11-15": 138,
-   "2026-11-16": 150
+   "2026-11-16": 167
   },
   "hellotyper2": {
    "2026-11-15": 3,
    "2026-11-16": 15
   },
   "c9274829331fb7fe1d0c56801b916e06": {
-   "2026-11-16": 5
+   "2026-11-16": 8
   }
  }
 }
