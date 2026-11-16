@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794870020,
+ "updated": 1794871215,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -596,12 +596,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 86,
+   "avgSpeed": 92,
    "highSpeed": 116,
-   "lifetimeRaces": 3144,
-   "teamRaces": 1957,
+   "lifetimeRaces": 3162,
+   "teamRaces": 1991,
    "memberSince": 1794241854,
-   "lastRace": 1794869984
+   "lastRace": 1794871185
   },
   {
    "username": "numba9nine",
@@ -1011,7 +1011,7 @@
    "2026-11-13": 1253,
    "2026-11-14": 1836,
    "2026-11-15": 1836,
-   "2026-11-16": 1957
+   "2026-11-16": 1991
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
