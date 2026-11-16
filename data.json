@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794854414,
+ "updated": 1794855443,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -205,12 +205,12 @@
    "carHue": 40,
    "carFile": "116_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/116_small_1.png",
-   "avgSpeed": 98,
+   "avgSpeed": 99,
    "highSpeed": 131,
-   "lifetimeRaces": 13221,
-   "teamRaces": 558,
+   "lifetimeRaces": 13224,
+   "teamRaces": 561,
    "memberSince": 1794240864,
-   "lastRace": 1794849010
+   "lastRace": 1794854512
   },
   {
    "username": "ashertypes1",
@@ -409,12 +409,12 @@
    "carHue": 60,
    "carFile": "fastback_small.png",
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
-   "avgSpeed": 73,
+   "avgSpeed": 74,
    "highSpeed": 121,
-   "lifetimeRaces": 3605,
-   "teamRaces": 551,
+   "lifetimeRaces": 3619,
+   "teamRaces": 557,
    "memberSince": 1793292197,
-   "lastRace": 1794596504
+   "lastRace": 1794854997
   },
   {
    "username": "b2a8cc3e769bbbcc0071e6593f8dd14a",
@@ -480,9 +480,9 @@
    "avgSpeed": 41,
    "highSpeed": 53,
    "lifetimeRaces": 102,
-   "teamRaces": 15,
+   "teamRaces": 18,
    "memberSince": 1793998918,
-   "lastRace": 1794521137
+   "lastRace": 1794854010
   },
   {
    "username": "ama248ilad77jmateo",
@@ -565,9 +565,9 @@
    "avgSpeed": 114,
    "highSpeed": 127,
    "lifetimeRaces": 1722,
-   "teamRaces": 132,
+   "teamRaces": 143,
    "memberSince": 1794847855,
-   "lastRace": 1794853791
+   "lastRace": 1794854192
   },
   {
    "username": "ilike100acc",
@@ -843,7 +843,7 @@
    "2026-11-13": 486,
    "2026-11-14": 486,
    "2026-11-15": 486,
-   "2026-11-16": 558
+   "2026-11-16": 561
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -913,7 +913,7 @@
    "2026-11-13": 551,
    "2026-11-14": 551,
    "2026-11-15": 551,
-   "2026-11-16": 551
+   "2026-11-16": 557
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
@@ -943,7 +943,7 @@
    "2026-11-13": 15,
    "2026-11-14": 15,
    "2026-11-15": 15,
-   "2026-11-16": 15
+   "2026-11-16": 18
   },
   "e89137c6d948fbd06cfde6ca3f2737d2": {
    "2026-11-09": 858,
@@ -1168,7 +1168,7 @@
    "2026-11-16": 0
   },
   "imisstypos": {
-   "2026-11-16": 132
+   "2026-11-16": 143
   }
  }
 }
