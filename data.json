@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794841220,
+ "updated": 1794842414,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -103,12 +103,12 @@
    "carHue": 320,
    "carFile": "142_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/142_small_1.png",
-   "avgSpeed": 138,
+   "avgSpeed": 125,
    "highSpeed": 172,
-   "lifetimeRaces": 27883,
-   "teamRaces": 672,
+   "lifetimeRaces": 27893,
+   "teamRaces": 677,
    "memberSince": 1794100813,
-   "lastRace": 1794841149
+   "lastRace": 1794841775
   },
   {
    "username": "hellotyper2",
@@ -562,12 +562,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 52,
+   "avgSpeed": 78,
    "highSpeed": 116,
-   "lifetimeRaces": 3095,
-   "teamRaces": 1865,
+   "lifetimeRaces": 3112,
+   "teamRaces": 1881,
    "memberSince": 1794241854,
-   "lastRace": 1794836604
+   "lastRace": 1794841785
   },
   {
    "username": "numba9nine",
@@ -666,10 +666,10 @@
    "carImage": "https://www.nitrotype.com/cars/r1dwqdafa_small.png",
    "avgSpeed": 49,
    "highSpeed": 70,
-   "lifetimeRaces": 1083,
-   "teamRaces": 363,
+   "lifetimeRaces": 1111,
+   "teamRaces": 377,
    "memberSince": 1794493776,
-   "lastRace": 1794769831
+   "lastRace": 1794841766
   },
   {
    "username": "exterverjae7",
@@ -787,7 +787,7 @@
    "2026-11-13": 602,
    "2026-11-14": 659,
    "2026-11-15": 671,
-   "2026-11-16": 672
+   "2026-11-16": 677
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -996,7 +996,7 @@
    "2026-11-13": 1253,
    "2026-11-14": 1836,
    "2026-11-15": 1836,
-   "2026-11-16": 1865
+   "2026-11-16": 1881
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
@@ -1061,7 +1061,7 @@
    "2026-11-13": 96,
    "2026-11-14": 323,
    "2026-11-15": 363,
-   "2026-11-16": 363
+   "2026-11-16": 377
   },
   "tran1learningkolemak": {
    "2026-11-12": 0
