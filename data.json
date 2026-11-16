@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794861613,
+ "updated": 1794862816,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -38,9 +38,9 @@
    "avgSpeed": 140,
    "highSpeed": 173,
    "lifetimeRaces": 4476,
-   "teamRaces": 1770,
+   "teamRaces": 1778,
    "memberSince": 1794193196,
-   "lastRace": 1794860963
+   "lastRace": 1794861305
   },
   {
    "username": "x_onion_x",
@@ -88,10 +88,10 @@
    "carImage": "https://www.nitrotype.com/cars/76_small_1.png",
    "avgSpeed": 119,
    "highSpeed": 138,
-   "lifetimeRaces": 1930,
-   "teamRaces": 89,
+   "lifetimeRaces": 1931,
+   "teamRaces": 97,
    "memberSince": 1794697788,
-   "lastRace": 1794789332
+   "lastRace": 1794861626
   },
   {
    "username": "visco_asher_yt",
@@ -103,12 +103,12 @@
    "carHue": 320,
    "carFile": "142_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/142_small_1.png",
-   "avgSpeed": 124,
+   "avgSpeed": 135,
    "highSpeed": 172,
-   "lifetimeRaces": 27928,
-   "teamRaces": 716,
+   "lifetimeRaces": 27947,
+   "teamRaces": 736,
    "memberSince": 1794100813,
-   "lastRace": 1794849151
+   "lastRace": 1794862606
   },
   {
    "username": "hellotyper2",
@@ -528,12 +528,12 @@
    "carHue": 180,
    "carFile": "pinkerton_small.png",
    "carImage": "https://www.nitrotype.com/cars/pinkerton_small.png",
-   "avgSpeed": 42,
+   "avgSpeed": 43,
    "highSpeed": 75,
-   "lifetimeRaces": 5007,
-   "teamRaces": 1564,
+   "lifetimeRaces": 5009,
+   "teamRaces": 1570,
    "memberSince": 1793725663,
-   "lastRace": 1794860877
+   "lastRace": 1794861890
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -650,9 +650,9 @@
    "avgSpeed": 121,
    "highSpeed": 127,
    "lifetimeRaces": 111,
-   "teamRaces": 127,
+   "teamRaces": 129,
    "memberSince": 1793906872,
-   "lastRace": 1794860609
+   "lastRace": 1794861153
   },
   {
    "username": "zatart",
@@ -792,7 +792,7 @@
    "2026-11-13": 1259,
    "2026-11-14": 1484,
    "2026-11-15": 1650,
-   "2026-11-16": 1770
+   "2026-11-16": 1778
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -802,7 +802,7 @@
    "2026-11-13": 602,
    "2026-11-14": 659,
    "2026-11-15": 671,
-   "2026-11-16": 716
+   "2026-11-16": 736
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -951,7 +951,7 @@
    "2026-11-13": 1135,
    "2026-11-14": 1359,
    "2026-11-15": 1512,
-   "2026-11-16": 1564
+   "2026-11-16": 1570
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -971,7 +971,7 @@
    "2026-11-13": 106,
    "2026-11-14": 106,
    "2026-11-15": 107,
-   "2026-11-16": 127
+   "2026-11-16": 129
   },
   "1f00628c7818edb45331470d6fd128bb": {
    "2026-11-09": 24,
@@ -1146,7 +1146,7 @@
   "anwanar": {
    "2026-11-14": 10,
    "2026-11-15": 82,
-   "2026-11-16": 89
+   "2026-11-16": 97
   },
   "numba9nine": {
    "2026-11-15": 138,
