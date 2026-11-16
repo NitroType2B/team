@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794807620,
+ "updated": 1794808817,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -38,9 +38,9 @@
    "avgSpeed": 128,
    "highSpeed": 173,
    "lifetimeRaces": 4457,
-   "teamRaces": 1749,
+   "teamRaces": 1759,
    "memberSince": 1794193196,
-   "lastRace": 1794805189
+   "lastRace": 1794805667
   },
   {
    "username": "x_onion_x",
@@ -310,9 +310,9 @@
    "avgSpeed": 47,
    "highSpeed": 92,
    "lifetimeRaces": 607,
-   "teamRaces": 8,
+   "teamRaces": 10,
    "memberSince": 1794787271,
-   "lastRace": 1794792175
+   "lastRace": 1794805539
   },
   {
    "username": "3082aed66286fe8fe6d8f58ad00e2713",
@@ -742,7 +742,7 @@
    "2026-11-13": 1259,
    "2026-11-14": 1484,
    "2026-11-15": 1650,
-   "2026-11-16": 1749
+   "2026-11-16": 1759
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -1106,7 +1106,7 @@
    "2026-11-16": 15
   },
   "c9274829331fb7fe1d0c56801b916e06": {
-   "2026-11-16": 8
+   "2026-11-16": 10
   }
  }
 }
