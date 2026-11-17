@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794886821,
+ "updated": 1794888017,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -290,12 +290,12 @@
    "carHue": 320,
    "carFile": "hurricania_small.png",
    "carImage": "https://www.nitrotype.com/cars/hurricania_small.png",
-   "avgSpeed": 77,
+   "avgSpeed": 76,
    "highSpeed": 95,
-   "lifetimeRaces": 5424,
-   "teamRaces": 166,
+   "lifetimeRaces": 5434,
+   "teamRaces": 177,
    "memberSince": 1794685404,
-   "lastRace": 1794886764
+   "lastRace": 1794887243
   },
   {
    "username": "c9274829331fb7fe1d0c56801b916e06",
@@ -1139,7 +1139,7 @@
    "2026-11-14": 9,
    "2026-11-15": 52,
    "2026-11-16": 125,
-   "2026-11-17": 166
+   "2026-11-17": 177
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
