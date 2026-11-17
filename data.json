@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794933615,
+ "updated": 1794934822,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 132,
+   "avgSpeed": 135,
    "highSpeed": 173,
-   "lifetimeRaces": 4558,
-   "teamRaces": 1860,
+   "lifetimeRaces": 4559,
+   "teamRaces": 1861,
    "memberSince": 1794193196,
-   "lastRace": 1794896677
+   "lastRace": 1794933899
   },
   {
    "username": "x_onion_x",
@@ -205,12 +205,12 @@
    "carHue": 200,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 95,
+   "avgSpeed": 96,
    "highSpeed": 131,
-   "lifetimeRaces": 13239,
-   "teamRaces": 569,
+   "lifetimeRaces": 13245,
+   "teamRaces": 582,
    "memberSince": 1794240864,
-   "lastRace": 1794932981
+   "lastRace": 1794933889
   },
   {
    "username": "ashertypes1",
@@ -579,9 +579,9 @@
    "carHue": 0,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 104,
+   "avgSpeed": 102,
    "highSpeed": 128,
-   "lifetimeRaces": 2290,
+   "lifetimeRaces": 2291,
    "teamRaces": 249,
    "memberSince": 1794703032,
    "lastRace": 1794876293
@@ -759,7 +759,7 @@
    "2026-11-14": 1484,
    "2026-11-15": 1650,
    "2026-11-16": 1786,
-   "2026-11-17": 1860
+   "2026-11-17": 1861
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -812,7 +812,7 @@
    "2026-11-14": 486,
    "2026-11-15": 486,
    "2026-11-16": 565,
-   "2026-11-17": 569
+   "2026-11-17": 582
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
