@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794878414,
+ "updated": 1794879616,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 138,
+   "avgSpeed": 142,
    "highSpeed": 173,
-   "lifetimeRaces": 4512,
-   "teamRaces": 1813,
+   "lifetimeRaces": 4524,
+   "teamRaces": 1826,
    "memberSince": 1794193196,
-   "lastRace": 1794878351
+   "lastRace": 1794879002
   },
   {
    "username": "x_onion_x",
@@ -103,12 +103,12 @@
    "carHue": 320,
    "carFile": "142_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/142_small_1.png",
-   "avgSpeed": 130,
+   "avgSpeed": 133,
    "highSpeed": 172,
-   "lifetimeRaces": 27957,
-   "teamRaces": 746,
+   "lifetimeRaces": 27960,
+   "teamRaces": 749,
    "memberSince": 1794100813,
-   "lastRace": 1794863950
+   "lastRace": 1794879568
   },
   {
    "username": "hellotyper2",
@@ -292,10 +292,10 @@
    "carImage": "https://www.nitrotype.com/cars/hurricania_small.png",
    "avgSpeed": 79,
    "highSpeed": 95,
-   "lifetimeRaces": 5404,
-   "teamRaces": 147,
+   "lifetimeRaces": 5405,
+   "teamRaces": 148,
    "memberSince": 1794685404,
-   "lastRace": 1794878054
+   "lastRace": 1794878755
   },
   {
    "username": "c9274829331fb7fe1d0c56801b916e06",
@@ -792,7 +792,7 @@
    "2026-11-14": 1484,
    "2026-11-15": 1650,
    "2026-11-16": 1786,
-   "2026-11-17": 1813
+   "2026-11-17": 1826
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -803,7 +803,7 @@
    "2026-11-14": 659,
    "2026-11-15": 671,
    "2026-11-16": 746,
-   "2026-11-17": 746
+   "2026-11-17": 749
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -1172,7 +1172,7 @@
    "2026-11-14": 9,
    "2026-11-15": 52,
    "2026-11-16": 125,
-   "2026-11-17": 147
+   "2026-11-17": 148
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
