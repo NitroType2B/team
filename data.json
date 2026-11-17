@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794942017,
+ "updated": 1794943215,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 557
+  "views": 559
  },
  "racers": [
   {
@@ -208,9 +208,9 @@
    "avgSpeed": 97,
    "highSpeed": 131,
    "lifetimeRaces": 13253,
-   "teamRaces": 584,
+   "teamRaces": 590,
    "memberSince": 1794240864,
-   "lastRace": 1794941350
+   "lastRace": 1794941871
   },
   {
    "username": "ashertypes1",
@@ -341,12 +341,12 @@
    "carHue": 0,
    "carFile": "f35_small.png",
    "carImage": "https://www.nitrotype.com/cars/f35_small.png",
-   "avgSpeed": 117,
+   "avgSpeed": 122,
    "highSpeed": 131,
-   "lifetimeRaces": 669,
-   "teamRaces": 0,
+   "lifetimeRaces": 676,
+   "teamRaces": 10,
    "memberSince": 1794861065,
-   "lastRace": 0
+   "lastRace": 1794942407
   },
   {
    "username": "ab9e10f06ae77ced2d67f287f8d94501",
@@ -426,12 +426,12 @@
    "carHue": 60,
    "carFile": "fastback_small.png",
    "carImage": "https://www.nitrotype.com/cars/fastback_small.png",
-   "avgSpeed": 68,
+   "avgSpeed": 76,
    "highSpeed": 121,
-   "lifetimeRaces": 3636,
-   "teamRaces": 575,
+   "lifetimeRaces": 3654,
+   "teamRaces": 597,
    "memberSince": 1793292197,
-   "lastRace": 1794857947
+   "lastRace": 1794942588
   },
   {
    "username": "b2a8cc3e769bbbcc0071e6593f8dd14a",
@@ -460,12 +460,12 @@
    "carHue": 0,
    "carFile": "fully_leaded_small.png",
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
-   "avgSpeed": 119,
+   "avgSpeed": 121,
    "highSpeed": 131,
-   "lifetimeRaces": 278,
-   "teamRaces": 208,
+   "lifetimeRaces": 292,
+   "teamRaces": 216,
    "memberSince": 1793905494,
-   "lastRace": 1794940412
+   "lastRace": 1794942598
   },
   {
    "username": "hunterrr12376",
@@ -530,7 +530,7 @@
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_ink_fox_small.png",
    "avgSpeed": 43,
    "highSpeed": 75,
-   "lifetimeRaces": 5010,
+   "lifetimeRaces": 5011,
    "teamRaces": 1571,
    "memberSince": 1793725663,
    "lastRace": 1794918776
@@ -813,7 +813,7 @@
    "2026-11-14": 486,
    "2026-11-15": 486,
    "2026-11-16": 565,
-   "2026-11-17": 584
+   "2026-11-17": 590
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -890,7 +890,7 @@
    "2026-11-14": 551,
    "2026-11-15": 551,
    "2026-11-16": 575,
-   "2026-11-17": 575
+   "2026-11-17": 597
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
@@ -901,7 +901,7 @@
    "2026-11-14": 176,
    "2026-11-15": 176,
    "2026-11-16": 191,
-   "2026-11-17": 208
+   "2026-11-17": 216
   },
   "hunterrr12376": {
    "2026-11-09": 26,
@@ -1179,7 +1179,7 @@
   },
   "brettfasttyper": {
    "2026-11-16": 0,
-   "2026-11-17": 0
+   "2026-11-17": 10
   },
   "ezrarules": {
    "2026-11-17": 2
