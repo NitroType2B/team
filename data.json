@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794885613,
+ "updated": 1794886821,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -154,12 +154,12 @@
    "carHue": 340,
    "carFile": "spirit_racers_final_seal_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_final_seal_small.png",
-   "avgSpeed": 130,
+   "avgSpeed": 121,
    "highSpeed": 158,
-   "lifetimeRaces": 34500,
-   "teamRaces": 1767,
+   "lifetimeRaces": 34510,
+   "teamRaces": 1777,
    "memberSince": 1792979300,
-   "lastRace": 1794798114
+   "lastRace": 1794886520
   },
   {
    "username": "3db33f0fa5e1cefd2a93a1d3f4eba1de",
@@ -290,12 +290,12 @@
    "carHue": 320,
    "carFile": "hurricania_small.png",
    "carImage": "https://www.nitrotype.com/cars/hurricania_small.png",
-   "avgSpeed": 78,
+   "avgSpeed": 77,
    "highSpeed": 95,
-   "lifetimeRaces": 5421,
-   "teamRaces": 164,
+   "lifetimeRaces": 5424,
+   "teamRaces": 166,
    "memberSince": 1794685404,
-   "lastRace": 1794880969
+   "lastRace": 1794886764
   },
   {
    "username": "c9274829331fb7fe1d0c56801b916e06",
@@ -570,40 +570,6 @@
    "lastRace": 1794629593
   },
   {
-   "username": "imisstypos",
-   "displayName": "Kryzen",
-   "role": "member",
-   "title": "Mystery Man",
-   "membership": "basic",
-   "carId": 484,
-   "carHue": 320,
-   "carFile": "shadow_dragon_small.png",
-   "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 113,
-   "highSpeed": 127,
-   "lifetimeRaces": 1783,
-   "teamRaces": 241,
-   "memberSince": 1794847855,
-   "lastRace": 1794860653
-  },
-  {
-   "username": "ilike100acc",
-   "displayName": "Rainbow Dragon",
-   "role": "officer",
-   "title": "Ghost Lap",
-   "membership": "gold",
-   "carId": 484,
-   "carHue": 80,
-   "carFile": "shadow_dragon_small.png",
-   "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 72,
-   "highSpeed": 116,
-   "lifetimeRaces": 3224,
-   "teamRaces": 2098,
-   "memberSince": 1794241854,
-   "lastRace": 1794876294
-  },
-  {
    "username": "numba9nine",
    "displayName": "treski",
    "role": "member",
@@ -826,7 +792,7 @@
    "2026-11-14": 1516,
    "2026-11-15": 1745,
    "2026-11-16": 1767,
-   "2026-11-17": 1767
+   "2026-11-17": 1777
   },
   "25db4dd822756ad6d1df065db97ebcab": {
    "2026-11-09": 0,
@@ -1173,7 +1139,7 @@
    "2026-11-14": 9,
    "2026-11-15": 52,
    "2026-11-16": 125,
-   "2026-11-17": 164
+   "2026-11-17": 166
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
