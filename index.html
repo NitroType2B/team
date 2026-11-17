@@ -257,7 +257,8 @@ main{padding:36px 24px 48px;max-width:1200px;margin:0 auto}
 .rangenote{margin:0;padding:10px 22px;color:var(--mute);font-size:13px;border-bottom:1px solid var(--line)}
 .btn.danger{background:#FF5D5D;color:#101828}
 .btn.danger:hover{box-shadow:0 8px 24px rgba(255,93,93,.4)}
-.gh-del{margin-top:22px}
+.gh-del{margin-top:0}
+.gh-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
 .hero.single .gh-dates a{color:inherit;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);text-underline-offset:4px}
 .hero.single .gh-dates a:hover{text-decoration-color:#fff}
 .back{display:inline-block;margin-bottom:16px;color:var(--cyan);font-weight:800;text-decoration:none}
@@ -629,7 +630,7 @@ body.guest .userbar{display:none}
 
     <dialog id="gdlg">
       <form id="gform" class="stack">
-        <h3 class="display" style="margin:0;font-size:28px">Create giveaway</h3>
+        <h3 class="display" id="gTitle" style="margin:0;font-size:28px">Create giveaway</h3>
         <label class="flabel">Giveaway name<input id="g_name" maxlength="60" placeholder="Example: Weekend Race-a-thon" required></label>
         <label class="flabel">Description<textarea id="g_desc" maxlength="500" rows="4" placeholder="What can people win, and how does it work?"></textarea></label>
         <div class="two">
@@ -683,7 +684,7 @@ body.guest .userbar{display:none}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { getFirestore, collection, doc, addDoc, getDoc, getDocs, setDoc, deleteDoc, writeBatch, onSnapshot, query, where, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, doc, addDoc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, writeBatch, onSnapshot, query, where, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const $ = id => document.getElementById(id);
 if (firebaseConfig.apiKey.startsWith("PASTE")) $("setup").classList.remove("hidden");
@@ -1348,7 +1349,11 @@ function drawGiveawayDetail(id) {
     else by.append(document.createTextNode(g.createdByName));
     hero.append(by);
   }
-  if (isOwner()) { const del = el("button", "btn danger gh-del", "Delete giveaway"); del.type = "button"; del.onclick = () => openDelete(g); hero.append(del); }
+  if (isOwner()) {
+    const ed = el("button", "btn ghost gh-del", "Edit giveaway"); ed.type = "button"; ed.onclick = () => openEditGiveaway(g);
+    const del = el("button", "btn danger gh-del", "Delete giveaway"); del.type = "button"; del.onclick = () => openDelete(g);
+    const row = el("div", "gh-actions"); row.append(ed, del); hero.append(row);
+  }
 
   $("gNote").textContent = stats.cur ? "races counted until " + fmtDT(Math.min(Date.now(), g.end)) + " \u22C5 data from " + agoTs(stats.cur.t) : "";
   if (stats.note) box.append(el("p", "sub note", stats.note));
@@ -1387,8 +1392,19 @@ function drawGiveawayDetail(id) {
   table.append(tbody); box.append(table);
 }
 
+let editingG = null;   // the giveaway being edited (owner only); null means we are creating a new one
+function openEditGiveaway(g) {
+  if (!isOwner()) return;
+  editingG = g;
+  $("gTitle").textContent = "Edit giveaway"; $("gSave").textContent = "Save changes";
+  $("g_name").value = g.name || ""; $("g_desc").value = g.description || "";
+  $("g_start").value = toLocalInput(g.start); $("g_end").value = toLocalInput(g.end);
+  $("gErr").textContent = "";
+  $("gdlg").showModal();
+}
 $("newGiveaway").onclick = () => {
   if (!isStaff()) return;
+  editingG = null; $("gTitle").textContent = "Create giveaway"; $("gSave").textContent = "Create giveaway";
   const now = Date.now();
   $("g_name").value = ""; $("g_desc").value = "";
   $("g_start").value = toLocalInput(now); $("g_end").value = toLocalInput(now + 7 * 864e5);
@@ -1402,12 +1418,20 @@ $("gform").onsubmit = async e => {
   const start = new Date($("g_start").value).getTime(), end = new Date($("g_end").value).getTime();
   const err = m => { $("gErr").textContent = m; };
   err("");
-  if (!isStaff()) return err("Only admins and the owner can create giveaways.");
+  if (editingG ? !isOwner() : !isStaff()) return err(editingG ? "Only the owner can edit giveaways." : "Only admins and the owner can create giveaways.");
   if (!name) return err("Give your giveaway a name.");
   if (!(start > 0) || !(end > 0)) return err("Pick a start and an end date and time.");
   if (end <= start) return err("The end has to be after the start.");
   const u = auth.currentUser; if (!u) return err("Please sign in again.");
   $("gSave").disabled = true;
+  if (editingG) {
+    try {
+      await updateDoc(doc(db, "giveaways", editingG.id), { name, description, start, end });
+      $("gdlg").close(); editingG = null;
+    } catch { err("Could not save the changes. Please try again."); }
+    finally { $("gSave").disabled = false; }
+    return;
+  }
   try {
     const ref = await addDoc(collection(db, "giveaways"), { name, description, start, end, createdBy: u.uid, createdByName: me?.username || u.displayName || "Racer", createdByRacer: me?.racer || null, createdAt: serverTimestamp() });
     $("gdlg").close();
