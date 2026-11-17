@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794932417,
+ "updated": 1794933615,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 554
+  "views": 555
  },
  "racers": [
   {
@@ -205,12 +205,12 @@
    "carHue": 200,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 98,
+   "avgSpeed": 95,
    "highSpeed": 131,
-   "lifetimeRaces": 13228,
-   "teamRaces": 565,
+   "lifetimeRaces": 13239,
+   "teamRaces": 569,
    "memberSince": 1794240864,
-   "lastRace": 1794860489
+   "lastRace": 1794932981
   },
   {
    "username": "ashertypes1",
@@ -812,7 +812,7 @@
    "2026-11-14": 486,
    "2026-11-15": 486,
    "2026-11-16": 565,
-   "2026-11-17": 565
+   "2026-11-17": 569
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
