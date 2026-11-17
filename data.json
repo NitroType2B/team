@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1794876013,
+ "updated": 1794877215,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 135,
+   "avgSpeed": 142,
    "highSpeed": 173,
-   "lifetimeRaces": 4495,
-   "teamRaces": 1797,
+   "lifetimeRaces": 4504,
+   "teamRaces": 1806,
    "memberSince": 1794193196,
-   "lastRace": 1794875786
+   "lastRace": 1794876709
   },
   {
    "username": "x_onion_x",
@@ -86,12 +86,12 @@
    "carHue": 240,
    "carFile": "76_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/76_small_1.png",
-   "avgSpeed": 119,
+   "avgSpeed": 113,
    "highSpeed": 138,
-   "lifetimeRaces": 1941,
-   "teamRaces": 107,
+   "lifetimeRaces": 1955,
+   "teamRaces": 121,
    "memberSince": 1794697788,
-   "lastRace": 1794865471
+   "lastRace": 1794876999
   },
   {
    "username": "visco_asher_yt",
@@ -570,23 +570,6 @@
    "lastRace": 1794629593
   },
   {
-   "username": "ezrarules",
-   "displayName": "joinmyteamroad 2 10k",
-   "role": "member",
-   "title": "Night Patrol",
-   "membership": "basic",
-   "carId": 484,
-   "carHue": 320,
-   "carFile": "shadow_dragon_small.png",
-   "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 121,
-   "highSpeed": 129,
-   "lifetimeRaces": 4753,
-   "teamRaces": 2,
-   "memberSince": 1794876004,
-   "lastRace": 0
-  },
-  {
    "username": "imisstypos",
    "displayName": "Kryzen",
    "role": "member",
@@ -613,12 +596,12 @@
    "carHue": 80,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 74,
+   "avgSpeed": 72,
    "highSpeed": 116,
-   "lifetimeRaces": 3220,
-   "teamRaces": 2089,
+   "lifetimeRaces": 3224,
+   "teamRaces": 2098,
    "memberSince": 1794241854,
-   "lastRace": 1794875963
+   "lastRace": 1794876294
   },
   {
    "username": "numba9nine",
@@ -630,12 +613,12 @@
    "carHue": 0,
    "carFile": "shadow_dragon_small.png",
    "carImage": "https://www.nitrotype.com/cars/shadow_dragon_small.png",
-   "avgSpeed": 106,
+   "avgSpeed": 104,
    "highSpeed": 128,
-   "lifetimeRaces": 2285,
-   "teamRaces": 244,
+   "lifetimeRaces": 2290,
+   "teamRaces": 249,
    "memberSince": 1794703032,
-   "lastRace": 1794875985
+   "lastRace": 1794876293
   },
   {
    "username": "nikooo124",
@@ -810,7 +793,7 @@
    "2026-11-14": 1484,
    "2026-11-15": 1650,
    "2026-11-16": 1786,
-   "2026-11-17": 1797
+   "2026-11-17": 1806
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -1050,7 +1033,7 @@
    "2026-11-14": 1836,
    "2026-11-15": 1836,
    "2026-11-16": 2015,
-   "2026-11-17": 2089
+   "2026-11-17": 2098
   },
   "f80d75120418f0ec5867162d84d42707": {
    "2026-11-09": 1,
@@ -1199,12 +1182,12 @@
    "2026-11-14": 10,
    "2026-11-15": 82,
    "2026-11-16": 107,
-   "2026-11-17": 107
+   "2026-11-17": 121
   },
   "numba9nine": {
    "2026-11-15": 138,
    "2026-11-16": 219,
-   "2026-11-17": 244
+   "2026-11-17": 249
   },
   "hellotyper2": {
    "2026-11-15": 3,
