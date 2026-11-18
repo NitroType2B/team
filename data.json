@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795035618,
+ "updated": 1795036821,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 593
+  "views": 594
  },
  "racers": [
   {
@@ -103,12 +103,12 @@
    "carHue": 320,
    "carFile": "142_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/142_small_1.png",
-   "avgSpeed": 131,
+   "avgSpeed": 145,
    "highSpeed": 172,
-   "lifetimeRaces": 28036,
-   "teamRaces": 821,
+   "lifetimeRaces": 28059,
+   "teamRaces": 848,
    "memberSince": 1794100813,
-   "lastRace": 1795032472
+   "lastRace": 1795036802
   },
   {
    "username": "hellotyper2",
@@ -208,9 +208,9 @@
    "avgSpeed": 91,
    "highSpeed": 131,
    "lifetimeRaces": 13262,
-   "teamRaces": 598,
+   "teamRaces": 599,
    "memberSince": 1794240864,
-   "lastRace": 1794951881
+   "lastRace": 1795035266
   },
   {
    "username": "ashertypes1",
@@ -545,12 +545,12 @@
    "carHue": 300,
    "carFile": "spirit_racers_ink_fox_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_ink_fox_small.png",
-   "avgSpeed": 43,
+   "avgSpeed": 41,
    "highSpeed": 75,
-   "lifetimeRaces": 5077,
-   "teamRaces": 1633,
+   "lifetimeRaces": 5092,
+   "teamRaces": 1653,
    "memberSince": 1793725663,
-   "lastRace": 1795034684
+   "lastRace": 1795036402
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -792,7 +792,7 @@
    "2026-11-15": 671,
    "2026-11-16": 746,
    "2026-11-17": 789,
-   "2026-11-18": 821
+   "2026-11-18": 848
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -837,7 +837,7 @@
    "2026-11-15": 486,
    "2026-11-16": 565,
    "2026-11-17": 598,
-   "2026-11-18": 598
+   "2026-11-18": 599
   },
   "24cf4df60146763fc790068e421c9389": {
    "2026-11-09": 28,
@@ -969,7 +969,7 @@
    "2026-11-15": 1512,
    "2026-11-16": 1570,
    "2026-11-17": 1604,
-   "2026-11-18": 1633
+   "2026-11-18": 1653
   },
   "nikooo124": {
    "2026-11-09": 10,
