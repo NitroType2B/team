@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794968414,
+ "updated": 1794969613,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 581
+  "views": 582
  },
  "racers": [
   {
@@ -86,12 +86,12 @@
    "carHue": 240,
    "carFile": "76_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/76_small_1.png",
-   "avgSpeed": 116,
+   "avgSpeed": 117,
    "highSpeed": 138,
-   "lifetimeRaces": 1992,
-   "teamRaces": 158,
+   "lifetimeRaces": 1993,
+   "teamRaces": 159,
    "memberSince": 1794697788,
-   "lastRace": 1794967076
+   "lastRace": 1794968529
   },
   {
    "username": "visco_asher_yt",
@@ -290,12 +290,12 @@
    "carHue": 60,
    "carFile": "hurricania_small.png",
    "carImage": "https://www.nitrotype.com/cars/hurricania_small.png",
-   "avgSpeed": 79,
+   "avgSpeed": 77,
    "highSpeed": 95,
-   "lifetimeRaces": 5475,
-   "teamRaces": 218,
+   "lifetimeRaces": 5486,
+   "teamRaces": 229,
    "memberSince": 1794685404,
-   "lastRace": 1794967295
+   "lastRace": 1794969088
   },
   {
    "username": "c9274829331fb7fe1d0c56801b916e06",
@@ -1194,7 +1194,7 @@
    "2026-11-15": 52,
    "2026-11-16": 125,
    "2026-11-17": 177,
-   "2026-11-18": 218
+   "2026-11-18": 229
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
@@ -1204,7 +1204,7 @@
    "2026-11-15": 82,
    "2026-11-16": 107,
    "2026-11-17": 135,
-   "2026-11-18": 158
+   "2026-11-18": 159
   },
   "numba9nine": {
    "2026-11-15": 138,
