@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795039215,
+ "updated": 1795040414,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 594
+  "views": 597
  },
  "racers": [
   {
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 137,
+   "avgSpeed": 139,
    "highSpeed": 173,
-   "lifetimeRaces": 4796,
-   "teamRaces": 2098,
+   "lifetimeRaces": 4799,
+   "teamRaces": 2101,
    "memberSince": 1794193196,
-   "lastRace": 1795039167
+   "lastRace": 1795039348
   },
   {
    "username": "x_onion_x",
@@ -137,12 +137,12 @@
    "carHue": 0,
    "carFile": "70_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/70_small_1.png",
-   "avgSpeed": 119,
+   "avgSpeed": 118,
    "highSpeed": 149,
-   "lifetimeRaces": 23714,
-   "teamRaces": 119,
+   "lifetimeRaces": 23715,
+   "teamRaces": 120,
    "memberSince": 1793228769,
-   "lastRace": 1795018462
+   "lastRace": 1795039722
   },
   {
    "username": "piquel",
@@ -485,6 +485,23 @@
    "lastRace": 1795031584
   },
   {
+   "username": "liljimbob1423",
+   "displayName": "HUMBLER",
+   "role": "member",
+   "title": "#YuleBeSorry",
+   "membership": "basic",
+   "carId": 247,
+   "carHue": 0,
+   "carFile": "error503_small.png",
+   "carImage": "https://www.nitrotype.com/cars/error503_small.png",
+   "avgSpeed": 42,
+   "highSpeed": 79,
+   "lifetimeRaces": 1497,
+   "teamRaces": 4,
+   "memberSince": 1795039783,
+   "lastRace": 1795040365
+  },
+  {
    "username": "hunterrr12376",
    "displayName": "banana",
    "role": "member",
@@ -547,10 +564,10 @@
    "carImage": "https://www.nitrotype.com/cars/spirit_koi_small.png",
    "avgSpeed": 40,
    "highSpeed": 75,
-   "lifetimeRaces": 5111,
-   "teamRaces": 1672,
+   "lifetimeRaces": 5127,
+   "teamRaces": 1685,
    "memberSince": 1793725663,
-   "lastRace": 1795039182
+   "lastRace": 1795040352
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -780,7 +797,7 @@
    "2026-11-15": 1650,
    "2026-11-16": 1786,
    "2026-11-17": 1989,
-   "2026-11-18": 2098
+   "2026-11-18": 2101
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -804,7 +821,7 @@
    "2026-11-15": 105,
    "2026-11-16": 117,
    "2026-11-17": 117,
-   "2026-11-18": 119
+   "2026-11-18": 120
   },
   "piquel": {
    "2026-11-09": 930,
@@ -969,7 +986,7 @@
    "2026-11-15": 1512,
    "2026-11-16": 1570,
    "2026-11-17": 1604,
-   "2026-11-18": 1672
+   "2026-11-18": 1685
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -1246,6 +1263,9 @@
   "thebesttyper21212121": {
    "2026-11-17": 0,
    "2026-11-18": 7
+  },
+  "liljimbob1423": {
+   "2026-11-18": 4
   }
  }
 }
