@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1794964813,
+ "updated": 1794966014,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 577
+  "views": 578
  },
  "racers": [
   {
@@ -307,12 +307,12 @@
    "carHue": 160,
    "carFile": "corsamystica_small.png",
    "carImage": "https://www.nitrotype.com/cars/corsamystica_small.png",
-   "avgSpeed": 55,
+   "avgSpeed": 51,
    "highSpeed": 92,
-   "lifetimeRaces": 630,
-   "teamRaces": 32,
+   "lifetimeRaces": 639,
+   "teamRaces": 42,
    "memberSince": 1794787271,
-   "lastRace": 1794964763
+   "lastRace": 1794965388
   },
   {
    "username": "3082aed66286fe8fe6d8f58ad00e2713",
@@ -1221,7 +1221,7 @@
   "c9274829331fb7fe1d0c56801b916e06": {
    "2026-11-16": 10,
    "2026-11-17": 28,
-   "2026-11-18": 32
+   "2026-11-18": 42
   },
   "58f85088f04bc8060beaf91a3adbab7f": {
    "2026-11-16": 0
