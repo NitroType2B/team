@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795004415,
+ "updated": 1795005625,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -539,7 +539,7 @@
    "username": "e89137c6d948fbd06cfde6ca3f2737d2",
    "displayName": "Imissmydogtobuddy",
    "role": "officer",
-   "title": "Keeper of the Keys",
+   "title": "Quicker Than the Fox",
    "membership": "gold",
    "carId": 482,
    "carHue": 260,
@@ -547,10 +547,10 @@
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_ink_fox_small.png",
    "avgSpeed": 42,
    "highSpeed": 75,
-   "lifetimeRaces": 5043,
-   "teamRaces": 1604,
+   "lifetimeRaces": 5045,
+   "teamRaces": 1606,
    "memberSince": 1793725663,
-   "lastRace": 1794949040
+   "lastRace": 1795005386
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -969,7 +969,7 @@
    "2026-11-15": 1512,
    "2026-11-16": 1570,
    "2026-11-17": 1604,
-   "2026-11-18": 1604
+   "2026-11-18": 1606
   },
   "nikooo124": {
    "2026-11-09": 10,
