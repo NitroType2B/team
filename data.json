@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795051215,
+ "updated": 1795051248,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -37,7 +37,7 @@
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
    "avgSpeed": 141,
    "highSpeed": 173,
-   "lifetimeRaces": 4853,
+   "lifetimeRaces": 4854,
    "teamRaces": 2155,
    "memberSince": 1794193196,
    "lastRace": 1795051179
@@ -613,9 +613,9 @@
    "carHue": 0,
    "carFile": "corsamegalodor123_small.png",
    "carImage": "https://www.nitrotype.com/cars/corsamegalodor123_small.png",
-   "avgSpeed": 95,
+   "avgSpeed": 94,
    "highSpeed": 122,
-   "lifetimeRaces": 49,
+   "lifetimeRaces": 50,
    "teamRaces": 13,
    "memberSince": 1795050117,
    "lastRace": 1795051197
