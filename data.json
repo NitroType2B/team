@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795114820,
+ "updated": 1795116025,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 628
+  "views": 630
  },
  "racers": [
   {
@@ -434,6 +434,23 @@
    "lastRace": 1795033430
   },
   {
+   "username": "69b6137a94794532cc4c496f74b0c9ba",
+   "displayName": "PracticalBlushDuck",
+   "role": "member",
+   "title": "Epic Word Skippage",
+   "membership": "basic",
+   "carId": 438,
+   "carHue": 0,
+   "carFile": "hurricania_small.png",
+   "carImage": "https://www.nitrotype.com/cars/hurricania_small.png",
+   "avgSpeed": 33,
+   "highSpeed": 77,
+   "lifetimeRaces": 458,
+   "teamRaces": 2,
+   "memberSince": 1795115104,
+   "lastRace": 1795115358
+  },
+  {
    "username": "travishaha12345",
    "displayName": "J-S I M S 0 N",
    "role": "member",
@@ -443,12 +460,12 @@
    "carHue": 260,
    "carFile": "pizza_small.png",
    "carImage": "https://www.nitrotype.com/cars/pizza_small.png",
-   "avgSpeed": 76,
+   "avgSpeed": 74,
    "highSpeed": 121,
-   "lifetimeRaces": 3818,
-   "teamRaces": 754,
+   "lifetimeRaces": 3820,
+   "teamRaces": 766,
    "memberSince": 1793292197,
-   "lastRace": 1795114196
+   "lastRace": 1795115308
   },
   {
    "username": "b2a8cc3e769bbbcc0071e6593f8dd14a",
@@ -565,9 +582,9 @@
    "avgSpeed": 38,
    "highSpeed": 52,
    "lifetimeRaces": 899,
-   "teamRaces": 0,
+   "teamRaces": 3,
    "memberSince": 1795114462,
-   "lastRace": 0
+   "lastRace": 1795114683
   },
   {
    "username": "e89137c6d948fbd06cfde6ca3f2737d2",
@@ -582,9 +599,9 @@
    "avgSpeed": 43,
    "highSpeed": 75,
    "lifetimeRaces": 5173,
-   "teamRaces": 1726,
+   "teamRaces": 1727,
    "memberSince": 1793725663,
-   "lastRace": 1795091681
+   "lastRace": 1795114571
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -1024,7 +1041,7 @@
    "2026-11-16": 575,
    "2026-11-17": 632,
    "2026-11-18": 705,
-   "2026-11-19": 754
+   "2026-11-19": 766
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
@@ -1076,7 +1093,7 @@
    "2026-11-16": 1570,
    "2026-11-17": 1604,
    "2026-11-18": 1706,
-   "2026-11-19": 1726
+   "2026-11-19": 1727
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -1394,7 +1411,10 @@
    "2026-11-19": 12
   },
   "b4866d7018fdabd946bf86b64161372f": {
-   "2026-11-19": 0
+   "2026-11-19": 3
+  },
+  "69b6137a94794532cc4c496f74b0c9ba": {
+   "2026-11-19": 2
   }
  }
 }
