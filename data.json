@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795058412,
+ "updated": 1795059613,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 615
+  "views": 617
  },
  "racers": [
   {
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 139,
+   "avgSpeed": 137,
    "highSpeed": 173,
-   "lifetimeRaces": 4886,
-   "teamRaces": 2188,
+   "lifetimeRaces": 4888,
+   "teamRaces": 2190,
    "memberSince": 1794193196,
-   "lastRace": 1795054542
+   "lastRace": 1795059352
   },
   {
    "username": "x_onion_x",
@@ -290,12 +290,12 @@
    "carHue": 180,
    "carFile": "corsa_xmaxx_small.png",
    "carImage": "https://www.nitrotype.com/cars/corsa_xmaxx_small.png",
-   "avgSpeed": 75,
+   "avgSpeed": 74,
    "highSpeed": 95,
-   "lifetimeRaces": 5522,
-   "teamRaces": 265,
+   "lifetimeRaces": 5528,
+   "teamRaces": 271,
    "memberSince": 1794685404,
-   "lastRace": 1795058349
+   "lastRace": 1795058723
   },
   {
    "username": "c9274829331fb7fe1d0c56801b916e06",
@@ -835,7 +835,7 @@
    "2026-11-16": 1786,
    "2026-11-17": 1989,
    "2026-11-18": 2135,
-   "2026-11-19": 2188
+   "2026-11-19": 2190
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -1282,7 +1282,7 @@
    "2026-11-16": 125,
    "2026-11-17": 177,
    "2026-11-18": 243,
-   "2026-11-19": 265
+   "2026-11-19": 271
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
