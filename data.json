@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795050016,
+ "updated": 1795051215,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 610
+  "views": 611
  },
  "racers": [
   {
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 135,
+   "avgSpeed": 141,
    "highSpeed": 173,
-   "lifetimeRaces": 4840,
-   "teamRaces": 2142,
+   "lifetimeRaces": 4853,
+   "teamRaces": 2155,
    "memberSince": 1794193196,
-   "lastRace": 1795048255
+   "lastRace": 1795051179
   },
   {
    "username": "x_onion_x",
@@ -137,12 +137,12 @@
    "carHue": 0,
    "carFile": "4t345fx452f_small.png",
    "carImage": "https://www.nitrotype.com/cars/4t345fx452f_small.png",
-   "avgSpeed": 91,
+   "avgSpeed": 94,
    "highSpeed": 149,
-   "lifetimeRaces": 23729,
-   "teamRaces": 134,
+   "lifetimeRaces": 23731,
+   "teamRaces": 136,
    "memberSince": 1793228769,
-   "lastRace": 1795049878
+   "lastRace": 1795050087
   },
   {
    "username": "piquel",
@@ -604,6 +604,23 @@
    "lastRace": 1794629593
   },
   {
+   "username": "soggyberry",
+   "displayName": "soggyberry",
+   "role": "member",
+   "title": "Millionaire",
+   "membership": "basic",
+   "carId": 267,
+   "carHue": 0,
+   "carFile": "corsamegalodor123_small.png",
+   "carImage": "https://www.nitrotype.com/cars/corsamegalodor123_small.png",
+   "avgSpeed": 95,
+   "highSpeed": 122,
+   "lifetimeRaces": 49,
+   "teamRaces": 13,
+   "memberSince": 1795050117,
+   "lastRace": 1795051197
+  },
+  {
    "username": "numba9nine",
    "displayName": "treski",
    "role": "member",
@@ -817,7 +834,7 @@
    "2026-11-16": 1786,
    "2026-11-17": 1989,
    "2026-11-18": 2135,
-   "2026-11-19": 2142
+   "2026-11-19": 2155
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -843,7 +860,7 @@
    "2026-11-16": 117,
    "2026-11-17": 117,
    "2026-11-18": 130,
-   "2026-11-19": 134
+   "2026-11-19": 136
   },
   "piquel": {
    "2026-11-09": 930,
@@ -1331,6 +1348,9 @@
   "johnschulte": {
    "2026-11-18": 0,
    "2026-11-19": 0
+  },
+  "soggyberry": {
+   "2026-11-19": 13
   }
  }
 }
