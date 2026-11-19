@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795120815,
+ "updated": 1795123213,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 632
+  "views": 633
  },
  "racers": [
   {
@@ -35,9 +35,9 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 140,
+   "avgSpeed": 138,
    "highSpeed": 173,
-   "lifetimeRaces": 4959,
+   "lifetimeRaces": 4960,
    "teamRaces": 2260,
    "memberSince": 1794193196,
    "lastRace": 1795119047
@@ -86,12 +86,12 @@
    "carHue": 240,
    "carFile": "76_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/76_small_1.png",
-   "avgSpeed": 119,
+   "avgSpeed": 121,
    "highSpeed": 138,
-   "lifetimeRaces": 2040,
-   "teamRaces": 205,
+   "lifetimeRaces": 2042,
+   "teamRaces": 208,
    "memberSince": 1794697788,
-   "lastRace": 1795037530
+   "lastRace": 1795120868
   },
   {
    "username": "visco_asher_yt",
@@ -103,12 +103,12 @@
    "carHue": 320,
    "carFile": "142_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/142_small_1.png",
-   "avgSpeed": 128,
+   "avgSpeed": 132,
    "highSpeed": 172,
-   "lifetimeRaces": 28091,
-   "teamRaces": 880,
+   "lifetimeRaces": 28096,
+   "teamRaces": 885,
    "memberSince": 1794100813,
-   "lastRace": 1795118178
+   "lastRace": 1795121362
   },
   {
    "username": "hellotyper2",
@@ -341,12 +341,12 @@
    "carHue": 0,
    "carFile": "f35_small.png",
    "carImage": "https://www.nitrotype.com/cars/f35_small.png",
-   "avgSpeed": 115,
+   "avgSpeed": 117,
    "highSpeed": 131,
-   "lifetimeRaces": 689,
-   "teamRaces": 23,
+   "lifetimeRaces": 700,
+   "teamRaces": 28,
    "memberSince": 1794861065,
-   "lastRace": 1795118288
+   "lastRace": 1795122554
   },
   {
    "username": "ab9e10f06ae77ced2d67f287f8d94501",
@@ -596,12 +596,12 @@
    "carHue": 300,
    "carFile": "spirit_racers_ink_fox_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_ink_fox_small.png",
-   "avgSpeed": 45,
+   "avgSpeed": 43,
    "highSpeed": 75,
-   "lifetimeRaces": 5198,
-   "teamRaces": 1744,
+   "lifetimeRaces": 5212,
+   "teamRaces": 1765,
    "memberSince": 1793725663,
-   "lastRace": 1795120061
+   "lastRace": 1795122550
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -647,9 +647,9 @@
    "carHue": 0,
    "carFile": "corsamegalodor123_small.png",
    "carImage": "https://www.nitrotype.com/cars/corsamegalodor123_small.png",
-   "avgSpeed": 89,
+   "avgSpeed": 90,
    "highSpeed": 122,
-   "lifetimeRaces": 81,
+   "lifetimeRaces": 83,
    "teamRaces": 45,
    "memberSince": 1795050117,
    "lastRace": 1795053082
@@ -902,7 +902,7 @@
    "2026-11-16": 746,
    "2026-11-17": 789,
    "2026-11-18": 849,
-   "2026-11-19": 880
+   "2026-11-19": 885
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -1093,7 +1093,7 @@
    "2026-11-16": 1570,
    "2026-11-17": 1604,
    "2026-11-18": 1706,
-   "2026-11-19": 1744
+   "2026-11-19": 1765
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -1347,7 +1347,7 @@
    "2026-11-16": 107,
    "2026-11-17": 135,
    "2026-11-18": 205,
-   "2026-11-19": 205
+   "2026-11-19": 208
   },
   "numba9nine": {
    "2026-11-15": 138,
@@ -1386,7 +1386,7 @@
    "2026-11-16": 0,
    "2026-11-17": 10,
    "2026-11-18": 20,
-   "2026-11-19": 23
+   "2026-11-19": 28
   },
   "ezrarules": {
    "2026-11-17": 2
