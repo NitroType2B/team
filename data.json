@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795108818,
+ "updated": 1795110016,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 625
+  "views": 626
  },
  "racers": [
   {
@@ -619,6 +619,23 @@
    "teamRaces": 45,
    "memberSince": 1795050117,
    "lastRace": 1795053082
+  },
+  {
+   "username": "588afc49b8ed31249f32c547599b3e62",
+   "displayName": "neilenf",
+   "role": "member",
+   "title": "Flow State",
+   "membership": "basic",
+   "carId": 438,
+   "carHue": 20,
+   "carFile": "hurricania_small.png",
+   "carImage": "https://www.nitrotype.com/cars/hurricania_small.png",
+   "avgSpeed": 44,
+   "highSpeed": 56,
+   "lifetimeRaces": 958,
+   "teamRaces": 7,
+   "memberSince": 1795109071,
+   "lastRace": 1795109367
   },
   {
    "username": "numba9nine",
@@ -1371,6 +1388,9 @@
   },
   "soggyberry": {
    "2026-11-19": 45
+  },
+  "588afc49b8ed31249f32c547599b3e62": {
+   "2026-11-19": 7
   }
  }
 }
