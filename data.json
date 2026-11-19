@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795074015,
+ "updated": 1795075217,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -171,12 +171,12 @@
    "carHue": 200,
    "carFile": "gt40_small.png",
    "carImage": "https://www.nitrotype.com/cars/gt40_small.png",
-   "avgSpeed": 144,
+   "avgSpeed": 140,
    "highSpeed": 177,
-   "lifetimeRaces": 1198,
-   "teamRaces": 13,
+   "lifetimeRaces": 1205,
+   "teamRaces": 20,
    "memberSince": 1794627547,
-   "lastRace": 1795073996
+   "lastRace": 1795074303
   },
   {
    "username": "fireheartc",
@@ -1263,7 +1263,7 @@
    "2026-11-16": 10,
    "2026-11-17": 10,
    "2026-11-18": 10,
-   "2026-11-19": 13
+   "2026-11-19": 20
   },
   "cf9e3eb05238ec4899612d044d71ee76": {
    "2026-11-14": 6
