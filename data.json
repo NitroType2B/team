@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795129216,
+ "updated": 1795131614,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 638
+  "views": 644
  },
  "racers": [
   {
@@ -596,12 +596,12 @@
    "carHue": 0,
    "carFile": "scream_small.png",
    "carImage": "https://www.nitrotype.com/cars/scream_small.png",
-   "avgSpeed": 38,
+   "avgSpeed": 40,
    "highSpeed": 52,
-   "lifetimeRaces": 899,
-   "teamRaces": 3,
+   "lifetimeRaces": 905,
+   "teamRaces": 9,
    "memberSince": 1795114462,
-   "lastRace": 1795114683
+   "lastRace": 1795131177
   },
   {
    "username": "e89137c6d948fbd06cfde6ca3f2737d2",
@@ -1429,7 +1429,7 @@
    "2026-11-19": 12
   },
   "b4866d7018fdabd946bf86b64161372f": {
-   "2026-11-19": 3
+   "2026-11-19": 9
   },
   "69b6137a94794532cc4c496f74b0c9ba": {
    "2026-11-19": 16
