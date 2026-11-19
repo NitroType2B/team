@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795124420,
+ "updated": 1795125618,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 635
+  "views": 637
  },
  "racers": [
   {
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 135,
+   "avgSpeed": 137,
    "highSpeed": 173,
-   "lifetimeRaces": 4963,
-   "teamRaces": 2264,
+   "lifetimeRaces": 4965,
+   "teamRaces": 2266,
    "memberSince": 1794193196,
-   "lastRace": 1795124266
+   "lastRace": 1795125160
   },
   {
    "username": "x_onion_x",
@@ -86,12 +86,12 @@
    "carHue": 240,
    "carFile": "76_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/76_small_1.png",
-   "avgSpeed": 119,
+   "avgSpeed": 116,
    "highSpeed": 138,
-   "lifetimeRaces": 2048,
-   "teamRaces": 214,
+   "lifetimeRaces": 2061,
+   "teamRaces": 227,
    "memberSince": 1794697788,
-   "lastRace": 1795123925
+   "lastRace": 1795125220
   },
   {
    "username": "visco_asher_yt",
@@ -613,12 +613,12 @@
    "carHue": 160,
    "carFile": "lit_train_small.png",
    "carImage": "https://www.nitrotype.com/cars/lit_train_small.png",
-   "avgSpeed": 43,
+   "avgSpeed": 42,
    "highSpeed": 75,
-   "lifetimeRaces": 5227,
-   "teamRaces": 1780,
+   "lifetimeRaces": 5240,
+   "teamRaces": 1789,
    "memberSince": 1793725663,
-   "lastRace": 1795124376
+   "lastRace": 1795125320
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -907,7 +907,7 @@
    "2026-11-16": 1786,
    "2026-11-17": 1989,
    "2026-11-18": 2135,
-   "2026-11-19": 2264
+   "2026-11-19": 2266
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -1111,7 +1111,7 @@
    "2026-11-16": 1570,
    "2026-11-17": 1604,
    "2026-11-18": 1706,
-   "2026-11-19": 1780
+   "2026-11-19": 1789
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -1365,7 +1365,7 @@
    "2026-11-16": 107,
    "2026-11-17": 135,
    "2026-11-18": 205,
-   "2026-11-19": 214
+   "2026-11-19": 227
   },
   "numba9nine": {
    "2026-11-15": 138,
