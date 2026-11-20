@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795202420,
+ "updated": 1795203652,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -324,12 +324,12 @@
    "carHue": 0,
    "carFile": "f35_small.png",
    "carImage": "https://www.nitrotype.com/cars/f35_small.png",
-   "avgSpeed": 117,
+   "avgSpeed": 118,
    "highSpeed": 131,
-   "lifetimeRaces": 700,
-   "teamRaces": 34,
+   "lifetimeRaces": 705,
+   "teamRaces": 35,
    "memberSince": 1794861065,
-   "lastRace": 1795123001
+   "lastRace": 1795202616
   },
   {
    "username": "ab9e10f06ae77ced2d67f287f8d94501",
@@ -581,7 +581,7 @@
    "carImage": "https://www.nitrotype.com/cars/spirit_koi_small.png",
    "avgSpeed": 37,
    "highSpeed": 75,
-   "lifetimeRaces": 5265,
+   "lifetimeRaces": 5266,
    "teamRaces": 1804,
    "memberSince": 1793725663,
    "lastRace": 1795178142
@@ -1409,7 +1409,7 @@
    "2026-11-17": 10,
    "2026-11-18": 20,
    "2026-11-19": 34,
-   "2026-11-20": 34
+   "2026-11-20": 35
   },
   "ezrarules": {
    "2026-11-17": 2
