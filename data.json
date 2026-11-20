@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795188047,
+ "updated": 1795189241,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 661
+  "views": 664
  },
  "racers": [
   {
@@ -188,12 +188,12 @@
    "carHue": 0,
    "carFile": "168_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/168_small_1.png",
-   "avgSpeed": 84,
+   "avgSpeed": 86,
    "highSpeed": 113,
-   "lifetimeRaces": 18119,
-   "teamRaces": 101,
+   "lifetimeRaces": 18132,
+   "teamRaces": 120,
    "memberSince": 1794434328,
-   "lastRace": 1794938269
+   "lastRace": 1795188600
   },
   {
    "username": "shadowlegend402",
@@ -1269,7 +1269,7 @@
    "2026-11-17": 101,
    "2026-11-18": 101,
    "2026-11-19": 101,
-   "2026-11-20": 101
+   "2026-11-20": 120
   },
   "juanito2223": {
    "2026-11-12": 82,
