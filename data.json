@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795208419,
+ "updated": 1795209616,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 671
+  "views": 675
  },
  "racers": [
   {
@@ -103,12 +103,12 @@
    "carHue": 180,
    "carFile": "party_sleigh_small.png",
    "carImage": "https://www.nitrotype.com/cars/party_sleigh_small.png",
-   "avgSpeed": 131,
-   "highSpeed": 172,
-   "lifetimeRaces": 28142,
-   "teamRaces": 931,
+   "avgSpeed": 145,
+   "highSpeed": 178,
+   "lifetimeRaces": 28155,
+   "teamRaces": 944,
    "memberSince": 1794100813,
-   "lastRace": 1795208395
+   "lastRace": 1795209105
   },
   {
    "username": "hellotyper2",
@@ -581,10 +581,10 @@
    "carImage": "https://www.nitrotype.com/cars/spirit_koi_small.png",
    "avgSpeed": 43,
    "highSpeed": 75,
-   "lifetimeRaces": 5306,
-   "teamRaces": 1839,
+   "lifetimeRaces": 5321,
+   "teamRaces": 1842,
    "memberSince": 1793725663,
-   "lastRace": 1795208392
+   "lastRace": 1795209228
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -732,12 +732,12 @@
    "carHue": 220,
    "carFile": "anaconda_small.png",
    "carImage": "https://www.nitrotype.com/cars/anaconda_small.png",
-   "avgSpeed": 58,
+   "avgSpeed": 59,
    "highSpeed": 77,
-   "lifetimeRaces": 340,
-   "teamRaces": 63,
+   "lifetimeRaces": 353,
+   "teamRaces": 75,
    "memberSince": 1794585958,
-   "lastRace": 1795107622
+   "lastRace": 1795209566
   },
   {
    "username": "1f00628c7818edb45331470d6fd128bb",
@@ -888,7 +888,7 @@
    "2026-11-17": 789,
    "2026-11-18": 849,
    "2026-11-19": 885,
-   "2026-11-20": 931
+   "2026-11-20": 944
   },
   "lifetime100": {
    "2026-11-09": 89,
@@ -1093,7 +1093,7 @@
    "2026-11-17": 1604,
    "2026-11-18": 1706,
    "2026-11-19": 1796,
-   "2026-11-20": 1839
+   "2026-11-20": 1842
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -1294,7 +1294,7 @@
    "2026-11-17": 38,
    "2026-11-18": 38,
    "2026-11-19": 63,
-   "2026-11-20": 63
+   "2026-11-20": 75
   },
   "ama248ilad77jmateo": {
    "2026-11-13": 2,
