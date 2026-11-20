@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795153213,
+ "updated": 1795154420,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,9 +35,9 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 136,
+   "avgSpeed": 130,
    "highSpeed": 173,
-   "lifetimeRaces": 4967,
+   "lifetimeRaces": 4980,
    "teamRaces": 2267,
    "memberSince": 1794193196,
    "lastRace": 1795126205
