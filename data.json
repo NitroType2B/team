@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795203652,
+ "updated": 1795204820,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -273,12 +273,12 @@
    "carHue": 180,
    "carFile": "corsa_xmaxx_small.png",
    "carImage": "https://www.nitrotype.com/cars/corsa_xmaxx_small.png",
-   "avgSpeed": 74,
+   "avgSpeed": 79,
    "highSpeed": 95,
-   "lifetimeRaces": 5528,
-   "teamRaces": 271,
+   "lifetimeRaces": 5538,
+   "teamRaces": 275,
    "memberSince": 1794685404,
-   "lastRace": 1795058723
+   "lastRace": 1795204183
   },
   {
    "username": "c9274829331fb7fe1d0c56801b916e06",
@@ -326,10 +326,10 @@
    "carImage": "https://www.nitrotype.com/cars/f35_small.png",
    "avgSpeed": 118,
    "highSpeed": 131,
-   "lifetimeRaces": 705,
-   "teamRaces": 35,
+   "lifetimeRaces": 710,
+   "teamRaces": 44,
    "memberSince": 1794861065,
-   "lastRace": 1795202616
+   "lastRace": 1795204097
   },
   {
    "username": "ab9e10f06ae77ced2d67f287f8d94501",
@@ -582,9 +582,9 @@
    "avgSpeed": 37,
    "highSpeed": 75,
    "lifetimeRaces": 5266,
-   "teamRaces": 1804,
+   "teamRaces": 1805,
    "memberSince": 1793725663,
-   "lastRace": 1795178142
+   "lastRace": 1795203234
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -1092,7 +1092,7 @@
    "2026-11-17": 1604,
    "2026-11-18": 1706,
    "2026-11-19": 1796,
-   "2026-11-20": 1804
+   "2026-11-20": 1805
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -1353,7 +1353,7 @@
    "2026-11-17": 177,
    "2026-11-18": 243,
    "2026-11-19": 271,
-   "2026-11-20": 271
+   "2026-11-20": 275
   },
   "solarflarecrown7462": {
    "2026-11-14": 4
@@ -1409,7 +1409,7 @@
    "2026-11-17": 10,
    "2026-11-18": 20,
    "2026-11-19": 34,
-   "2026-11-20": 35
+   "2026-11-20": 44
   },
   "ezrarules": {
    "2026-11-17": 2
