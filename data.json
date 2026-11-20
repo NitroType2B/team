@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795194041,
+ "updated": 1795195244,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -460,12 +460,12 @@
    "carHue": 0,
    "carFile": "131_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/131_small_1.png",
-   "avgSpeed": 34,
+   "avgSpeed": 31,
    "highSpeed": 77,
-   "lifetimeRaces": 469,
-   "teamRaces": 16,
+   "lifetimeRaces": 473,
+   "teamRaces": 20,
    "memberSince": 1795115104,
-   "lastRace": 1795116627
+   "lastRace": 1795194286
   },
   {
    "username": "travishaha12345",
@@ -480,9 +480,9 @@
    "avgSpeed": 66,
    "highSpeed": 121,
    "lifetimeRaces": 3870,
-   "teamRaces": 815,
+   "teamRaces": 816,
    "memberSince": 1793292197,
-   "lastRace": 1795192907
+   "lastRace": 1795193728
   },
   {
    "username": "b2a8cc3e769bbbcc0071e6593f8dd14a",
@@ -1072,7 +1072,7 @@
    "2026-11-17": 632,
    "2026-11-18": 705,
    "2026-11-19": 774,
-   "2026-11-20": 815
+   "2026-11-20": 816
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
@@ -1480,7 +1480,7 @@
   },
   "69b6137a94794532cc4c496f74b0c9ba": {
    "2026-11-19": 16,
-   "2026-11-20": 16
+   "2026-11-20": 20
   },
   "wildfirex23": {
    "2026-11-19": 0,
