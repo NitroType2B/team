@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795222819,
+ "updated": 1795224014,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 681
+  "views": 682
  },
  "racers": [
   {
@@ -86,12 +86,12 @@
    "carHue": 240,
    "carFile": "76_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/76_small_1.png",
-   "avgSpeed": 116,
+   "avgSpeed": 119,
    "highSpeed": 138,
-   "lifetimeRaces": 2061,
-   "teamRaces": 227,
+   "lifetimeRaces": 2081,
+   "teamRaces": 247,
    "memberSince": 1794697788,
-   "lastRace": 1795125220
+   "lastRace": 1795223981
   },
   {
    "username": "visco_asher_yt",
@@ -545,12 +545,12 @@
    "carHue": 0,
    "carFile": "scream_small.png",
    "carImage": "https://www.nitrotype.com/cars/scream_small.png",
-   "avgSpeed": 40,
+   "avgSpeed": 39,
    "highSpeed": 52,
-   "lifetimeRaces": 905,
-   "teamRaces": 9,
+   "lifetimeRaces": 911,
+   "teamRaces": 15,
    "memberSince": 1795114462,
-   "lastRace": 1795131177
+   "lastRace": 1795223991
   },
   {
    "username": "e89137c6d948fbd06cfde6ca3f2737d2",
@@ -1363,7 +1363,7 @@
    "2026-11-18": 205,
    "2026-11-19": 227,
    "2026-11-20": 227,
-   "2026-11-21": 227
+   "2026-11-21": 247
   },
   "numba9nine": {
    "2026-11-15": 138,
@@ -1449,7 +1449,7 @@
   "b4866d7018fdabd946bf86b64161372f": {
    "2026-11-19": 9,
    "2026-11-20": 9,
-   "2026-11-21": 9
+   "2026-11-21": 15
   },
   "69b6137a94794532cc4c496f74b0c9ba": {
    "2026-11-19": 16,
