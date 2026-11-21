@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795293616,
+ "updated": 1795294817,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 696
+  "views": 697
  },
  "racers": [
   {
@@ -443,12 +443,12 @@
    "carHue": 40,
    "carFile": "blizferr_small.png",
    "carImage": "https://www.nitrotype.com/cars/blizferr_small.png",
-   "avgSpeed": 48,
+   "avgSpeed": 50,
    "highSpeed": 97,
-   "lifetimeRaces": 7508,
-   "teamRaces": 47,
+   "lifetimeRaces": 7535,
+   "teamRaces": 73,
    "memberSince": 1795232905,
-   "lastRace": 1795293582
+   "lastRace": 1795294688
   },
   {
    "username": "b2a8cc3e769bbbcc0071e6593f8dd14a",
@@ -647,12 +647,12 @@
    "carHue": 280,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 95,
+   "avgSpeed": 96,
    "highSpeed": 128,
-   "lifetimeRaces": 2294,
-   "teamRaces": 253,
+   "lifetimeRaces": 2301,
+   "teamRaces": 260,
    "memberSince": 1794703032,
-   "lastRace": 1795211089
+   "lastRace": 1795294792
   },
   {
    "username": "johnschulte",
@@ -1371,7 +1371,7 @@
    "2026-11-18": 250,
    "2026-11-19": 250,
    "2026-11-20": 253,
-   "2026-11-21": 253
+   "2026-11-21": 260
   },
   "hellotyper2": {
    "2026-11-15": 3,
@@ -1460,7 +1460,7 @@
    "2026-11-20": 0
   },
   "f0777d8296a3ab4be2deeffe3590552e": {
-   "2026-11-21": 47
+   "2026-11-21": 73
   }
  }
 }
