@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795266017,
+ "updated": 1795268418,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 688
+  "views": 689
  },
  "racers": [
   {
@@ -443,12 +443,12 @@
    "carHue": 40,
    "carFile": "blizferr_small.png",
    "carImage": "https://www.nitrotype.com/cars/blizferr_small.png",
-   "avgSpeed": 53,
+   "avgSpeed": 51,
    "highSpeed": 97,
-   "lifetimeRaces": 7461,
-   "teamRaces": 0,
+   "lifetimeRaces": 7466,
+   "teamRaces": 4,
    "memberSince": 1795232905,
-   "lastRace": 0
+   "lastRace": 1795268366
   },
   {
    "username": "b2a8cc3e769bbbcc0071e6593f8dd14a",
@@ -579,12 +579,12 @@
    "carHue": 280,
    "carFile": "spirit_racers_ink_fox_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_ink_fox_small.png",
-   "avgSpeed": 38,
+   "avgSpeed": 39,
    "highSpeed": 75,
-   "lifetimeRaces": 5448,
-   "teamRaces": 1942,
+   "lifetimeRaces": 5454,
+   "teamRaces": 1947,
    "memberSince": 1793725663,
-   "lastRace": 1795263479
+   "lastRace": 1795268376
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -1090,7 +1090,7 @@
    "2026-11-18": 1706,
    "2026-11-19": 1796,
    "2026-11-20": 1880,
-   "2026-11-21": 1942
+   "2026-11-21": 1947
   },
   "nikooo124": {
    "2026-11-09": 10,
@@ -1478,7 +1478,7 @@
    "2026-11-20": 0
   },
   "f0777d8296a3ab4be2deeffe3590552e": {
-   "2026-11-21": 0
+   "2026-11-21": 4
   }
  }
 }
