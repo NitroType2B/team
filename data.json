@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795232417,
+ "updated": 1795234198,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 685
+  "views": 686
  },
  "racers": [
   {
@@ -432,6 +432,23 @@
    "teamRaces": 829,
    "memberSince": 1793292197,
    "lastRace": 1795200432
+  },
+  {
+   "username": "f0777d8296a3ab4be2deeffe3590552e",
+   "displayName": "chicken_sandwhich",
+   "role": "member",
+   "title": "Nitro Rich",
+   "membership": "basic",
+   "carId": 338,
+   "carHue": 40,
+   "carFile": "blizferr_small.png",
+   "carImage": "https://www.nitrotype.com/cars/blizferr_small.png",
+   "avgSpeed": 53,
+   "highSpeed": 97,
+   "lifetimeRaces": 7461,
+   "teamRaces": 0,
+   "memberSince": 1795232905,
+   "lastRace": 0
   },
   {
    "username": "b2a8cc3e769bbbcc0071e6593f8dd14a",
@@ -1459,6 +1476,9 @@
   "wildfirex23": {
    "2026-11-19": 0,
    "2026-11-20": 0
+  },
+  "f0777d8296a3ab4be2deeffe3590552e": {
+   "2026-11-21": 0
   }
  }
 }
