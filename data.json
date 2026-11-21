@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795269620,
+ "updated": 1795270814,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -579,12 +579,12 @@
    "carHue": 280,
    "carFile": "spirit_racers_ink_fox_small.png",
    "carImage": "https://www.nitrotype.com/cars/spirit_racers_ink_fox_small.png",
-   "avgSpeed": 42,
+   "avgSpeed": 41,
    "highSpeed": 75,
-   "lifetimeRaces": 5460,
-   "teamRaces": 1954,
+   "lifetimeRaces": 5461,
+   "teamRaces": 1955,
    "memberSince": 1793725663,
-   "lastRace": 1795268640
+   "lastRace": 1795270527
   },
   {
    "username": "93220ea6c7e74cd17c4858897adcf9da",
@@ -1090,7 +1090,7 @@
    "2026-11-18": 1706,
    "2026-11-19": 1796,
    "2026-11-20": 1880,
-   "2026-11-21": 1954
+   "2026-11-21": 1955
   },
   "nikooo124": {
    "2026-11-09": 10,
