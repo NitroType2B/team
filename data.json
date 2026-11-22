@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795371615,
+ "updated": 1795372817,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 137,
+   "avgSpeed": 134,
    "highSpeed": 173,
-   "lifetimeRaces": 5182,
-   "teamRaces": 2483,
+   "lifetimeRaces": 5183,
+   "teamRaces": 2484,
    "memberSince": 1794193196,
-   "lastRace": 1795332064
+   "lastRace": 1795372413
   },
   {
    "username": "x_onion_x",
@@ -443,12 +443,12 @@
    "carHue": 40,
    "carFile": "blizferr_small.png",
    "carImage": "https://www.nitrotype.com/cars/blizferr_small.png",
-   "avgSpeed": 39,
+   "avgSpeed": 58,
    "highSpeed": 97,
-   "lifetimeRaces": 7636,
-   "teamRaces": 175,
+   "lifetimeRaces": 7657,
+   "teamRaces": 196,
    "memberSince": 1795232905,
-   "lastRace": 1795371593
+   "lastRace": 1795372794
   },
   {
    "username": "b2a8cc3e769bbbcc0071e6593f8dd14a",
@@ -841,7 +841,7 @@
    "2026-11-19": 2267,
    "2026-11-20": 2312,
    "2026-11-21": 2353,
-   "2026-11-22": 2483
+   "2026-11-22": 2484
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
@@ -1506,7 +1506,7 @@
   },
   "f0777d8296a3ab4be2deeffe3590552e": {
    "2026-11-21": 140,
-   "2026-11-22": 175
+   "2026-11-22": 196
   }
  }
 }
