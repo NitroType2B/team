@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795465221,
+ "updated": 1795466416,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 727
+  "views": 728
  },
  "racers": [
   {
@@ -613,12 +613,12 @@
    "carHue": 0,
    "carFile": "corsamegalodor123_small.png",
    "carImage": "https://www.nitrotype.com/cars/corsamegalodor123_small.png",
-   "avgSpeed": 103,
+   "avgSpeed": 94,
    "highSpeed": 122,
-   "lifetimeRaces": 138,
-   "teamRaces": 102,
+   "lifetimeRaces": 155,
+   "teamRaces": 119,
    "memberSince": 1795050117,
-   "lastRace": 1795396663
+   "lastRace": 1795466351
   },
   {
    "username": "588afc49b8ed31249f32c547599b3e62",
@@ -1521,7 +1521,7 @@
    "2026-11-20": 58,
    "2026-11-21": 58,
    "2026-11-22": 84,
-   "2026-11-23": 102
+   "2026-11-23": 119
   },
   "588afc49b8ed31249f32c547599b3e62": {
    "2026-11-19": 12,
