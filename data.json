@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795537216,
+ "updated": 1795538417,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -636,23 +636,6 @@
    "teamRaces": 11,
    "memberSince": 1795040766,
    "lastRace": 1795101141
-  },
-  {
-   "username": "e0beec1b328136af9711834c4ac38425",
-   "displayName": "Harper 67",
-   "role": "member",
-   "title": "[SKIPWRD]",
-   "membership": "basic",
-   "carId": 277,
-   "carHue": 120,
-   "carFile": "fully_leaded_small.png",
-   "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
-   "avgSpeed": 19,
-   "highSpeed": 23,
-   "lifetimeRaces": 80,
-   "teamRaces": 17,
-   "memberSince": 1795528907,
-   "lastRace": 1795531491
   },
   {
    "username": "nikooo124",
