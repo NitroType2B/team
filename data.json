@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795546822,
+ "updated": 1795548017,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -307,12 +307,12 @@
    "carHue": 0,
    "carFile": "f35_small.png",
    "carImage": "https://www.nitrotype.com/cars/f35_small.png",
-   "avgSpeed": 116,
+   "avgSpeed": 115,
    "highSpeed": 131,
-   "lifetimeRaces": 712,
-   "teamRaces": 46,
+   "lifetimeRaces": 714,
+   "teamRaces": 48,
    "memberSince": 1794861065,
-   "lastRace": 1795467952
+   "lastRace": 1795547010
   },
   {
    "username": "ab9e10f06ae77ced2d67f287f8d94501",
@@ -1487,7 +1487,7 @@
    "2026-11-21": 44,
    "2026-11-22": 44,
    "2026-11-23": 46,
-   "2026-11-24": 46
+   "2026-11-24": 48
   },
   "ezrarules": {
    "2026-11-17": 2
