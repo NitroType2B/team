@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795531216,
+ "updated": 1795532423,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -394,10 +394,10 @@
    "carImage": "https://www.nitrotype.com/cars/131_small_1.png",
    "avgSpeed": 31,
    "highSpeed": 77,
-   "lifetimeRaces": 474,
-   "teamRaces": 21,
+   "lifetimeRaces": 475,
+   "teamRaces": 22,
    "memberSince": 1795115104,
-   "lastRace": 1795530902
+   "lastRace": 1795531361
   },
   {
    "username": "travishaha12345",
@@ -641,7 +641,7 @@
    "username": "e0beec1b328136af9711834c4ac38425",
    "displayName": "Harper 67",
    "role": "member",
-   "title": "Catty Wampus",
+   "title": "[SKIPWRD]",
    "membership": "basic",
    "carId": 277,
    "carHue": 120,
@@ -649,10 +649,10 @@
    "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
    "avgSpeed": 19,
    "highSpeed": 23,
-   "lifetimeRaces": 76,
-   "teamRaces": 12,
+   "lifetimeRaces": 80,
+   "teamRaces": 17,
    "memberSince": 1795528907,
-   "lastRace": 1795531157
+   "lastRace": 1795531491
   },
   {
    "username": "nikooo124",
@@ -1566,7 +1566,7 @@
    "2026-11-21": 20,
    "2026-11-22": 20,
    "2026-11-23": 20,
-   "2026-11-24": 21
+   "2026-11-24": 22
   },
   "wildfirex23": {
    "2026-11-19": 0,
@@ -1579,7 +1579,7 @@
    "2026-11-24": 241
   },
   "e0beec1b328136af9711834c4ac38425": {
-   "2026-11-24": 12
+   "2026-11-24": 17
   }
  }
 }
