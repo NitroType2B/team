@@ -1,11 +1,11 @@
 {
  "team": "2B",
- "updated": 1795528822,
+ "updated": 1795530019,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
   "formedStamp": 1792979300,
-  "views": 734
+  "views": 735
  },
  "racers": [
   {
@@ -636,6 +636,23 @@
    "teamRaces": 11,
    "memberSince": 1795040766,
    "lastRace": 1795101141
+  },
+  {
+   "username": "e0beec1b328136af9711834c4ac38425",
+   "displayName": "Harper 67",
+   "role": "member",
+   "title": "Rookie Racer",
+   "membership": "basic",
+   "carId": 277,
+   "carHue": 120,
+   "carFile": "fully_leaded_small.png",
+   "carImage": "https://www.nitrotype.com/cars/fully_leaded_small.png",
+   "avgSpeed": 20,
+   "highSpeed": 23,
+   "lifetimeRaces": 70,
+   "teamRaces": 7,
+   "memberSince": 1795528907,
+   "lastRace": 1795529434
   },
   {
    "username": "nikooo124",
@@ -1560,6 +1577,9 @@
    "2026-11-22": 200,
    "2026-11-23": 241,
    "2026-11-24": 241
+  },
+  "e0beec1b328136af9711834c4ac38425": {
+   "2026-11-24": 7
   }
  }
 }
