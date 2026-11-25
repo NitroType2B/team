@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795593624,
+ "updated": 1795594822,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -426,12 +426,12 @@
    "carHue": 260,
    "carFile": "pizza_small.png",
    "carImage": "https://www.nitrotype.com/cars/pizza_small.png",
-   "avgSpeed": 117,
+   "avgSpeed": 76,
    "highSpeed": 134,
-   "lifetimeRaces": 3884,
-   "teamRaces": 829,
+   "lifetimeRaces": 3887,
+   "teamRaces": 832,
    "memberSince": 1793292197,
-   "lastRace": 1795200432
+   "lastRace": 1795594787
   },
   {
    "username": "f0777d8296a3ab4be2deeffe3590552e",
@@ -1026,7 +1026,7 @@
    "2026-11-22": 829,
    "2026-11-23": 829,
    "2026-11-24": 829,
-   "2026-11-25": 829
+   "2026-11-25": 832
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
