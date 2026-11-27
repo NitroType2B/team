@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795754416,
+ "updated": 1795755619,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -115,7 +115,7 @@
    "displayName": "Gr8 Minds-Retired",
    "role": "officer",
    "title": "Cupid's Arrow",
-   "membership": "gold",
+   "membership": "basic",
    "carId": 362,
    "carHue": 0,
    "carFile": "xmaxxhyper_small.png",
