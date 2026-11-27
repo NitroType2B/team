@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795820418,
+ "updated": 1795821616,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -35,12 +35,12 @@
    "carHue": 0,
    "carFile": "209_small_1.png",
    "carImage": "https://www.nitrotype.com/cars/209_small_1.png",
-   "avgSpeed": 133,
+   "avgSpeed": 128,
    "highSpeed": 173,
-   "lifetimeRaces": 5682,
-   "teamRaces": 2983,
+   "lifetimeRaces": 5684,
+   "teamRaces": 2985,
    "memberSince": 1794193196,
-   "lastRace": 1795756693
+   "lastRace": 1795820718
   },
   {
    "username": "x_onion_x",
@@ -799,7 +799,7 @@
    "2026-11-24": 2812,
    "2026-11-25": 2860,
    "2026-11-26": 2970,
-   "2026-11-27": 2983
+   "2026-11-27": 2985
   },
   "visco_asher_yt": {
    "2026-11-09": 264,
