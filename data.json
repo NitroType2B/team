@@ -1,6 +1,6 @@
 {
  "team": "2B",
- "updated": 1795863619,
+ "updated": 1795864816,
  "teamMeta": {
   "tag": "2B",
   "name": "2B Determined",
@@ -409,12 +409,12 @@
    "carHue": 20,
    "carFile": "ultima_small.png",
    "carImage": "https://www.nitrotype.com/cars/ultima_small.png",
-   "avgSpeed": 70,
+   "avgSpeed": 65,
    "highSpeed": 134,
-   "lifetimeRaces": 4177,
-   "teamRaces": 1122,
+   "lifetimeRaces": 4187,
+   "teamRaces": 1132,
    "memberSince": 1793292197,
-   "lastRace": 1795861792
+   "lastRace": 1795864098
   },
   {
    "username": "f0777d8296a3ab4be2deeffe3590552e",
@@ -1044,7 +1044,7 @@
    "2026-11-25": 952,
    "2026-11-26": 955,
    "2026-11-27": 1073,
-   "2026-11-28": 1122
+   "2026-11-28": 1132
   },
   "bf0f4ce150bfa53eafcdb990c9841a97": {
    "2026-11-09": 30,
